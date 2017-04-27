@@ -4,3 +4,9 @@ Bin
 *.suo
 *.opendb
 *.filters
+*.m4
+*.mk
+*.png
+*.md
+*.xml
+*.wav
