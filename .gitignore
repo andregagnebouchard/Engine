@@ -10,3 +10,5 @@ Bin
 *.md
 *.xml
 *.wav
+*.ipch
+*.tmp
