@@ -1,4 +1,7 @@
-Bin
+Bin/x86/Debug/
+Bin/x86/Release/
+Bin/x64/Debug/
+Bin/x64/Release/
 *.suo
 *.db
 *.suo
