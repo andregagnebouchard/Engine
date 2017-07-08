@@ -12,9 +12,14 @@ class OpenGLGraphic : public IGraphic
 {
 public:
 	// IGraphic
-	virtual void Clear() override;
-	virtual void DrawTriangle() override;
+	virtual void FillBuffer(const IPrimitive* const primitive) override;
+	virtual void DrawBuffer() override;
+	virtual void ClearBuffer() override;
 
+	// IMPL
 	void Init();
+private:
+	float m_buffer[1024];
+	unsigned int m_vertexCount;
 };
 //=================================================================================================

@@ -15,3 +15,4 @@ Bin/x64/Release/
 *.wav
 *.ipch
 *.tmp
+*.bak*

@@ -188,7 +188,7 @@
   <ItemGroup>
     <ClInclude Include="Display.h" />
     <ClInclude Include="DisplayFactory.h" />
-    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="Primitive.h" />
     <ClInclude Include="IExecutionContext.h" />
     <ClInclude Include="IGraphic.h" />
     <ClInclude Include="IProcessWindow.h" />

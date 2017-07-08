@@ -1,32 +1,37 @@
 #include "stdafx.h"
 #include "OpenGLGraphic.h"
 //=================================================================================================
-void OpenGLGraphic::Clear()
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-}
-//=================================================================================================
 void OpenGLGraphic::Init()
 {
 #ifdef _WIN32
 	if (glewInit() != GLEW_OK)
 		throw std::exception("ERROR: InitOpenGL");
 #endif
+	m_vertexCount = 0;
 }
 //=================================================================================================
-void OpenGLGraphic::DrawTriangle()
+void OpenGLGraphic::DrawBuffer()
 {
-	// Vertices et coordonnées
-	float vertices[] = { -0.5, -0.5,   0.0, 0.5,   0.5, -0.5 };
-	Clear();
-	// On remplie puis on active le tableau Vertex Attrib 0
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, m_buffer);
 	glEnableVertexAttribArray(0);
-
-	// On affiche le triangle
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	// On désactive le tableau Vertex Attrib puisque l'on n'en a plus besoin
+	glDrawArrays(GL_TRIANGLES, 0, m_vertexCount / 2);
 	glDisableVertexAttribArray(0);
+}
+//=================================================================================================
+void OpenGLGraphic::FillBuffer(const IPrimitive* const primitive)
+{
+	unsigned int initialVertexCount = m_vertexCount;
+	for (; m_vertexCount < initialVertexCount + primitive->GetVerticeArraySize(); m_vertexCount++)
+	{
+		unsigned int bufferIndex = initialVertexCount + (m_vertexCount - initialVertexCount);
+		unsigned int triangleIndex = m_vertexCount - initialVertexCount;
+		m_buffer[bufferIndex] = primitive->GetVerticesArray()[triangleIndex];
+	}
+}
+//=================================================================================================
+void OpenGLGraphic::ClearBuffer()
+{
+	m_vertexCount = 0;
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 //=================================================================================================
