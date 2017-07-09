@@ -1,19 +1,6 @@
 ﻿#include "stdafx.h"
 #include "DisplayFactory.h"
-
-
-#define SDL_MAIN_HANDLED
-#include <Windows.h>
-#include <GL/glew.h>
-#include <gl\GL.h>
-
-#include <SDL/SDL.h>
-#include <stdio.h>
-#include <iostream>
-
-#include <vector>
-#include <map>
-
+#include "Shader.h"
 int main(int argc, char **argv)
 {
 	argc;
@@ -22,6 +9,10 @@ int main(int argc, char **argv)
 	IGraphic *graphic = display->GetGraphic();
 	IExecutionContext *executionContext = display->GetExecutionContext();
 	IProcessWindow *processWindow = executionContext->GetProcessWindow();
+
+	Shader shaderBasique("Shaders\\basique2D.vert",
+		"Shaders\\basique2D.frag");
+	shaderBasique.charger();
 
 	while (true)
 	{

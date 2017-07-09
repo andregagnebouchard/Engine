@@ -183,6 +183,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLGLProcessWindow.cpp" />
     <ClCompile Include="SDLProcessEventListener.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -198,8 +199,13 @@
     <ClInclude Include="SDLGLExecutionContext.h" />
     <ClInclude Include="SDLGLProcessWindow.h" />
     <ClInclude Include="SDLProcessEventListener.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="typedef.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\Shaders\texture.frag" />
+    <None Include="Shader\Shaders\texture.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
