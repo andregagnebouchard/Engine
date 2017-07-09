@@ -12,9 +12,9 @@ public:
 class Point : public IPrimitive
 {
 public:
-	Point(const float _x, const float _y) :
-		x(_x),
-		y(_y)
+	Point(const float x, const float y) :
+		m_x(x),
+		m_y(y)
 	{}
 
 	virtual const float* const GetVerticesArray() const override
@@ -27,18 +27,18 @@ public:
 		return 2;
 	}
 
-	float x;
-	float y;
-	float vertices[2] = { x, y };
+	float m_x;
+	float m_y;
+	float vertices[2] = { m_x, m_y };
 };
 //=================================================================================================
 class Triangle : public IPrimitive
 {
 public:
-	Triangle(const Point _p1, const Point _p2, const Point _p3) :
-		p1(_p1),
-		p2(_p2),
-		p3(_p3)
+	Triangle(const Point p1, const Point p2, const Point p3) :
+		m_p1(p1),
+		m_p2(p2),
+		m_p3(p3)
 		{}
 
 	virtual const float* const GetVerticesArray() const override
@@ -51,9 +51,9 @@ public:
 		return 6;
 	}
 
-	Point p1;
-	Point p2;
-	Point p3;
-	float vertices[6] = { p1.vertices[0], p1.vertices[1], p2.vertices[0], p2.vertices[1], p3.vertices[0], p3.vertices[1] };
+	Point m_p1;
+	Point m_p2;
+	Point m_p3;
+	float vertices[6] = { m_p1.vertices[0], m_p1.vertices[1], m_p2.vertices[0], m_p2.vertices[1], m_p3.vertices[0], m_p3.vertices[1] };
 };
 //=================================================================================================

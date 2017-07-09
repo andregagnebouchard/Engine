@@ -183,12 +183,15 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLGLProcessWindow.cpp" />
     <ClCompile Include="SDLProcessEventListener.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="OpenGLShaderProgram.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Colors.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="DisplayFactory.h" />
+    <ClInclude Include="IShader.h" />
+    <ClInclude Include="IShaderProgram.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="IExecutionContext.h" />
     <ClInclude Include="IGraphic.h" />
@@ -199,7 +202,7 @@
     <ClInclude Include="SDLGLExecutionContext.h" />
     <ClInclude Include="SDLGLProcessWindow.h" />
     <ClInclude Include="SDLProcessEventListener.h" />
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="OpenGLShaderProgram.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="typedef.h" />
   </ItemGroup>

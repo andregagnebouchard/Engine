@@ -1,96 +1,72 @@
 #include "stdafx.h"
-#include "Shader.h"
+#include "OpenGLShaderProgram.h"
+#include <iostream>
+#include <string>
+#include <fstream>
 //=================================================================================================
-Shader::Shader() : m_vertexID(0), m_fragmentID(0), m_programID(0), m_vertexSource(), m_fragmentSource()
-{
-}
-//=================================================================================================
-Shader::Shader(Shader const &shaderACopier)
-{
-    // Copie des fichiers sources
-    m_vertexSource = shaderACopier.m_vertexSource;
-    m_fragmentSource = shaderACopier.m_fragmentSource;
-
-    // Chargement du nouveau shader
-    charger();
-}
-//=================================================================================================
-Shader::Shader(std::string vertexSource, std::string fragmentSource) : 
-	m_vertexID(0), 
-	m_fragmentID(0), 
-	m_programID(0),
-  m_vertexSource(vertexSource), 
-	m_fragmentSource(fragmentSource)
+OpenGLShaderProgram::OpenGLShaderProgram(const std::string &vertexShaderFilepath, const std::string &fragmentShaderFilepath) :
+	m_vertexShaderId(0), 
+	m_fragmentShaderId(0), 
+	m_id(0),
+	m_vertexShaderFilepath(vertexShaderFilepath),
+	m_fragmentShaderFilepath(fragmentShaderFilepath)
 {
 }
 //=================================================================================================
-Shader::~Shader()
+OpenGLShaderProgram::~OpenGLShaderProgram()
 {
-    glDeleteShader(m_vertexID);
-    glDeleteShader(m_fragmentID);
-    glDeleteProgram(m_programID);
+    glDeleteShader(m_vertexShaderId);
+    glDeleteShader(m_fragmentShaderId);
+    glDeleteProgram(m_id);
 }
-Shader& Shader::operator=(Shader const &shaderACopier)
-{
-    // Copie des fichiers sources
-    m_vertexSource = shaderACopier.m_vertexSource;
-    m_fragmentSource = shaderACopier.m_fragmentSource;
-
-    // Chargement du nouveau shader
-    charger();
-
-    return *this;
-}
-bool Shader::charger()
+//=================================================================================================
+void OpenGLShaderProgram::Init()
 {
     // Destruction d'un éventuel ancien Shader
-    if(glIsShader(m_vertexID) == GL_TRUE)
-        glDeleteShader(m_vertexID);
+    if(glIsShader(m_vertexShaderId) == GL_TRUE)
+        glDeleteShader(m_vertexShaderId);
 
-    if(glIsShader(m_fragmentID) == GL_TRUE)
-        glDeleteShader(m_fragmentID);
+    if(glIsShader(m_fragmentShaderId) == GL_TRUE)
+        glDeleteShader(m_fragmentShaderId);
 
-    if(glIsProgram(m_programID) == GL_TRUE)
-        glDeleteProgram(m_programID);
+    if(glIsProgram(m_id) == GL_TRUE)
+        glDeleteProgram(m_id);
 
     // Compilation des shaders
-    if(!compilerShader(m_vertexID, GL_VERTEX_SHADER, m_vertexSource))
-        return false;
-
-    if(!compilerShader(m_fragmentID, GL_FRAGMENT_SHADER, m_fragmentSource))
-        return false;
+		CompileShaders(m_vertexShaderId, GL_VERTEX_SHADER, m_vertexShaderFilepath);
+		CompileShaders(m_fragmentShaderId, GL_FRAGMENT_SHADER, m_fragmentShaderFilepath);
 
     // Création du programme
-    m_programID = glCreateProgram();
+		m_id = glCreateProgram();
 
     // Association des shaders
-    glAttachShader(m_programID, m_vertexID);
-    glAttachShader(m_programID, m_fragmentID);
+    glAttachShader(m_id, m_vertexShaderId);
+    glAttachShader(m_id, m_fragmentShaderId);
 
     // Verrouillage des entrées shader
-    glBindAttribLocation(m_programID, 0, "in_Vertex");
-    glBindAttribLocation(m_programID, 1, "in_Color");
-    glBindAttribLocation(m_programID, 2, "in_TexCoord0");
+    glBindAttribLocation(m_id, 0, "in_Vertex");
+    glBindAttribLocation(m_id, 1, "in_Color");
+    glBindAttribLocation(m_id, 2, "in_TexCoord0");
 
     // Linkage du programme
-    glLinkProgram(m_programID);
+    glLinkProgram(m_id);
 
     // Vérification du linkage
     GLint erreurLink(0);
-    glGetProgramiv(m_programID, GL_LINK_STATUS, &erreurLink);
+    glGetProgramiv(m_id, GL_LINK_STATUS, &erreurLink);
 
     // S'il y a eu une erreur
     if(erreurLink != GL_TRUE)
     {
         // Récupération de la taille de l'erreur
         GLint tailleErreur(0);
-        glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &tailleErreur);
+        glGetProgramiv(m_id, GL_INFO_LOG_LENGTH, &tailleErreur);
 
         // Allocation de mémoire
         char *erreur = new char[tailleErreur + 1];
 
         // Récupération de l'erreur
-        glGetShaderInfoLog(m_programID, tailleErreur, &tailleErreur, erreur);
+        glGetShaderInfoLog(m_id, tailleErreur, &tailleErreur, erreur);
         erreur[tailleErreur] = '\0';
 
         // Affichage de l'erreur
@@ -98,16 +74,13 @@ bool Shader::charger()
 
         // Libération de la mémoire et retour du booléen false
         delete[] erreur;
-        glDeleteProgram(m_programID);
+        glDeleteProgram(m_id);
 
-        return false;
+				throw std::exception("Shader initialisation error");
     }
-
-    // Sinon c'est que tout s'est bien passé
-    else
-        return true;
 }
-bool Shader::compilerShader(GLuint &shader, GLenum type, std::string const &fichierSource)
+//=================================================================================================
+void OpenGLShaderProgram::CompileShaders(GLuint &shader, GLenum type, std::string const &fichierSource)
 {
     // Création du shader
     shader = glCreateShader(type);
@@ -116,7 +89,7 @@ bool Shader::compilerShader(GLuint &shader, GLenum type, std::string const &fich
     if(shader == 0)
     {
         std::cout << "Erreur, le type de shader (" << type << ") n'existe pas" << std::endl;
-        return false;
+				throw std::exception("Shader initialisation error");
     }
 
     // Flux de lecture
@@ -128,7 +101,7 @@ bool Shader::compilerShader(GLuint &shader, GLenum type, std::string const &fich
         std::cout << "Erreur le fichier " << fichierSource << " est introuvable" << std::endl;
         glDeleteShader(shader);
 
-        return false;
+				throw std::exception("Shader initialisation error");
     }
 
     // Strings permettant de lire le code source
@@ -178,14 +151,17 @@ bool Shader::compilerShader(GLuint &shader, GLenum type, std::string const &fich
         delete[] erreur;
         glDeleteShader(shader);
 
-        return false;
+				throw std::exception("Shader initialisation error");
     }
-
-    // Sinon c'est que tout s'est bien passé
-    else
-        return true;
 }
-GLuint Shader::getProgramID() const
+//=================================================================================================
+void OpenGLShaderProgram::Bind()
 {
-    return m_programID;
+	glUseProgram(m_id);
 }
+//=================================================================================================
+void OpenGLShaderProgram::Unbind()
+{
+	glUseProgram(0);
+}
+//=================================================================================================
