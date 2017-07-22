@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Display.cpp" />
+    <ClCompile Include="DisplayFactory.cpp" />
+    <ClCompile Include="OpenGLGraphic.cpp" />
+    <ClCompile Include="SDLExecutionContext.cpp" />
+    <ClCompile Include="SDLGLExecutionContext.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="SDLGLProcessWindow.cpp" />
+    <ClCompile Include="SDLProcessEventListener.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="OpenGLShaderProgram.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Randomizer.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Display.h" />
+    <ClInclude Include="DisplayFactory.h" />
+    <ClInclude Include="IExecutionContext.h" />
+    <ClInclude Include="IGraphic.h" />
+    <ClInclude Include="IProcessWindow.h" />
+    <ClInclude Include="IProcessEventListener.h" />
+    <ClInclude Include="OpenGLGraphic.h" />
+    <ClInclude Include="SDLExecutionContext.h" />
+    <ClInclude Include="SDLGLExecutionContext.h" />
+    <ClInclude Include="SDLGLProcessWindow.h" />
+    <ClInclude Include="SDLProcessEventListener.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="typedef.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Colors.h" />
+    <ClInclude Include="IShaderProgram.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLShaderProgram.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Randomizer.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{73087932-30ae-489e-8fcb-2cd54b69f5a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{503c6436-5cec-49dc-b2a7-d705b39baa44}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\Shaders\texture.frag" />
+    <None Include="Shader\Shaders\texture.vert" />
+  </ItemGroup>
+</Project>
