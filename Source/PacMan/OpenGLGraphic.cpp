@@ -51,7 +51,6 @@ void OpenGLGraphic::FillColorBuffer(const IColor* const color)
 //=================================================================================================
 void OpenGLGraphic::Draw() const
 {
-
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, m_vertexBuffer);
 
 	glEnableVertexAttribArray(0);

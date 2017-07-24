@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include "IExecutionContext.h"
 //=================================================================================================
 class SDLExecutionContext : public IExecutionContext

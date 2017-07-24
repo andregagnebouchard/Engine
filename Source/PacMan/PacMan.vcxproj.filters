@@ -9,13 +9,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLGLProcessWindow.cpp" />
     <ClCompile Include="SDLProcessEventListener.cpp" />
-    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="OpenGLShaderProgram.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Randomizer.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomVisiter.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,8 +35,6 @@
     <ClInclude Include="SDLGLExecutionContext.h" />
     <ClInclude Include="SDLGLProcessWindow.h" />
     <ClInclude Include="SDLProcessEventListener.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="typedef.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="IShaderProgram.h">
@@ -44,6 +47,18 @@
     <ClInclude Include="Randomizer.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="RandomVisiter.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="typedef.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shader">
@@ -51,6 +66,9 @@
     </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{503c6436-5cec-49dc-b2a7-d705b39baa44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{73beea2a-0c58-4c59-b546-29cee86b73a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

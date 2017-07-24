@@ -57,27 +57,7 @@ void OpenGLShaderProgram::Init()
 
     // S'il y a eu une erreur
     if(erreurLink != GL_TRUE)
-    {
-        // Récupération de la taille de l'erreur
-        GLint tailleErreur(0);
-        glGetProgramiv(m_id, GL_INFO_LOG_LENGTH, &tailleErreur);
-
-        // Allocation de mémoire
-        char *erreur = new char[tailleErreur + 1];
-
-        // Récupération de l'erreur
-        glGetShaderInfoLog(m_id, tailleErreur, &tailleErreur, erreur);
-        erreur[tailleErreur] = '\0';
-
-        // Affichage de l'erreur
-        std::cout << erreur << std::endl;
-
-        // Libération de la mémoire et retour du booléen false
-        delete[] erreur;
-        glDeleteProgram(m_id);
-
 				throw std::exception("Shader initialisation error");
-    }
 }
 //=================================================================================================
 void OpenGLShaderProgram::CompileShaders(GLuint &shader, GLenum type, std::string const &fichierSource)
@@ -87,10 +67,7 @@ void OpenGLShaderProgram::CompileShaders(GLuint &shader, GLenum type, std::strin
 
     // Vérification du shader
     if(shader == 0)
-    {
-        std::cout << "Erreur, le type de shader (" << type << ") n'existe pas" << std::endl;
 				throw std::exception("Shader initialisation error");
-    }
 
     // Flux de lecture
     std::ifstream fichier(fichierSource.c_str());
@@ -98,9 +75,7 @@ void OpenGLShaderProgram::CompileShaders(GLuint &shader, GLenum type, std::strin
     // Test d'ouverture
     if(!fichier)
     {
-        std::cout << "Erreur le fichier " << fichierSource << " est introuvable" << std::endl;
         glDeleteShader(shader);
-
 				throw std::exception("Shader initialisation error");
     }
 
@@ -131,28 +106,7 @@ void OpenGLShaderProgram::CompileShaders(GLuint &shader, GLenum type, std::strin
 
     // S'il y a eu une erreur
     if(erreurCompilation != GL_TRUE)
-    {
-        // Récupération de la taille de l'erreur
-        GLint tailleErreur(0);
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &tailleErreur);
-
-        // Allocation de mémoire
-        char *erreur = new char[tailleErreur + 1];
-
-
-        // Récupération de l'erreur
-        glGetShaderInfoLog(shader, tailleErreur, &tailleErreur, erreur);
-        erreur[tailleErreur] = '\0';
-
-        // Affichage de l'erreur
-        std::cout << erreur << std::endl;
-
-        // Libération de la mémoire et retour du booléen false
-        delete[] erreur;
-        glDeleteShader(shader);
-
 				throw std::exception("Shader initialisation error");
-    }
 }
 //=================================================================================================
 void OpenGLShaderProgram::Bind()

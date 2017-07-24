@@ -10,8 +10,7 @@ int main(int argc, char **argv)
 	IExecutionContext *executionContext = display->GetExecutionContext();
 	IProcessWindow *processWindow = executionContext->GetProcessWindow();
 
-	OpenGLShaderProgram shader("Shaders\\couleur2D.vert",
-		"Shaders\\couleur2D.frag");
+	OpenGLShaderProgram shader("Shaders\\couleur2D.vert","Shaders\\couleur2D.frag");
 	shader.Init();
 	while (true)
 	{

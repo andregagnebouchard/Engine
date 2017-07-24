@@ -6,7 +6,6 @@ Bin/x64/Release/
 *.db
 *.suo
 *.opendb
-*.filters
 *.m4
 *.mk
 *.png

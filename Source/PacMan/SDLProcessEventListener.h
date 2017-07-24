@@ -2,7 +2,7 @@
 //=================================================================================================
 #include "stdafx.h"
 #include "IProcessEventListener.h"
-#include "SDL\SDL.h"
+#include <SDL.h>
 class SDLProcessEventListener : public IProcessEventListener
 {
 public:
