@@ -7,6 +7,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PacMan", "Source\PacMan\Pac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTest", "EngineTest\EngineTest.vcxproj", "{F98BDB0E-29DC-4ADD-9C3D-C4FCE61D0A64}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml2", "Components\tinyxml\tinyxml2\tinyxml2.vcxproj", "{D1C528B6-AA02-4D29-9D61-DC08E317A70D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{6A1BBA40-D807-44F5-B456-7D2631D5FD46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,8 +35,19 @@ Global
 		{F98BDB0E-29DC-4ADD-9C3D-C4FCE61D0A64}.Release|x64.Build.0 = Release|x64
 		{F98BDB0E-29DC-4ADD-9C3D-C4FCE61D0A64}.Release|x86.ActiveCfg = Release|Win32
 		{F98BDB0E-29DC-4ADD-9C3D-C4FCE61D0A64}.Release|x86.Build.0 = Release|Win32
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug|x64.ActiveCfg = Debug|x64
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug|x64.Build.0 = Debug|x64
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug|x86.ActiveCfg = Debug|Win32
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug|x86.Build.0 = Debug|Win32
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Release|x64.ActiveCfg = Release|x64
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Release|x64.Build.0 = Release|x64
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Release|x86.ActiveCfg = Release|Win32
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D} = {6A1BBA40-D807-44F5-B456-7D2631D5FD46}
 	EndGlobalSection
 EndGlobal

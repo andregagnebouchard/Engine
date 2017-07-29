@@ -1,7 +1,5 @@
-Bin/x86/Debug/
-Bin/x86/Release/
-Bin/x64/Debug/
-Bin/x64/Release/
+Bin
+
 *.suo
 *.db
 *.suo
@@ -15,3 +13,13 @@ Bin/x64/Release/
 *.ipch
 *.tmp
 *.bak*
+*.tlog
+*.obj
+*.idb
+*.log
+*.pdb
+*.dll
+*.lib
+*.exe
+
+#Components
