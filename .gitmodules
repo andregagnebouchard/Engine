@@ -7,3 +7,6 @@
 [submodule "Components/SDL2"]
 	path = Components/SDL2
 	url = https://github.com/spurious/SDL-mirror.git
+[submodule "Components/SDL2_image"]
+	path = Components/SDL2_image
+	url = https://github.com/davidsiaw/SDL2_image.git

@@ -22,4 +22,7 @@ Bin
 *.lib
 *.exe
 
+Solution.VC.db-wal
 #Components
+.vs/Engine/v15/Solution.VC.db-wal
+.vs/Engine/v15/Solution.VC.db-shm
