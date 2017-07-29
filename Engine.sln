@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "log4cplus", "Components\log
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineComponentTests", "Source\EngineComponentTests\EngineComponentTests.vcxproj", "{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL2", "Components\SDL2\VisualC\SDL\SDL.vcxproj", "{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -55,6 +57,14 @@ Global
 		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Release|x64.Build.0 = Release|x64
 		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Release|x86.ActiveCfg = Release|Win32
 		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Release|x86.Build.0 = Release|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.ActiveCfg = Debug|x64
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.Build.0 = Debug|x64
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x86.ActiveCfg = Debug|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x86.Build.0 = Debug|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x64.ActiveCfg = Release|x64
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x64.Build.0 = Release|x64
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x86.ActiveCfg = Release|Win32
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +72,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D1C528B6-AA02-4D29-9D61-DC08E317A70D} = {6A1BBA40-D807-44F5-B456-7D2631D5FD46}
 		{917836A4-0DDC-47BE-B930-1B3BFDF6C940} = {6A1BBA40-D807-44F5-B456-7D2631D5FD46}
+		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68} = {6A1BBA40-D807-44F5-B456-7D2631D5FD46}
 	EndGlobalSection
 EndGlobal

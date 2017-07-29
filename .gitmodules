@@ -4,3 +4,6 @@
 [submodule "Components/log4cplus"]
 	path = Components/log4cplus
 	url = https://github.com/log4cplus/log4cplus.git
+[submodule "Components/SDL2"]
+	path = Components/SDL2
+	url = https://github.com/spurious/SDL-mirror.git

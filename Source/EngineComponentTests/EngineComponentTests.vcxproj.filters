@@ -32,5 +32,8 @@
     <ClCompile Include="log4cplus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SDL2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
