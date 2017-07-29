@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include <SDL.h>
 #include "IExecutionContext.h"
 //=================================================================================================

@@ -1,34 +1,47 @@
 #include "stdafx.h"
 #include "InitializerValidator.h"
 //=================================================================================================
-void InitializerValidator::ValidateIfDiskHaveEnoughSpace(const int64 diskSpaceNeeded)
+InitializerValidator::InitializerValidator(const AppUtil* const appUtil) :
+	m_pAppUtil(appUtil)
 {
-	if (GetDiskSpaceSpace() < diskSpaceNeeded)
-		return false;
-
-	return true;
 }
 //=================================================================================================
-const int64 InitializerValidator::GetDiskSpaceSpace() const
+void InitializerValidator::ValidateThatDiskHaveEnoughSpace(const int64 diskSpaceNeededByte) const
 {
-	// Check for enough free disk space on the current disk.
-	const int  drive = _getdrive();
-	struct _diskfree_t diskfree;
-
-	_getdiskfree(drive, &diskfree);
-
-	unsigned __int64 const neededClusters =
-		diskSpaceNeeded / (diskfree.sectors_per_cluster*diskfree.bytes_per_sector);
-
-	if (diskfree.avail_clusters < neededClusters)
-	{
-		// if you get here you don’t have enough disk space!
-		GCC_ERROR("CheckStorage Failure: Not enough physical storage.");
-		return false;
-	}
-	return true;
+	if (m_pAppUtil->GetDiskSpaceByte() < diskSpaceNeededByte)
+		throw std::exception("Disks doesn't have enough space");
 }
 //=================================================================================================
+void InitializerValidator::ValidateThatWeHaveEnoughPhysicalRAM(const int64 physicalRAMNeededByte) const
+{
+	if (m_pAppUtil->GetPhysicalRAMByte() < physicalRAMNeededByte)
+		throw std::exception("Not enough physical RAM");
+}
 //=================================================================================================
+void InitializerValidator::ValidateThatWeHaveEnoughVirtualRAM(const int64 virtualRAMNeededByte) const
+{
+	if (m_pAppUtil->GetVirtualRAMByte() < virtualRAMNeededByte)
+		throw std::exception("Not enough virtual RAM");
+}
 //=================================================================================================
+void InitializerValidator::ValidateThatWeHaveEnoughContinuousVirtualRAM(const int64 virtualRAMNeededByte) const
+{
+	char *buff = new char[(unsigned int)virtualRAMNeededByte];
+	if (buff)
+		delete[] buff;
+	else
+		throw std::exception("Not enough contiguous available memory.");
+}
+//=================================================================================================
+void InitializerValidator::ValidateThatProcessIsTheOnlyInstance(const std::wstring &processName) const
+{
+	if (m_pAppUtil->IsProcessUniqueInstance(processName) == false)
+		throw std::exception("An instance of the process already exists");
+}
+//=================================================================================================
+void InitializerValidator::ValidateThatCPUIsFastEnough(const MegaHertz minimumCPUFrequency) const
+{
+	if (m_pAppUtil->GetCpuSpeed() < minimumCPUFrequency)
+		throw std::exception("CPU is too slow to launch the process");
+}
 //=================================================================================================

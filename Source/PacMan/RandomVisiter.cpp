@@ -57,7 +57,7 @@ int RandomVisiter::m_primeAarray[] =
 //=================================================================================================
 RandomVisiter::RandomVisiter(const int elementsQty)
 {
-	GCC_ASSERT(elementsQty > 0 && "Can't do a PrimeSearch if you have 0 elements to search through");
+	BOOST_ASSERT(elementsQty > 0 && "Can't do a PrimeSearch if you have 0 elements to search through");
 
 	m_maxElements = elementsQty;
 
@@ -74,7 +74,7 @@ RandomVisiter::RandomVisiter(const int elementsQty)
 	int s = sizeof(m_primeAarray) / sizeof(m_primeAarray[0]);
 
 	// If this GCC_ASSERT gets hit you didn't have enough prime numbers to deal with this number of elements
-	GCC_ASSERT(m_primeAarray[s - 1]>m_maxElements);
+	BOOST_ASSERT(m_primeAarray[s - 1]>m_maxElements);
 
 	while (*m_currentPrime < m_maxElements)
 		m_currentPrime++;

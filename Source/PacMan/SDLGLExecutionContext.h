@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "SDLExecutionContext.h"
 #include "SDLGLProcessWindow.h"
 //=================================================================================================

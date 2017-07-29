@@ -21,8 +21,6 @@ public:
 	bool charger();
 	GLuint getID() const;
 	void setFichierImage(const std::string &fichierImage);
-
-
 private:
 
 	GLuint m_id;

@@ -5,4 +5,4 @@ typedef unsigned long ulong;
 typedef std::vector<std::string> StringVec;
 typedef int RESULT;
 typedef __int64 int64;
-typedef long MegaHertz
+typedef unsigned long MegaHertz;

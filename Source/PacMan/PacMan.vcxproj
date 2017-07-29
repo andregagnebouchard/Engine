@@ -61,24 +61,28 @@
     <Import Project="..\..\Support\PropertySheets\SDL2-2.0.5.props" />
     <Import Project="..\..\Support\PropertySheets\glew-2.0.0.props" />
     <Import Project="..\..\Support\PropertySheets\SDL2Image.props" />
+    <Import Project="..\..\Support\PropertySheets\boost_1_64_0.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\SDL2-2.0.5.props" />
     <Import Project="..\..\Support\PropertySheets\glew-2.0.0.props" />
     <Import Project="..\..\Support\PropertySheets\SDL2Image.props" />
+    <Import Project="..\..\Support\PropertySheets\boost_1_64_0.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\SDL2-2.0.5.props" />
     <Import Project="..\..\Support\PropertySheets\glew-2.0.0.props" />
     <Import Project="..\..\Support\PropertySheets\SDL2Image.props" />
+    <Import Project="..\..\Support\PropertySheets\boost_1_64_0.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\SDL2-2.0.5.props" />
     <Import Project="..\..\Support\PropertySheets\glew-2.0.0.props" />
     <Import Project="..\..\Support\PropertySheets\SDL2Image.props" />
+    <Import Project="..\..\Support\PropertySheets\boost_1_64_0.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -179,8 +183,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AppUtil.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="DisplayFactory.cpp" />
+    <ClCompile Include="EngineInitializer.cpp" />
+    <ClCompile Include="InitializerValidator.cpp" />
     <ClCompile Include="OpenGLGraphic.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="RandomVisiter.cpp" />
@@ -194,9 +201,13 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AppUtil.h" />
     <ClInclude Include="Colors.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="DisplayFactory.h" />
+    <ClInclude Include="EngineInitializer.h" />
+    <ClInclude Include="InitializerValidator.h" />
     <ClInclude Include="IShaderProgram.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Primitive.h" />
@@ -215,6 +226,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="typedef.h" />
+    <ClInclude Include="WindowsInclude.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Shaders\texture.frag" />
