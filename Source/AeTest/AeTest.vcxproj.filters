@@ -17,6 +17,9 @@
     <ClCompile Include="gmock.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="glew.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

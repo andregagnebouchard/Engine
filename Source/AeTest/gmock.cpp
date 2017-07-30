@@ -1,3 +1,4 @@
+//https://github.com/google/googletest/blob/master/googlemock/docs/ForDummies.md
 #include <gtest\gtest.h>
 #include <gmock\gmock.h>
 using ::testing::AtLeast;

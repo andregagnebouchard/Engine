@@ -65,6 +65,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -75,6 +76,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -85,6 +87,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -95,6 +98,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -149,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="glew.cpp" />
     <ClCompile Include="gmock.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="log4cplus.cpp" />
