@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "log4cplus", "Components\log4cplus\msvc14\log4cplus.vcxproj", "{917836A4-0DDC-47BE-B930-1B3BFDF6C940}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineComponentTests", "Source\EngineComponentTests\EngineComponentTests.vcxproj", "{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL2", "Components\SDL2\VisualC\SDL\SDL.vcxproj", "{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "boost", "boost", "{F94FDD4D-978F-433D-A621-639BA2577596}"
@@ -23,7 +21,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "Components\googlet
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gmock", "Components\googletest\googlemock\msvc\2015\gmock.vcxproj", "{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineComponentGoogleTest", "Source\EngineComponentGoogleTest\EngineComponentGoogleTest.vcxproj", "{B6791031-42C5-42D4-96F6-F28D20CC66E4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AeTest", "Source\AeTest\AeTest.vcxproj", "{B6791031-42C5-42D4-96F6-F28D20CC66E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,14 +57,6 @@ Global
 		{917836A4-0DDC-47BE-B930-1B3BFDF6C940}.Release|x64.Build.0 = Release|x64
 		{917836A4-0DDC-47BE-B930-1B3BFDF6C940}.Release|x86.ActiveCfg = Release|Win32
 		{917836A4-0DDC-47BE-B930-1B3BFDF6C940}.Release|x86.Build.0 = Release|Win32
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Debug|x64.ActiveCfg = Debug|x64
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Debug|x64.Build.0 = Debug|x64
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Debug|x86.ActiveCfg = Debug|Win32
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Debug|x86.Build.0 = Debug|Win32
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Release|x64.ActiveCfg = Release|x64
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Release|x64.Build.0 = Release|x64
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Release|x86.ActiveCfg = Release|Win32
-		{6CC20FB6-BDA0-4CB4-B7B6-7BB3FD9EBE12}.Release|x86.Build.0 = Release|Win32
 		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.ActiveCfg = Debug|x64
 		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.Build.0 = Debug|x64
 		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x86.ActiveCfg = Debug|Win32

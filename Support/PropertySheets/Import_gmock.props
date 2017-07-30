@@ -2,14 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformShortName)\</OutDir>
-    <IntDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformShortName)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(OutDir);</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Components\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

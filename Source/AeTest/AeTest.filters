@@ -13,30 +13,25 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ComponentTests">
+      <UniqueIdentifier>{73007e39-cbf2-4be4-a450-bedb97a9fa82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tinyxml.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="log4cplus.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ComponentTests</Filter>
     </ClCompile>
     <ClCompile Include="SDL2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ComponentTests</Filter>
     </ClCompile>
     <ClCompile Include="SDL2_image.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>ComponentTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

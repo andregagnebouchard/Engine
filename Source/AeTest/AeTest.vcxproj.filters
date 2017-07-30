@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="log4cplus.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SDL2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SDL2_image.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="gmock.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{1887923c-f4c8-41dc-968a-509ed92788cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
