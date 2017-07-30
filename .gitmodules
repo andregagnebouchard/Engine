@@ -10,3 +10,6 @@
 [submodule "Components/SDL2_image"]
 	path = Components/SDL2_image
 	url = https://github.com/davidsiaw/SDL2_image.git
+[submodule "Components/googletest"]
+	path = Components/googletest
+	url = https://github.com/google/googletest.git
