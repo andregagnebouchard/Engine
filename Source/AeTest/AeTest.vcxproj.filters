@@ -20,6 +20,9 @@
     <ClCompile Include="glew.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="sfml-window.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

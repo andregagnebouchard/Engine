@@ -65,6 +65,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -75,6 +76,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -85,6 +87,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -95,6 +98,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -159,6 +163,7 @@
     <ClCompile Include="log4cplus.cpp" />
     <ClCompile Include="sfml-graphics.cpp" />
     <ClCompile Include="sfml-system.cpp" />
+    <ClCompile Include="sfml-window.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +181,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Components\SFML\src\SFML\System\sfml-system.vcxproj">
       <Project>{94cdfd92-1e29-3706-8397-9fc779a50203}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\SFML\src\SFML\Window\sfml-window.vcxproj">
+      <Project>{9c4287df-6fca-3c86-9529-34a5b92cf957}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Components\tinyxml\tinyxml2\tinyxml2.vcxproj">
       <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>

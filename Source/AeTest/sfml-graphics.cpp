@@ -1,5 +1,5 @@
-/*
 #include <gtest/gtest.h>
+/*
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 
