@@ -5,16 +5,16 @@
     <ClCompile Include="log4cplus.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="SDL2.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL2_image.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="gmock.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml-system.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml-graphics.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="glew.cpp">

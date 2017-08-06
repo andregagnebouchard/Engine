@@ -16,3 +16,6 @@
 [submodule "Components/glew"]
 	path = Components/glew
 	url = https://github.com/nigels-com/glew.git
+[submodule "Components/SFML"]
+	path = Components/SFML
+	url = https://github.com/SFML/SFML.git

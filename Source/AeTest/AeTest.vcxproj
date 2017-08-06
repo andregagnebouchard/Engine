@@ -61,44 +61,40 @@
     <Import Project="..\..\Support\PropertySheets\Import_googletest.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\Import_googletest.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\Import_googletest.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\Import_googletest.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SDL2_image.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_gmock.props" />
     <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -109,6 +105,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SFML_STATIC;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -122,6 +119,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>SFML_STATIC;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +131,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>SFML_STATIC;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,6 +144,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SFML_STATIC;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -157,11 +157,14 @@
     <ClCompile Include="gmock.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="log4cplus.cpp" />
-    <ClCompile Include="SDL2.cpp" />
-    <ClCompile Include="SDL2_image.cpp" />
+    <ClCompile Include="sfml-graphics.cpp" />
+    <ClCompile Include="sfml-system.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Components\glew\build\vc12\glew_shared.vcxproj">
+      <Project>{55ae3d72-7de6-f19f-aef2-9ae8ca26cf3d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\googletest\googlemock\msvc\2015\gmock.vcxproj">
       <Project>{34681f0d-ce45-415d-b5f2-5c662dfe3bd5}</Project>
     </ProjectReference>
@@ -171,11 +174,8 @@
     <ProjectReference Include="..\..\Components\log4cplus\msvc14\log4cplus.vcxproj">
       <Project>{917836a4-0ddc-47be-b930-1b3bfdf6c940}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Components\SDL2\VisualC\SDL\SDL.vcxproj">
-      <Project>{81ce8daf-ebb2-4761-8e45-b71abcca8c68}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Components\SDL2_image\VisualC\SDL_image_VS2012.vcxproj">
-      <Project>{2bd5534e-00e2-4bea-ac96-d9a92ea24696}</Project>
+    <ProjectReference Include="..\..\Components\SFML\src\SFML\System\sfml-system.vcxproj">
+      <Project>{94cdfd92-1e29-3706-8397-9fc779a50203}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Components\tinyxml\tinyxml2\tinyxml2.vcxproj">
       <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>

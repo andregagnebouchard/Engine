@@ -9,7 +9,12 @@
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(OutDir);</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
+    <Lib>
+      <AdditionalOptions Condition="'$(Platform)' == 'Win32'">%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Platform)' == 'x64'">%(AdditionalOptions) /machine:X64</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
