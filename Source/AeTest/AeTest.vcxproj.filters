@@ -23,6 +23,9 @@
     <ClCompile Include="sfml-window.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="sfml-network.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
