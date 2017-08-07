@@ -67,6 +67,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -79,6 +80,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -91,6 +93,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -103,6 +106,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_system.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_window.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -183,6 +187,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Components\log4cplus\msvc14\log4cplus.vcxproj">
       <Project>{917836a4-0ddc-47be-b930-1b3bfdf6c940}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\SFML\src\SFML\Graphics\sfml-graphics.vcxproj">
+      <Project>{c0806eb9-c66c-397e-ac21-1771c4b75532}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Components\SFML\src\SFML\Network\sfml-network.vcxproj">
       <Project>{a3496877-0e44-3f2d-b3e7-4b704a269106}</Project>
