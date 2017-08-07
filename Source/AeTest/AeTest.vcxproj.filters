@@ -29,6 +29,9 @@
     <ClCompile Include="sfml-audio.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="lua.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

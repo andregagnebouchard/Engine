@@ -69,6 +69,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -83,6 +84,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -97,6 +99,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -111,6 +114,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_network.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -171,6 +175,7 @@
   <ItemGroup>
     <ClCompile Include="glew.cpp" />
     <ClCompile Include="gmock.cpp" />
+    <ClCompile Include="lua.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="log4cplus.cpp" />
     <ClCompile Include="sfml-audio.cpp" />
