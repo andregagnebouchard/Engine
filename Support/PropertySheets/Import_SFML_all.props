@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="Import_SFML_audio.props" />
+	<Import Project="Import_SFML_graphics.props" />
+	<Import Project="Import_SFML_network.props" />
+	<Import Project="Import_SFML_system.props" />
+	<Import Project="Import_SFML_window.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>Import_SFML_all</_PropertySheetDisplayName>
+  </PropertyGroup>
+</Project>

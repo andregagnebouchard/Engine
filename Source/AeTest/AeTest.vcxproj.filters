@@ -26,6 +26,9 @@
     <ClCompile Include="sfml-network.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="sfml-audio.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
