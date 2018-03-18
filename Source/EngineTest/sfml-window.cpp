@@ -8,7 +8,7 @@
 /// \return Application exit code
 ///
 ////////////////////////////////////////////////////////////
-TEST(SFMLWindow, UseSFMLWindow)
+TEST(DISABLED_SFMLWindow, UseSFMLWindow)
 {
 	// Request a 24-bits depth buffer when creating the window
 	sf::ContextSettings contextSettings;

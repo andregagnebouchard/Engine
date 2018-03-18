@@ -8,7 +8,7 @@ std::ostream& operator <<(std::ostream& stream, const sf::Ftp::Response& respons
 	return stream << response.getStatus() << response.getMessage();
 }
 
-TEST(SFMLNetwork, UseSFMLNetwork)
+TEST(DISABLED_SFMLNetwork, UseSFMLNetwork)
 {
 	// Choose the server address
 	sf::IpAddress address("127.0.0.1");

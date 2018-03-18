@@ -40,7 +40,7 @@ public:
 		return true;
 	}
 };
-TEST(PainterTest, CanDrawSomething) 
+TEST(DISABLED_PainterTest, CanDrawSomething)
 {
 	MockTurtle turtle;                          // #2
 	EXPECT_CALL(turtle, PenDown())              // #3

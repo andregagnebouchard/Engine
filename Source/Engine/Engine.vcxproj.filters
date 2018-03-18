@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Global">
+      <UniqueIdentifier>{5d328b7e-f3e1-4aab-9357-5f33f8f5aa60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{41a1dac1-d323-4275-aabf-611967884329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RessourceCache">
+      <UniqueIdentifier>{b47c266b-6fbb-46ba-8c98-dd1fefb65de4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="typedef.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="macro.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="constant.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsInclude.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Startup.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Startup.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
