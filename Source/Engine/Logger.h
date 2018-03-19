@@ -2,23 +2,22 @@
 #include "stdafx.h"
 namespace Engine
 {
+	class Logger
+	{
+	public:
+		enum class Level
+		{
+			Debug,
+			Info,
+			Warning,
+			Error,
+			None
+		};
 
-enum class LogLevel
-{
-	LOG_DEBUG,
-	LOG_INFO,
-	LOG_WARNING,
-	LOG_ERROR,
-	LOG_NONE
-};
-
-class Logger
-{
-public:
-	void Log(const sf::String &msg, LogLevel level) const;
-	void SetLogLevel(LogLevel level);
-	void Init();
-private:
-	LogLevel m_logLevel;
-};
+		static void Log(const sf::String &msg, Level level);
+		static void SetLogLevel(Level level);
+		static void Init();
+	private:
+		static Level m_Level;
+	};
 }

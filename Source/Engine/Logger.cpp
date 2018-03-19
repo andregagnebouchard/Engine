@@ -15,28 +15,28 @@ void Logger::Init()
 	LOG4CPLUS_INFO(logger, LOG4CPLUS_TEXT("Logger initialized"));
 }
 //=================================================================================================
-void Logger::Log(const sf::String &msg, LogLevel level) const
+void Logger::Log(const sf::String &msg, Level level)
 {
 	log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("Engine"));
 
 	switch (level)
 	{
-		case LogLevel::LOG_DEBUG :
+		case Level::Debug:
 		{
 			LOG4CPLUS_DEBUG(logger, msg.toWideString());
 			break;
 		}
-		case LogLevel::LOG_INFO:
+		case Level::Info:
 		{
 			LOG4CPLUS_INFO(logger, msg.toWideString());
 			break;
 		}
-		case LogLevel::LOG_WARNING:
+		case Level::Warning:
 		{
 			LOG4CPLUS_WARN(logger, msg.toWideString());
 			break;
 		}
-		case LogLevel::LOG_ERROR:
+		case Level::Error:
 		{
 			LOG4CPLUS_ERROR(logger, msg.toWideString());
 			break;
@@ -48,27 +48,27 @@ void Logger::Log(const sf::String &msg, LogLevel level) const
 	}
 }
 //=================================================================================================
-void Logger::SetLogLevel(LogLevel level)
+void Logger::SetLogLevel(Level level)
 {
 	log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("Engine"));
 	switch (level)
 	{
-		case LogLevel::LOG_DEBUG:
+		case Level::Debug:
 		{
 			logger.setLogLevel(log4cplus::DEBUG_LOG_LEVEL);
 			break;
 		}
-		case LogLevel::LOG_INFO:
+		case Level::Info:
 		{
 			logger.setLogLevel(log4cplus::INFO_LOG_LEVEL);
 			break;
 		}
-		case LogLevel::LOG_WARNING:
+		case Level::Warning:
 		{
 			logger.setLogLevel(log4cplus::WARN_LOG_LEVEL);
 			break;
 		}
-		case LogLevel::LOG_ERROR:
+		case Level::Error:
 		{
 			logger.setLogLevel(log4cplus::ERROR_LOG_LEVEL);
 			break;

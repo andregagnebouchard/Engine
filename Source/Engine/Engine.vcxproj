@@ -95,6 +95,7 @@
       <PreprocessorDefinitions>AE_API_DLL;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,6 +106,7 @@
       <PreprocessorDefinitions>AE_API_DLL;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,6 +119,7 @@
       <PreprocessorDefinitions>AE_API_DLL;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -133,6 +136,7 @@
       <PreprocessorDefinitions>AE_API_DLL;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -140,8 +144,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
     <ClInclude Include="constant.h" />
+    <ClInclude Include="Include\Engine\Application.h" />
+    <ClInclude Include="Include\Engine\GraphicSystem.h" />
+    <ClInclude Include="Include\Engine\System.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Startup.h" />
     <ClInclude Include="macro.h" />
@@ -151,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GraphicSystem.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Startup.cpp" />
   </ItemGroup>

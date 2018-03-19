@@ -1,25 +1,23 @@
 #include "stdafx.h"
-#include "Application.h"
-using namespace Engine;
+#include <..\Engine\Include\Engine\Application.h>
+using namespace sf;
 
-Application *theApp = nullptr;
-//=================================================================================================
-Application::Application()
+namespace Engine
 {
-	theApp = this;
-}
-//=================================================================================================
-void Application::Init(WindowInfo windowInfo)
-{
-	m_logger.Init();
+	shared_ptr<Application> Application::m_Instance = nullptr;
+	shared_ptr<Application> Application::Get()
+	{
+		if (m_Instance == nullptr)
+			m_Instance = make_shared<Application>();
 
-	m_window = std::make_unique<sf::Window>(sf::VideoMode(windowInfo.width, windowInfo.length), windowInfo.title);
-	m_logger.Log("Created context window", LogLevel::LOG_INFO);
+		return m_Instance;
+	}
+
+	void Application::Init()
+	{
+		Logger::Init();
+		Logger::SetLogLevel(Logger::Level::Debug);
+	}
+
 
 }
-//=================================================================================================
-const Logger& Application::GetLogger()
-{
-	return m_logger;
-}
-//=================================================================================================

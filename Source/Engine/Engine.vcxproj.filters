@@ -10,6 +10,9 @@
     <Filter Include="RessourceCache">
       <UniqueIdentifier>{b47c266b-6fbb-46ba-8c98-dd1fefb65de4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Include">
+      <UniqueIdentifier>{1f5cb3ad-da46-47fb-a8b5-8b6f355385f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -30,11 +33,17 @@
     <ClInclude Include="Startup.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\Application.h">
+      <Filter>Engine\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\GraphicSystem.h">
+      <Filter>Engine\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\System.h">
+      <Filter>Engine\Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicSystem.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

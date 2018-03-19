@@ -1,108 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="DisplayFactory.cpp" />
-    <ClCompile Include="OpenGLGraphic.cpp" />
-    <ClCompile Include="SDLExecutionContext.cpp" />
-    <ClCompile Include="SDLGLExecutionContext.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="SDLGLProcessWindow.cpp" />
-    <ClCompile Include="SDLProcessEventListener.cpp" />
-    <ClCompile Include="OpenGLShaderProgram.cpp">
-      <Filter>Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Randomizer.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomVisiter.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="AppUtil.cpp">
-      <Filter>Mainloop\Initialization</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineInitializer.cpp">
-      <Filter>Mainloop\Initialization</Filter>
-    </ClCompile>
-    <ClCompile Include="InitializerValidator.cpp">
-      <Filter>Mainloop\Initialization</Filter>
-    </ClCompile>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Display.h" />
-    <ClInclude Include="DisplayFactory.h" />
-    <ClInclude Include="IExecutionContext.h" />
-    <ClInclude Include="IGraphic.h" />
-    <ClInclude Include="IProcessWindow.h" />
-    <ClInclude Include="IProcessEventListener.h" />
-    <ClInclude Include="OpenGLGraphic.h" />
-    <ClInclude Include="SDLExecutionContext.h" />
-    <ClInclude Include="SDLGLExecutionContext.h" />
-    <ClInclude Include="SDLGLProcessWindow.h" />
-    <ClInclude Include="SDLProcessEventListener.h" />
-    <ClInclude Include="Primitive.h" />
-    <ClInclude Include="Colors.h" />
-    <ClInclude Include="IShaderProgram.h">
-      <Filter>Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLShaderProgram.h">
-      <Filter>Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Randomizer.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomVisiter.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="typedef.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="AppUtil.h">
-      <Filter>Mainloop\Initialization</Filter>
-    </ClInclude>
-    <ClInclude Include="InitializerValidator.h">
-      <Filter>Mainloop\Initialization</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowsInclude.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineInitializer.h">
-      <Filter>Mainloop\Initialization</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{73087932-30ae-489e-8fcb-2cd54b69f5a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{503c6436-5cec-49dc-b2a7-d705b39baa44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Global">
-      <UniqueIdentifier>{73beea2a-0c58-4c59-b546-29cee86b73a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mainloop">
-      <UniqueIdentifier>{7b8ba14f-c951-4a40-aa83-6a2b85cd84e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mainloop\Initialization">
-      <UniqueIdentifier>{37423ebf-a572-4f84-babf-f55d186118e8}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shader\Shaders\texture.frag" />
-    <None Include="Shader\Shaders\texture.vert" />
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

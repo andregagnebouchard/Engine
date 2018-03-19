@@ -15,6 +15,8 @@
 #include "macro.h"
 #include "constant.h"
 
+using namespace std; // Yup!
+
 // log4cplus
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
@@ -23,3 +25,4 @@
 #include <log4cplus/fileappender.h>
 
 #include "SFML\System\String.hpp"
+#include <..\Engine\Logger.h>
