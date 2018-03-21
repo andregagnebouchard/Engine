@@ -1,11 +1,12 @@
 #pragma once
-#include "stdafx.h"
+#include <Engine\Export.h>
 #include <SFML\Window.hpp>
+#include <memory>
 namespace Engine
 {
 	class System;
 
-	class Application
+	class EXPORT Application
 	{
 	public:
 		static shared_ptr<Application> Get();

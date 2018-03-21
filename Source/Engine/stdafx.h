@@ -11,7 +11,7 @@
 #include <memory>
 #include <cctype>
 
-#include "typedef.h"
+#include <Engine\Typedef.h>
 #include "macro.h"
 #include "constant.h"
 
@@ -25,4 +25,4 @@ using namespace std; // Yup!
 #include <log4cplus/fileappender.h>
 
 #include "SFML\System\String.hpp"
-#include <..\Engine\Logger.h>
+#include "Logger.h"

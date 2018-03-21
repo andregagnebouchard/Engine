@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Startup.h"
 #include "WindowsInclude.h"
-#include <..\Engine\Include\Engine\Application.h>
+#include <Engine\Application.h>
 namespace Engine
 {
 	bool Startup::CheckStorage(const int64 diskSpaceNeeded)

@@ -1,17 +1,18 @@
 #pragma once
-#include "stdafx.h"
-#include <..\Engine\Include\Engine\System.h>
+#include <Engine\System.h>
+#include <Engine\Export.h>
 #include <SFML\Window.hpp>
+#include <memory>
 namespace Engine
 {
-	struct WindowInfo
+	struct EXPORT WindowInfo
 	{
 		uint width;
 		uint length;
-		sf::String title;
+		string title;
 	};
 
-	class GraphicSystem : public System
+	class EXPORT GraphicSystem : public System
 	{
 	public:
 		static shared_ptr<GraphicSystem> Create(WindowInfo windowInfo);

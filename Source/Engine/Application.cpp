@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <..\Engine\Include\Engine\Application.h>
+#include <Engine\Application.h>
 using namespace sf;
 
 namespace Engine

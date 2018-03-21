@@ -18,9 +18,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="typedef.h">
-      <Filter>Global</Filter>
-    </ClInclude>
     <ClInclude Include="macro.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -43,6 +40,12 @@
       <Filter>Engine\Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\Engine\System.h">
+      <Filter>Engine\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\Typedef.h">
+      <Filter>Engine\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\Export.h">
       <Filter>Engine\Include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <Include\Engine\GraphicSystem.h>
+#include <Engine\GraphicSystem.h>
 
 namespace Engine
 {
@@ -15,7 +15,7 @@ namespace Engine
 	}
 	void GraphicSystem::Init()
 	{
-		m_Window = make_unique<sf::Window>(sf::VideoMode(m_WindowInfo.width, m_WindowInfo.length), m_WindowInfo.title);
+		m_Window = make_unique<sf::Window>(sf::VideoMode(m_WindowInfo.width, m_WindowInfo.length), sf::String(m_WindowInfo.title));
 		Logger::Log("Created context window", Logger::Level::Info);
 	}
 
