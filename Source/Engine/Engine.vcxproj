@@ -160,11 +160,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="All.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="constant.h" />
     <ClInclude Include="Include\Engine\Application.h" />
     <ClInclude Include="Include\Engine\Export.h" />
     <ClInclude Include="Include\Engine\GraphicSystem.h" />
     <ClInclude Include="Include\Engine\System.h" />
+    <ClInclude Include="Include\Engine\TransformComponent.h" />
     <ClInclude Include="Include\Engine\Typedef.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Startup.h" />
@@ -177,6 +179,7 @@
     <ClCompile Include="GraphicSystem.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Startup.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\log4cplus\msvc14\log4cplus.vcxproj">

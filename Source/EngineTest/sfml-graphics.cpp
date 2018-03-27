@@ -13,7 +13,7 @@
 /// \return Application exit code
 ///
 ////////////////////////////////////////////////////////////
-TEST(SFMLGraphics, SFMLGraphics)
+TEST(DISABLED_SFMLGraphics, SFMLGraphics)
 {
 	bool exit = false;
 	bool sRgb = false;

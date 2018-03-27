@@ -9,29 +9,25 @@ namespace Engine
 {
 	struct WindowInfo
 	{
-    WindowInfo() = default;
-    ~WindowInfo() = default;
-    WindowInfo(const WindowInfo& w) = default;
-
-		uint width;
-		uint length;
-		string title;
+		uint Width;
+		uint Length;
+		string Title;
 	};
 
 	class GraphicSystem : public System
 	{
 	public:
 		static shared_ptr<GraphicSystem> Create(WindowInfo windowInfo);
-		GraphicSystem(WindowInfo windowInfo);
 
 		~GraphicSystem() = default;
 
 		void Init() override;
 		void Shutdown() override;
-		void Update() override;
+		void Update(float dt) override;
 
 		void Resize(uint width, uint height);
 	private:
+    GraphicSystem(WindowInfo windowInfo);
 
 		WindowInfo m_WindowInfo;
 		unique_ptr<sf::Window> m_Window;

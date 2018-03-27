@@ -51,6 +51,12 @@
     <ClInclude Include="All.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\TransformComponent.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Startup.cpp">
@@ -63,6 +69,9 @@
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="GraphicSystem.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>

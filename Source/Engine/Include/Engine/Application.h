@@ -17,6 +17,8 @@ namespace Engine
 		void AddSystem(shared_ptr<System> system);
 
 	private:
+    Application() = default;
+
 		static shared_ptr<Application> m_Instance;
 		vector<shared_ptr<System>> m_Systems;
 	};
