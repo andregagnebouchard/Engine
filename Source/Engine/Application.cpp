@@ -18,6 +18,4 @@ namespace Engine
 		Logger::Init();
 		Logger::SetLogLevel(Logger::Level::Debug);
 	}
-
-
 }

@@ -13,6 +13,7 @@ namespace Engine
 	{
 
 	}
+
 	void GraphicSystem::Init()
 	{
 		m_Window = make_unique<sf::Window>(sf::VideoMode(m_WindowInfo.width, m_WindowInfo.length), sf::String(m_WindowInfo.title));

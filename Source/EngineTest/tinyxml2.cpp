@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <tinyxml\tinyxml2.h>
-TEST(DISABLED_tinyxml2_test, useTinyXml2)
+TEST(tinyxml2_test, useTinyXml2)
 {
 	tinyxml2::XMLDocument xml_doc;
 

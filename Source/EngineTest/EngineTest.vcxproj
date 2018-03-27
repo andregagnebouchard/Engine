@@ -70,7 +70,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_Ae.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -86,7 +86,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_Ae.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -102,7 +102,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_Ae.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -118,7 +118,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_graphics.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_Ae.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -191,7 +191,7 @@
     <ClCompile Include="sfml-network.cpp" />
     <ClCompile Include="sfml-system.cpp" />
     <ClCompile Include="sfml-window.cpp" />
-    <ClCompile Include="Startup.cpp" />
+    <ClCompile Include="GraphicSystem.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>

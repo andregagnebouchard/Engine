@@ -1,18 +1,24 @@
 #pragma once
 #include <Engine\System.h>
-#include <Engine\Export.h>
+#include <Engine\Typedef.h>
 #include <SFML\Window.hpp>
 #include <memory>
+#include <string>
+using namespace std;
 namespace Engine
 {
-	struct EXPORT WindowInfo
+	struct WindowInfo
 	{
+    WindowInfo() = default;
+    ~WindowInfo() = default;
+    WindowInfo(const WindowInfo& w) = default;
+
 		uint width;
 		uint length;
 		string title;
 	};
 
-	class EXPORT GraphicSystem : public System
+	class GraphicSystem : public System
 	{
 	public:
 		static shared_ptr<GraphicSystem> Create(WindowInfo windowInfo);

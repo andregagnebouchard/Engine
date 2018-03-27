@@ -33,7 +33,7 @@ void playSound()
 	std::cout << std::endl << std::endl;
 }
 
-TEST(DISABLED_SFMLAudio, UseSFMLAudio)
+TEST(SFMLAudio, UseSFMLAudio)
 {
 	// Play a sound
 	playSound();

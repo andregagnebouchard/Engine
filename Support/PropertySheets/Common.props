@@ -7,6 +7,9 @@
     <IntDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformShortName)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OutDir);</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
@@ -15,6 +18,10 @@
       <AdditionalOptions Condition="'$(Platform)' == 'Win32'">%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <AdditionalOptions Condition="'$(Platform)' == 'x64'">%(AdditionalOptions) /machine:X64</AdditionalOptions>
     </Lib>
+    <ClCompile>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

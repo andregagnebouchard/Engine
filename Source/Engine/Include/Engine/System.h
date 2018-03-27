@@ -1,10 +1,8 @@
 #pragma once
-#include "stdafx.h"
-#include <Engine\Export.h>
 
 namespace Engine
 {
-	class EXPORT System
+	class System
 	{
 	public:
 		virtual ~System() = default;

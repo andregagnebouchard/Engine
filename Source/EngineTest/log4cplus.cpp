@@ -3,7 +3,7 @@
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/configurator.h>
 #include <log4cplus/initializer.h>
-TEST(DISABLED_log4cplusTest, UseLog4cplus)
+TEST(log4cplusTest, UseLog4cplus)
 {
 	// Initialization and deinitialization.
 	log4cplus::Initializer initializer;
