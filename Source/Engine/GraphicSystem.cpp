@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include <Engine\GraphicSystem.h>
+#include "GraphicSystem.h"
 
 namespace Engine
 {
-	shared_ptr<GraphicSystem> GraphicSystem::Create(WindowInfo windowInfo)
+	shared_ptr<IGraphicSystem> IGraphicSystem::Create(WindowInfo windowInfo)
 	{
 		return make_shared<GraphicSystem>(windowInfo);
 	}
 
-	GraphicSystem::GraphicSystem(WindowInfo windowInfo) :
+  GraphicSystem::GraphicSystem(WindowInfo windowInfo) :
 		m_WindowInfo(windowInfo)
 	{
 
@@ -33,6 +33,7 @@ namespace Engine
 
   void GraphicSystem::Resize(uint width, uint height)
 	{
+    //TODO: Resize OpenGL viewport glViewport(0, 0, width, height); see https://learnopengl.com/Getting-started/Hello-Window
     if (width * height == 0)
       throw std::invalid_argument("Invalid window size");
 

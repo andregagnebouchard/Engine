@@ -2,10 +2,10 @@
 
 namespace Engine
 {
-	class System
+	class ISystem
 	{
 	public:
-		virtual ~System() = default;
+		virtual ~ISystem() = default;
 
 		virtual void Init() = 0;
 		virtual void Shutdown() = 0;

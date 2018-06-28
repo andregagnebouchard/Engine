@@ -1,8 +1,7 @@
 #pragma once
-#include <Engine/Application.h>
-#include <Engine/Export.h>
-#include <Engine/System.h>
-#include <Engine/GraphicSystem.h>
 #include <Engine/Typedef.h>
-#include <Engine/Component.h>
-#include <Engine/TransformComponent.h>
+#include <Engine/Export.h>
+#include <Engine/IApplication.h>
+#include <Engine/ISystem.h>
+#include <Engine/IGraphicSystem.h>
+#include <Engine/IComponent.h>

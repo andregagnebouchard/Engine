@@ -1,0 +1,147 @@
+===========================
+Notes :
+- SystemInput will keep track of the pressed state of all the inputs and will fire events when the state changes
+- PhysicComponent and RenderComponent will share the TransformComponent
+- All "RENDER_SPRITE" event will have a layer value
+- The LogicComponent must change state only once per frame, at the end of its processing
+- For Networking in LockStep, we will send the output events of the "ComponentInput"
+- The "COLLISION" event must specify both objects that collided
+===========================
+Preinit :
+- ComponentInput subscribes to "W_KEY_PRESSED" of ComponentMessageManager
+- ComponentInput subscribes to "W_KEY_RELEASED" of ComponentMessageManager
+- ComponentLogic subscribes to "START_MOVE_FORWARD" of the EntityId of ComponentMessageManager
+- ComponentLogic start in state "Idle"
+- ComponentPhysic subscribes to "MOVE_COMMAND" of the EntityId of ComponentMessageManager
+- ComponentLogic subscribes to "MOVED_ACTION"
+- ComponentRender subscribes to "MOVED_ACTION"
+- ComponentAudio subscribes to "MOVED_ACTION"
+- ComponentRenderer subscribes to "STATE_CHANGE"
+- ComponentRenderer subscribes to "COLLISION"
+- ComponentAudio subscribes to "COLLISION"
+- SystemRender subscribes to "RENDER_SPRITE"
+- All the component but the input register to the "NEXT_FRAME" event(Should have an object for this)
+===========================
+Frame #0 : User press W key. User is not facing a wall
+Initialisation
+- CreatePlayMusicProcess
+
+SystemInput.Update() : 
+- Register the "W" key pressed
+- Callback everything subscribed to the "W_KEY_PRESSED"
+- Update all input components
+
+InputComponentUpdate :
+- Fetch "W_KEY_PRESSED" in its buffer
+- "W_KEY_PRESSED" key is translated into "START_MOVE_FORWARD"
+- Push "INPUT_MOVE_FORWARD" with the EntityId into the ComponentMessagesManager
+
+SystemLogic.Update()
+- Update all Processes
+- Update all PhysicComponents
+- Update all LogicComponent
+
+Process
+- Send "PLAY_MUSIC" event
+
+LogicComponent
+- Fetch "START_MOVE_FORWARD" in its buffer
+- Since it is in Idle state, create a new process "MOVING_PROCESS" and push it to the SystemLogic
+
+PhysicComponent
+- Nothing
+
+RenderSystem
+- Update all RenderComponent
+- Render
+
+RenderComponent
+- Send "RENDER_SPRITE" event with transform position
+
+AudioSystem
+- Fetch "PLAY_MUSIC" event
+- Start playing the music
+
+GameLoop
+- Push "NEXT_FRAME"
+- All components subscribes to the event swap their event buffer
+================Frame #1================
+SystemInput.Update()
+- Register and callback nothing
+
+ComponentInput
+- Nothing
+
+SystemLogic.Update()
+- Update all Processes
+- Update all PhysicComponents
+- Update all LogicComponent
+
+MoveProcess
+- Send "MOVE_COMMAND" event
+
+PhysicComponent
+- Fetch "MOVE_COMMAND" event
+- Get its position with "TransformComponent"
+- Get its velocity with "VelocityComponent"
+- Calculate its new position
+- Check collision between current and new position. There are no collision
+- Update the TransformComponent
+- Send "MOVED_ACTION" event
+
+LogicComponent
+- Fetch "MOVED_ACTION" event
+- Send "STATE_CHANGED" event from "Idle" to "Moving"
+
+ RenderSystem
+- Update all RenderComponent
+- Render
+
+RenderComponent
+- "STATE_CHANGED" event from "Idle" to "Moving"
+- Get the tileset corresponding to the state with a map
+- Push "RENDER_SPRITE"
+============Frame #2===============
+SystemInput.Update()
+- Nothing
+
+ComponentInput
+- Nothing
+
+SystemLogic.Update()
+- Update all Processes
+- Update all PhysicComponents
+- Update all LogicComponent
+
+MoveProcess sends "MOVE_COMMAND"
+
+PhysicComponents
+- Fetch "MOVE_COMMAND" event
+- Get its position with "TransformComponent"
+- Get its velocity with "VelocityComponent"
+- Calculate its new position
+- Check collision between current and new position. There is a collision
+- Update the transform component to be next to the wall
+- Send "COLLISION" event
+
+LogicComponent
+- Fetch "COLLISION" event
+- Change state to "COLLIDED"
+- Push "COLLISION" event
+- Take 10 damage and die
+- Push "STATE_CHANGED" event
+
+RenderSystem
+- Update all RenderComponent
+- Render
+
+RenderComponent
+- Fetch "STATE_CHANGED" event
+- Update its tileset to the "Collided" one
+- Push "RENDER_SPRITE"
+- 
+- Fetch "COLLISION" event
+- Create "EXPLOSION_PROCESS"
+
+
+// Example: --run_test=MultiDevicesTest --log_level=test_suite -- deviceQty=2 masterDevice=QC-000013

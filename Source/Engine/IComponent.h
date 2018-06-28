@@ -2,10 +2,10 @@
 
 namespace Engine
 {
-  class Component
+  class IComponent
   {
   public:
-    virtual ~Component() = default;
+    virtual ~IComponent() = default;
 
     virtual void Init() = 0;
     virtual void Shutdown() = 0;

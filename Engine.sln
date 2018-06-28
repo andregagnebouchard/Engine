@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml2", "Components\tinyxml\tinyxml2\tinyxml2.vcxproj", "{D1C528B6-AA02-4D29-9D61-DC08E317A70D}"
 EndProject
@@ -41,6 +41,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTest", "Source\EngineTest\EngineTest.vcxproj", "{B6791031-42C5-42D4-96F6-F28D20CC66E4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Source\Game\Game.vcxproj", "{3825A1A6-A106-4F03-8226-6EEA11C7BDFB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "boost", "boost", "{463B4F3D-724D-4B85-95D7-39D52AA4A07F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -187,6 +189,7 @@ Global
 		{94CDFD92-1E29-3706-8397-9FC779A50203} = {633DB6E0-D714-4D49-95D8-D65D763C9163}
 		{9C4287DF-6FCA-3C86-9529-34A5B92CF957} = {633DB6E0-D714-4D49-95D8-D65D763C9163}
 		{D0BD6031-2A6C-4E5D-B224-E1D9A25163DA} = {6A1BBA40-D807-44F5-B456-7D2631D5FD46}
+		{463B4F3D-724D-4B85-95D7-39D52AA4A07F} = {6A1BBA40-D807-44F5-B456-7D2631D5FD46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {808549F3-145F-41E2-8375-3C572CF81D2A}

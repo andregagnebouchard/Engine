@@ -33,15 +33,6 @@
     <ClInclude Include="Logger.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\Application.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\GraphicSystem.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\System.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Engine\Typedef.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -51,10 +42,25 @@
     <ClInclude Include="All.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="Renderer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IApplication.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\TransformComponent.h">
+    <ClInclude Include="Include\Engine\ISystem.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IGraphicSystem.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicSystem.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,16 +68,14 @@
     <ClCompile Include="Startup.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicSystem.cpp">
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Application.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="TransformComponent.cpp">
+    <ClCompile Include="GraphicSystem.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
