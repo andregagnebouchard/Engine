@@ -25,3 +25,6 @@
 [submodule "Components/zlib"]
 	path = Components/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "Components/box2d"]
+	path = Components/box2d
+	url = https://github.com/erincatto/Box2D.git

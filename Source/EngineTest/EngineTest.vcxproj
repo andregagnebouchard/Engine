@@ -71,6 +71,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
     <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_box2d.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -87,6 +88,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
     <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_box2d.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -103,6 +105,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
     <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_box2d.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -119,6 +122,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_SFML_audio.props" />
     <Import Project="..\..\Support\PropertySheets\Import_lua.props" />
     <Import Project="..\..\Support\PropertySheets\Import_Engine.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_box2d.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -185,6 +189,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="box2d.cpp" />
     <ClCompile Include="glew.cpp" />
     <ClCompile Include="gmock.cpp" />
     <ClCompile Include="lua.cpp" />
@@ -199,6 +204,9 @@
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Components\box2d\Build\Box2D.vcxproj">
+      <Project>{a434e80c-1049-10be-d9ca-b31d459e0cef}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\glew\build\vc12\glew_shared.vcxproj">
       <Project>{55ae3d72-7de6-f19f-aef2-9ae8ca26cf3d}</Project>
     </ProjectReference>
