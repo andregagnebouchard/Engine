@@ -102,5 +102,8 @@
     <ClCompile Include="SystemInput.cpp">
       <Filter>Engine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Messager.cpp">
+      <Filter>Engine\Event</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

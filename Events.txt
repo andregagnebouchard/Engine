@@ -1,0 +1,49 @@
+class Event
+{
+	public:
+	enum class Id
+	{
+		// KeyEvent
+		W_KEY_PRESSED, 
+		W_KEY_RELEASED,
+		
+		// EntityEvent
+		MOVE,
+		COLLISION,
+		
+		// JoystickEvent
+		
+	}
+	struct KeyEvent
+	{
+		enum class State { Pressed, Released};
+		enum class Key { A, B, C, D, E...};
+		KeyEvent::State keyState;
+		Key key;
+	}
+
+	strict JoystickButtonEvent
+	{
+		unsigned int joystickId;
+		unsigned int button;
+	}
+	
+	struct EntityEvent
+	{
+		EntityId id;
+	}
+	enum class Type { Key, JoystickButton, Entity};
+	union { KeyEvent key, JoystickButtonEvent joystickButton, EntityEvent entity};
+	Type GetType();
+}
+
+class Messager
+{
+	public:
+	void Attach(std::function<void(Event)> &callback, Event::Id eventId);
+	void Attach(std::function<void(Event)> &callback, Event::Id eventId, EntityId entityId);
+	void Detach(std::function<void(Event)> &callback);
+	void Fire(const Event &event);
+	private:
+	unordered_multimap<EventId, std::function<void(Event)>> m_Callbacks;
+}

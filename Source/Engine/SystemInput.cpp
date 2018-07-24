@@ -32,17 +32,17 @@ namespace Engine
 			switch (event.type)
 			{
 			case sf::Event::KeyPressed:
-				SignalKeyEvent(event, Event::KeyEvent::Type::Pressed);
+				SignalKeyEvent(event, Event::KeyEvent::State::Pressed);
 				break;
 			case sf::Event::KeyReleased:
-				SignalKeyEvent(event, Event::KeyEvent::Type::Released);
+				SignalKeyEvent(event, Event::KeyEvent::State::Released);
 				break;
 			}
 		}
 	}
 
-	void SystemInput::SignalKeyEvent(const sf::Event &event, Event::KeyEvent::Type type)
+	void SystemInput::SignalKeyEvent(const sf::Event &event, Event::KeyEvent::State state)
 	{
-		//Messager::Propagate()
+    //Messager::Fire(event);
 	}
 }

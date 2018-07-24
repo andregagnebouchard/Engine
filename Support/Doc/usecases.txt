@@ -2,10 +2,41 @@
 Notes :
 - SystemInput will keep track of the pressed state of all the inputs and will fire events when the state changes
 - PhysicComponent and RenderComponent will share the TransformComponent
-- All "RENDER_SPRITE" event will have a layer value
+- All "RENDER_SPRITE" event will have a layer value and the sprite ID
 - The LogicComponent must change state only once per frame, at the end of its processing
 - For Networking in LockStep, we will send the output events of the "ComponentInput"
 - The "COLLISION" event must specify both objects that collided
+- The "SystemLogic" is responsible to create and delete entities
+- The entityId will be set on Box2d::Body::SetUserData
+- SystemPhysic implémente les collisions callback de Box2d. Il les buffer tous. Après World.step(), il throw 2 events. Collision of bar with ball && Collision of ball with bar.
+- SystemNetwork tire des évènements de synchronisations "RESYNC" appliqués par SystemSimulation.
+- SystemSimulation se charge de la création/deletion d'entity et du repositionnement après la réponse du serveur. Il connait tous et bypass l'ordre
+- Les AI vont être des process. Tu peux chainer les process
+- Les systèmes peuvent être disablés(Pause disable rendering & logic)
+- Les évènements audio vont préciser le temps auquel commencer et s'ils doivent looper.
+- Déclare tes id dans un .h en static et définit les dans un .cpp au même nom
+===========================
+GameState
+- FrameCount
+- All the entity alive
+- All the transform components
+- All the entity states (Hp, Level). ComponentLogic::SetState()
+- All the processes states
+===========================
+OnPause
+- SystemSimulation listens to "OnPause" event
+- 
+
+===========================
+Loop
+MainLoop
+SystemNetwork
+SystemSimulation
+SystemInput
+SystemLogic
+SystemPhysic
+SystemRender
+SystemAudio
 ===========================
 Preinit :
 - ComponentInput subscribes to "W_KEY_PRESSED" of ComponentMessageManager
@@ -20,11 +51,19 @@ Preinit :
 - ComponentRenderer subscribes to "COLLISION"
 - ComponentAudio subscribes to "COLLISION"
 - SystemRender subscribes to "RENDER_SPRITE"
+- SystemSimulation subscribes to "PAUSE_KEY_PRESSED"
+- SystemSimulation subscribes to "CREATE_ENTITY"
+- SystemSimulation subscribes to "DELETE_ENTITY"
+- SystemSimulation subscribes to "RESYNC"
+- SystemSimulation subscribes to "REWIND"
 - All the component but the input register to the "NEXT_FRAME" event(Should have an object for this)
 ===========================
 Frame #0 : User press W key. User is not facing a wall
 Initialisation
 - CreatePlayMusicProcess
+
+SystemEntity.Update()
+- Nothing
 
 SystemInput.Update() : 
 - Register the "W" key pressed
@@ -37,26 +76,37 @@ InputComponentUpdate :
 - Push "INPUT_MOVE_FORWARD" with the EntityId into the ComponentMessagesManager
 
 SystemLogic.Update()
+- SystemLogic::Create/Delete entities
 - Update all Processes
+- Update PhysicSystem
 - Update all PhysicComponents
 - Update all LogicComponent
 
 Process
 - Send "PLAY_MUSIC" event
 
+PhysicSystem.Update()
+- World.Step()
+- Push translated collision events
+
+PhysicComponents.Update()
+- TransformComponent->SetX(body->GetPosition()->GetX());
+- TransformComponent->SetY(body->GetPosition()->GetY());
+- TransformComponent->SetAngle(body->GetPosition()->GetAngle())
+
 LogicComponent
 - Fetch "START_MOVE_FORWARD" in its buffer
 - Since it is in Idle state, create a new process "MOVING_PROCESS" and push it to the SystemLogic
 
-PhysicComponent
-- Nothing
 
 RenderSystem
 - Update all RenderComponent
 - Render
 
 RenderComponent
-- Send "RENDER_SPRITE" event with transform position
+- Position = TransformComponent->GetX() + TransformComponent->GetY()
+- Angle = TransformComponent->GetAngle()
+- Send "RENDER_SPRITE" event with transform position and angle
 
 AudioSystem
 - Fetch "PLAY_MUSIC" event
@@ -66,6 +116,9 @@ GameLoop
 - Push "NEXT_FRAME"
 - All components subscribes to the event swap their event buffer
 ================Frame #1================
+SystemEntity.Update()
+- Nothing
+
 SystemInput.Update()
 - Register and callback nothing
 
@@ -73,7 +126,9 @@ ComponentInput
 - Nothing
 
 SystemLogic.Update()
+- SystemLogic::Create/Delete entities
 - Update all Processes
+- Update PhysicSystem
 - Update all PhysicComponents
 - Update all LogicComponent
 
@@ -109,6 +164,7 @@ ComponentInput
 - Nothing
 
 SystemLogic.Update()
+- SystemLogic::Create/Delete entities
 - Update all Processes
 - Update all PhysicComponents
 - Update all LogicComponent
@@ -141,7 +197,4 @@ RenderComponent
 - Push "RENDER_SPRITE"
 - 
 - Fetch "COLLISION" event
-- Create "EXPLOSION_PROCESS"
-
-
-// Example: --run_test=MultiDevicesTest --log_level=test_suite -- deviceQty=2 masterDevice=QC-000013
+- Send "CREATE_ENTITY" with "ENTITYID_EXPLOSION" and a "POSITION" "ANGLE"

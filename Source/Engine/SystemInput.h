@@ -17,7 +17,7 @@ namespace Engine
 		void Update(float dt) override;
 
 	private:
-		void SignalKeyEvent(const sf::Event &event, Event::KeyEvent::Type type);
+		void SignalKeyEvent(const sf::Event &event, Event::KeyEvent::State state);
 		shared_ptr<sf::Window> m_Window;
 	};
 }
