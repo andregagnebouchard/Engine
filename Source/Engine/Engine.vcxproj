@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="All.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="constant.h" />
     <ClInclude Include="GraphicSystem.h" />
@@ -169,11 +170,14 @@
     <ClInclude Include="Include\Engine\IGraphicSystem.h" />
     <ClInclude Include="Include\Engine\ISystem.h" />
     <ClInclude Include="Include\Engine\Typedef.h" />
+    <ClInclude Include="ISystemInput.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="Messager.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Startup.h" />
     <ClInclude Include="macro.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SystemInput.h" />
     <ClInclude Include="WindowsInclude.h" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +186,7 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Startup.cpp" />
+    <ClCompile Include="SystemInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\log4cplus\msvc14\log4cplus.vcxproj">

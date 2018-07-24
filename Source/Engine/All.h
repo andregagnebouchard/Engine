@@ -4,4 +4,5 @@
 #include <Engine/IApplication.h>
 #include <Engine/ISystem.h>
 #include <Engine/IGraphicSystem.h>
+#include <Engine/ISystemInput.h>
 #include <Engine/IComponent.h>

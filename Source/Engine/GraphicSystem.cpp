@@ -16,7 +16,7 @@ namespace Engine
 
 	void GraphicSystem::Init()
 	{
-		m_Window = make_unique<sf::Window>(sf::VideoMode(m_WindowInfo.Width, m_WindowInfo.Length), sf::String(m_WindowInfo.Title));
+		m_Window = make_shared<sf::Window>(sf::VideoMode(m_WindowInfo.Width, m_WindowInfo.Length), sf::String(m_WindowInfo.Title));
 		Logger::Log("Created context window", Logger::Level::Info);
 	}
 

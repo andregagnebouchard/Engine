@@ -13,6 +13,15 @@
     <Filter Include="Include">
       <UniqueIdentifier>{1f5cb3ad-da46-47fb-a8b5-8b6f355385f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{e2a5a1c8-f86c-4c48-a8e0-b7a937bd4af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphic">
+      <UniqueIdentifier>{22c806f0-ef81-4c2f-b466-e8e1deee32d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Event">
+      <UniqueIdentifier>{8efe3696-d54f-43d2-adb7-f8e9f26d1055}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -42,9 +51,6 @@
     <ClInclude Include="All.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -57,11 +63,26 @@
     <ClInclude Include="Include\Engine\IGraphicSystem.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicSystem.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="IComponent.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystemInput.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicSystem.h">
+      <Filter>Engine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Engine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInput.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Messager.h">
+      <Filter>Engine\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +97,10 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="GraphicSystem.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemInput.cpp">
+      <Filter>Engine\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

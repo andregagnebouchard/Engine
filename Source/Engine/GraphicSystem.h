@@ -9,14 +9,16 @@ namespace Engine
   public:
     GraphicSystem(WindowInfo windowInfo);
     ~GraphicSystem() = default;
-
+		
+		// ISystem
     void Init() override;
     void Shutdown() override;
     void Update(float dt) override;
 
-    void Resize(uint width, uint height);
+		// IGraphicSystem
+    void Resize(uint width, uint height) override;
   private:
     WindowInfo m_WindowInfo;
-    unique_ptr<sf::Window> m_Window;
+    shared_ptr<sf::Window> m_Window;
   };
 }
