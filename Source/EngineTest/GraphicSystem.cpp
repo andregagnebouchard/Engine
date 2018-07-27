@@ -1,5 +1,5 @@
 #include <gtest\gtest.h>
-#include <Engine\IGraphicSystem.h>
+#include <Engine\ISystemGraphic.h>
 //=================================================================================================
 class GraphicSystemTest : public testing::Test
 {
@@ -15,7 +15,7 @@ protected:
     m_Graphic->Shutdown();
   }
 
-  shared_ptr<Engine::IGraphicSystem> m_Graphic = Engine::IGraphicSystem::Create(Engine::WindowInfo{ 800, 600, "Graphic" });
+  shared_ptr<Engine::ISystemGraphic> m_Graphic = Engine::ISystemGraphic::Create(Engine::WindowInfo{ 800, 600, "Graphic" });
 };
 //=================================================================================================
 TEST_F(GraphicSystemTest, ResizeGraphicSystemWindow)

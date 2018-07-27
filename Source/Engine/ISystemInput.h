@@ -9,7 +9,6 @@ namespace Engine
 	class ISystemInput : public ISystem
 	{
 	public:
-		//static shared_ptr<ISystemInput> Create();
 		~ISystemInput() = default;
 		
 		// ISystem

@@ -6,17 +6,17 @@ using namespace std;
 
 namespace Engine
 {
-  class ISystem;
-
   class Application : public IApplication
   {
   public:
     void Init() override;
     void Shutdown() override;
-    void AddSystem(shared_ptr<ISystem> system) override;
 
+    shared_ptr<ISystemInput> GetSystemInput() const override;
+    shared_ptr<ISystemGraphic> GetSystemGraphic() const override;
     void RunLoop() override;
   private:
-    vector<shared_ptr<ISystem>> m_Systems;
+    shared_ptr<ISystemInput> m_SystemInput;
+    shared_ptr<ISystemGraphic> m_SystemGraphic;
   };
 }

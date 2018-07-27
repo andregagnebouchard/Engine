@@ -6,25 +6,17 @@
 using namespace std;
 namespace Engine
 {
-	struct WindowInfo
-	{
-		uint Width;
-		uint Length;
-		string Title;
-	};
-
-	class IGraphicSystem : public ISystem
+	class ISystemGraphic : public ISystem
 	{
 	public:
-    static shared_ptr<IGraphicSystem> Create(WindowInfo windowInfo);
-		~IGraphicSystem() = default;
+		~ISystemGraphic() = default;
 
 		// ISystem
 		virtual void Init() = 0;
 		virtual void Shutdown() = 0;
 		virtual void Update(float dt) = 0;
 
-		// IGraphicSystem
+		// ISystemGraphic
 		virtual void Resize(uint width, uint height) = 0;
 	};
 }

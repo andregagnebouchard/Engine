@@ -164,10 +164,10 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="constant.h" />
-    <ClInclude Include="GraphicSystem.h" />
+    <ClInclude Include="SystemGraphic.h" />
     <ClInclude Include="Include\Engine\IApplication.h" />
     <ClInclude Include="Include\Engine\Export.h" />
-    <ClInclude Include="Include\Engine\IGraphicSystem.h" />
+    <ClInclude Include="Include\Engine\ISystemGraphic.h" />
     <ClInclude Include="Include\Engine\ISystem.h" />
     <ClInclude Include="Include\Engine\Typedef.h" />
     <ClInclude Include="ISystemInput.h" />
@@ -182,7 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="GraphicSystem.cpp" />
+    <ClCompile Include="SystemGraphic.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Messager.cpp" />
     <ClCompile Include="Renderer.cpp" />

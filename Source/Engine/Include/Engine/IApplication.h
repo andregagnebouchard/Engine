@@ -3,7 +3,9 @@ using namespace std;
 
 namespace Engine
 {
-	class ISystem;
+	class ISystemInput;
+  class ISystemGraphic;
+
 	class IApplication
 	{
 	public:
@@ -13,8 +15,9 @@ namespace Engine
 
 		virtual void Init() = 0;
     virtual void Shutdown() = 0;
-    virtual void AddSystem(shared_ptr<ISystem> system) = 0;
 
+    virtual shared_ptr<ISystemInput> GetSystemInput() const = 0;
+    virtual shared_ptr<ISystemGraphic> GetSystemGraphic() const = 0;
     virtual void RunLoop() = 0;
 	};
 }

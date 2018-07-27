@@ -60,17 +60,11 @@
     <ClInclude Include="Include\Engine\ISystem.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\IGraphicSystem.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="IComponent.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="ISystemInput.h">
       <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicSystem.h">
-      <Filter>Engine\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Engine\Graphic</Filter>
@@ -84,6 +78,12 @@
     <ClInclude Include="Messager.h">
       <Filter>Engine\Event</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Engine\ISystemGraphic.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemGraphic.h">
+      <Filter>Engine\Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Startup.cpp">
@@ -96,14 +96,14 @@
     <ClCompile Include="Application.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicSystem.cpp">
-      <Filter>Engine\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="SystemInput.cpp">
       <Filter>Engine\Input</Filter>
     </ClCompile>
     <ClCompile Include="Messager.cpp">
       <Filter>Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemGraphic.cpp">
+      <Filter>Engine\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

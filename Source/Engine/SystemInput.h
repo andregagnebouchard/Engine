@@ -1,7 +1,6 @@
 #pragma once
 #include <Engine\ISystemInput.h>
 #include <SFML\Window.hpp>
-#include "Event.h"
 using namespace std;
 namespace Engine
 {
@@ -17,7 +16,7 @@ namespace Engine
 		void Update(float dt) override;
 
 	private:
-		void SignalKeyEvent(const sf::Event &event, Event::KeyEvent::State state);
+		void SignalKeyEvent(const sf::Event &event);
 		shared_ptr<sf::Window> m_Window;
 	};
 }

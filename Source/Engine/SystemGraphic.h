@@ -1,24 +1,27 @@
 #pragma once
-#include <Engine\IGraphicSystem.h>
+#include <Engine\ISystemGraphic.h>
 #include <SFML\Window.hpp>
 using namespace std;
 namespace Engine
 {
-  class GraphicSystem : public IGraphicSystem
+  class MessageQueue;
+  class Event;
+  class SystemGraphic : public ISystemGraphic
   {
   public:
-    GraphicSystem(WindowInfo windowInfo);
-    ~GraphicSystem() = default;
+    SystemGraphic(shared_ptr<sf::Window> window);
+    ~SystemGraphic() = default;
 		
 		// ISystem
     void Init() override;
     void Shutdown() override;
     void Update(float dt) override;
 
-		// IGraphicSystem
+		// ISystemGraphic
     void Resize(uint width, uint height) override;
   private:
-    WindowInfo m_WindowInfo;
+    void HandleRenderingEvent(const Event &event);
+    MessageQueue m_MsgQueue;
     shared_ptr<sf::Window> m_Window;
   };
 }
