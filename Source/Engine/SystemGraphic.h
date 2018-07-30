@@ -1,11 +1,9 @@
 #pragma once
 #include <Engine\ISystemGraphic.h>
-#include <SFML\Window.hpp>
+#include "Messager.h"
 using namespace std;
 namespace Engine
 {
-  class MessageQueue;
-  class Event;
   class SystemGraphic : public ISystemGraphic
   {
   public:

@@ -2,7 +2,6 @@
 #include <Engine\ISystem.h>
 #include <Engine\Typedef.h>
 #include <memory>
-#include <string>
 using namespace std;
 namespace Engine
 {

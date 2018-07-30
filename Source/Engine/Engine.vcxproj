@@ -164,6 +164,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="constant.h" />
+    <ClInclude Include="SpriteCache.h" />
     <ClInclude Include="SystemGraphic.h" />
     <ClInclude Include="Include\Engine\IApplication.h" />
     <ClInclude Include="Include\Engine\Export.h" />
@@ -173,7 +174,6 @@
     <ClInclude Include="ISystemInput.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Messager.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Startup.h" />
     <ClInclude Include="macro.h" />
     <ClInclude Include="stdafx.h" />
@@ -185,7 +185,6 @@
     <ClCompile Include="SystemGraphic.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Messager.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Startup.cpp" />
     <ClCompile Include="SystemInput.cpp" />
   </ItemGroup>

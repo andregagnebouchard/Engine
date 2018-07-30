@@ -16,6 +16,7 @@ namespace Engine
 
   void Messager::Fire(const Event &event)
   {
+		Logger::Log("Firing EventId" + static_cast<int>(event.GetId()), Logger::Level::Info);
     for (auto callback : m_Callbacks[event.GetId()])
       (*callback)(event);
   }
@@ -23,14 +24,16 @@ namespace Engine
   //=============
   // MessageQueue
   //=============
-  MessageQueue::MessageQueue()
+  MessageQueue::MessageQueue() :
+		m_CurrentQueue(m_Queue1),
+		m_CurrentQueueId(1)
   {
     m_Callback = bind(&MessageQueue::OnEvent, this, placeholders::_1);
   }
 
-  queue<Event>& MessageQueue::GetEvents()
+  queue<Event>& MessageQueue::GetQueue()
   {
-    return m_Events;
+    return m_CurrentQueue;
   }
 
   function<void(Event)>* MessageQueue::GetCallback()
@@ -39,6 +42,20 @@ namespace Engine
   }
   void MessageQueue::OnEvent(Event event)
   {
-    m_Events.push(event);
+		m_CurrentQueue.push(event);
   }
+
+	void MessageQueue::Swap()
+	{
+		if (m_CurrentQueueId == 1)
+		{
+			m_CurrentQueue = m_Queue2;
+			m_CurrentQueueId = 2;
+		}
+		else
+		{
+			m_CurrentQueue = m_Queue1;
+			m_CurrentQueueId = 1;
+		}
+	}
 }

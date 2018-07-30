@@ -1,11 +1,10 @@
 #pragma once
+#include <Engine/ISystemGraphic.h>
+#include <Engine/ISystemInput.h>
 using namespace std;
 
 namespace Engine
 {
-	class ISystemInput;
-  class ISystemGraphic;
-
 	class IApplication
 	{
 	public:

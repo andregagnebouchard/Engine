@@ -7,9 +7,6 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{41a1dac1-d323-4275-aabf-611967884329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RessourceCache">
-      <UniqueIdentifier>{b47c266b-6fbb-46ba-8c98-dd1fefb65de4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Include">
       <UniqueIdentifier>{1f5cb3ad-da46-47fb-a8b5-8b6f355385f5}</UniqueIdentifier>
     </Filter>
@@ -66,9 +63,6 @@
     <ClInclude Include="ISystemInput.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Engine\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="SystemInput.h">
       <Filter>Engine\Input</Filter>
     </ClInclude>
@@ -84,6 +78,9 @@
     <ClInclude Include="SystemGraphic.h">
       <Filter>Engine\Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteCache.h">
+      <Filter>Engine\Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Startup.cpp">
@@ -92,7 +89,6 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Application.cpp">
       <Filter>Engine</Filter>
     </ClCompile>

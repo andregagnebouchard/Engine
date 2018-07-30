@@ -10,6 +10,7 @@
 #include <map>
 #include <memory>
 #include <cctype>
+#include <chrono>
 
 #include <Engine\Typedef.h>
 #include "macro.h"

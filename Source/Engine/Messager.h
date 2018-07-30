@@ -37,15 +37,19 @@ namespace Engine
   {
   public:
     MessageQueue();
-    ~MessageQueue() = default;
 
-    queue<Event>& GetEvents();
+    queue<Event>& GetQueue();
     function<void(Event)>* GetCallback();
+		void Swap();
     
   private:
     void OnEvent(Event event);
 
     function<void(Event)> m_Callback;
-    queue<Event> m_Events;
+    queue<Event> m_Queue1;
+		queue<Event> m_Queue2;
+		queue<Event> &m_CurrentQueue;
+		int m_CurrentQueueId;
+
   };
 }

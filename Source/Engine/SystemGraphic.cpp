@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <SFML\Window.hpp>
 #include "SystemGraphic.h"
 #include "Messager.h"
 namespace Engine
@@ -21,7 +22,7 @@ namespace Engine
 
 	void SystemGraphic::Update(float dt)
 	{
-    auto q = m_MsgQueue.GetEvents();
+    auto q = m_MsgQueue.GetQueue();
     while(!q.empty())
     {
       Event &event = q.front();

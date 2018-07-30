@@ -22,9 +22,24 @@ namespace Engine
     m_SystemInput = make_shared<SystemInput>(window);
 	}
 
+	void Application::Shutdown()
+	{
+		m_SystemGraphic->Shutdown();
+		m_SystemInput->Shutdown();
+	}
   void Application::RunLoop()
 	{
-	  
+		using clock = std::chrono::high_resolution_clock;
+
+		auto earlier = clock::now();
+		while (true)
+		{
+			auto dt = clock::now() - earlier;
+			earlier = clock::now();
+
+			m_SystemInput->Update(dt.count());
+			m_SystemGraphic->Update(dt.count());
+		}
 	}
 
   shared_ptr<ISystemInput> Application::GetSystemInput() const
