@@ -28,8 +28,10 @@ namespace Engine
       Event &event = q.front();
       q.pop();
 
-      if (event.GetType() == Event::Type::Rendering)
-        HandleRenderingEvent(event);
+			if (event.GetType() == Event::Type::Rendering)
+				HandleRenderingEvent(event);
+			else
+				throw exception("Unknown rendering event received by SystemGraphic");
     }
 	}
 
@@ -40,6 +42,7 @@ namespace Engine
     case Event::Id::RENDER_SPRITE:
       {
       event.render.spriteId;
+			Logger::Log("SpriteId");
       break;
       }
     }

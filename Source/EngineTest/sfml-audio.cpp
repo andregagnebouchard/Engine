@@ -11,7 +11,7 @@ void playSound()
 		return;
 
 	// Display sound informations
-	std::cout << "canary.wav:" << std::endl;
+	std::cout << "WavTest.wav:" << std::endl;
 	std::cout << " " << buffer.getDuration().asSeconds() << " seconds" << std::endl;
 	std::cout << " " << buffer.getSampleRate() << " samples / sec" << std::endl;
 	std::cout << " " << buffer.getChannelCount() << " channels" << std::endl;

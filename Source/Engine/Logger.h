@@ -14,7 +14,7 @@ namespace Engine
 			None
 		};
 
-		static void Log(const sf::String &msg, Level level);
+		static void Log(const sf::String &msg, Level level = Level::Info);
 		static void SetLogLevel(Level level);
 		static void Init();
 	private:

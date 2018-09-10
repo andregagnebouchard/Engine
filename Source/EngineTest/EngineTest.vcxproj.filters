@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="box2d.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="glew.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="gmock.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="log4cplus.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="lua.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml-audio.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml-graphics.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml-network.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml-system.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml-window.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>ComponentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicSystemTest.cpp">
+      <Filter>EngineTests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ComponentTests">
+      <UniqueIdentifier>{cf091ce2-ea78-49c7-ab9b-74e4a89a4d74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineTests">
+      <UniqueIdentifier>{6c2f5311-4c1e-4fd8-b02f-95a934daa79c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

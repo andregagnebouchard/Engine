@@ -6,7 +6,7 @@ using namespace std;
 
 namespace Engine
 {
-  class Application : public IApplication
+	class  Application : public IApplication
   {
   public:
     void Init() override;

@@ -1,5 +1,7 @@
 #include <gtest\gtest.h>
-#include <Engine\ISystemGraphic.h>
+#include <Engine\Messager.h>
+#include <Engine\SystemGraphic.h>
+using namespace Engine;
 //=================================================================================================
 class GraphicSystemTest : public testing::Test
 {
@@ -15,7 +17,8 @@ protected:
     m_Graphic->Shutdown();
   }
 
-  shared_ptr<Engine::ISystemGraphic> m_Graphic = Engine::ISystemGraphic::Create(Engine::WindowInfo{ 800, 600, "Graphic" });
+	shared_ptr<sf::Window> window = make_shared<sf::Window>(sf::VideoMode(1024, 768), sf::String("Engine"));
+  shared_ptr<SystemGraphic> m_Graphic = make_shared<SystemGraphic>(window);
 };
 //=================================================================================================
 TEST_F(GraphicSystemTest, ResizeGraphicSystemWindow)
@@ -36,5 +39,13 @@ TEST_F(GraphicSystemTest, ResizeGraphicSystemWindowWithZeroHeight)
 TEST_F(GraphicSystemTest, ResizeGraphicSystemWindowWithTooBigResolution)
 {
   EXPECT_THROW(m_Graphic->Resize(1921, 1081), invalid_argument);
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicAttachedOnRenderEvent)
+{
+	Event event(Event::Type::Rendering, Event::Id::RENDER_SPRITE);
+	event.render.spriteId = 0;
+	Messager::Fire(event);
+	m_Graphic->Update(0);
 }
 //=================================================================================================
