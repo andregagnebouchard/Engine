@@ -160,7 +160,9 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="constant.h" />
-    <ClInclude Include="SpriteCache.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceCache.h" />
+    <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="SystemGraphic.h" />
     <ClInclude Include="Include\Engine\IApplication.h" />
     <ClInclude Include="Include\Engine\Export.h" />
@@ -178,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceCache.cpp" />
+    <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="SystemGraphic.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Messager.cpp" />

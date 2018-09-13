@@ -19,6 +19,9 @@
     <Filter Include="Engine\Event">
       <UniqueIdentifier>{8efe3696-d54f-43d2-adb7-f8e9f26d1055}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{d0b7c4c7-cbf9-4719-838f-6f825defad53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -78,8 +81,14 @@
     <ClInclude Include="SystemGraphic.h">
       <Filter>Engine\Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteCache.h">
-      <Filter>Engine\Graphic</Filter>
+    <ClInclude Include="Resource.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceCache.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLoader.h">
+      <Filter>Engine\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +109,15 @@
     </ClCompile>
     <ClCompile Include="SystemGraphic.cpp">
       <Filter>Engine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceCache.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLoader.cpp">
+      <Filter>Engine\Resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

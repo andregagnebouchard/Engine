@@ -228,6 +228,9 @@
       <Project>{2cb386ed-eb04-44b0-a6cb-0fe3ceed52f1}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ResourceTest.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
