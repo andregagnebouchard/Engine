@@ -1,13 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets">
-    <Import Project="Import_SFML_audio.props" />
-	<Import Project="Import_SFML_graphics.props" />
-	<Import Project="Import_SFML_network.props" />
-	<Import Project="Import_SFML_system.props" />
-	<Import Project="Import_SFML_window.props" />
   </ImportGroup>
   <PropertyGroup>
     <_PropertySheetDisplayName>Import_SFML_all</_PropertySheetDisplayName>
   </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Components\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">sfml-system-s-d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">sfml-system-s.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">sfml-window-s-d.lib;opengl32.lib;gdi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">sfml-window-s.lib;opengl32.lib;gdi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">sfml-network-s-d.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">sfml-network-s.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">sfml-graphics-s-d.lib;opengl32.lib;freetype.lib;jpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">sfml-graphics-s.lib;opengl32.lib;freetype.lib;jpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Platform)' == 'Win32'">$(SolutionDir)Components\SFML\extlibs\libs-msvc-universal\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+	  <AdditionalLibraryDirectories Condition="'$(Platform)' == 'x64'">$(SolutionDir)Components\SFML\extlibs\libs-msvc-universal\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">sfml-graphics-s-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">sfml-graphics-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Platform)' == 'Win32'">$(SolutionDir)Components\SFML\extlibs\libs-msvc-universal\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+	  <AdditionalLibraryDirectories Condition="'$(Platform)' == 'x64'">$(SolutionDir)Components\SFML\extlibs\libs-msvc-universal\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
 </Project>

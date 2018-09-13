@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Engine\Application.h""
+#include "Engine\Application.h"
 #include "SystemGraphic.h"
 #include "SystemInput.h"
 using namespace sf;
@@ -37,8 +37,8 @@ namespace Engine
 			auto dt = clock::now() - earlier;
 			earlier = clock::now();
 
-			m_SystemInput->Update(dt.count());
-			m_SystemGraphic->Update(dt.count());
+			m_SystemInput->Update(static_cast<float>(dt.count()));
+			m_SystemGraphic->Update(static_cast<float>(dt.count()));
 		}
 	}
 
