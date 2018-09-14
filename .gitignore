@@ -6,9 +6,7 @@ Bin
 *.opendb
 *.m4
 *.mk
-*.png
 *.md
-*.xml
 *.wav
 *.ipch
 *.tmp

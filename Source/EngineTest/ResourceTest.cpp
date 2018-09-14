@@ -28,10 +28,16 @@ TEST_F(ResourceTest, ResourceCacheLoadXmlFile)
   if (eResult != tinyxml2::XML_SUCCESS)
     FAIL();
 
-  tinyxml2::XMLNode* resource = xml_doc.FirstChildElement("DATA");
-  resource = resource->FirstChildElement("RESOURCE");
-  resource = resource->FirstChildElement("GRAPHIC");
-  int id = atoi(resource->FirstChildElement("ID")->GetText());
-  string name = resource->FirstChildElement("NAME")->GetText();
-  string path = resource->FirstChildElement("PATH")->GetText();
+  vector<const char*> arr;
+  tinyxml2::XMLElement* resources = xml_doc.FirstChildElement("DATA")->FirstChildElement("RESOURCES");
+  for (tinyxml2::XMLElement* resource = resources->FirstChildElement(); resource != NULL; resource = resource->NextSiblingElement())
+  {
+    const char* name;
+    name = resource->Attribute("Name");
+    arr.push_back(name);
+    const char* id;
+    id = resource->Attribute("ID");
+    int idInt = atoi(id);
+    arr.push_back(id);
+  }
 }
