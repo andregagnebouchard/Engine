@@ -16,6 +16,7 @@ namespace Engine
 		virtual void Update(float dt) = 0;
 
 		// ISystemGraphic
-		virtual void Resize(uint width, uint height) = 0;
+		virtual void ResizeWindow(uint width, uint height) = 0;
+    virtual void SetWindowVisible(bool isVisible) = 0;
 	};
 }

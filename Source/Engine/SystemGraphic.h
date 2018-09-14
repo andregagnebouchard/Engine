@@ -17,7 +17,8 @@ namespace Engine
     void Update(float dt) override;
 
 		// ISystemGraphic
-    void Resize(uint width, uint height) override;
+    void ResizeWindow(uint width, uint height) override;
+    void SetWindowVisible(bool isVisible) override;
   private:
     void HandleRenderingEvent(const Event &event);
     MessageQueue m_MsgQueue;

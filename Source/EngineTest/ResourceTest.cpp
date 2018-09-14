@@ -28,8 +28,10 @@ TEST_F(ResourceTest, ResourceCacheLoadXmlFile)
   if (eResult != tinyxml2::XML_SUCCESS)
     FAIL();
 
-  tinyxml2::XMLNode* resource = xml_doc.FirstChildElement("DATA")->FirstChildElement("RESOURCE")->FirstChildElement("GRAPHIC");
-  int id = atoi(resource->FirstChildElement("SCREEN_WIDTH")->GetText());
+  tinyxml2::XMLNode* resource = xml_doc.FirstChildElement("DATA");
+  resource = resource->FirstChildElement("RESOURCE");
+  resource = resource->FirstChildElement("GRAPHIC");
+  int id = atoi(resource->FirstChildElement("ID")->GetText());
   string name = resource->FirstChildElement("NAME")->GetText();
   string path = resource->FirstChildElement("PATH")->GetText();
 }

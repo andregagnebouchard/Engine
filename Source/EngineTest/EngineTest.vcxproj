@@ -179,6 +179,7 @@
     <ClCompile Include="lua.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="log4cplus.cpp" />
+    <ClCompile Include="ResourceTest.cpp" />
     <ClCompile Include="sfml-audio.cpp" />
     <ClCompile Include="sfml-graphics.cpp" />
     <ClCompile Include="sfml-network.cpp" />
@@ -227,9 +228,6 @@
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{2cb386ed-eb04-44b0-a6cb-0fe3ceed52f1}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ResourceTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

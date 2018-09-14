@@ -38,6 +38,9 @@
     <ClCompile Include="GraphicSystemTest.cpp">
       <Filter>EngineTests</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceTest.cpp">
+      <Filter>EngineTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ComponentTests">
@@ -46,10 +49,5 @@
     <Filter Include="EngineTests">
       <UniqueIdentifier>{6c2f5311-4c1e-4fd8-b02f-95a934daa79c}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ResourceTest.h">
-      <Filter>EngineTests</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

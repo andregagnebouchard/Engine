@@ -17,6 +17,6 @@ namespace Engine
 
 	private:
 		void SignalKeyEvent(const sf::Event &event);
-		shared_ptr<sf::Window> m_Window;
+		shared_ptr<sf::Window> m_Window; // Input events are pushed in the window
 	};
 }

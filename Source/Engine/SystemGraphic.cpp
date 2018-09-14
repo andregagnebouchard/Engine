@@ -47,7 +47,7 @@ namespace Engine
       }
     }
   }
-  void SystemGraphic::Resize(uint width, uint height)
+  void SystemGraphic::ResizeWindow(uint width, uint height)
 	{
     //TODO: Resize OpenGL viewport glViewport(0, 0, width, height); see https://learnopengl.com/Getting-started/Hello-Window
     if (width * height == 0)
@@ -58,4 +58,9 @@ namespace Engine
 
     m_Window->setSize(sf::Vector2u(width, height));
 	}
+
+  void SystemGraphic::SetWindowVisible(bool doShow)
+  {
+    m_Window->setVisible(doShow);
+  }
 }
