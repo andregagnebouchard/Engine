@@ -1,6 +1,7 @@
 #pragma once
 #include <Engine/ISystemGraphic.h>
 #include <Engine/ISystemInput.h>
+#include <Engine/IApplicationOption.h>
 using namespace std;
 
 namespace Engine
@@ -12,7 +13,7 @@ namespace Engine
 
     static shared_ptr<IApplication> Create();
 
-		virtual void Init() = 0;
+		virtual void Init(shared_ptr<IApplicationOption> options) = 0;
     virtual void Shutdown() = 0;
 
     virtual shared_ptr<ISystemInput> GetSystemInput() const = 0;

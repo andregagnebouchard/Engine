@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
+#include <Engine/Typedef.h>
 using namespace std;
 namespace Engine
 {
@@ -11,30 +12,27 @@ namespace Engine
     enum class Type
     {
       PNG,
-      MP3
+			WAV
     };
 
-    Resource(int id, wstring filepath, int size, shared_ptr<void> data, shared_ptr<ResourceLoader> resourceLoader);
+		// The resource type will be deducted by the extension of the filepath
+    Resource(const wstring &filepath, const wstring &name, shared_ptr<ResourceLoader> resourceLoader);
 
-    wstring GetFilePath();
-    size_t GetSize();
-    shared_ptr<void> GetData();
-    Type GetType();
-    int GetId();
+    wstring GetFilePath() const;
+		wstring GetName() const;
+    Byte GetSize() const;
+    shared_ptr<void> GetData() const;
+    Type GetType() const;
+
+		void Load();
+		bool IsLoaded() const;
   private:
-
-    // The resource cache is the only one handling the loaded state
-    friend class ResourceCache;
-    void Load();
-    void Close();
-    bool IsLoaded();
-
     wstring m_FilePath;
-    size_t m_Size;
+		Byte m_Size;
     shared_ptr<void> m_Data;
     Type m_Type;
     bool m_IsLoaded;
-    int m_Id;
+		wstring m_Name;
     shared_ptr<ResourceLoader> m_ResourceLoader;
   };
 }

@@ -6,10 +6,10 @@ using namespace std;
 
 namespace Engine
 {
-	class  Application : public IApplication
+	class Application : public IApplication
   {
   public:
-    void Init() override;
+    void Init(shared_ptr<IApplicationOption> options) override;
     void Shutdown() override;
 
     shared_ptr<ISystemInput> GetSystemInput() const override;

@@ -180,6 +180,9 @@
       <Project>{2cb386ed-eb04-44b0-a6cb-0fe3ceed52f1}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Support\Testing\ResourceCacheTest\Resource.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

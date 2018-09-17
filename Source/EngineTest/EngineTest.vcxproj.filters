@@ -41,6 +41,9 @@
     <ClCompile Include="ResourceTest.cpp">
       <Filter>EngineTests</Filter>
     </ClCompile>
+    <ClCompile Include="UtilTest.cpp">
+      <Filter>EngineTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ComponentTests">
@@ -49,5 +52,13 @@
     <Filter Include="EngineTests">
       <UniqueIdentifier>{6c2f5311-4c1e-4fd8-b02f-95a934daa79c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{86fd71a8-a9c4-4e75-bef9-0c63441b8def}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Support\Testing\ResourceCacheTest\Resource.xml">
+      <Filter>Resource</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

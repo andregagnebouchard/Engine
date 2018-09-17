@@ -22,6 +22,12 @@
     <Filter Include="Engine\Resource">
       <UniqueIdentifier>{d0b7c4c7-cbf9-4719-838f-6f825defad53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Util">
+      <UniqueIdentifier>{b9684e85-0cc3-42e5-9921-d701c42b054f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Application">
+      <UniqueIdentifier>{6ad1d1dd-8949-4f23-a584-94f6bc117e4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -36,9 +42,6 @@
     <ClInclude Include="WindowsInclude.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="Startup.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -50,9 +53,6 @@
     </ClInclude>
     <ClInclude Include="All.h">
       <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Include\Engine\IApplication.h">
       <Filter>Include</Filter>
@@ -90,16 +90,28 @@
     <ClInclude Include="ResourceLoader.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="FileUtil.h">
+      <Filter>Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtil.h">
+      <Filter>Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IApplicationOption.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Engine\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationOption.h">
+      <Filter>Engine\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Startup.h">
+      <Filter>Engine\Application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Startup.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="SystemInput.cpp">
       <Filter>Engine\Input</Filter>
@@ -118,6 +130,21 @@
     </ClCompile>
     <ClCompile Include="ResourceLoader.cpp">
       <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtil.cpp">
+      <Filter>Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtil.cpp">
+      <Filter>Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Engine\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Startup.cpp">
+      <Filter>Engine\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationOption.cpp">
+      <Filter>Engine\Application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

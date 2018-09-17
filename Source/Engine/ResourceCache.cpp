@@ -1,28 +1,31 @@
 #include "stdafx.h"
 #include "ResourceCache.h"
 #include "ResourceLoader.h"
+#include "StringUtil.h"
 namespace Engine
 {
-  void ResourceCache::Init()
-  {
-    // Load XML file
-    auto resourceLoader = make_shared<ResourceLoader>();
-    auto data = make_shared<string>("Allo mon gars!");
-    auto ressource = make_shared<Resource>(0, L"AnyPath", 10, data, resourceLoader);
-    m_Ressources[0] = ressource;
-  }
-  shared_ptr<Resource> ResourceCache::GetResource(int id)
-  {
-    auto ressource = m_Ressources[id];
-    if (!ressource->IsLoaded())
-      ressource->Load();
+	void ResourceCache::AddResource(shared_ptr<Resource> resource)
+	{
+		if (m_Resources.find(resource->GetName()) != m_Resources.end())
+			throw invalid_argument("Resource already cached:" + StringUtil::ToStr(resource->GetName()));
 
-    return ressource;
+		m_Resources[resource->GetName()] = resource;
+	}
+
+  shared_ptr<Resource> ResourceCache::GetResource(const wstring &name) const
+  {
+		auto resourceIt = m_Resources.find(name);
+		if(resourceIt == m_Resources.end())
+			throw invalid_argument("Resource not cached:" + StringUtil::ToStr(name));
+
+		auto resource = resourceIt->second;
+    if (!resource->IsLoaded())
+      resource->Load();
+
+    return resource;
   }
   void ResourceCache::Clear()
   {
-    for (auto ressource : m_Ressources)
-      ressource.second->Close();
-    m_Ressources.clear();
+    m_Resources.clear();
   }
 }

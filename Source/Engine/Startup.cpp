@@ -38,7 +38,7 @@ namespace Engine
 		if (lError == ERROR_SUCCESS)
 		{
 			// query the key:
-			RegQueryValueEx(hKey, L"~MHz", NULL, &type, (LPBYTE)&dwMHz, &BufSize);
+			RegQueryValueEx(hKey, L"~MHz",  NULL, &type, (LPBYTE)&dwMHz, &BufSize);
 		}
 		return dwMHz;
 	}

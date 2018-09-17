@@ -11,7 +11,7 @@ namespace Engine
 		return make_shared<Application>();
 	}
 
-	void Application::Init()
+	void Application::Init(shared_ptr<IApplicationOption> options)
 	{
 		Logger::Init();
 		Logger::SetLogLevel(Logger::Level::Debug);

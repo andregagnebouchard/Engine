@@ -7,14 +7,16 @@ namespace Engine
   class ResourceCache
   {
   public:
-    void Init();
-    shared_ptr<Resource> GetResource(int id);
+		// Throw if a resource with the same name already exist
+		void AddResource(shared_ptr<Resource> resource);
 
-    int GetSize();
+		// Guarentee that the returned resource is loaded
+    shared_ptr<Resource> GetResource(const wstring &name) const;
+
     // This will invalidate all the resources previously returned
     void Clear();
   private:
-    map<int, shared_ptr<Resource>> m_Ressources;
+    map<wstring, shared_ptr<Resource>> m_Resources;
     int m_Size;
   };
 }

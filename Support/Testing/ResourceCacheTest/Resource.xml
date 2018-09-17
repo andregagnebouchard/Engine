@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE PLAY SYSTEM "play.dtd">
 <DATA>
+  <WINDOW Width="1920" Height="1080" Name="Application" IsVisible="0"/>
 	<RESOURCES >
-		<RESOURCE Type="GRAPHIC" ID="0" Name="GraphicTestResource1" Path="D:\Dev\Repo\Engine\Support\Testing\ResourceCacheTest\BLACK_SQUARE_10x9.png" />
-		<RESOURCE Type="GRAPHIC" ID="1" Name="GraphicTestResource2" Path="D:\Dev\Repo\Engine\Support\Testing\ResourceCacheTest\BLACK_SQUARE_10x9.png" />
+		<RESOURCE Name="GraphicTestResource1" Path="D:\Dev\Repo\Engine\Support\Testing\ResourceCacheTest\BLACK_SQUARE_10x9.png" />
+		<RESOURCE Name="GraphicTestResource2" Path="D:\Dev\Repo\Engine\Support\Testing\ResourceCacheTest\BLACK_SQUARE_10x9.png" />
 	</RESOURCES>
 </DATA>

@@ -8,4 +8,5 @@ namespace Engine
 	typedef __int64 int64;
 	typedef unsigned __int64 uint64;
 	typedef unsigned long MegaHertz;
+	typedef int Byte;
 }

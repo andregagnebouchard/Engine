@@ -62,24 +62,28 @@
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -157,12 +161,16 @@
   <ItemGroup>
     <ClInclude Include="All.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ApplicationOption.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="FileUtil.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="constant.h" />
+    <ClInclude Include="Include\Engine\IApplicationOption.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceCache.h" />
     <ClInclude Include="ResourceLoader.h" />
+    <ClInclude Include="StringUtil.h" />
     <ClInclude Include="SystemGraphic.h" />
     <ClInclude Include="Include\Engine\IApplication.h" />
     <ClInclude Include="Include\Engine\Export.h" />
@@ -180,9 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ApplicationOption.cpp" />
+    <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
+    <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="SystemGraphic.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Messager.cpp" />

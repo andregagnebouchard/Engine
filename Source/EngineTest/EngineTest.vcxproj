@@ -187,6 +187,7 @@
     <ClCompile Include="sfml-window.cpp" />
     <ClCompile Include="GraphicSystemTest.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="UtilTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\box2d\Build\Box2D.vcxproj">
@@ -228,6 +229,9 @@
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{2cb386ed-eb04-44b0-a6cb-0fe3ceed52f1}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\Support\Testing\ResourceCacheTest\Resource.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
