@@ -4,7 +4,7 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 namespace Engine
 {
-  shared_ptr<void> ResourceLoader::Load(const wstring &filename, Resource::Type type) const
+  shared_ptr<void> ResourceLoader::Load(const wstring &filename, Resource::Type type)
   {
     switch (type)
     {
@@ -20,7 +20,7 @@ namespace Engine
     return nullptr;
   }
 
-	shared_ptr<void> ResourceLoader::LoadPng(const wstring &filename) const
+	shared_ptr<void> ResourceLoader::LoadPng(const wstring &filename)
 	{
 		auto texture = make_shared<sf::Texture>();
 		if (!texture->loadFromFile(StringUtil::ToStr(filename)))
@@ -29,7 +29,7 @@ namespace Engine
 		return texture;
 	}
 
-	shared_ptr<void> ResourceLoader::LoadWav(const wstring &filename) const
+	shared_ptr<void> ResourceLoader::LoadWav(const wstring &filename)
 	{
 		sf::SoundBuffer buffer;
 		if(!buffer.loadFromFile(StringUtil::ToStr(filename)))

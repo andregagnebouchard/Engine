@@ -2,8 +2,7 @@
 #include "ApplicationOption.h"
 #include "StringUtil.h"
 #include <tinyxml\tinyxml2.h>
-#include "ResourceCache.h"
-#include "ResourceLoader.h"
+#include "Resource.h"
 using namespace tinyxml2;
 namespace Engine
 {
@@ -12,7 +11,7 @@ namespace Engine
 		return make_shared<ApplicationOption>();
 	}
 
-	void ApplicationOption::Init(const wstring &filename)
+	void ApplicationOption::Load(const wstring &filename)
 	{
 		XMLDocument xml_doc;
 		if (xml_doc.LoadFile(StringUtil::ToStr(filename).c_str()) != XML_SUCCESS)
@@ -34,22 +33,19 @@ namespace Engine
 		// Resource
 		if (XMLElement* resources = xml_doc.FirstChildElement("RESOURCES"))
 		{
-			auto resourceCache = make_shared<ResourceCache>();
-			auto resourceLoader = make_shared<ResourceLoader>();
 			for (auto resourceNode = resources->FirstChildElement(); resourceNode != NULL; resourceNode = resourceNode->NextSiblingElement())
 			{
 				const char *name = resourceNode->Attribute("Name");
 				const char *path = resourceNode->Attribute("Path");
 				if (name == nullptr) Throw("RESSOURCES::Name");
 				if (path == nullptr) Throw("RESSOURCES::Path");
-				resourceCache->AddResource(make_shared<Resource>(StringUtil::ToWStr(path), StringUtil::ToWStr(name), resourceLoader));
+        m_Resources.push_back(make_shared<Resource>(StringUtil::ToWStr(path), StringUtil::ToWStr(name)));
 			}
 		}
 		else
 			// Technically not a mistake
 			Logger::Log("Did not find any resource in the file \"" + StringUtil::ToStr(filename), Logger::Level::Warning);
 	}
-
 
 	ApplicationOption::ApplicationOption() :
 		m_WindowWidth(640),
@@ -91,4 +87,9 @@ namespace Engine
 	{
 		return m_IsWindowVisible;
 	}
+
+  vector<shared_ptr<Resource>> ApplicationOption::GetResources() const
+  {
+    return m_Resources;
+  }
 }

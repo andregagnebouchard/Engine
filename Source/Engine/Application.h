@@ -6,6 +6,7 @@ using namespace std;
 
 namespace Engine
 {
+  class ResourceCache;
 	class Application : public IApplication
   {
   public:
@@ -18,5 +19,6 @@ namespace Engine
   private:
     shared_ptr<ISystemInput> m_SystemInput;
     shared_ptr<ISystemGraphic> m_SystemGraphic;
+    shared_ptr<ResourceCache> m_ResourceCache;
   };
 }

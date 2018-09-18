@@ -15,15 +15,17 @@ namespace Engine
 			throw runtime_error("Extension does not have a corresponding resource type:" + StringUtil::ToStr(ext));
 	}
 
-  Resource::Resource(const wstring &filepath, const wstring &name, shared_ptr<ResourceLoader> resourceLoader) :
+  Resource::Resource(const wstring &filepath, const wstring &name) :
     m_Data(nullptr),
     m_FilePath(filepath),
     m_Size(0),
     m_IsLoaded(false),
     m_Type(Resource::Type::WAV),
-    m_ResourceLoader(resourceLoader),
 		m_Name(name)
   {
+    if (m_Name.length() > RESOURCE_NAME_CHAR_MAX)
+      throw invalid_argument("Resource name exceeds character limit of \"" + to_string(RESOURCE_NAME_CHAR_MAX) + "\" :\"" + StringUtil::ToStr(name));
+
 		m_Size = FileUtil::GetFileSize(filepath);
 		m_Type = FileExtensionToResourceType(FileUtil::GetExtension(filepath));
   }
@@ -50,7 +52,7 @@ namespace Engine
   }
   void Resource::Load()
   {
-    m_Data = m_ResourceLoader->Load(m_FilePath, m_Type);
+    m_Data = ResourceLoader::Load(m_FilePath, m_Type);
     m_IsLoaded = true;
   }
 

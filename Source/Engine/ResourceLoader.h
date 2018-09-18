@@ -8,9 +8,9 @@ namespace Engine
   class ResourceLoader
   {
   public:
-    shared_ptr<void> Load(const wstring &filename, Resource::Type type) const;
+    static shared_ptr<void> Load(const wstring &filename, Resource::Type type);
 	private:
-		shared_ptr<void> LoadPng(const wstring &filename) const;
-		shared_ptr<void> LoadWav(const wstring &filename) const;
+    static shared_ptr<void> LoadPng(const wstring &filename);
+    static shared_ptr<void> LoadWav(const wstring &filename);
   };
 }

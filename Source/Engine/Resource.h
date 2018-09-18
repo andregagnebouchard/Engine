@@ -16,7 +16,7 @@ namespace Engine
     };
 
 		// The resource type will be deducted by the extension of the filepath
-    Resource(const wstring &filepath, const wstring &name, shared_ptr<ResourceLoader> resourceLoader);
+    Resource(const wstring &filepath, const wstring &name);
 
     wstring GetFilePath() const;
 		wstring GetName() const;
@@ -33,6 +33,5 @@ namespace Engine
     Type m_Type;
     bool m_IsLoaded;
 		wstring m_Name;
-    shared_ptr<ResourceLoader> m_ResourceLoader;
   };
 }

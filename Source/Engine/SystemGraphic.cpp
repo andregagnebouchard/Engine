@@ -1,11 +1,15 @@
 #include "stdafx.h"
 #include <SFML\Window.hpp>
+#include <SFML\Graphics\Text.hpp>
 #include "SystemGraphic.h"
 #include "Messager.h"
+#include "ResourceCache.h"
+#include "StringUtil.h"
 namespace Engine
 {
-  SystemGraphic::SystemGraphic(shared_ptr<sf::Window> window) :
-    m_Window(window)
+  SystemGraphic::SystemGraphic(shared_ptr<sf::Window> window, shared_ptr<ResourceCache> resourceCache) :
+    m_Window(window),
+    m_ResourceCache(resourceCache)
 	{
     Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::RENDER_SPRITE);
 	}
@@ -39,11 +43,15 @@ namespace Engine
   {
     switch(event.GetId())
     {
-    case Event::Id::RENDER_SPRITE:
+      case Event::Id::RENDER_SPRITE:
       {
-      event.render.spriteId;
-			Logger::Log("SpriteId");
-      break;
+        auto resource = m_ResourceCache->GetResource(StringUtil::ToWStr(event.render.resourceName));
+        if (resource->GetType() != Resource::Type::PNG)
+          throw invalid_argument("A non-PNG resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
+
+        auto texture = static_pointer_cast<sf::Texture>(resource->GetData());
+
+        break;
       }
     }
   }

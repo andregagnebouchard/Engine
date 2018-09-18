@@ -1,0 +1,48 @@
+class BallLogicComponent : IComponent
+{
+	public:
+	// IComponent
+	void Init();
+	void Shutdown();
+	void Update(float dt);
+	string GetName();
+}
+
+BallLogicComponent::Init()
+{
+	Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::ON_COLLISION);
+}
+
+BallLogicComponent::Update(float dt)
+{
+	while(!m_MsgQueue.GetQueue().empty())
+	{
+		Event ev = m_MsgQueue.GetQueue().front();
+		m_MsgQueue.GetQueue().pop();
+		switch(ev.GetId())
+		{
+			case Event::Id::Collision:
+			{
+				string entityName = event.collision.GetEntityName();
+				if(entityName == "Paddle")
+
+				break;
+			}
+		}
+	}
+		
+}
+===========================================================================
+ComponentMap.xml
+	<Actor Name="Ball">
+		<Component Name="BallLogicComponent">
+		<Component Name="BallPhysicComponent">
+	</Actor>
+===========================================================================
+void main()
+{
+	IActorFactory::Init("ActorComponentMap.xml");
+	IComponentFactory::Add(make_shared<BallLogicComponent>());
+}
+
+Met le device "Unreachable" si tu le découvre avec la version 0 sur un mauvais adapter

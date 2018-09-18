@@ -1,6 +1,7 @@
 #include <gtest\gtest.h>
 #include <Engine\Messager.h>
 #include <Engine\SystemGraphic.h>
+#include <Engine\ResourceCache.h>
 using namespace Engine;
 //=================================================================================================
 class GraphicSystemTest : public testing::Test
@@ -18,8 +19,9 @@ protected:
     m_Graphic->Shutdown();
   }
 
+  shared_ptr<ResourceCache> m_ResourceCache = make_shared<ResourceCache>();
 	shared_ptr<sf::Window> m_Window = make_shared<sf::Window>(sf::VideoMode(1024, 768), sf::String("Engine"));
-  shared_ptr<SystemGraphic> m_Graphic = make_shared<SystemGraphic>(m_Window);
+  shared_ptr<SystemGraphic> m_Graphic = make_shared<SystemGraphic>(m_Window, m_ResourceCache);
 };
 //=================================================================================================
 TEST_F(GraphicSystemTest, ResizeGraphicSystemWindow)
@@ -45,7 +47,7 @@ TEST_F(GraphicSystemTest, ResizeGraphicSystemWindowWithTooBigResolution)
 TEST_F(GraphicSystemTest, SystemGraphicAttachedOnRenderEvent)
 {
 	Event event(Event::Type::Rendering, Event::Id::RENDER_SPRITE);
-	event.render.spriteId = 0;
+  memmove(event.render.resourceName, "Test", 5);
 	Messager::Fire(event);
 	m_Graphic->Update(0);
 }

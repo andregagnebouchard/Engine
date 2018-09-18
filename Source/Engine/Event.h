@@ -1,4 +1,5 @@
 #pragma once
+#include "constant.h"
 namespace Engine
 {
   class Event
@@ -231,7 +232,7 @@ namespace Engine
 
     struct RenderEvent
     {
-      int spriteId;
+      char resourceName[RESOURCE_NAME_CHAR_MAX];
     };
 
     enum class Type

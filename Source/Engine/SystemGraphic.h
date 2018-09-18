@@ -5,10 +5,11 @@
 using namespace std;
 namespace Engine
 {
+  class ResourceCache;
   class SystemGraphic : public ISystemGraphic
   {
   public:
-    SystemGraphic(shared_ptr<sf::Window> window);
+    SystemGraphic(shared_ptr<sf::Window> window, shared_ptr<ResourceCache> resourceCache);
     ~SystemGraphic() = default;
 		
 		// ISystem
@@ -23,5 +24,6 @@ namespace Engine
     void HandleRenderingEvent(const Event &event);
     MessageQueue m_MsgQueue;
     shared_ptr<sf::Window> m_Window;
+    shared_ptr<ResourceCache> m_ResourceCache;
   };
 }
