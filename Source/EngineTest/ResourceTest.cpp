@@ -124,20 +124,3 @@ TEST_F(ResourceTest, CacheTwoResourceWithSameNameWhileClearingCache)
 	m_ResourceCache->Clear();
 	m_ResourceCache->AddResource(resource);
 }
-
-TEST_F(ResourceTest, ResourceCacheLoadXmlFile)
-{
-  tinyxml2::XMLDocument xml_doc;
-
-  tinyxml2::XMLError eResult = xml_doc.LoadFile("..\\..\\Support\\Testing\\ResourceCacheTest\\Resource.xml");
-  if (eResult != tinyxml2::XML_SUCCESS)
-    FAIL();
-
-  tinyxml2::XMLElement* resources = xml_doc.FirstChildElement("DATA")->FirstChildElement("RESOURCES");
-  for (auto resource = resources->FirstChildElement(); resource != NULL; resource = resource->NextSiblingElement())
-  {
-		string name = resource->Attribute("Name");
-		string path = resource->Attribute("Path");
-		Resource res(StringUtil::ToWStr(path), StringUtil::ToWStr(name), m_ResourceLoader);
-  }
-}

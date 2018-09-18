@@ -44,6 +44,9 @@
     <ClCompile Include="UtilTest.cpp">
       <Filter>EngineTests</Filter>
     </ClCompile>
+    <ClCompile Include="ApplicationTest.cpp">
+      <Filter>EngineTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ComponentTests">
@@ -57,7 +60,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\..\Support\Testing\ResourceCacheTest\Resource.xml">
+    <Xml Include="..\..\Support\Testing\ApplicationTest\ValidInit.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="..\..\Support\Testing\ApplicationTest\EmptyInit.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowHeight.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowWidth.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowIsVisible.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="..\..\Support\Testing\ApplicationTest\ResourceLess.xml">
       <Filter>Resource</Filter>
     </Xml>
   </ItemGroup>

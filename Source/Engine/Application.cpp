@@ -17,7 +17,7 @@ namespace Engine
 		Logger::SetLogLevel(Logger::Level::Debug);
 
     // Read WindowInfo from a config file
-    auto window = make_shared<sf::Window>(sf::VideoMode(1024, 768), sf::String("Engine"));
+    auto window = make_shared<sf::Window>(sf::VideoMode(options->GetWindowWidth(), options->GetWindowHeight()), options->GetWindowName());
     m_SystemGraphic = make_shared<SystemGraphic>(window);
     m_SystemInput = make_shared<SystemInput>(window);
 	}

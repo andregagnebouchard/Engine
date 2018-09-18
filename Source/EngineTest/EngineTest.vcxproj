@@ -173,6 +173,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ApplicationTest.cpp" />
     <ClCompile Include="box2d.cpp" />
     <ClCompile Include="glew.cpp" />
     <ClCompile Include="gmock.cpp" />
@@ -231,7 +232,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\..\Support\Testing\ResourceCacheTest\Resource.xml" />
+    <Xml Include="..\..\Support\Testing\ApplicationTest\EmptyInit.xml" />
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowHeight.xml" />
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowIsVisible.xml" />
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowWidth.xml" />
+    <Xml Include="..\..\Support\Testing\ApplicationTest\ResourceLess.xml" />
+    <Xml Include="..\..\Support\Testing\ApplicationTest\ValidInit.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

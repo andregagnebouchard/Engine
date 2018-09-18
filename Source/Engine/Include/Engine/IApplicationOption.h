@@ -11,7 +11,7 @@ namespace Engine
 		virtual ~IApplicationOption() = default;
 
 		// Load the values defined in a XML file
-		virtual void Init(const wstring &filename);
+		virtual void Init(const wstring &filename) = 0;
 
 		virtual void SetWindowWidth(int width) = 0;
 		virtual int GetWindowWidth() const = 0;

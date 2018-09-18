@@ -73,17 +73,17 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Common.props" />
-    <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -204,11 +204,23 @@
     <ProjectReference Include="..\..\Components\log4cplus\msvc14\log4cplus.vcxproj">
       <Project>{917836a4-0ddc-47be-b930-1b3bfdf6c940}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\Components\SFML\src\SFML\Audio\sfml-audio.vcxproj">
+      <Project>{3190379a-ed54-3a5c-973e-b0d26671b0af}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\SFML\src\SFML\Graphics\sfml-graphics.vcxproj">
+      <Project>{c0806eb9-c66c-397e-ac21-1771c4b75532}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\SFML\src\SFML\Network\sfml-network.vcxproj">
+      <Project>{a3496877-0e44-3f2d-b3e7-4b704a269106}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\SFML\src\SFML\System\sfml-system.vcxproj">
       <Project>{94cdfd92-1e29-3706-8397-9fc779a50203}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Components\SFML\src\SFML\Window\sfml-window.vcxproj">
       <Project>{9c4287df-6fca-3c86-9529-34a5b92cf957}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\tinyxml\tinyxml2\tinyxml2.vcxproj">
+      <Project>{d1c528b6-aa02-4d29-9d61-dc08e317a70d}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

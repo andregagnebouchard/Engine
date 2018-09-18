@@ -10,9 +10,8 @@ namespace Engine
 		ApplicationOption();
 		~ApplicationOption() = default;
 
-		void Init(const wstring &filename) override;
-
 		// IApplicationOption
+		void Init(const wstring &filename) override;
 		void SetWindowWidth(int width) override;
 		int GetWindowWidth() const override;
 		void SetWindowHeight(int height) override;
