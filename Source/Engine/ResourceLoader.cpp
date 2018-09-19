@@ -2,17 +2,18 @@
 #include "ResourceLoader.h"
 #include "StringUtil.h"
 #include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 namespace Engine
 {
   shared_ptr<void> ResourceLoader::Load(const wstring &filename, Resource::Type type)
   {
     switch (type)
     {
-    case Resource::Type::PNG:
-			return LoadPng(filename);
+    case Resource::Type::Graphic:
+			return LoadGraphicResource(filename);
       break;
-    case Resource::Type::WAV:
-			return LoadWav(filename);
+    case Resource::Type::Audio:
+			return LoadAudioResource(filename);
       break;
 		default:
 			throw invalid_argument("Unknown resource type to load");
@@ -20,16 +21,16 @@ namespace Engine
     return nullptr;
   }
 
-	shared_ptr<void> ResourceLoader::LoadPng(const wstring &filename)
+	shared_ptr<void> ResourceLoader::LoadGraphicResource(const wstring &filename)
 	{
-		auto texture = make_shared<sf::Texture>();
-		if (!texture->loadFromFile(StringUtil::ToStr(filename)))
+    sf::Texture texture;
+		if (!texture.loadFromFile(StringUtil::ToStr(filename)))
 			throw runtime_error("Failed to load texture from file:" + StringUtil::ToStr(filename));
 
-		return texture;
+    return make_shared<sf::Sprite>(texture);
 	}
 
-	shared_ptr<void> ResourceLoader::LoadWav(const wstring &filename)
+	shared_ptr<void> ResourceLoader::LoadAudioResource(const wstring &filename)
 	{
 		sf::SoundBuffer buffer;
 		if(!buffer.loadFromFile(StringUtil::ToStr(filename)))

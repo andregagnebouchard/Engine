@@ -1,6 +1,6 @@
 #pragma once
 #include <Engine\ISystemGraphic.h>
-#include <SFML\Window.hpp>
+#include <SFML\Graphics\RenderWindow.hpp>
 #include "Messager.h"
 using namespace std;
 namespace Engine
@@ -9,7 +9,7 @@ namespace Engine
   class SystemGraphic : public ISystemGraphic
   {
   public:
-    SystemGraphic(shared_ptr<sf::Window> window, shared_ptr<ResourceCache> resourceCache);
+    SystemGraphic(shared_ptr<sf::RenderWindow> renderWindow, shared_ptr<ResourceCache> resourceCache);
     ~SystemGraphic() = default;
 		
 		// ISystem
@@ -23,7 +23,7 @@ namespace Engine
   private:
     void HandleRenderingEvent(const Event &event);
     MessageQueue m_MsgQueue;
-    shared_ptr<sf::Window> m_Window;
+    shared_ptr<sf::RenderWindow> m_RenderWindow;
     shared_ptr<ResourceCache> m_ResourceCache;
   };
 }

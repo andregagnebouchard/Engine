@@ -10,7 +10,7 @@ namespace Engine
   public:
     static shared_ptr<void> Load(const wstring &filename, Resource::Type type);
 	private:
-    static shared_ptr<void> LoadPng(const wstring &filename);
-    static shared_ptr<void> LoadWav(const wstring &filename);
+    static shared_ptr<void> LoadGraphicResource(const wstring &filename);
+    static shared_ptr<void> LoadAudioResource(const wstring &filename);
   };
 }

@@ -11,8 +11,8 @@ namespace Engine
   public:
     enum class Type
     {
-      PNG,
-			WAV
+      Graphic,
+			Audio
     };
 
 		// The resource type will be deducted by the extension of the filepath

@@ -33,7 +33,7 @@ protected:
 TEST_F(ResourceTest, CreateWavResource)
 {
 	Resource resource(PNG_RESOURCE_PATH, PNG_RESOURCE_NAME);
-	ASSERT_EQ(resource.GetType(), Resource::Type::PNG);
+	ASSERT_EQ(resource.GetType(), Resource::Type::Graphic);
 	ASSERT_EQ(resource.GetSize(), FileUtil::GetFileSize(PNG_RESOURCE_PATH));
 	ASSERT_EQ(resource.GetName(), PNG_RESOURCE_NAME);
 }
@@ -41,7 +41,7 @@ TEST_F(ResourceTest, CreateWavResource)
 TEST_F(ResourceTest, CreatePngResource)
 {
 	Resource resource(WAV_RESOURCE_PATH, WAV_RESOURCE_NAME);
-	ASSERT_EQ(resource.GetType(), Resource::Type::WAV);
+	ASSERT_EQ(resource.GetType(), Resource::Type::Audio);
 	ASSERT_EQ(resource.GetSize(), FileUtil::GetFileSize(WAV_RESOURCE_PATH));
 	ASSERT_EQ(resource.GetName(), WAV_RESOURCE_NAME);
 }

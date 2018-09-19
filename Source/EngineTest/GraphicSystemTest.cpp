@@ -2,53 +2,75 @@
 #include <Engine\Messager.h>
 #include <Engine\SystemGraphic.h>
 #include <Engine\ResourceCache.h>
+#include <Engine\StringUtil.h>
 using namespace Engine;
 //=================================================================================================
 class GraphicSystemTest : public testing::Test
 {
 protected:
 
-  virtual void SetUp()
+  const string RESOURCE_NAME = "Square";
+
+  GraphicSystemTest()
   {
+    m_Sprite = make_shared<Resource>(L"..\\..\\Support\\Testing\\ResourceCacheTest\\BLACK_SQUARE_10x9.png", StringUtil::ToWStr(RESOURCE_NAME));
+    m_ResourceCache = make_shared<ResourceCache>();
+    m_ResourceCache->AddResource(m_Sprite);
+    m_Window = make_shared<sf::RenderWindow>(sf::VideoMode(1, 1), sf::String("Engine"));
+    m_Graphic = make_shared<SystemGraphic>(m_Window, m_ResourceCache);
     m_Graphic->Init();
-    m_Graphic->SetWindowVisible(false); // For optimization purposes
   }
 
-  virtual void TearDown()
+  ~GraphicSystemTest()
   {
     m_Graphic->Shutdown();
   }
+  shared_ptr<Resource> m_Sprite;
+  shared_ptr<ResourceCache> m_ResourceCache;
+  shared_ptr<sf::RenderWindow> m_Window;
+  shared_ptr<SystemGraphic> m_Graphic;
 
-  shared_ptr<ResourceCache> m_ResourceCache = make_shared<ResourceCache>();
-	shared_ptr<sf::Window> m_Window = make_shared<sf::Window>(sf::VideoMode(1024, 768), sf::String("Engine"));
-  shared_ptr<SystemGraphic> m_Graphic = make_shared<SystemGraphic>(m_Window, m_ResourceCache);
 };
 //=================================================================================================
-TEST_F(GraphicSystemTest, ResizeGraphicSystemWindow)
+TEST_F(GraphicSystemTest, DISABLED_ResizeGraphicSystemWindow)
 {
   m_Graphic->ResizeWindow(1920, 1080);
 }
 //=================================================================================================
-TEST_F(GraphicSystemTest, ResizeGraphicSystemWindowWithZeroWidth)
+TEST_F(GraphicSystemTest, DISABLED_ResizeGraphicSystemWindowWithZeroWidth)
 {
   EXPECT_THROW(m_Graphic->ResizeWindow(0, 1080), invalid_argument);
 }
 //=================================================================================================
-TEST_F(GraphicSystemTest, ResizeGraphicSystemWindowWithZeroHeight)
+TEST_F(GraphicSystemTest, DISABLED_ResizeGraphicSystemWindowWithZeroHeight)
 {
   EXPECT_THROW(m_Graphic->ResizeWindow(1920, 0), invalid_argument);
 }
 //=================================================================================================
-TEST_F(GraphicSystemTest, ResizeGraphicSystemWindowWithTooBigResolution)
+TEST_F(GraphicSystemTest, DISABLED_ResizeGraphicSystemWindowWithTooBigResolution)
 {
   EXPECT_THROW(m_Graphic->ResizeWindow(1921, 1081), invalid_argument);
 }
 //=================================================================================================
-TEST_F(GraphicSystemTest, SystemGraphicAttachedOnRenderEvent)
+TEST_F(GraphicSystemTest, SystemGraphicUpdateOnValidSpriteRenderEvent)
 {
 	Event event(Event::Type::Rendering, Event::Id::RENDER_SPRITE);
-  memmove(event.render.resourceName, "Test", 5);
+  strcpy_s(event.render.resourceName, RESOURCE_NAME.c_str());
 	Messager::Fire(event);
 	m_Graphic->Update(0);
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicUpdateOnInvalidSpriteRenderEvent)
+{
+  const string invalidResource = "";
+  Event event(Event::Type::Rendering, Event::Id::RENDER_SPRITE);
+  strcpy_s(event.render.resourceName, invalidResource.c_str());
+  Messager::Fire(event);
+  EXPECT_THROW(m_Graphic->Update(0), invalid_argument);
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicUpdateOnNoEvent)
+{
+  m_Graphic->Update(0);
 }
 //=================================================================================================

@@ -63,6 +63,7 @@
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -70,6 +71,7 @@
     <Import Project="..\..\Support\PropertySheets\Common.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -77,6 +79,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -84,6 +87,7 @@
     <Import Project="..\..\Support\PropertySheets\Import_log4cplus.props" />
     <Import Project="..\..\Support\PropertySheets\Import_tinyxml2.props" />
     <Import Project="..\..\Support\PropertySheets\Import_SFML_all.props" />
+    <Import Project="..\..\Support\PropertySheets\Import_glew.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -201,6 +205,9 @@
     <ClCompile Include="SystemInput.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Components\glew\build\vc12\glew_shared.vcxproj">
+      <Project>{55ae3d72-7de6-f19f-aef2-9ae8ca26cf3d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\log4cplus\msvc14\log4cplus.vcxproj">
       <Project>{917836a4-0ddc-47be-b930-1b3bfdf6c940}</Project>
     </ProjectReference>

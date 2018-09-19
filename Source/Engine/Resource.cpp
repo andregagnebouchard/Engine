@@ -8,9 +8,9 @@ namespace Engine
 	Resource::Type FileExtensionToResourceType(std::wstring &ext)
 	{
 		if (ext == L"wav")
-			return Resource::Type::WAV;
+			return Resource::Type::Audio;
 		else if (ext == L"png")
-			return Resource::Type::PNG;
+			return Resource::Type::Graphic;
 		else
 			throw runtime_error("Extension does not have a corresponding resource type:" + StringUtil::ToStr(ext));
 	}
@@ -20,7 +20,7 @@ namespace Engine
     m_FilePath(filepath),
     m_Size(0),
     m_IsLoaded(false),
-    m_Type(Resource::Type::WAV),
+    m_Type(Resource::Type::Audio),
 		m_Name(name)
   {
     if (m_Name.length() > RESOURCE_NAME_CHAR_MAX)
