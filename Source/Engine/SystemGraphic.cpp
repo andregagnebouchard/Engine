@@ -34,11 +34,11 @@ namespace Engine
     auto q = m_MsgQueue.GetQueue();
     while(!q.empty())
     {
-      Event &event = q.front();
+      shared_ptr<Event> &event = q.front();
       q.pop();
 
-			if (event.GetType() == Event::Type::Rendering)
-				HandleRenderingEvent(event);
+			if (event->GetType() == Event::Type::Render)
+				HandleRenderingEvent(dynamic_pointer_cast<RenderEvent>(event));
 			else
 				throw invalid_argument("Unknown rendering event received by SystemGraphic");
     }
@@ -46,13 +46,13 @@ namespace Engine
     m_RenderWindow->display();
 	}
 
-  void SystemGraphic::HandleRenderingEvent(const Event &event)
+  void SystemGraphic::HandleRenderingEvent(shared_ptr<RenderEvent> event)
   {
-    switch(event.GetId())
+    switch(event->GetId())
     {
       case Event::Id::RENDER_SPRITE:
       {
-        auto resource = m_ResourceCache->GetResource(StringUtil::ToWStr(event.render.resourceName));
+        auto resource = m_ResourceCache->GetResource((event->GetResourceName()));
         if (resource->GetType() != Resource::Type::Graphic)
           throw invalid_argument("A non-Graphic resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
 

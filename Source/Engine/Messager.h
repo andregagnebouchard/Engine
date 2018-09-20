@@ -2,6 +2,7 @@
 #include <functional>
 #include <queue>
 #include <set>
+#include <memory>
 #include "Event.h"
 #include <unordered_map>
 using namespace std;
@@ -21,15 +22,15 @@ namespace Engine
     };
     */
 
-    static void Attach(const std::function<void(Event)> *callback, Event::Id eventId);
+    static void Attach(const function<void(shared_ptr<Event>)> *callback, Event::Id eventId);
     //void Attach(std::function<void(Event)> &callback, Event::Id eventId, ActorId actorId);
 
-    static void Detach(const std::function<void(Event)> *callback, Event::Id eventId);
+    static void Detach(const function<void(shared_ptr<Event>)> *callback, Event::Id eventId);
     //void Detach(std::function<void(Event)> &callback, Event::Id eventId, ActorId actorId);
 
-    static void Fire(const Event &event);
+    static void Fire(const shared_ptr<Event> event);
   private:
-    static unordered_map<Event::Id, set<const std::function<void(Event)>*>> m_Callbacks;
+    static unordered_map<Event::Id, set<const function<void(shared_ptr<Event>)>*>> m_Callbacks;
     //unordered_multimap<EntityEventKey, std::function<void(Event)>, decltype> m_EntityCallbacks;
   };
 
@@ -38,17 +39,17 @@ namespace Engine
   public:
     MessageQueue();
 
-    queue<Event>& GetQueue();
-    function<void(Event)>* GetCallback();
+    queue<shared_ptr<Event>>& GetQueue();
+    function<void(shared_ptr<Event>)>* GetCallback();
 		void Swap();
     
   private:
-    void OnEvent(Event event);
+    void OnEvent(shared_ptr<Event> event);
 
-    function<void(Event)> m_Callback;
-    queue<Event> m_Queue1;
-		queue<Event> m_Queue2;
-		queue<Event> &m_CurrentQueue;
+    function<void(shared_ptr<Event>)> m_Callback;
+    queue<shared_ptr<Event>> m_Queue1;
+		queue<shared_ptr<Event>> m_Queue2;
+		queue<shared_ptr<Event>> &m_CurrentQueue;
 		int m_CurrentQueueId;
 
   };

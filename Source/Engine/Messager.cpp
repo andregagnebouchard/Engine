@@ -3,21 +3,21 @@
 #include "Messager.h"
 namespace Engine
 {
-  unordered_map<Event::Id, set<const std::function<void(Event)>*>> Messager::m_Callbacks;
-  void Messager::Attach(const std::function<void(Event)> *callback, Event::Id eventId)
+  unordered_map<Event::Id, set<const std::function<void(shared_ptr<Event>)>*>> Messager::m_Callbacks;
+  void Messager::Attach(const std::function<void(shared_ptr<Event>)> *callback, Event::Id eventId)
   {
     m_Callbacks[eventId].insert(callback);
   }
 
-  void Messager::Detach(const std::function<void(Event)> *callback, Event::Id eventId)
+  void Messager::Detach(const std::function<void(shared_ptr<Event>)> *callback, Event::Id eventId)
   {
     m_Callbacks[eventId].erase(callback);
   }
 
-  void Messager::Fire(const Event &event)
+  void Messager::Fire(const shared_ptr<Event> event)
   {
-		Logger::Log("Firing EventId" + static_cast<int>(event.GetId()), Logger::Level::Info);
-    for (auto callback : m_Callbacks[event.GetId()])
+		Logger::Log("Firing EventId" + static_cast<int>(event->GetId()), Logger::Level::Info);
+    for (auto callback : m_Callbacks[event->GetId()])
       (*callback)(event);
   }
 
@@ -31,16 +31,16 @@ namespace Engine
     m_Callback = bind(&MessageQueue::OnEvent, this, placeholders::_1);
   }
 
-  queue<Event>& MessageQueue::GetQueue()
+  queue<shared_ptr<Event>>& MessageQueue::GetQueue()
   {
     return m_CurrentQueue;
   }
 
-  function<void(Event)>* MessageQueue::GetCallback()
+  function<void(shared_ptr<Event>)>* MessageQueue::GetCallback()
   {
     return &m_Callback;
   }
-  void MessageQueue::OnEvent(Event event)
+  void MessageQueue::OnEvent(shared_ptr<Event> event)
   {
 		m_CurrentQueue.push(event);
   }

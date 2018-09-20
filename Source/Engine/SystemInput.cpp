@@ -33,20 +33,21 @@ namespace Engine
 
 	void SystemInput::SignalKeyEvent(const sf::Event &event)
 	{
-    Event toFire(Event::Type::Key);
+    auto toKeyState = [&](const bool isPressed) 
+    {
+      return isPressed ? InputEvent::KeyState::Pressed : InputEvent::KeyState::Released; 
+    };
 
-    auto pressedToState = [&](const bool isPressed, Event::KeyEvent::State *state) {isPressed ? *state = Event::KeyEvent::State::Pressed : *state = Event::KeyEvent::State::Released; };
-    pressedToState(event.key.alt, &toFire.key.alt);
-    pressedToState(event.key.control, &toFire.key.control);
-    pressedToState(event.key.shift, &toFire.key.shift);
-    pressedToState(event.key.system, &toFire.key.system);
+    InputEvent::KeyState altKeyState = toKeyState(event.key.alt);
+    InputEvent::KeyState controlKeyState = toKeyState(event.key.control);
+    InputEvent::KeyState shiftKeyState = toKeyState(event.key.shift);
+    InputEvent::KeyState systemKeyState = toKeyState(event.key.system);
 
     //sf::Keyboard::key and our events matches 1:1
     // SFML does not differentiate pressed and released key, but we do
 	  // We apply an offset to the numerical enum value if it is released to locate its corresponding id
     int offset = event.type == sf::Event::KeyPressed ? 0 : Event::KEY_RELEASED_OFFSET;
     int id = offset + static_cast<int>(event.key.code);
-    toFire.SetId(static_cast<Event::Id>(id));
-    Messager::Fire(toFire);
+    Messager::Fire(make_shared<InputEvent>(static_cast<Event::Id>(id), altKeyState, controlKeyState, shiftKeyState, systemKeyState));
 	}
 }

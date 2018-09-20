@@ -146,5 +146,8 @@
     <ClCompile Include="ApplicationOption.cpp">
       <Filter>Engine\Application</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Engine\Event</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

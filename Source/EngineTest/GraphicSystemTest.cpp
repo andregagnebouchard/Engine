@@ -9,11 +9,11 @@ class GraphicSystemTest : public testing::Test
 {
 protected:
 
-  const string RESOURCE_NAME = "Square";
+  const wstring RESOURCE_NAME = L"Square";
 
   GraphicSystemTest()
   {
-    m_Sprite = make_shared<Resource>(L"..\\..\\Support\\Testing\\ResourceCacheTest\\BLACK_SQUARE_10x9.png", StringUtil::ToWStr(RESOURCE_NAME));
+    m_Sprite = make_shared<Resource>(L"..\\..\\Support\\Testing\\ResourceCacheTest\\BLACK_SQUARE_10x9.png", RESOURCE_NAME);
     m_ResourceCache = make_shared<ResourceCache>();
     m_ResourceCache->AddResource(m_Sprite);
     m_Window = make_shared<sf::RenderWindow>(sf::VideoMode(1, 1), sf::String("Engine"));
@@ -54,18 +54,13 @@ TEST_F(GraphicSystemTest, DISABLED_ResizeGraphicSystemWindowWithTooBigResolution
 //=================================================================================================
 TEST_F(GraphicSystemTest, SystemGraphicUpdateOnValidSpriteRenderEvent)
 {
-	Event event(Event::Type::Rendering, Event::Id::RENDER_SPRITE);
-  strcpy_s(event.render.resourceName, RESOURCE_NAME.c_str());
-	Messager::Fire(event);
+	Messager::Fire(make_shared<RenderEvent>(Event::Id::RENDER_SPRITE, RESOURCE_NAME));
 	m_Graphic->Update(0);
 }
 //=================================================================================================
 TEST_F(GraphicSystemTest, SystemGraphicUpdateOnInvalidSpriteRenderEvent)
 {
-  const string invalidResource = "";
-  Event event(Event::Type::Rendering, Event::Id::RENDER_SPRITE);
-  strcpy_s(event.render.resourceName, invalidResource.c_str());
-  Messager::Fire(event);
+  Messager::Fire(make_shared<RenderEvent>(Event::Id::RENDER_SPRITE, L""));
   EXPECT_THROW(m_Graphic->Update(0), invalid_argument);
 }
 //=================================================================================================

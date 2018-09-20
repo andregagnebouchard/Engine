@@ -1,5 +1,6 @@
 #pragma once
 #include "constant.h"
+using namespace std;
 namespace Engine
 {
   class Event
@@ -214,46 +215,55 @@ namespace Engine
       KEY_F15_RELEASE,
       KEY_PAUSE_RELEASE,
 
-      UNKNOWN, // Unknown Id for initialisation purposes
+      UNKNOWN, // Unknown Id for initialization purposes
 
       RENDER_SPRITE
     };
 
     static const int KEY_RELEASED_OFFSET = static_cast<int>(Id::KEY_A_RELEASE) - static_cast<int>(Id::KEY_A_PRESS);
-
-    struct KeyEvent
-    {
-      enum class State { Pressed, Released };
-      State alt;
-      State control;
-      State shift;
-      State system;
-    };
-
-    struct RenderEvent
-    {
-      char resourceName[RESOURCE_NAME_CHAR_MAX];
-    };
-
     enum class Type
     {
-      Key,
-      Rendering,
+      Input,
+      Render,
+      Unknown
     };
 
-    Event(Type type, Id id) : m_Type(type), m_Id(id) {}
-    Event(Type type) : m_Type(type), m_Id(Id::UNKNOWN) {}
+    Event(Id id);
+    Event();
 
-    union
-    {
-      KeyEvent key;
-      RenderEvent render;
-    };
-    Type GetType() const { return m_Type; }
-    Id GetId() const { return m_Id; }
-    void SetId(Id id) { m_Id = id; }
+    virtual Type GetType() const;
+
+    Id GetId() const;
+    void SetId(Id id);
   private:
-    Type m_Type;
     Id m_Id;
+  };
+
+  class RenderEvent : public Event
+  {
+  public :
+    RenderEvent(Id id, const wstring &resourceName);
+    wstring GetResourceName() const;
+    Type GetType() const override;
+  private:
+    wstring m_ResourceName;
+  };
+
+  class InputEvent : public Event
+  {
+  public:
+    enum class KeyState { Pressed, Released };
+    InputEvent(Id id, KeyState altKeyState, KeyState controlKeyState, KeyState shiftKeyState, KeyState systemKeyState);
+
+    KeyState GetAltKeyState() const;
+    KeyState GetControlKeyState() const;
+    KeyState GetShiftKeyState() const;
+    KeyState GetSystemKeyState() const;
+    Type GetType() const override;
+  private:
+    KeyState m_AltKeyState;
+    KeyState m_ControlKeyState;
+    KeyState m_ShiftKeyState;
+    KeyState m_SystemKeyState;
   };
 }

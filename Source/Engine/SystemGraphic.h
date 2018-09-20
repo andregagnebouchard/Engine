@@ -21,7 +21,7 @@ namespace Engine
     void ResizeWindow(uint width, uint height) override;
     void SetWindowVisible(bool isVisible) override;
   private:
-    void HandleRenderingEvent(const Event &event);
+    void HandleRenderingEvent(shared_ptr<RenderEvent> event);
     MessageQueue m_MsgQueue;
     shared_ptr<sf::RenderWindow> m_RenderWindow;
     shared_ptr<ResourceCache> m_ResourceCache;
