@@ -33,6 +33,42 @@ BallLogicComponent::Update(float dt)
 		
 }
 ===========================================================================
+class BallPhysicComponent : IComponent
+{
+	public:
+	// IComponent
+	void Init();
+	void Shutdown();
+	void Update(float dt);
+	string GetName();
+}
+
+BallPhysicComponent::Init()
+{
+	Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::ON_COLLISION);
+}
+
+BallPhysicComponent::Update(float dt)
+{
+	while(!m_MsgQueue.GetQueue().empty())
+	{
+		Event ev = m_MsgQueue.GetQueue().front();
+		m_MsgQueue.GetQueue().pop();
+		switch(ev.GetId())
+		{
+			case Event::Id::Collision:
+			{
+				auto collidable = event.collision.GetCollidable();
+				vec2 dir = collidable.GetDirection();
+				int mass = collidable.GetMass();
+				
+				break;
+			}
+		}
+	}
+		
+}
+===========================================================================
 ComponentMap.xml
 	<Actor Name="Ball">
 		<Component Name="BallLogicComponent">
@@ -44,5 +80,3 @@ void main()
 	IActorFactory::Init("ActorComponentMap.xml");
 	IComponentFactory::Add(make_shared<BallLogicComponent>());
 }
-
-Met le device "Unreachable" si tu le découvre avec la version 0 sur un mauvais adapter
