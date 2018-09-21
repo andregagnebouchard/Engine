@@ -5,6 +5,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 namespace Engine
 {
+  map<wstring, sf::Texture> ResourceLoader::m_TextureCache;
+
   shared_ptr<void> ResourceLoader::Load(const wstring &filename, Resource::Type type)
   {
     switch (type)
@@ -23,11 +25,16 @@ namespace Engine
 
 	shared_ptr<void> ResourceLoader::LoadGraphicResource(const wstring &filename)
 	{
-    sf::Texture texture;
-		if (!texture.loadFromFile(StringUtil::ToStr(filename)))
-			throw runtime_error("Failed to load texture from file:" + StringUtil::ToStr(filename));
-
-    return make_shared<sf::Sprite>(texture);
+    if (m_TextureCache.find(filename) == m_TextureCache.end())
+    {
+      m_TextureCache[filename] = sf::Texture();
+      if(!m_TextureCache[filename].loadFromFile(StringUtil::ToStr(filename)))
+        throw runtime_error("Failed to load texture from file:" + StringUtil::ToStr(filename));
+    }
+    
+    // Sprite needs their texture to be alive to work
+    // We therefore need to store instances of textures somewhere to keep them alive
+    return make_shared<sf::Sprite>(m_TextureCache[filename]);
 	}
 
 	shared_ptr<void> ResourceLoader::LoadAudioResource(const wstring &filename)
