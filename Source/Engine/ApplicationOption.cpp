@@ -25,7 +25,6 @@ namespace Engine
 			if (const char* width = window->Attribute("Width")) m_WindowWidth = atoi(width); else Throw("WINDOW::Width");
 			if (const char* height = window->Attribute("Height")) m_WindowHeight = atoi(height); else Throw("WINDOW::Height");
 			if (const char* name = window->Attribute("Name")) m_WindowName = name; else Throw("WINDOW::Name");
-			if (const char* isVisible = window->Attribute("IsVisible")) m_IsWindowVisible = atoi(isVisible) != 0; else Throw("WINDOW::IsVisible");
 		}
 		else
 			Throw("WINDOW");
@@ -78,14 +77,6 @@ namespace Engine
 	string ApplicationOption::GetWindowName() const
 	{
 		return m_WindowName;
-	}
-	void ApplicationOption::SetIsWindowVisible(bool isVisible)
-	{
-		m_IsWindowVisible = isVisible;
-	}
-	bool ApplicationOption::GetIsWindowVisible() const
-	{
-		return m_IsWindowVisible;
 	}
 
   vector<shared_ptr<Resource>> ApplicationOption::GetResources() const

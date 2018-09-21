@@ -49,8 +49,3 @@ TEST_F(ApplicationTest, InitApplicationOptionWithMissingWindowWidthFile)
 {
 	EXPECT_THROW(m_Options->Load(fileDir + L"MissingWindowWidth.xml"), invalid_argument);
 }
-
-TEST_F(ApplicationTest, InitApplicationOptionWithMissingWindowIsVisibleFile)
-{
-	EXPECT_THROW(m_Options->Load(fileDir + L"MissingWindowIsVisible.xml"), invalid_argument);
-}

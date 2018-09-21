@@ -18,8 +18,6 @@ namespace Engine
 		int GetWindowHeight() const override;
 		void SetWindowName(const string &name) override;
 		string GetWindowName() const override;
-		void SetIsWindowVisible(bool isVisible) override;
-		bool GetIsWindowVisible() const override;
 
     vector<shared_ptr<Resource>> GetResources() const override;
 

@@ -234,7 +234,6 @@
   <ItemGroup>
     <Xml Include="..\..\Support\Testing\ApplicationTest\EmptyInit.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowHeight.xml" />
-    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowIsVisible.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowWidth.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\ResourceLess.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\ValidInit.xml" />

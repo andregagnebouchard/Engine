@@ -72,9 +72,6 @@
     <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowWidth.xml">
       <Filter>Resource</Filter>
     </Xml>
-    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowIsVisible.xml">
-      <Filter>Resource</Filter>
-    </Xml>
     <Xml Include="..\..\Support\Testing\ApplicationTest\ResourceLess.xml">
       <Filter>Resource</Filter>
     </Xml>

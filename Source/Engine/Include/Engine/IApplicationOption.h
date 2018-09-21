@@ -23,8 +23,6 @@ namespace Engine
 		virtual int GetWindowHeight() const = 0;
 		virtual void SetWindowName(const string &name) = 0;
 		virtual string GetWindowName() const = 0;
-		virtual void SetIsWindowVisible(bool isVisible) = 0;
-		virtual bool GetIsWindowVisible() const = 0;
 
     // Might be empty
     virtual vector<shared_ptr<Resource>> GetResources() const = 0;
