@@ -238,6 +238,9 @@
     <Xml Include="..\..\Support\Testing\ApplicationTest\ResourceLess.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\ValidInit.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WindowTest.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

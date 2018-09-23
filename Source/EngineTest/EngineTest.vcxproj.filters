@@ -76,4 +76,9 @@
       <Filter>Resource</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WindowTest.h">
+      <Filter>EngineTests</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

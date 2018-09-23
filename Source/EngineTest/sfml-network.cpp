@@ -16,5 +16,4 @@ TEST(SFMLNetwork, UseSFMLNetwork)
 	// Connect to the server
 	sf::Ftp server;
 	sf::Ftp::Response connectResponse = server.connect(address);
-	std::cout << connectResponse << std::endl;
 }

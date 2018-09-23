@@ -171,6 +171,7 @@
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="constant.h" />
     <ClInclude Include="Include\Engine\IApplicationOption.h" />
+    <ClInclude Include="IWindow.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceCache.h" />
     <ClInclude Include="ResourceLoader.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="macro.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SystemInput.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsInclude.h" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +206,7 @@
     <ClCompile Include="Messager.cpp" />
     <ClCompile Include="Startup.cpp" />
     <ClCompile Include="SystemInput.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\glew\build\vc12\glew_shared.vcxproj">

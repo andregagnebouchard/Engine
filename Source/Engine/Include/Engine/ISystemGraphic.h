@@ -5,6 +5,7 @@
 using namespace std;
 namespace Engine
 {
+	class IWindow;
 	class ISystemGraphic : public ISystem
 	{
 	public:
@@ -16,7 +17,6 @@ namespace Engine
 		virtual void Update(float dt) = 0;
 
 		// ISystemGraphic
-		virtual void ResizeWindow(uint width, uint height) = 0;
-    virtual void SetWindowVisible(bool isVisible) = 0;
+		virtual shared_ptr<IWindow> GetWindow() const = 0;
 	};
 }

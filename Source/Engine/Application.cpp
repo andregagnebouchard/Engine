@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Engine\Application.h"
 #include "SystemGraphic.h"
+#include "Window.h"
 #include "SystemInput.h"
 #include "ResourceCache.h"
 using namespace sf;
@@ -18,14 +19,15 @@ namespace Engine
 		Logger::SetLogLevel(Logger::Level::Debug);
 
     // Read WindowInfo from a config file
-    auto window = make_shared<sf::RenderWindow>(sf::VideoMode(options->GetWindowWidth(), options->GetWindowHeight()), options->GetWindowName());
+    auto renderWindow = make_shared<sf::RenderWindow>(sf::VideoMode(options->GetWindowWidth(), options->GetWindowHeight()), options->GetWindowName());
 
     m_ResourceCache = make_shared<ResourceCache>();
     for (auto resource : options->GetResources())
       m_ResourceCache->AddResource(resource);
 
-    m_SystemGraphic = make_shared<SystemGraphic>(window, m_ResourceCache);
-    m_SystemInput = make_shared<SystemInput>(window);
+
+    m_SystemGraphic = make_shared<SystemGraphic>(renderWindow, make_shared<Window>(renderWindow), m_ResourceCache);
+    m_SystemInput = make_shared<SystemInput>(renderWindow);
 	}
 
 	void Application::Shutdown()
