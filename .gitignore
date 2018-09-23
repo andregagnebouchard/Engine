@@ -7,7 +7,6 @@ Bin
 *.m4
 *.mk
 *.md
-*.wav
 *.ipch
 *.tmp
 *.bak*
