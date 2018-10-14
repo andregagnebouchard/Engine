@@ -46,6 +46,12 @@ namespace Engine
     m_RenderWindow->display();
 	}
 
+	void SystemGraphic::Add(shared_ptr<IComponent> component)
+	{
+		//TODO: Map vs vector?
+		// Map could validate its id is already registered
+	}
+
   void SystemGraphic::HandleRenderingEvent(shared_ptr<RenderEvent> event)
   {
     switch(event->GetId())

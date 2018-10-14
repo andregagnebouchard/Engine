@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE PLAY SYSTEM "play.dtd">
-<WINDOW Width="1920" Height="1080" Name="Application" IsVisible="0"/>
+<WINDOW Width="1920" Height="1080" Name="Application"/>
 <RESOURCES >
 	<RESOURCE Name="GraphicResource" Path="..\..\Support\Testing\ResourceCacheTest\BLACK_SQUARE_10x9.png" />
 	<RESOURCE Name="AudioResource" Path="..\..\Support\Testing\ResourceCacheTest\WavFile.wav" />

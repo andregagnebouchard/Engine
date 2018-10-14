@@ -17,22 +17,22 @@ protected:
 
 };
 //=================================================================================================
-TEST_F(WindowTest, DISABLED_ResizeGraphicSystemWindow)
+TEST_F(WindowTest, ResizeGraphicSystemWindow)
 {
 	m_Window->Resize(1920, 1080);
 }
 //=================================================================================================
-TEST_F(WindowTest, DISABLED_ResizeGraphicSystemWindowWithZeroWidth)
+TEST_F(WindowTest, ResizeGraphicSystemWindowWithZeroWidth)
 {
 	EXPECT_THROW(m_Window->Resize(0, 1080), invalid_argument);
 }
 //=================================================================================================
-TEST_F(WindowTest, DISABLED_ResizeGraphicSystemWindowWithZeroHeight)
+TEST_F(WindowTest, ResizeGraphicSystemWindowWithZeroHeight)
 {
 	EXPECT_THROW(m_Window->Resize(1920, 0), invalid_argument);
 }
 //=================================================================================================
-TEST_F(WindowTest, DISABLED_ResizeGraphicSystemWindowWithTooBigResolution)
+TEST_F(WindowTest, ResizeGraphicSystemWindowWithTooBigResolution)
 {
 	EXPECT_THROW(m_Window->Resize(1921, 1081), invalid_argument);
 }

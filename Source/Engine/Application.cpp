@@ -46,6 +46,9 @@ namespace Engine
 			earlier = clock::now();
 
 			m_SystemInput->Update(static_cast<float>(dt.count()));
+
+			Messager::Fire(make_shared<RenderEvent>(Event::Id::RENDER_SPRITE, L"Mushroom"));
+
 			m_SystemGraphic->Update(static_cast<float>(dt.count()));
 		}
 	}

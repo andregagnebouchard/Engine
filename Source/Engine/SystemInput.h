@@ -14,6 +14,7 @@ namespace Engine
 		void Init() override;
 		void Shutdown() override;
 		void Update(float dt) override;
+		void Add(shared_ptr<IComponent> component) override;
 
 	private:
 		void SignalKeyEvent(const sf::Event &event);

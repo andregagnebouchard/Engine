@@ -28,7 +28,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\..\Support\Testing\ResourceCacheTest\Resource.xml">
+    <Xml Include="Ressource.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>

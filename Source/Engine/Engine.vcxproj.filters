@@ -28,6 +28,9 @@
     <Filter Include="Engine\Application">
       <UniqueIdentifier>{6ad1d1dd-8949-4f23-a584-94f6bc117e4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{967a08bf-b662-4f2e-93fe-7a181e38c400}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -114,6 +117,21 @@
     <ClInclude Include="Window.h">
       <Filter>Engine\Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="IComponentFactory.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntityFactory.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntity.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">
@@ -157,6 +175,12 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Engine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFactory.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Engine\Entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!DOCTYPE PLAY SYSTEM "play.dtd">
+<WINDOW Width="1920" Height="1080" Name="Application" IsVisible="0"/>
+<RESOURCES >
+  <RESOURCE Name="Mushroom" Path="Assets\Graphic\Mushroom.png" />
+</RESOURCES>

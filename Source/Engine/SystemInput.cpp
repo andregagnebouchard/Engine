@@ -31,6 +31,12 @@ namespace Engine
 		}
 	}
 
+	void SystemInput::Add(shared_ptr<IComponent> component)
+	{
+		//TODO: Map vs vector?
+		// Map could validate its id is already registered
+	}
+
 	void SystemInput::SignalKeyEvent(const sf::Event &event)
 	{
     auto toKeyState = [&](const bool isPressed) 
