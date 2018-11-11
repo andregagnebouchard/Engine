@@ -31,6 +31,9 @@
     <Filter Include="Engine\Entity">
       <UniqueIdentifier>{967a08bf-b662-4f2e-93fe-7a181e38c400}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Logic">
+      <UniqueIdentifier>{79b383ae-0722-4442-ab22-fbdbd4433847}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -48,27 +51,6 @@
     <ClInclude Include="Logger.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\Typedef.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\Export.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="All.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\IApplication.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\ISystem.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="ISystemInput.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="SystemInput.h">
       <Filter>Engine\Input</Filter>
     </ClInclude>
@@ -77,9 +59,6 @@
     </ClInclude>
     <ClInclude Include="Messager.h">
       <Filter>Engine\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\ISystemGraphic.h">
-      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="SystemGraphic.h">
       <Filter>Engine\Graphic</Filter>
@@ -99,9 +78,6 @@
     <ClInclude Include="StringUtil.h">
       <Filter>Engine\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\IApplicationOption.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Engine\Application</Filter>
     </ClInclude>
@@ -111,26 +87,56 @@
     <ClInclude Include="Startup.h">
       <Filter>Engine\Application</Filter>
     </ClInclude>
-    <ClInclude Include="IWindow.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Engine\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="IComponentFactory.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="IEntityFactory.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="IEntity.h">
-      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="EntityFactory.h">
       <Filter>Engine\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemLogic.h">
+      <Filter>Engine\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\All.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\Export.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IApplication.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IApplicationOption.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IComponent.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IComponentFactory.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IEntity.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\ISystem.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\ISystemGraphic.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\ISystemInput.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\ISystemLogic.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\IWindow.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Engine\Typedef.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemLogic.cpp">
+      <Filter>Engine\Logic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

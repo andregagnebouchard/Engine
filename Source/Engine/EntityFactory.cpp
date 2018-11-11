@@ -10,11 +10,12 @@ namespace Engine
 	EntityFactory::EntityFactory(shared_ptr<IComponentFactory> componentFactory) :
 		m_ComponentFactory(componentFactory)
 	{
-
+		if (componentFactory == nullptr)
+			throw invalid_argument("The component factory is nullptr");
 	}
 	shared_ptr<IEntity> EntityFactory::CreateEntity(const wstring &name)
 	{
-		// Validate the entity is already registered
+		// Validate if the entity is already registered
 		auto it = m_EntityComponentsMap.find(name);
 		if(it == m_EntityComponentsMap.end())
 			throw invalid_argument("The entity is not registered :" + StringUtil::ToStr(name));
@@ -50,13 +51,5 @@ namespace Engine
 			throw invalid_argument("The entity is already registered :" + StringUtil::ToStr(entityName));
 
 		m_EntityComponentsMap[entityName] = componentNames;
-	}
-
-	shared_ptr<IEntityFactory> IEntityFactory::Create(shared_ptr<IComponentFactory> componentFactory)
-	{
-		if (componentFactory == nullptr)
-			throw invalid_argument("The component factory is nullptr");
-
-		return make_shared<EntityFactory>(componentFactory);
 	}
 }

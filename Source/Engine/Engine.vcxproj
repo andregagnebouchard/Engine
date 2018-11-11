@@ -163,37 +163,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="All.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="ApplicationOption.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="FileUtil.h" />
-    <ClInclude Include="IComponent.h" />
     <ClInclude Include="constant.h" />
-    <ClInclude Include="IComponentFactory.h" />
-    <ClInclude Include="IEntity.h" />
-    <ClInclude Include="IEntityFactory.h" />
+    <ClInclude Include="Include\Engine\All.h" />
+    <ClInclude Include="Include\Engine\Export.h" />
+    <ClInclude Include="Include\Engine\IApplication.h" />
     <ClInclude Include="Include\Engine\IApplicationOption.h" />
-    <ClInclude Include="IWindow.h" />
+    <ClInclude Include="Include\Engine\IComponent.h" />
+    <ClInclude Include="Include\Engine\IComponentFactory.h" />
+    <ClInclude Include="Include\Engine\IEntity.h" />
+    <ClInclude Include="Include\Engine\ISystem.h" />
+    <ClInclude Include="Include\Engine\ISystemGraphic.h" />
+    <ClInclude Include="Include\Engine\ISystemInput.h" />
+    <ClInclude Include="Include\Engine\ISystemLogic.h" />
+    <ClInclude Include="Include\Engine\IWindow.h" />
+    <ClInclude Include="Include\Engine\Typedef.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceCache.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="SystemGraphic.h" />
-    <ClInclude Include="Include\Engine\IApplication.h" />
-    <ClInclude Include="Include\Engine\Export.h" />
-    <ClInclude Include="Include\Engine\ISystemGraphic.h" />
-    <ClInclude Include="Include\Engine\ISystem.h" />
-    <ClInclude Include="Include\Engine\Typedef.h" />
-    <ClInclude Include="ISystemInput.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Messager.h" />
     <ClInclude Include="Startup.h" />
     <ClInclude Include="macro.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SystemInput.h" />
+    <ClInclude Include="SystemLogic.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsInclude.h" />
   </ItemGroup>
@@ -213,6 +214,7 @@
     <ClCompile Include="Messager.cpp" />
     <ClCompile Include="Startup.cpp" />
     <ClCompile Include="SystemInput.cpp" />
+    <ClCompile Include="SystemLogic.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Engine\Application.h"
 #include "SystemGraphic.h"
+#include "SystemLogic.h"
 #include "Window.h"
 #include "SystemInput.h"
 #include "ResourceCache.h"
@@ -13,8 +14,11 @@ namespace Engine
 		return make_shared<Application>();
 	}
 
-	void Application::Init(shared_ptr<IApplicationOption> options)
+	void Application::Init(shared_ptr<IApplicationOption> options, shared_ptr<IComponentFactory> componentFactory)
 	{
+		if (options == nullptr) throw invalid_argument("Parameter \"options\" is nullptr");
+		if (componentFactory == nullptr) throw invalid_argument("Parameter \"componentFactory\" is nullptr");
+
 		Logger::Init();
 		Logger::SetLogLevel(Logger::Level::Debug);
 
@@ -28,6 +32,7 @@ namespace Engine
 
     m_SystemGraphic = make_shared<SystemGraphic>(renderWindow, make_shared<Window>(renderWindow), m_ResourceCache);
     m_SystemInput = make_shared<SystemInput>(renderWindow);
+		m_SystemLogic = make_shared<SystemLogic>();
 	}
 
 	void Application::Shutdown()
@@ -64,4 +69,10 @@ namespace Engine
     if (!m_SystemGraphic) throw std::exception("Uninitialized SystemGraphic");
     return m_SystemGraphic;
   }
+
+	shared_ptr<ISystemLogic> Application::GetSystemLogic() const
+	{
+		if (!m_SystemLogic) throw std::exception("Uninitialized SystemGraphic");
+		return m_SystemLogic;
+	}
 }

@@ -42,7 +42,7 @@ namespace Engine
 			}
 		}
 		else
-			// Technically not a mistake
+			// Not having any ressource is "technically@ not a mistake
 			Logger::Log("Did not find any resource in the file \"" + StringUtil::ToStr(filename), Logger::Level::Warning);
 	}
 

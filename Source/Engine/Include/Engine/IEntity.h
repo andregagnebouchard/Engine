@@ -8,6 +8,5 @@ namespace Engine
 	public:
 		virtual ~IEntity() = default;
 		virtual wstring GetName() const = 0;
-
 	};
 }
