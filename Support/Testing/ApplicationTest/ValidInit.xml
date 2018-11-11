@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE PLAY SYSTEM "play.dtd">
 <WINDOW Width="1920" Height="1080" Name="Application"/>
-<RESOURCES >
+<RESOURCES>
 	<RESOURCE Name="GraphicResource" Path="..\..\Support\Testing\ResourceCacheTest\BLACK_SQUARE_10x9.png" />
 	<RESOURCE Name="AudioResource" Path="..\..\Support\Testing\ResourceCacheTest\WavFile.wav" />
 </RESOURCES>
+<ENTITIES>
+  <ENTITY Name="Entity1" LogicComponent="LogicComponent1" GraphicComponent="GraphicComponent1" InputComponent="InputComponent1" />
+</ENTITIES>

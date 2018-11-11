@@ -12,5 +12,10 @@ namespace Engine
 		{
 			return wstring(str.begin(), str.end());
 		}
+
+		string ToStr(const char *str)
+		{
+			return string(str);
+		}
 	}
 }

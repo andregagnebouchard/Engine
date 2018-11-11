@@ -173,6 +173,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Support\Testing\ApplicationTest\EntityTest.cpp" />
     <ClCompile Include="ApplicationTest.cpp" />
     <ClCompile Include="box2d.cpp" />
     <ClCompile Include="glew.cpp" />
@@ -233,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\Support\Testing\ApplicationTest\EmptyInit.xml" />
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingEntityName.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowHeight.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\MissingWindowWidth.xml" />
     <Xml Include="..\..\Support\Testing\ApplicationTest\ResourceLess.xml" />

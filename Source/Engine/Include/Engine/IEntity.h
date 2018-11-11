@@ -1,6 +1,6 @@
 #pragma once
-using namespace std;
 #include <string>
+using namespace std;
 namespace Engine
 {
 	class IEntity

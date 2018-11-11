@@ -8,14 +8,21 @@ namespace Engine
 {
 	class IEntity;
 	class IComponentFactory;
+	class ISystemGraphic;
+	class ISystemLogic;
+	class ISystemInput;
 	class EntityFactory
 	{
 	public:
-		EntityFactory(shared_ptr<IComponentFactory> componentFactory);
+		EntityFactory(shared_ptr<IComponentFactory> componentFactory, shared_ptr<ISystemGraphic> systemGraphic, shared_ptr<ISystemLogic> systemLogic, shared_ptr<ISystemInput> systemInput);
+
 		shared_ptr<IEntity> CreateEntity(const wstring &name);
 		void RegisterEntity(const vector<wstring> &componentNames, const wstring &entityName);
 	private:
 		shared_ptr<IComponentFactory> m_ComponentFactory;
 		map<wstring, vector<wstring>> m_EntityComponentsMap;
+		shared_ptr<ISystemGraphic> m_SystemGraphic;
+		shared_ptr<ISystemLogic> m_SystemLogic;
+		shared_ptr<ISystemInput> m_SystemInput;
 	};
 }

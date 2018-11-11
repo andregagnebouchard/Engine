@@ -20,6 +20,9 @@ namespace Engine
 		string GetWindowName() const override;
 
     vector<shared_ptr<Resource>> GetResources() const override;
+		vector<shared_ptr<EntityDeclaration>> GetEntities() const override;
+		void AddResource(shared_ptr<Resource> resource) override;
+		void AddEntity(shared_ptr<IApplicationOption::EntityDeclaration> entity) override;
 
 	private:
 		int m_WindowWidth;
@@ -27,5 +30,6 @@ namespace Engine
 		string m_WindowName;
 		bool m_IsWindowVisible;
     vector<shared_ptr<Resource>> m_Resources;
+		vector<shared_ptr<EntityDeclaration>> m_Entities;
 	};
 }

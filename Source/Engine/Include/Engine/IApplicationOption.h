@@ -7,9 +7,16 @@ using namespace std;
 namespace Engine
 {
   class Resource;
+	class IEntity;
 	class IApplicationOption
 	{
 	public:
+		struct EntityDeclaration
+		{
+			vector<wstring> componentNames;
+			wstring name;
+		};
+
 		virtual ~IApplicationOption() = default;
 
 		// Load the values defined in a XML file
@@ -26,6 +33,9 @@ namespace Engine
 
     // Might be empty
     virtual vector<shared_ptr<Resource>> GetResources() const = 0;
+		virtual vector<shared_ptr<EntityDeclaration>> GetEntities() const = 0;
+		virtual void AddResource(shared_ptr<Resource> resource) = 0;
+		virtual void AddEntity(shared_ptr<IApplicationOption::EntityDeclaration> entity) = 0;
 
 		static shared_ptr<IApplicationOption> Create();
 	};

@@ -47,6 +47,9 @@
     <ClCompile Include="ApplicationTest.cpp">
       <Filter>EngineTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Support\Testing\ApplicationTest\EntityTest.cpp">
+      <Filter>EngineTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ComponentTests">
@@ -73,6 +76,9 @@
       <Filter>Resource</Filter>
     </Xml>
     <Xml Include="..\..\Support\Testing\ApplicationTest\ResourceLess.xml">
+      <Filter>Resource</Filter>
+    </Xml>
+    <Xml Include="..\..\Support\Testing\ApplicationTest\MissingEntityName.xml">
       <Filter>Resource</Filter>
     </Xml>
   </ItemGroup>

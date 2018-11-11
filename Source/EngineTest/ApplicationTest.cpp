@@ -13,12 +13,14 @@ protected:
 	virtual void SetUp()
 	{
 		m_Options = IApplicationOption::Create();
+		m_Application = IApplication::Create();
 	}
 
 	virtual void TearDown()
 	{
 	}
 	shared_ptr<IApplicationOption> m_Options = nullptr;
+	shared_ptr<IApplication> m_Application = nullptr;
 };
 
 class ComponentFactory : public IComponentFactory
@@ -55,6 +57,11 @@ TEST_F(ApplicationTest, LoadApplicationOptionWithMissingWindowHeightFile)
 	EXPECT_THROW(m_Options->Load(fileDir + L"MissingWindowHeight.xml"), invalid_argument);
 }
 
+TEST_F(ApplicationTest, LoadApplicationOptionWithMissingEntityName)
+{
+	EXPECT_THROW(m_Options->Load(fileDir + L"MissingEntityName.xml"), invalid_argument);
+}
+
 TEST_F(ApplicationTest, LoadApplicationOptionWithMissingWindowWidthFile)
 {
 	EXPECT_THROW(m_Options->Load(fileDir + L"MissingWindowWidth.xml"), invalid_argument);
@@ -66,24 +73,21 @@ TEST_F(ApplicationTest, CreateApplication)
 }
 TEST_F(ApplicationTest, InitApplicationWithAllParametersNullptr)
 {
-	auto app = IApplication::Create();
-	EXPECT_THROW(app->Init(nullptr, nullptr), invalid_argument);
+	EXPECT_THROW(m_Application->Init(nullptr, nullptr), invalid_argument);
 }
 
 TEST_F(ApplicationTest, InitApplicationWithParameterComponentFactoryNullptr)
 {
-	auto app = IApplication::Create();
-	EXPECT_THROW(app->Init(IApplicationOption::Create(), nullptr), invalid_argument);
+	EXPECT_THROW(m_Application->Init(IApplicationOption::Create(), nullptr), invalid_argument);
 }
 
 TEST_F(ApplicationTest, InitApplicationWithParameterApplicationOptionNullptr)
 {
-	auto app = IApplication::Create();
-	EXPECT_THROW(app->Init(nullptr, make_shared<ComponentFactory>()), invalid_argument);
+	EXPECT_THROW(m_Application->Init(nullptr, make_shared<ComponentFactory>()), invalid_argument);
 }
 
-TEST_F(ApplicationTest, InitApplicationWithValidParameters)
+TEST_F(ApplicationTest, InitApplication)
 {
-	auto app = IApplication::Create();
-	EXPECT_THROW(app->Init(nullptr, make_shared<ComponentFactory>()), invalid_argument);
+	m_Options->Load(fileDir + L"ValidInit.xml");
+	m_Application->Init(m_Options, make_shared<ComponentFactory>());
 }

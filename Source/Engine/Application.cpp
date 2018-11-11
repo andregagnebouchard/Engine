@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "SystemInput.h"
 #include "ResourceCache.h"
+#include "EntityFactory.h"
 using namespace sf;
 
 namespace Engine
@@ -22,17 +23,22 @@ namespace Engine
 		Logger::Init();
 		Logger::SetLogLevel(Logger::Level::Debug);
 
-    // Read WindowInfo from a config file
+    // Read WindowInfo from the options
     auto renderWindow = make_shared<sf::RenderWindow>(sf::VideoMode(options->GetWindowWidth(), options->GetWindowHeight()), options->GetWindowName());
 
+		// Read all ressources from the options
     m_ResourceCache = make_shared<ResourceCache>();
     for (auto resource : options->GetResources())
       m_ResourceCache->AddResource(resource);
 
-
     m_SystemGraphic = make_shared<SystemGraphic>(renderWindow, make_shared<Window>(renderWindow), m_ResourceCache);
     m_SystemInput = make_shared<SystemInput>(renderWindow);
 		m_SystemLogic = make_shared<SystemLogic>();
+
+		// Read all entity definition from the options
+		auto entityFactory = make_shared<EntityFactory>(componentFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput);
+		for (auto entity : options->GetEntities())
+			entityFactory->RegisterEntity(entity->componentNames, entity->name);
 	}
 
 	void Application::Shutdown()

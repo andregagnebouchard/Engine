@@ -3,6 +3,7 @@
 #include "StringUtil.h"
 #include <tinyxml\tinyxml2.h>
 #include "Resource.h"
+#include "Entity.h"
 using namespace tinyxml2;
 namespace Engine
 {
@@ -42,8 +43,33 @@ namespace Engine
 			}
 		}
 		else
-			// Not having any ressource is "technically@ not a mistake
+			// Not having any ressource is "technically" not a mistake
 			Logger::Log("Did not find any resource in the file \"" + StringUtil::ToStr(filename), Logger::Level::Warning);
+
+		// Entity
+		if (XMLElement* entities = xml_doc.FirstChildElement("ENTITIES"))
+		{
+			for (auto entityNode = entities->FirstChildElement(); entityNode != NULL; entityNode = entityNode->NextSiblingElement())
+			{
+				const char *name = entityNode->Attribute("Name");
+				const char *logicComponent = entityNode->Attribute("LogicComponent");
+				const char *graphicComponent = entityNode->Attribute("GraphicComponent");
+				const char *inputComponent = entityNode->Attribute("InputComponent");
+
+				if (name == nullptr) Throw("ENTITIES::Name");
+
+				vector<wstring> components = { StringUtil::ToWStr(logicComponent), StringUtil::ToWStr(graphicComponent), StringUtil::ToWStr(inputComponent) };
+				if(components.empty())
+					Logger::Log("The entity \"" + StringUtil::ToStr(name) + "\" declared in the file \"" + StringUtil::ToStr(filename) + "\" do not have any component", Logger::Level::Warning);
+
+				m_Entities.push_back(make_shared<EntityDeclaration>());
+				m_Entities.back()->componentNames = components;
+				m_Entities.back()->name = StringUtil::ToWStr(name);
+			}
+		}
+		else
+			// Not having any entity is "technically" not a mistake
+			Logger::Log("Did not find any entity in the file \"" + StringUtil::ToStr(filename), Logger::Level::Warning);
 	}
 
 	ApplicationOption::ApplicationOption() :
@@ -83,4 +109,18 @@ namespace Engine
   {
     return m_Resources;
   }
+
+	vector<shared_ptr<IApplicationOption::EntityDeclaration>> ApplicationOption::GetEntities() const
+	{
+		return m_Entities;
+	}
+
+	void ApplicationOption::AddResource(shared_ptr<Resource> resource)
+	{
+		m_Resources.push_back(resource);
+	}
+	void ApplicationOption::AddEntity(shared_ptr<EntityDeclaration> entity)
+	{
+		m_Entities.push_back(entity);
+	}
 }

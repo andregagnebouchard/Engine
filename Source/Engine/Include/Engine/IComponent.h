@@ -9,7 +9,8 @@ namespace Engine
 		{
 			Input,
 			Graphic,
-			Audio
+			Audio,
+			Logic
 		};
     virtual ~IComponent() = default;
 

@@ -14,6 +14,5 @@ namespace Engine
 	private:
 		vector<shared_ptr<IComponent>> m_Components;
 		wstring m_Name;
-
 	};
 }
