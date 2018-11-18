@@ -16,5 +16,6 @@ namespace Engine
 		void Add(shared_ptr<IComponent> component) override;
 
 	private:
+		map<int, shared_ptr<IComponent>> m_Components;
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+using namespace std;
 namespace Engine
 {
   class IComponent
@@ -20,5 +21,11 @@ namespace Engine
 
 		virtual wstring GetName() const = 0;
 		virtual Type GetType() const = 0;
+
+		// The engine will handle the unique id attribution while creating the components in EntityFactory
+		int GetId() const { return m_Id; }
+		void SetId(int id) { m_Id = id; };
+	private:
+		int m_Id;
   };
 }

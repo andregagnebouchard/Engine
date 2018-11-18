@@ -18,6 +18,7 @@ protected:
 
 	virtual void TearDown()
 	{
+		m_Application->Shutdown();
 	}
 	shared_ptr<IApplicationOption> m_Options = nullptr;
 	shared_ptr<IApplication> m_Application = nullptr;
@@ -90,4 +91,9 @@ TEST_F(ApplicationTest, InitApplication)
 {
 	m_Options->Load(fileDir + L"ValidInit.xml");
 	m_Application->Init(m_Options, make_shared<ComponentFactory>());
+}
+
+TEST_F(ApplicationTest, ShutdownUninitializedApplication)
+{
+	m_Application->Shutdown();
 }

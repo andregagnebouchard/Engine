@@ -4,3 +4,6 @@
 <RESOURCES >
   <RESOURCE Name="Mushroom" Path="Assets\Graphic\Mushroom.png" />
 </RESOURCES>
+<ENTITIES>
+  <ENTITY Name="Mushroom" LogicComponent="MushroomLogicComponent" GraphicComponent="MushroomGraphicComponent" InputComponent="MushroomInputComponent" />
+</ENTITIES>

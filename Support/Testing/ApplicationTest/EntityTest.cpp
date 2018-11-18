@@ -6,6 +6,7 @@
 #include <Engine/ISystemGraphic.h>
 #include <Engine/ISystemLogic.h>
 #include <Engine/ISystemInput.h>
+#include <gmock\gmock.h>
 using namespace Engine;
 using namespace std;
 
@@ -28,33 +29,32 @@ class ValidComponent : public IComponent
 	}
 };
 
-// Mocks
-class SystemGraphic : public ISystemGraphic
+class SystemGraphicMock : public ISystemGraphic
 {
 public:
-	void Init() override {};
-	void Shutdown() override {};
-	void Update(float dt) override {};
-	void Add(shared_ptr<IComponent> component) override {};
+	MOCK_METHOD0(Init, void());
+	MOCK_METHOD0(Shutdown, void());
+	MOCK_METHOD1(Update, void(float dt));
+	MOCK_METHOD1(Add, void(shared_ptr<IComponent> component));
 
 	// ISystemGraphic
-	shared_ptr<IWindow> GetWindow() const override { return nullptr; };
+	MOCK_CONST_METHOD0(GetWindow, shared_ptr<IWindow>());
 };
 
-class SystemLogic : public ISystemLogic
+class SystemLogicMock : public ISystemLogic
 {
-	void Init() override {};
-	void Shutdown() override {};
-	void Update(float dt) override {};
-	void Add(shared_ptr<IComponent> component) override {};
+	MOCK_METHOD0(Init, void());
+	MOCK_METHOD0(Shutdown, void());
+	MOCK_METHOD1(Update, void(float dt));
+	MOCK_METHOD1(Add, void(shared_ptr<IComponent> component));
 };
 
-class SystemInput : public ISystemInput
+class SystemInputMock : public ISystemInput
 {
-	void Init() override {};
-	void Shutdown() override {};
-	void Update(float dt) override {};
-	void Add(shared_ptr<IComponent> component) override {};
+	MOCK_METHOD0(Init, void());
+	MOCK_METHOD0(Shutdown, void());
+	MOCK_METHOD1(Update, void(float dt));
+	MOCK_METHOD1(Add, void(shared_ptr<IComponent> component));
 };
 class ComponentFactory : public IComponentFactory
 {
@@ -70,51 +70,51 @@ public:
 
 TEST(EntityTest, CreateEntityFactoryWithNullComponentFactory)
 {
-	EXPECT_THROW(EntityFactory(nullptr, make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>()), invalid_argument);
+	EXPECT_THROW(EntityFactory(nullptr, make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>()), invalid_argument);
 }
 
 TEST(EntityTest, CreateEntityFactoryWithNullSystemGraphic)
 {
-	EXPECT_THROW(EntityFactory(make_shared<ComponentFactory>(), nullptr, make_shared<SystemLogic>(), make_shared<SystemInput>()), invalid_argument);
+	EXPECT_THROW(EntityFactory(make_shared<ComponentFactory>(), nullptr, make_shared<SystemLogicMock>(), make_shared<SystemInputMock>()), invalid_argument);
 }
 
 TEST(EntityTest, CreateEntityFactoryWithNullSystemLogic)
 {
-	EXPECT_THROW(EntityFactory(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), nullptr, make_shared<SystemInput>()), invalid_argument);
+	EXPECT_THROW(EntityFactory(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), nullptr, make_shared<SystemInputMock>()), invalid_argument);
 }
 
 TEST(EntityTest, CreateEntityFactoryWithNullSystemInput)
 {
-	EXPECT_THROW(EntityFactory(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), nullptr), invalid_argument);
+	EXPECT_THROW(EntityFactory(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), nullptr), invalid_argument);
 }
 
 TEST(EntityTest, CreateEntityFactory)
 {
-	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>());
+	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>());
 }
 
 TEST(EntityTest, RegisterEntity)
 {
-	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>());
+	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>());
 	factory->RegisterEntity({}, ENTITY_NAME);
 }
 
 TEST(EntityTest, RegisterSameEntityTwice)
 {
-	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>());
+	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>());
 	factory->RegisterEntity({}, ENTITY_NAME);
 	EXPECT_THROW(factory->RegisterEntity({}, ENTITY_NAME), invalid_argument);
 }
 
 TEST(EntityTest, CreateUnregisteredEntity)
 {
-	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>());
+	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>());
 	EXPECT_THROW(factory->CreateEntity(ENTITY_NAME), invalid_argument);
 }
 
 TEST(EntityTest, CreateRegisteredEntity)
 {
-	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>());
+	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>());
 	factory->RegisterEntity({}, ENTITY_NAME);
 	auto entity = factory->CreateEntity(ENTITY_NAME);
 	ASSERT_EQ(entity->GetName(), ENTITY_NAME);
@@ -122,7 +122,7 @@ TEST(EntityTest, CreateRegisteredEntity)
 
 TEST(EntityTest, CreateRegisteredEntityWithExistingComponent)
 {
-	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>());
+	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>());
 	factory->RegisterEntity({ EXISTING_COMPONENT }, ENTITY_NAME);
 	auto entity = factory->CreateEntity(ENTITY_NAME);
 	ASSERT_EQ(entity->GetName(), ENTITY_NAME);
@@ -130,7 +130,7 @@ TEST(EntityTest, CreateRegisteredEntityWithExistingComponent)
 
 TEST(EntityTest, CreateRegisteredEntityWithNonExistingComponent)
 {
-	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphic>(), make_shared<SystemLogic>(), make_shared<SystemInput>());
+	auto factory = make_shared<EntityFactory>(make_shared<ComponentFactory>(), make_shared<SystemGraphicMock>(), make_shared<SystemLogicMock>(), make_shared<SystemInputMock>());
 	factory->RegisterEntity({ NON_EXISTING_COMPONENT }, ENTITY_NAME);
 	EXPECT_THROW(auto entity = factory->CreateEntity(ENTITY_NAME), runtime_error);
 }

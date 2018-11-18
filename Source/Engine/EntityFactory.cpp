@@ -14,7 +14,8 @@ namespace Engine
 		m_ComponentFactory(componentFactory),
 		m_SystemLogic(systemLogic),
 		m_SystemGraphic(systemGraphic),
-		m_SystemInput(systemInput)
+		m_SystemInput(systemInput),
+		m_ComponentId(0)
 	{
 		if (componentFactory == nullptr) throw invalid_argument("The parameter \"componentFactory\" is nullptr");
 		if (systemGraphic == nullptr) throw invalid_argument("The parameter \"systemGraphic\" is nullptr");
@@ -40,6 +41,8 @@ namespace Engine
 			if (component->GetName() != name)
 				throw runtime_error("The component factory did not return the expected component. Asked for \"" + StringUtil::ToStr(name) + "\" but received \"" + StringUtil::ToStr(component->GetName()));
 
+			// Set an unique id for each created component
+			component->SetId(m_ComponentId++);
 			components.push_back(component);
 		}
 

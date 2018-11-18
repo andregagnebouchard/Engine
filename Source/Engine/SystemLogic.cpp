@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "SystemLogic.h"
 #include "Messager.h"
+#include <Engine\IComponent.h>
+#include "StringUtil.h"
 namespace Engine
 {
 	SystemLogic::SystemLogic()
@@ -21,7 +23,10 @@ namespace Engine
 
 	void SystemLogic::Add(shared_ptr<IComponent> component)
 	{
-		//TODO: Map vs vector?
-		// Map could validate its id is already registered
+		auto it = m_Components.find(component->GetId());
+		if (it != m_Components.end())
+			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is already added in SystemInput");
+
+		m_Components[component->GetId()] = component;
 	}
 }

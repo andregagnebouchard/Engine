@@ -8,6 +8,7 @@
 #include "Messager.h"
 #include "ResourceCache.h"
 #include "StringUtil.h"
+#include <Engine\IComponent.h>
 namespace Engine
 {
   SystemGraphic::SystemGraphic(shared_ptr<sf::RenderWindow> renderWindow, shared_ptr<IWindow> window, shared_ptr<ResourceCache> resourceCache) :
@@ -48,8 +49,11 @@ namespace Engine
 
 	void SystemGraphic::Add(shared_ptr<IComponent> component)
 	{
-		//TODO: Map vs vector?
-		// Map could validate its id is already registered
+		auto it = m_Components.find(component->GetId());
+		if (it != m_Components.end())
+			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is already added in SystemInput");
+
+		m_Components[component->GetId()] = component;
 	}
 
   void SystemGraphic::HandleRenderingEvent(shared_ptr<RenderEvent> event)

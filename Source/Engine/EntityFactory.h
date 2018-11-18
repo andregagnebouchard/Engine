@@ -14,6 +14,7 @@ namespace Engine
 	class EntityFactory
 	{
 	public:
+		// The systems are required to register in order to register the components to them
 		EntityFactory(shared_ptr<IComponentFactory> componentFactory, shared_ptr<ISystemGraphic> systemGraphic, shared_ptr<ISystemLogic> systemLogic, shared_ptr<ISystemInput> systemInput);
 
 		shared_ptr<IEntity> CreateEntity(const wstring &name);
@@ -24,5 +25,6 @@ namespace Engine
 		shared_ptr<ISystemGraphic> m_SystemGraphic;
 		shared_ptr<ISystemLogic> m_SystemLogic;
 		shared_ptr<ISystemInput> m_SystemInput;
+		int m_ComponentId;
 	};
 }

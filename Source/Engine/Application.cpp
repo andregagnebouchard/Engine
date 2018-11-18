@@ -10,6 +10,10 @@ using namespace sf;
 
 namespace Engine
 {
+	Application::~Application()
+	{
+		Shutdown();
+	}
 	shared_ptr<IApplication> IApplication::Create()
 	{
 		return make_shared<Application>();
@@ -43,8 +47,9 @@ namespace Engine
 
 	void Application::Shutdown()
 	{
-		m_SystemGraphic->Shutdown();
-		m_SystemInput->Shutdown();
+		if(m_SystemGraphic != nullptr) m_SystemGraphic->Shutdown();
+		if(m_SystemInput != nullptr) m_SystemInput->Shutdown();
+		if(m_SystemLogic != nullptr) m_SystemLogic->Shutdown();
 	}
   void Application::RunLoop()
 	{

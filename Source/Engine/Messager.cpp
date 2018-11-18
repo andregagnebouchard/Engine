@@ -6,11 +6,17 @@ namespace Engine
   unordered_map<Event::Id, set<const std::function<void(shared_ptr<Event>)>*>> Messager::m_Callbacks;
   void Messager::Attach(const std::function<void(shared_ptr<Event>)> *callback, Event::Id eventId)
   {
+		if (callback == nullptr)
+			throw invalid_argument("Argument \"callback\" is nullptr");
+
     m_Callbacks[eventId].insert(callback);
   }
 
   void Messager::Detach(const std::function<void(shared_ptr<Event>)> *callback, Event::Id eventId)
   {
+		if (callback == nullptr)
+			throw invalid_argument("Argument \"callback\" is nullptr");
+
     m_Callbacks[eventId].erase(callback);
   }
 

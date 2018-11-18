@@ -29,5 +29,6 @@ namespace Engine
     shared_ptr<IWindow> m_Window;
 		shared_ptr<sf::RenderWindow> m_RenderWindow;
     shared_ptr<ResourceCache> m_ResourceCache;
+		map<int, shared_ptr<IComponent>> m_Components;
   };
 }

@@ -11,6 +11,7 @@ namespace Engine
 	class Application : public IApplication
   {
   public:
+		~Application();
     void Init(shared_ptr<IApplicationOption> options, shared_ptr<IComponentFactory> componentFactory) override;
     void Shutdown() override;
 
