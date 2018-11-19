@@ -14,6 +14,7 @@ namespace Engine
 		void Shutdown() override;
 		void Update(float dt) override;
 		void Add(shared_ptr<IComponent> component) override;
+		void Remove(shared_ptr<IComponent> component) override;
 
 	private:
 		map<int, shared_ptr<IComponent>> m_Components;

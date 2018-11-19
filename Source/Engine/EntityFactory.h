@@ -1,4 +1,5 @@
 #pragma once
+#include <Engine/Messager.h>
 #include <map>
 #include <memory>
 #include <string>
@@ -18,13 +19,17 @@ namespace Engine
 		EntityFactory(shared_ptr<IComponentFactory> componentFactory, shared_ptr<ISystemGraphic> systemGraphic, shared_ptr<ISystemLogic> systemLogic, shared_ptr<ISystemInput> systemInput);
 
 		shared_ptr<IEntity> CreateEntity(const wstring &name);
+		void DeleteEntity(const wstring &name);
 		void RegisterEntity(const vector<wstring> &componentNames, const wstring &entityName);
+		void Update(float dt);
 	private:
 		shared_ptr<IComponentFactory> m_ComponentFactory;
 		map<wstring, vector<wstring>> m_EntityComponentsMap;
 		shared_ptr<ISystemGraphic> m_SystemGraphic;
 		shared_ptr<ISystemLogic> m_SystemLogic;
 		shared_ptr<ISystemInput> m_SystemInput;
+		vector<shared_ptr<IEntity>> m_Entities;
+		MessageQueue m_MsgQueue;
 		int m_ComponentId;
 	};
 }

@@ -32,6 +32,10 @@ namespace Engine
 	{
     m_RenderWindow->clear();
 
+		// Update all components first so they can fire their render event
+		for (auto &component : m_Components)
+			component.second->Update(dt);
+
     auto q = m_MsgQueue.GetQueue();
     while(!q.empty())
     {
@@ -49,11 +53,26 @@ namespace Engine
 
 	void SystemGraphic::Add(shared_ptr<IComponent> component)
 	{
+		if (component == nullptr)
+			throw invalid_argument("The parameter \"Component\" is nullptr");
+
 		auto it = m_Components.find(component->GetId());
 		if (it != m_Components.end())
-			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is already added in SystemInput");
+			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is already added in SystemGraphic");
 
 		m_Components[component->GetId()] = component;
+	}
+
+	void SystemGraphic::Remove(shared_ptr<IComponent> component)
+	{
+		if (component == nullptr)
+			throw invalid_argument("The parameter \"Component\" is nullptr");
+
+		auto it = m_Components.find(component->GetId());
+		if (it == m_Components.end())
+			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is not in SystemGraphic");
+
+		m_Components.erase(component->GetId());
 	}
 
   void SystemGraphic::HandleRenderingEvent(shared_ptr<RenderEvent> event)
@@ -66,7 +85,8 @@ namespace Engine
         if (resource->GetType() != Resource::Type::Graphic)
           throw invalid_argument("A non-Graphic resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
 
-        m_RenderWindow->draw(*static_pointer_cast<sf::Sprite>(resource->GetData()));
+				auto sprite = *static_pointer_cast<sf::Sprite>(resource->GetData());
+        m_RenderWindow->draw(sprite);
         break;
       }
     }

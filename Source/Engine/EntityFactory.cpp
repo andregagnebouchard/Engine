@@ -21,6 +21,9 @@ namespace Engine
 		if (systemGraphic == nullptr) throw invalid_argument("The parameter \"systemGraphic\" is nullptr");
 		if (systemLogic == nullptr) throw invalid_argument("The parameter \"systemLogic\" is nullptr");
 		if (systemInput == nullptr) throw invalid_argument("The parameter \"systemInput\" is nullptr");
+
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::CREATE_ENTITY);
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::DELETE_ENTITY);
 	}
 
 	shared_ptr<IEntity> EntityFactory::CreateEntity(const wstring &name)
@@ -66,7 +69,8 @@ namespace Engine
 				throw runtime_error("Unknown component type");
 			}
 		}
-		return make_shared<Entity>(name, components);
+		m_Entities.push_back(make_shared<Entity>(name, components));
+		return m_Entities.back();
 	}
 
 	void EntityFactory::RegisterEntity(const vector<wstring> &componentNames, const wstring &entityName)
@@ -75,5 +79,34 @@ namespace Engine
 			throw invalid_argument("The entity is already registered :" + StringUtil::ToStr(entityName));
 
 		m_EntityComponentsMap[entityName] = componentNames;
+	}
+
+	void EntityFactory::Update(float dt)
+	{
+		auto q = m_MsgQueue.GetQueue();
+		while (!q.empty())
+		{
+			shared_ptr<Event> &event = q.front();
+			q.pop();
+
+			if (event->GetType() != Event::Type::Entity)
+				throw invalid_argument("Unknown event type handled by EntityFactory");
+
+			auto ev = dynamic_pointer_cast<EntityEvent>(event);
+			switch (ev->GetActionType())
+			{
+			case EntityEvent::Type::Create:
+				CreateEntity(ev->GetName());
+				break;
+			case EntityEvent::Type::Delete:
+				DeleteEntity(ev->GetName());
+				break;
+			}
+		}
+	}
+
+	void EntityFactory::DeleteEntity(const wstring &name)
+	{
+		throw runtime_error("Not implemented");
 	}
 }

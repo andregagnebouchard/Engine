@@ -4,6 +4,8 @@
 #include <Engine\ResourceCache.h>
 #include <Engine\Window.h>
 #include <Engine\StringUtil.h>
+#include <Engine\IComponent.h>
+#include <gmock\gmock.h>
 using namespace Engine;
 //=================================================================================================
 class GraphicSystemTest : public testing::Test
@@ -35,6 +37,21 @@ protected:
   shared_ptr<SystemGraphic> m_Graphic;
 
 };
+
+class GraphicComponentMock : public IComponent
+{
+public:
+	MOCK_METHOD0(Init, void());
+	MOCK_METHOD0(Shutdown, void());
+	MOCK_METHOD1(Update, void(float dt));
+
+	MOCK_CONST_METHOD0(GetName, wstring());	
+
+	IComponent::Type GetType() const override { return IComponent::Type::Graphic; };
+private:
+
+};
+
 //=================================================================================================
 TEST_F(GraphicSystemTest, SystemGraphicUpdateOnValidSpriteRenderEvent)
 {
@@ -53,3 +70,40 @@ TEST_F(GraphicSystemTest, SystemGraphicUpdateOnNoEvent)
   m_Graphic->Update(0);
 }
 //=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicAddValidComponent)
+{
+	m_Graphic->Add(make_shared<GraphicComponentMock>());
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicAddInvalidComponent)
+{
+	EXPECT_THROW(m_Graphic->Add(nullptr); , invalid_argument);
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicRemoveComponent)
+{
+	auto component = make_shared<GraphicComponentMock>();
+	m_Graphic->Add(component);
+	m_Graphic->Remove(component);
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicRemoveComponentNotAdded)
+{
+	auto component = make_shared<GraphicComponentMock>();
+	EXPECT_THROW(m_Graphic->Remove(component);, invalid_argument);
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicAddComponentTwice)
+{
+	auto component = make_shared<GraphicComponentMock>();
+	m_Graphic->Add(component);
+	EXPECT_THROW(m_Graphic->Add(component); , invalid_argument);
+}
+//=================================================================================================
+TEST_F(GraphicSystemTest, SystemGraphicUpdateAllComponentOnUpdate)
+{
+	auto component = make_shared<GraphicComponentMock>();
+	m_Graphic->Add(component);
+	m_Graphic->Update(0);
+	EXPECT_CALL(*component, Update(::testing::_)).Times(::testing::AtLeast(1));
+}

@@ -36,6 +36,7 @@ public:
 	MOCK_METHOD0(Shutdown, void());
 	MOCK_METHOD1(Update, void(float dt));
 	MOCK_METHOD1(Add, void(shared_ptr<IComponent> component));
+	MOCK_METHOD1(Remove, void(shared_ptr<IComponent> component));
 
 	// ISystemGraphic
 	MOCK_CONST_METHOD0(GetWindow, shared_ptr<IWindow>());
@@ -47,6 +48,7 @@ class SystemLogicMock : public ISystemLogic
 	MOCK_METHOD0(Shutdown, void());
 	MOCK_METHOD1(Update, void(float dt));
 	MOCK_METHOD1(Add, void(shared_ptr<IComponent> component));
+	MOCK_METHOD1(Remove, void(shared_ptr<IComponent> component));
 };
 
 class SystemInputMock : public ISystemInput
@@ -55,6 +57,7 @@ class SystemInputMock : public ISystemInput
 	MOCK_METHOD0(Shutdown, void());
 	MOCK_METHOD1(Update, void(float dt));
 	MOCK_METHOD1(Add, void(shared_ptr<IComponent> component));
+	MOCK_METHOD1(Remove, void(shared_ptr<IComponent> component));
 };
 class ComponentFactory : public IComponentFactory
 {

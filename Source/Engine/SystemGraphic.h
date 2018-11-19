@@ -19,7 +19,7 @@ namespace Engine
     void Shutdown() override;
     void Update(float dt) override;
 		void Add(shared_ptr<IComponent> component) override;
-
+		void Remove(shared_ptr<IComponent> component) override;
 
 		// ISystemGraphic
 		shared_ptr<IWindow> GetWindow() const override;

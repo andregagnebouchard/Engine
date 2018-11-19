@@ -40,9 +40,9 @@ namespace Engine
 		m_SystemLogic = make_shared<SystemLogic>();
 
 		// Read all entity definition from the options
-		auto entityFactory = make_shared<EntityFactory>(componentFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput);
+		m_EntityFactory = make_shared<EntityFactory>(componentFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput);
 		for (auto entity : options->GetEntities())
-			entityFactory->RegisterEntity(entity->componentNames, entity->name);
+			m_EntityFactory->RegisterEntity(entity->componentNames, entity->name);
 	}
 
 	void Application::Shutdown()
@@ -58,14 +58,13 @@ namespace Engine
 		auto earlier = clock::now();
 		while (true)
 		{
-			auto dt = clock::now() - earlier;
+			float dt = static_cast<float>((clock::now() - earlier).count());
 			earlier = clock::now();
 
-			m_SystemInput->Update(static_cast<float>(dt.count()));
-
-			Messager::Fire(make_shared<RenderEvent>(Event::Id::RENDER_SPRITE, L"Mushroom"));
-
-			m_SystemGraphic->Update(static_cast<float>(dt.count()));
+			m_EntityFactory->Update(dt);
+			m_SystemInput->Update(dt);
+			m_SystemLogic->Update(dt);
+			m_SystemGraphic->Update(dt);
 		}
 	}
 

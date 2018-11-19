@@ -8,6 +8,7 @@ using namespace std;
 namespace Engine
 {
   class ResourceCache;
+	class EntityFactory;
 	class Application : public IApplication
   {
   public:
@@ -24,5 +25,6 @@ namespace Engine
     shared_ptr<ISystemInput> m_SystemInput;
     shared_ptr<ISystemGraphic> m_SystemGraphic;
     shared_ptr<ResourceCache> m_ResourceCache;
+		shared_ptr<EntityFactory> m_EntityFactory;
   };
 }

@@ -16,6 +16,7 @@ namespace Engine
 		virtual void Shutdown() = 0;
 		virtual void Update(float dt) = 0;
 		virtual void Add(shared_ptr<IComponent> component) = 0;
+		virtual void Remove(shared_ptr<IComponent> component) = 0;
 
 		// ISystemGraphic
 		virtual shared_ptr<IWindow> GetWindow() const = 0;

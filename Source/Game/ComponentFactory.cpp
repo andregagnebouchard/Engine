@@ -10,9 +10,9 @@ namespace Game
 		{
 			return make_shared<MushroomLogicComponent>();
 		}
-		else if (name == L"MushroomLogicComponent")
+		else if (name == L"MushroomGraphicComponent")
 		{
-			return make_shared<MushroomLogicComponent>();
+			return make_shared<MushroomGraphicComponent>();
 
 		}
 		else if (name == L"MushroomInputComponent")

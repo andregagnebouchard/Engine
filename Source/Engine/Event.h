@@ -217,7 +217,9 @@ namespace Engine
 
       UNKNOWN, // Unknown Id for initialization purposes
 
-      RENDER_SPRITE
+      RENDER_SPRITE,
+			CREATE_ENTITY,
+			DELETE_ENTITY
     };
 
     static const int KEY_RELEASED_OFFSET = static_cast<int>(Id::KEY_A_RELEASE) - static_cast<int>(Id::KEY_A_PRESS);
@@ -225,13 +227,14 @@ namespace Engine
     {
       Input,
       Render,
+			Entity,
       Unknown
     };
 
     Event(Id id);
     Event();
 
-    virtual Type GetType() const;
+    virtual Type GetType() const = 0;
 
     Id GetId() const;
     void SetId(Id id);
@@ -266,4 +269,18 @@ namespace Engine
     KeyState m_ShiftKeyState;
     KeyState m_SystemKeyState;
   };
+
+	class EntityEvent : public Event
+	{
+	public:
+		enum class Type { Create, Delete };
+		EntityEvent(Id id, Type type, const wstring &name);
+
+		Type GetActionType() const;
+		wstring GetName() const;
+		Event::Type GetType() const override;
+	private:
+		wstring m_Name;
+		Type m_Type;
+	};
 }

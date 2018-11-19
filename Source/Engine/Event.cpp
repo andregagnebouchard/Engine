@@ -71,4 +71,25 @@ namespace Engine
   {
     return Event::Type::Input;
   }
+
+	EntityEvent::EntityEvent(Id id, EntityEvent::Type type, const wstring &name) :
+		Event(id),
+		m_Type(type),
+		m_Name(name)
+	{
+	}
+
+	EntityEvent::Type EntityEvent::GetActionType() const
+	{
+		return m_Type;
+	}
+	wstring EntityEvent::GetName() const
+	{
+		return m_Name;
+	}
+
+	Event::Type EntityEvent::GetType() const
+	{
+		return Event::Type::Entity;
+	}
 }

@@ -187,6 +187,7 @@
     <ClInclude Include="ResourceCache.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="StringUtil.h" />
+    <ClInclude Include="System.h" />
     <ClInclude Include="SystemGraphic.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Messager.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="StringUtil.cpp" />
+    <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemGraphic.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Messager.cpp" />
