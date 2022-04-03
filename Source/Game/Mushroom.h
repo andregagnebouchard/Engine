@@ -6,6 +6,7 @@ namespace Game
 	class MushroomInputComponent : public IComponent
 	{
 	public:
+		MushroomInputComponent();
 		~MushroomInputComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};

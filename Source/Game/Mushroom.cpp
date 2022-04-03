@@ -9,6 +9,10 @@ namespace Game
 		Messager::Fire(make_shared<RenderEvent>(Event::Id::RENDER_SPRITE, L"Mushroom"));
 	}
 
+	MushroomInputComponent::MushroomInputComponent()
+	{
+
+	}
 	void MushroomInputComponent::Update(float dt)
 	{
 
