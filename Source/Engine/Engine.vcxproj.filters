@@ -144,6 +144,12 @@
     <ClInclude Include="System.h">
       <Filter>Engine\System</Filter>
     </ClInclude>
+    <ClInclude Include="EventDefinition.h">
+      <Filter>Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameLogicEvent.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">

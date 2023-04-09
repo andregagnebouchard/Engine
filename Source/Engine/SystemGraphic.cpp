@@ -9,6 +9,7 @@
 #include "ResourceCache.h"
 #include "StringUtil.h"
 #include <Engine\IComponent.h>
+#include "EventDefinition.h"
 namespace Engine
 {
   SystemGraphic::SystemGraphic(shared_ptr<sf::RenderWindow> renderWindow, shared_ptr<IWindow> window, shared_ptr<ResourceCache> resourceCache) :
@@ -16,7 +17,7 @@ namespace Engine
     m_ResourceCache(resourceCache),
 		m_RenderWindow(renderWindow)
 	{
-    Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::RENDER_SPRITE);
+    Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
 	}
 
 	void SystemGraphic::Init()
@@ -25,7 +26,7 @@ namespace Engine
 
 	void SystemGraphic::Shutdown()
 	{
-    Messager::Detach(m_MsgQueue.GetCallback(), Event::Id::RENDER_SPRITE);
+    Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
 	}
 
 	void SystemGraphic::Update(float dt)
@@ -36,18 +37,16 @@ namespace Engine
 		for (auto &component : m_Components)
 			component.second->Update(dt);
 
-    auto q = m_MsgQueue.GetQueue();
-    while(!q.empty())
+    while(!m_MsgQueue.Empty())
     {
-      shared_ptr<Event> &event = q.front();
-      q.pop();
+      shared_ptr<Event> &event = m_MsgQueue.Front();
+			m_MsgQueue.Pop();
 
 			if (event->GetType() == Event::Type::Render)
 				HandleRenderingEvent(dynamic_pointer_cast<RenderEvent>(event));
 			else
 				throw invalid_argument("Unknown rendering event received by SystemGraphic");
     }
-
     m_RenderWindow->display();
 	}
 
@@ -77,15 +76,17 @@ namespace Engine
 
   void SystemGraphic::HandleRenderingEvent(shared_ptr<RenderEvent> event)
   {
-    switch(event->GetId())
+    switch(static_cast<EventDefinition::Id>(event->GetKey().first))
     {
-      case Event::Id::RENDER_SPRITE:
+      case EventDefinition::Id::RENDER_SPRITE:
       {
         auto resource = m_ResourceCache->GetResource((event->GetResourceName()));
         if (resource->GetType() != Resource::Type::Graphic)
           throw invalid_argument("A non-Graphic resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
 
 				auto sprite = *static_pointer_cast<sf::Sprite>(resource->GetData());
+				sprite.move(sf::Vector2f(event->GetXPosition(), event->GetYPosition()));
+
         m_RenderWindow->draw(sprite);
         break;
       }

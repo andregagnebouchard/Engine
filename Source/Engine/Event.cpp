@@ -2,17 +2,23 @@
 #include "Event.h"
 namespace Engine
 {
-  Event::Event(Id id) : 
-    m_Id(id) 
+  Event::Key::Key() : first(-1), second(-1), third(-1), fourth(-1){}
+  Event::Key::Key(int first) : first(first), second(-1), third(-1), fourth(-1) {}
+  Event::Key::Key(int first, int second) : first(first), second(second), third(-1), fourth(-1) {}
+  Event::Key::Key(int first, int second, int third) : first(first), second(second), third(third), fourth(-1) {}
+  Event::Key::Key(int first, int second, int third, int fourth) : first(first), second(second), third(third), fourth(fourth) {}
+
+  Event::Event(Event::Key key) : 
+    m_Key(key) 
   {
   }
 
   Event::Event() : 
-    m_Id(Id::UNKNOWN) 
+    m_Key()
   {
   }
-  InputEvent::InputEvent(Id id, KeyState altKeyState, KeyState controlKeyState, KeyState shiftKeyState, KeyState systemKeyState) :
-    Event(id),
+  InputEvent::InputEvent(Event::Key key, KeyState altKeyState, KeyState controlKeyState, KeyState shiftKeyState, KeyState systemKeyState) :
+    Event(key),
     m_AltKeyState(altKeyState),
     m_ControlKeyState(controlKeyState),
     m_ShiftKeyState(shiftKeyState),
@@ -20,9 +26,11 @@ namespace Engine
   {
   }
 
-  RenderEvent::RenderEvent(Id id, const wstring &resourceName) : 
-    Event(id), 
-    m_ResourceName(resourceName) 
+  RenderEvent::RenderEvent(Event::Key key, const wstring& resourceName, const float x, const float y) :
+    Event(key), 
+    m_ResourceName(resourceName),
+    m_XPosition(x),
+    m_YPosition(y)
   {
   }
 
@@ -48,14 +56,23 @@ namespace Engine
     return m_ResourceName; 
   }
 
-  Event::Id Event::GetId() const
-  { 
-    return m_Id; 
+  float RenderEvent::GetXPosition() const
+  {
+    return m_XPosition;
+  }
+  float RenderEvent::GetYPosition() const
+  {
+    return m_YPosition;
   }
 
-  void Event::SetId(Id id) 
+  Event::Key Event::GetKey() const
   { 
-    m_Id = id; 
+    return m_Key;
+  }
+
+  void Event::SetKey(Event::Key key)
+  { 
+    m_Key= key; 
   }
 
   Event::Type Event::GetType() const
@@ -72,8 +89,8 @@ namespace Engine
     return Event::Type::Input;
   }
 
-	EntityEvent::EntityEvent(Id id, EntityEvent::Type type, const wstring &name) :
-		Event(id),
+	EntityEvent::EntityEvent(Event::Key key, EntityEvent::Type type, const wstring &name) :
+		Event(key),
 		m_Type(type),
 		m_Name(name)
 	{
@@ -92,4 +109,32 @@ namespace Engine
 	{
 		return Event::Type::Entity;
 	}
+
+  LogicEvent::LogicEvent(Event::Key key, shared_ptr<IGameLogicEvent> gameLogicEvent) : 
+    Event(key),
+    m_GameLogicEventId(key.second), 
+    m_EntityId(key.third),
+    m_GameLogicEvent(gameLogicEvent)
+  {
+  }
+
+  Event::Type LogicEvent::GetType() const
+  {
+    return Event::Type::Logic;
+  }
+
+  int LogicEvent::GetEntityId() const
+  {
+    return m_EntityId;
+  }
+
+  int LogicEvent::GetGameLogicEventId() const
+  {
+    return m_GameLogicEventId;
+  }
+
+  shared_ptr<IGameLogicEvent> LogicEvent::GetGameLogicEvent() const
+  {
+    return m_GameLogicEvent;
+  }
 }

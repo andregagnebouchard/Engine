@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SystemInput.h"
 #include "Messager.h"
+#include "EventDefinition.h"
 #include <Engine\IComponent.h>
 #include "StringUtil.h"
 namespace Engine
@@ -12,6 +13,7 @@ namespace Engine
 
 	void SystemInput::Init()
 	{
+
 	}
 
 	void SystemInput::Shutdown()
@@ -76,8 +78,8 @@ namespace Engine
     //sf::Keyboard::key and our events matches 1:1
     // SFML does not differentiate pressed and released key, but we do
 	  // We apply an offset to the numerical enum value if it is released to locate its corresponding id
-    int offset = event.type == sf::Event::KeyPressed ? 0 : Event::KEY_RELEASED_OFFSET;
+    int offset = event.type == sf::Event::KeyPressed ? 0 : EventDefinition::KEY_RELEASED_OFFSET;
     int id = offset + static_cast<int>(event.key.code);
-    Messager::Fire(make_shared<InputEvent>(static_cast<Event::Id>(id), altKeyState, controlKeyState, shiftKeyState, systemKeyState));
+    Messager::Fire(make_shared<InputEvent>(static_cast<Event::Key>(id), altKeyState, controlKeyState, shiftKeyState, systemKeyState));
 	}
 }

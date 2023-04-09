@@ -3,16 +3,16 @@
 #include "Messager.h"
 namespace Engine
 {
-  unordered_map<Event::Id, set<const std::function<void(shared_ptr<Event>)>*>> Messager::m_Callbacks;
-  void Messager::Attach(const std::function<void(shared_ptr<Event>)> *callback, Event::Id eventId)
+  unordered_map<Event::Key, set<const std::function<void(shared_ptr<Event>)>*>> Messager::m_Callbacks;
+  void Messager::Attach(const std::function<void(shared_ptr<Event>)> *callback, Event::Key eventKey)
   {
 		if (callback == nullptr)
 			throw invalid_argument("Argument \"callback\" is nullptr");
 
-    m_Callbacks[eventId].insert(callback);
+    m_Callbacks[eventKey].insert(callback);
   }
 
-  void Messager::Detach(const std::function<void(shared_ptr<Event>)> *callback, Event::Id eventId)
+  void Messager::Detach(const std::function<void(shared_ptr<Event>)> *callback, Event::Key eventId)
   {
 		if (callback == nullptr)
 			throw invalid_argument("Argument \"callback\" is nullptr");
@@ -22,8 +22,8 @@ namespace Engine
 
   void Messager::Fire(const shared_ptr<Event> event)
   {
-		Logger::Log("Firing EventId" + static_cast<int>(event->GetId()), Logger::Level::Info);
-    for (auto callback : m_Callbacks[event->GetId()])
+		//Logger::Log("Firing EventId " + itoa(event->GetKey().first) + "\t" + event->GetKey().second + "\t" + event->GetKey().third + "\t" + event->GetKey().fourth, Logger::Level::Info);
+    for (auto callback : m_Callbacks[event->GetKey()])
       (*callback)(event);
   }
 
@@ -35,11 +35,6 @@ namespace Engine
 		m_CurrentQueueId(1)
   {
     m_Callback = bind(&MessageQueue::OnEvent, this, placeholders::_1);
-  }
-
-  queue<shared_ptr<Event>>& MessageQueue::GetQueue()
-  {
-    return m_CurrentQueue;
   }
 
   function<void(shared_ptr<Event>)>* MessageQueue::GetCallback()
@@ -64,4 +59,17 @@ namespace Engine
 			m_CurrentQueueId = 1;
 		}
 	}
+
+  void MessageQueue::Pop()
+  {
+    m_CurrentQueue.pop();
+  }
+  shared_ptr<Event> MessageQueue::Front()
+  {
+    return m_CurrentQueue.front();
+  }
+  bool MessageQueue::Empty()
+  {
+    return m_CurrentQueue.empty();
+  }
 }

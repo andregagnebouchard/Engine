@@ -15,7 +15,7 @@ namespace Engine
 		};
     virtual ~IComponent() = default;
 
-    virtual void Init() = 0;
+		virtual void Init() = 0; // Called when the entity is created
     virtual void Shutdown() = 0;
     virtual void Update(float dt) = 0;
 

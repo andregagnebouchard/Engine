@@ -7,6 +7,7 @@
 #include <Engine\ISystemGraphic.h>
 #include <Engine\ISystemInput.h>
 #include <Engine\ISystemLogic.h>
+#include "EventDefinition.h"
 using namespace std;
 namespace Engine
 {
@@ -22,8 +23,8 @@ namespace Engine
 		if (systemLogic == nullptr) throw invalid_argument("The parameter \"systemLogic\" is nullptr");
 		if (systemInput == nullptr) throw invalid_argument("The parameter \"systemInput\" is nullptr");
 
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::CREATE_ENTITY);
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Id::DELETE_ENTITY);
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
 	}
 
 	shared_ptr<IEntity> EntityFactory::CreateEntity(const wstring &name)
@@ -52,6 +53,7 @@ namespace Engine
 		// Register the component to its proper system
 		for (auto &component : components)
 		{
+			component->Init();
 			switch (component->GetType())
 			{
 			case IComponent::Type::Audio:
@@ -83,11 +85,10 @@ namespace Engine
 
 	void EntityFactory::Update(float dt)
 	{
-		auto q = m_MsgQueue.GetQueue();
-		while (!q.empty())
+		while (!m_MsgQueue.Empty())
 		{
-			shared_ptr<Event> &event = q.front();
-			q.pop();
+			shared_ptr<Event> &event = m_MsgQueue.Front();
+			m_MsgQueue.Pop();
 
 			if (event->GetType() != Event::Type::Entity)
 				throw invalid_argument("Unknown event type handled by EntityFactory");

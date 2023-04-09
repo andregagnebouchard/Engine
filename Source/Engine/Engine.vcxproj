@@ -165,11 +165,13 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="ApplicationOption.h" />
+    <ClInclude Include="EventDefinition.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="constant.h" />
+    <ClInclude Include="IGameLogicEvent.h" />
     <ClInclude Include="Include\Engine\All.h" />
     <ClInclude Include="Include\Engine\Export.h" />
     <ClInclude Include="Include\Engine\IApplication.h" />
