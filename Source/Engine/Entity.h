@@ -11,6 +11,7 @@ namespace Engine
 		Entity(const wstring &name, const vector<shared_ptr<IComponent>> &components);
 		~Entity() = default;
 		wstring GetName() const override;
+		vector<shared_ptr<IComponent>> GetComponents() const override;
 	private:
 		vector<shared_ptr<IComponent>> m_Components;
 		wstring m_Name;

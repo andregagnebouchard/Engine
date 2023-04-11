@@ -12,4 +12,9 @@ namespace Engine
 	{
 		return m_Name;
 	}
+
+	vector<shared_ptr<IComponent>> Entity::GetComponents() const
+	{
+		return m_Components;
+	}
 }

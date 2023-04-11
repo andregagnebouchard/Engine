@@ -19,10 +19,10 @@ namespace Engine
 		return make_shared<Application>();
 	}
 
-	void Application::Init(shared_ptr<IApplicationOption> options, shared_ptr<IComponentFactory> componentFactory)
+	void Application::Init(shared_ptr<IApplicationOption> options, shared_ptr<IEntityFactory> entityFactory)
 	{
 		if (options == nullptr) throw invalid_argument("Parameter \"options\" is nullptr");
-		if (componentFactory == nullptr) throw invalid_argument("Parameter \"componentFactory\" is nullptr");
+		if (entityFactory == nullptr) throw invalid_argument("Parameter \"entityFactory\" is nullptr");
 
 		Logger::Init();
 		Logger::SetLogLevel(Logger::Level::Debug);
@@ -38,11 +38,7 @@ namespace Engine
     m_SystemGraphic = make_shared<SystemGraphic>(renderWindow, make_shared<Window>(renderWindow), m_ResourceCache);
     m_SystemInput = make_shared<SystemInput>(renderWindow);
 		m_SystemLogic = make_shared<SystemLogic>();
-
-		// Read all entity definition from the options
-		m_EntityFactory = make_shared<EntityFactory>(componentFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput);
-		for (auto entity : options->GetEntities())
-			m_EntityFactory->RegisterEntity(entity->componentNames, entity->name);
+		m_EntityFactory = make_shared<EntityFactory>(entityFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput);
 	}
 
 	void Application::Shutdown()

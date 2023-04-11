@@ -3,7 +3,7 @@
 #include <Engine/ISystemInput.h>
 #include <Engine/ISystemLogic.h>
 #include <Engine/IApplicationOption.h>
-#include <Engine/IComponentFactory.h>
+#include <Engine/IEntityFactory.h>
 using namespace std;
 
 namespace Engine
@@ -17,7 +17,7 @@ namespace Engine
 
 		// Options : Contains all the game settings
 		// ComponentFactory : User-implemented class used to create entities
-		virtual void Init(shared_ptr<IApplicationOption> options, shared_ptr<IComponentFactory> componentFactory) = 0;
+		virtual void Init(shared_ptr<IApplicationOption> options, shared_ptr<IEntityFactory> entityFactory) = 0;
     virtual void Shutdown() = 0;
 
     virtual shared_ptr<ISystemInput> GetSystemInput() const = 0;

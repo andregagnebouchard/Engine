@@ -171,13 +171,13 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="constant.h" />
+    <ClInclude Include="IEntityFactory.h" />
     <ClInclude Include="IGameLogicEvent.h" />
     <ClInclude Include="Include\Engine\All.h" />
     <ClInclude Include="Include\Engine\Export.h" />
     <ClInclude Include="Include\Engine\IApplication.h" />
     <ClInclude Include="Include\Engine\IApplicationOption.h" />
     <ClInclude Include="Include\Engine\IComponent.h" />
-    <ClInclude Include="Include\Engine\IComponentFactory.h" />
     <ClInclude Include="Include\Engine\IEntity.h" />
     <ClInclude Include="Include\Engine\ISystem.h" />
     <ClInclude Include="Include\Engine\ISystemGraphic.h" />
