@@ -29,6 +29,6 @@ namespace Engine
 		shared_ptr<ISystemInput> m_SystemInput;
 		vector<shared_ptr<IEntity>> m_Entities;
 		MessageQueue m_MsgQueue;
-		int m_ComponentId;
+		int m_EntityIdCounter;
 	};
 }

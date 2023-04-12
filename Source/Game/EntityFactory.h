@@ -10,6 +10,6 @@ namespace Game
 	{
 	public:
 		~EntityFactory() = default;
-		shared_ptr<Engine::IEntity> Create(const wstring& name) override;
+		shared_ptr<Engine::IEntity> Create(const wstring& name, int entityId) override;
 	};
 }

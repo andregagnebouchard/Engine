@@ -16,7 +16,7 @@ namespace Engine
 		m_SystemLogic(systemLogic),
 		m_SystemGraphic(systemGraphic),
 		m_SystemInput(systemInput),
-		m_ComponentId(0)
+		m_EntityIdCounter(0)
 	{
 		if (gameEntityFactory == nullptr) throw invalid_argument("The parameter \"gameEntityFactory\" is nullptr");
 		if (systemGraphic == nullptr) throw invalid_argument("The parameter \"systemGraphic\" is nullptr");
@@ -30,14 +30,13 @@ namespace Engine
 	shared_ptr<IEntity> EntityFactory::CreateEntity(const wstring& name)
 	{
 		// Create the entity using the entity factory provided by the user
-		auto entity = m_GameEntityFactory->Create(name);
+		auto entity = m_GameEntityFactory->Create(name, m_EntityIdCounter++);
 		if (entity == nullptr)
 			throw runtime_error("The entity named \"" + StringUtil::ToStr(name) + "\" returned a nullptr from the EntityFactory provided by the game");
 
 		// Register the component to its proper system
 		for (auto& component : entity->GetComponents())
 		{
-			component->SetId(m_ComponentId++); // Set an unique id for each created component
 			component->Init();
 			switch (component->GetType())
 			{
