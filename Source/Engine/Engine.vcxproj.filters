@@ -37,6 +37,9 @@
     <Filter Include="Engine\System">
       <UniqueIdentifier>{ced6ce79-8920-46c5-b7d6-5369d079ae94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{8f46f020-531b-4c5f-9bf2-3ae8fc879f3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -70,9 +73,6 @@
       <Filter>Engine\Resource</Filter>
     </ClInclude>
     <ClInclude Include="ResourceCache.h">
-      <Filter>Engine\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceLoader.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
     <ClInclude Include="FileUtil.h">
@@ -150,6 +150,12 @@
     <ClInclude Include="IEntityFactory.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="SystemAudio.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystemAudio.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">
@@ -168,9 +174,6 @@
       <Filter>Engine\Resource</Filter>
     </ClCompile>
     <ClCompile Include="ResourceCache.cpp">
-      <Filter>Engine\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLoader.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
     <ClCompile Include="FileUtil.cpp">
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemAudio.cpp">
+      <Filter>Engine\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

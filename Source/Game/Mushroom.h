@@ -7,8 +7,8 @@ namespace Game
 {
 	struct MushroomState
 	{
-		int posX;
-		int posY;
+		float posX;
+		float posY;
 	};
 
 	class MoveMushroomLogicEvent : public IGameLogicEvent
@@ -23,11 +23,11 @@ namespace Game
 		MoveMushroomLogicEvent(int deltaX, int deltaY);
 		~MoveMushroomLogicEvent() = default;
 
-		int GetDeltaX() const { return deltaX; };
-		int GetDeltaY() const { return deltaY; };
+		int GetDeltaX() const { return m_DeltaX; };
+		int GetDeltaY() const { return m_DeltaY; };
 	private:
-		int deltaX;
-		int deltaY;
+		int m_DeltaX;
+		int m_DeltaY;
 	};
 
 	class MushroomInputComponent : public IComponent
@@ -80,5 +80,22 @@ namespace Game
 	private:
 		int m_EntityId;
 		shared_ptr<MushroomState> m_State;
+	};
+
+	class MushroomAudioComponent : public IComponent
+	{
+	public:
+		MushroomAudioComponent(int entityId);
+		~MushroomAudioComponent() = default;
+		void Init() override;
+		void Shutdown() override {};
+		void Update(float dt) override;
+
+		wstring GetName() const override { return L"MushroomAudioComponent"; }
+		Type GetType() const override { return IComponent::Type::Audio; }
+	private:
+		shared_ptr<AudioEvent> CreateAudioEvent() const;
+		MessageQueue m_MsgQueue;
+		int m_EntityId;
 	};
 }

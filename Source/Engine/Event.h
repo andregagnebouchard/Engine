@@ -35,6 +35,7 @@ namespace Engine
       Render,
 			Entity,
       Logic,
+      Audio,
       Unknown
     };
 
@@ -47,6 +48,16 @@ namespace Engine
     void SetKey(Event::Key key);
   private:
     Event::Key m_Key;
+  };
+
+  class AudioEvent : public Event
+  {
+  public:
+    AudioEvent(Event::Key key, const wstring& resourceName);
+    wstring GetResourceName() const;
+    Type GetType() const override;
+  private:
+    wstring m_ResourceName;
   };
 
   class RenderEvent : public Event

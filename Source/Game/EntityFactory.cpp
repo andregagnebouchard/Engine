@@ -13,6 +13,7 @@ namespace Game
 			components.emplace_back(make_shared<MushroomLogicComponent>(entityId, state));
 			components.emplace_back(make_shared<MushroomGraphicComponent>(entityId, state));
 			components.emplace_back(make_shared<MushroomInputComponent>(entityId));
+			components.emplace_back(make_shared<MushroomAudioComponent>(entityId));
 			return make_shared<Entity>(name, components);
 		}
 		return nullptr;

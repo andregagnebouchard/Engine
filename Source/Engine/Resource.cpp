@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Resource.h"
-#include "ResourceLoader.h"
 #include "FileUtil.h"
 #include "StringUtil.h"
 namespace Engine
@@ -15,13 +14,10 @@ namespace Engine
 			throw runtime_error("Extension does not have a corresponding resource type:" + StringUtil::ToStr(ext));
 	}
 
-  Resource::Resource(const wstring &filepath, const wstring &name) :
-    m_Data(nullptr),
+  Resource::Resource(const wstring &filepath, const wstring &name, Type type) :
     m_FilePath(filepath),
     m_Size(0),
-    m_IsLoaded(false),
-    m_Type(Resource::Type::Audio),
-		m_Name(name)
+    m_Type(type)
   {
     if (m_Name.length() > RESOURCE_NAME_CHAR_MAX)
       throw invalid_argument("Resource name exceeds character limit of \"" + to_string(RESOURCE_NAME_CHAR_MAX) + "\" :\"" + StringUtil::ToStr(name));
@@ -38,26 +34,34 @@ namespace Engine
   {
     return m_Size;
   }
-  shared_ptr<void> Resource::GetData() const
-  {
-    return m_Data;
-  }
   Resource::Type Resource::GetType() const
   {
     return m_Type;
   }
-  bool Resource::IsLoaded() const
+
+  AudioResource::AudioResource(const wstring& filepath, const wstring& name, sf::Sound* sound) :
+    Resource(filepath, name, Resource::Type::Audio),
+    m_Sound(sound)
   {
-    return m_IsLoaded;
   }
-  void Resource::Load()
+
+  sf::Sound* AudioResource::GetSound() const
   {
-    m_Data = ResourceLoader::Load(m_FilePath, m_Type);
-    m_IsLoaded = true;
+    return m_Sound;
   }
 
 	wstring Resource::GetName() const
 	{
 		return m_Name;
 	}
+  GraphicResource::GraphicResource(const wstring& filepath, const wstring& name, sf::Sprite* sprite) :
+    Resource(filepath, name, Resource::Type::Graphic),
+    m_Sprite(sprite)
+  {
+  }
+
+  sf::Sprite* GraphicResource::GetSprite() const
+  {
+    return m_Sprite;
+  }
 }

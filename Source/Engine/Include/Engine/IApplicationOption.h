@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 namespace Engine
@@ -32,9 +33,8 @@ namespace Engine
 		virtual string GetWindowName() const = 0;
 
     // Might be empty
-    virtual vector<shared_ptr<Resource>> GetResources() const = 0;
 		virtual vector<shared_ptr<EntityDeclaration>> GetEntities() const = 0;
-		virtual void AddResource(shared_ptr<Resource> resource) = 0;
+		virtual unordered_map<wstring, wstring> GetResourceNameToFilepath() const = 0;
 		virtual void AddEntity(shared_ptr<IApplicationOption::EntityDeclaration> entity) = 0;
 
 		static shared_ptr<IApplicationOption> Create();

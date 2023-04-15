@@ -7,15 +7,17 @@
 #include <Engine\ISystemGraphic.h>
 #include <Engine\ISystemInput.h>
 #include <Engine\ISystemLogic.h>
+#include <Engine\ISystemAudio.h>
 #include "EventDefinition.h"
 using namespace std;
 namespace Engine
 {
-	EntityFactory::EntityFactory(shared_ptr<IEntityFactory> gameEntityFactory, shared_ptr<ISystemGraphic> systemGraphic, shared_ptr<ISystemLogic> systemLogic, shared_ptr<ISystemInput> systemInput) :
+	EntityFactory::EntityFactory(shared_ptr<IEntityFactory> gameEntityFactory, shared_ptr<ISystemGraphic> systemGraphic, shared_ptr<ISystemLogic> systemLogic, shared_ptr<ISystemInput> systemInput, shared_ptr<ISystemAudio> systemAudio) :
 		m_GameEntityFactory(gameEntityFactory),
 		m_SystemLogic(systemLogic),
 		m_SystemGraphic(systemGraphic),
 		m_SystemInput(systemInput),
+		m_SystemAudio(systemAudio),
 		m_EntityIdCounter(0)
 	{
 		if (gameEntityFactory == nullptr) throw invalid_argument("The parameter \"gameEntityFactory\" is nullptr");
@@ -41,7 +43,8 @@ namespace Engine
 			switch (component->GetType())
 			{
 			case IComponent::Type::Audio:
-				throw "Not implemented";
+				m_SystemAudio->Add(component);
+				break;
 			case IComponent::Type::Graphic:
 				m_SystemGraphic->Add(component);
 				break;

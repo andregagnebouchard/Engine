@@ -39,7 +39,7 @@ namespace Engine
 				const char *path = resourceNode->Attribute("Path");
 				if (name == nullptr) Throw("RESSOURCES::Name");
 				if (path == nullptr) Throw("RESSOURCES::Path");
-        m_Resources.push_back(make_shared<Resource>(StringUtil::ToWStr(path), StringUtil::ToWStr(name)));
+				m_ResourceNameToFilepath.insert(make_pair(StringUtil::ToWStr(name), StringUtil::ToWStr(path)));
 			}
 		}
 		else
@@ -105,22 +105,18 @@ namespace Engine
 		return m_WindowName;
 	}
 
-  vector<shared_ptr<Resource>> ApplicationOption::GetResources() const
-  {
-    return m_Resources;
-  }
-
 	vector<shared_ptr<IApplicationOption::EntityDeclaration>> ApplicationOption::GetEntities() const
 	{
 		return m_Entities;
 	}
 
-	void ApplicationOption::AddResource(shared_ptr<Resource> resource)
-	{
-		m_Resources.push_back(resource);
-	}
 	void ApplicationOption::AddEntity(shared_ptr<EntityDeclaration> entity)
 	{
 		m_Entities.push_back(entity);
+	}
+
+	unordered_map<wstring, wstring> ApplicationOption::GetResourceNameToFilepath() const
+	{
+		return m_ResourceNameToFilepath;
 	}
 }

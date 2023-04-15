@@ -2,6 +2,7 @@
 #include "Engine\Application.h"
 #include "SystemGraphic.h"
 #include "SystemLogic.h"
+#include "SystemAudio.h"
 #include "Window.h"
 #include "SystemInput.h"
 #include "ResourceCache.h"
@@ -30,15 +31,12 @@ namespace Engine
     // Read WindowInfo from the options
     auto renderWindow = make_shared<sf::RenderWindow>(sf::VideoMode(options->GetWindowWidth(), options->GetWindowHeight()), options->GetWindowName());
 
-		// Read all ressources from the options
-    m_ResourceCache = make_shared<ResourceCache>();
-    for (auto resource : options->GetResources())
-      m_ResourceCache->AddResource(resource);
-
+    m_ResourceCache = make_shared<ResourceCache>(options->GetResourceNameToFilepath());
     m_SystemGraphic = make_shared<SystemGraphic>(renderWindow, make_shared<Window>(renderWindow), m_ResourceCache);
     m_SystemInput = make_shared<SystemInput>(renderWindow);
 		m_SystemLogic = make_shared<SystemLogic>();
-		m_EntityFactory = make_shared<EntityFactory>(entityFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput);
+		m_SystemAudio= make_shared<SystemAudio>(m_ResourceCache);
+		m_EntityFactory = make_shared<EntityFactory>(entityFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput, m_SystemAudio);
 	}
 
 	void Application::Shutdown()
@@ -61,6 +59,7 @@ namespace Engine
 			m_SystemInput->Update(dt);
 			m_SystemLogic->Update(dt);
 			m_SystemGraphic->Update(dt);
+			m_SystemAudio->Update(dt);
 		}
 	}
 
@@ -80,5 +79,10 @@ namespace Engine
 	{
 		if (!m_SystemLogic) throw std::exception("Uninitialized SystemGraphic");
 		return m_SystemLogic;
+	}
+	shared_ptr<ISystemAudio> Application::GetSystemAudio() const
+	{
+		if (!m_SystemAudio) throw std::exception("Uninitialized SystemAudio");
+		return m_SystemAudio;
 	}
 }

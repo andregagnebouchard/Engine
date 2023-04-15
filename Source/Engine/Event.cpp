@@ -137,4 +137,19 @@ namespace Engine
   {
     return m_GameLogicEvent;
   }
+
+  AudioEvent::AudioEvent(Event::Key key, const wstring& resourceName) :
+    Event(key),
+    m_ResourceName(resourceName)
+  {
+
+  }
+  wstring AudioEvent::GetResourceName() const
+  {
+    return m_ResourceName;
+  }
+  Event::Type AudioEvent::GetType() const
+  {
+    return Event::Type::Audio;
+  }
 }

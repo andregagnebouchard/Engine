@@ -185,9 +185,9 @@
     <ClInclude Include="Include\Engine\ISystemLogic.h" />
     <ClInclude Include="Include\Engine\IWindow.h" />
     <ClInclude Include="Include\Engine\Typedef.h" />
+    <ClInclude Include="ISystemAudio.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceCache.h" />
-    <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="SystemGraphic.h" />
@@ -198,6 +198,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SystemInput.h" />
     <ClInclude Include="SystemLogic.h" />
+    <ClInclude Include="SystemAudio.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsInclude.h" />
   </ItemGroup>
@@ -210,7 +211,6 @@
     <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
-    <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="StringUtil.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemGraphic.cpp" />
@@ -219,6 +219,7 @@
     <ClCompile Include="Startup.cpp" />
     <ClCompile Include="SystemInput.cpp" />
     <ClCompile Include="SystemLogic.cpp" />
+    <ClCompile Include="SystemAudio.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

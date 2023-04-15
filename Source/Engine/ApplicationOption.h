@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine\IApplicationOption.h"
+#include <unordered_map>
 using namespace std;
 
 namespace Engine
@@ -19,9 +20,8 @@ namespace Engine
 		void SetWindowName(const string &name) override;
 		string GetWindowName() const override;
 
-    vector<shared_ptr<Resource>> GetResources() const override;
 		vector<shared_ptr<EntityDeclaration>> GetEntities() const override;
-		void AddResource(shared_ptr<Resource> resource) override;
+		unordered_map<wstring, wstring> GetResourceNameToFilepath() const override;
 		void AddEntity(shared_ptr<IApplicationOption::EntityDeclaration> entity) override;
 
 	private:
@@ -29,7 +29,7 @@ namespace Engine
 		int m_WindowHeight;
 		string m_WindowName;
 		bool m_IsWindowVisible;
-    vector<shared_ptr<Resource>> m_Resources;
+		unordered_map<wstring, wstring> m_ResourceNameToFilepath;
 		vector<shared_ptr<EntityDeclaration>> m_Entities;
 	};
 }

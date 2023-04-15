@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE PLAY SYSTEM "play.dtd">
 <WINDOW Width="1920" Height="1080" Name="Application" IsVisible="0"/>
-<RESOURCES >
-  <RESOURCE Name="Mushroom" Path="Assets\Graphic\Mushroom.png" />
+<RESOURCES>
+  <RESOURCE Name="MushroomSprite" Path="Assets\Graphic\Mushroom.png" />
+  <RESOURCE Name="MushroomMoveSound" Path="Assets\Sound\pacman_beginning.wav" />
 </RESOURCES>
-<ENTITIES>
-  <ENTITY Name="Mushroom" LogicComponent="MushroomLogicComponent" GraphicComponent="MushroomGraphicComponent" InputComponent="MushroomInputComponent" />
-</ENTITIES>

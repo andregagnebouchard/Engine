@@ -220,7 +220,8 @@ namespace Engine
       RENDER_SPRITE,
       CREATE_ENTITY,
       DELETE_ENTITY,
-      GAME_LOGIC
+      GAME_LOGIC,
+      AUDIO
     };
     static const int KEY_RELEASED_OFFSET = static_cast<int>(Id::KEY_A_RELEASE) - static_cast<int>(Id::KEY_A_PRESS);
   };

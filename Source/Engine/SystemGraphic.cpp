@@ -80,14 +80,16 @@ namespace Engine
     {
       case EventDefinition::Id::RENDER_SPRITE:
       {
-        auto resource = m_ResourceCache->GetResource((event->GetResourceName()));
+        Resource* resource = m_ResourceCache->GetResource((event->GetResourceName()));
         if (resource->GetType() != Resource::Type::Graphic)
           throw invalid_argument("A non-Graphic resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
 
-				auto sprite = *static_pointer_cast<sf::Sprite>(resource->GetData());
-				sprite.move(sf::Vector2f(event->GetXPosition(), event->GetYPosition()));
+				GraphicResource* graphicResource= dynamic_cast<GraphicResource*>(resource);
 
-        m_RenderWindow->draw(sprite);
+				sf::Sprite* sprite = graphicResource->GetSprite();
+				sprite->setPosition(sf::Vector2f(event->GetXPosition(), event->GetYPosition()));
+
+        m_RenderWindow->draw(*sprite);
         break;
       }
     }
