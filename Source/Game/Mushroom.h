@@ -5,29 +5,30 @@
 using namespace Engine;
 namespace Game
 {
+	enum MushroomMovingDirection { LEFT, UP, RIGHT, DOWN };
+	enum MushroomActionState { IDLE, MOVING };
 	struct MushroomState
 	{
 		float posX;
 		float posY;
+		MushroomActionState actionState;
+		MushroomMovingDirection direction;
+		int movingFrame;
 	};
 
 	class MoveMushroomLogicEvent : public IGameLogicEvent
 	{
 	public:
-		enum Direction {
-			UP,
-			DOWN,
-			LEFT,
-			RIGHT
-		};
-		MoveMushroomLogicEvent(int deltaX, int deltaY);
+		MoveMushroomLogicEvent(int deltaX, int deltaY, MushroomMovingDirection direction);
 		~MoveMushroomLogicEvent() = default;
 
 		int GetDeltaX() const { return m_DeltaX; };
 		int GetDeltaY() const { return m_DeltaY; };
+		MushroomMovingDirection GetDirection() const { return m_Direction; };
 	private:
 		int m_DeltaX;
 		int m_DeltaY;
+		MushroomMovingDirection m_Direction;
 	};
 
 	class MushroomInputComponent : public IComponent
@@ -42,7 +43,7 @@ namespace Game
 		wstring GetName() const override { return L"MushroomInputComponent"; }
 		Type GetType() const override { return IComponent::Type::Input; }
 	private:
-		shared_ptr<LogicEvent> CreateMoveEvent(MoveMushroomLogicEvent::Direction direction);
+		shared_ptr<LogicEvent> CreateMoveEvent(MushroomMovingDirection direction);
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
 
@@ -78,6 +79,7 @@ namespace Game
 		wstring GetName() const override { return L"MushroomGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }
 	private:
+		wstring PickSpriteName() const;
 		int m_EntityId;
 		shared_ptr<MushroomState> m_State;
 	};

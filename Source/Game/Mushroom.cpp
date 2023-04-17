@@ -5,7 +5,6 @@
 using namespace Engine;
 namespace Game
 {
-	shared_ptr<MushroomState> m_State;
 	//================================================Graphic==========================================================================================================
 	MushroomGraphicComponent::MushroomGraphicComponent(int entityId, shared_ptr<MushroomState> state) : 
 		m_EntityId(entityId), 
@@ -16,9 +15,53 @@ namespace Game
 	{
 		Messager::Fire(make_shared<RenderEvent>(
 			Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
-			L"MushroomSprite",
+			PickSpriteName(),
 			m_State->posX,
 			m_State->posY));
+	}
+
+	wstring MushroomGraphicComponent::PickSpriteName() const
+	{
+		if (m_State->actionState == MushroomActionState::MOVING)
+		{
+			if (m_State->direction == MushroomMovingDirection::DOWN)
+			{
+				if(m_State->movingFrame == 0)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 1)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 2)
+					return L"MushroomMoving";
+			}
+			if (m_State->direction == MushroomMovingDirection::UP)
+			{
+				if (m_State->movingFrame == 0)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 1)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 2)
+					return L"MushroomMoving";
+			}
+			if (m_State->direction == MushroomMovingDirection::LEFT)
+			{
+				if (m_State->movingFrame == 0)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 1)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 2)
+					return L"MushroomMoving";
+			}
+			if (m_State->direction == MushroomMovingDirection::RIGHT)
+			{
+				if (m_State->movingFrame == 0)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 1)
+					return L"MushroomMoving";
+				if (m_State->movingFrame == 2)
+					return L"MushroomMoving";
+			}
+		}
+		return L"MushroomSprite";
 	}
 
 	//================================================Input==========================================================================================================
@@ -49,37 +92,37 @@ namespace Game
 			switch (key.first)
 			{
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_DOWN_PRESS) :
-					Messager::Fire(CreateMoveEvent(MoveMushroomLogicEvent::Direction::DOWN));
+					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::DOWN));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_UP_PRESS) :
-					Messager::Fire(CreateMoveEvent(MoveMushroomLogicEvent::Direction::UP));
+					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::UP));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_LEFT_PRESS) :
-					Messager::Fire(CreateMoveEvent(MoveMushroomLogicEvent::Direction::LEFT));
+					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::LEFT));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_RIGHT_PRESS) :
-					Messager::Fire(CreateMoveEvent(MoveMushroomLogicEvent::Direction::RIGHT));
+					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::RIGHT));
 					break;
 			}
 		}
 	}
 
-	shared_ptr<LogicEvent> MushroomInputComponent::CreateMoveEvent(MoveMushroomLogicEvent::Direction direction)
+	shared_ptr<LogicEvent> MushroomInputComponent::CreateMoveEvent(MushroomMovingDirection direction)
 	{
 		int deltaX = 0;
 		int deltaY = 0;
 		switch (direction)
 		{
-		case MoveMushroomLogicEvent::Direction::DOWN:
+		case MushroomMovingDirection::DOWN:
 			deltaY = 10;
 			break;
-		case MoveMushroomLogicEvent::Direction::UP:
+		case MushroomMovingDirection::UP:
 			deltaY = -10;
 			break;
-		case MoveMushroomLogicEvent::Direction::LEFT:
+		case MushroomMovingDirection::LEFT:
 			deltaX = -10;
 			break;
-		case MoveMushroomLogicEvent::Direction::RIGHT:
+		case MushroomMovingDirection::RIGHT:
 			deltaX = 10;
 			break;
 		}
@@ -90,7 +133,7 @@ namespace Game
 				static_cast<int>(GameEventId::MushroomMove),
 				m_EntityId
 			),
-			make_shared<MoveMushroomLogicEvent>(deltaX, deltaY)
+			make_shared<MoveMushroomLogicEvent>(deltaX, deltaY, direction)
 			);
 	}
 	//================================================Logic==========================================================================================================
@@ -100,9 +143,10 @@ namespace Game
 	{
 	};
 
-	MoveMushroomLogicEvent::MoveMushroomLogicEvent(int deltaX, int deltaY) : 
+	MoveMushroomLogicEvent::MoveMushroomLogicEvent(int deltaX, int deltaY, MushroomMovingDirection direction) : 
 		m_DeltaX(deltaX),
-		m_DeltaY(deltaY) 
+		m_DeltaY(deltaY),
+		m_Direction(direction)
 	{
 	};
 
@@ -128,6 +172,18 @@ namespace Game
 
 	void MushroomLogicComponent::Move(shared_ptr<MoveMushroomLogicEvent> ev)
 	{
+		if (m_State->actionState != MushroomActionState::MOVING)
+		{
+			m_State->actionState = MushroomActionState::MOVING;
+			m_State->movingFrame = 0;
+		}
+
+		if (ev->GetDirection() != m_State->direction)
+		{
+			m_State->direction = ev->GetDirection();
+			m_State->movingFrame = 0;
+		}
+
 		m_State->posX += ev->GetDeltaX();
 		m_State->posY += ev->GetDeltaY();
 	}
