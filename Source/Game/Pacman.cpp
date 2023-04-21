@@ -1,17 +1,17 @@
 #include "stdafx.h"
-#include "Mushroom.h"
+#include "Pacman.h"
 #include "GameEventIds.h"
 #include <Engine\EventDefinition.h>
 using namespace Engine;
 namespace Game
 {
 	//================================================Graphic==========================================================================================================
-	MushroomGraphicComponent::MushroomGraphicComponent(int entityId, shared_ptr<MushroomState> state) : 
+	PacmanGraphicComponent::PacmanGraphicComponent(int entityId, shared_ptr<PacmanState> state) : 
 		m_EntityId(entityId), 
 		m_State(state) 
 	{
 	};
-	void MushroomGraphicComponent::Update(float dt)
+	void PacmanGraphicComponent::Update(float dt)
 	{
 		Messager::Fire(make_shared<RenderEvent>(
 			Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
@@ -20,57 +20,65 @@ namespace Game
 			m_State->posY));
 	}
 
-	wstring MushroomGraphicComponent::PickSpriteName() const
+	wstring PacmanGraphicComponent::PickSpriteName() const
 	{
-		if (m_State->actionState == MushroomActionState::MOVING)
+		if (m_State->actionState == PacmanActionState::MOVING)
 		{
-			if (m_State->direction == MushroomMovingDirection::DOWN)
+			if (m_State->direction == PacmanMovingDirection::DOWN)
 			{
 				if(m_State->movingFrame == 0)
-					return L"MushroomMoving";
+					return L"pacman_down_0";
 				if (m_State->movingFrame == 1)
-					return L"MushroomMoving";
+					return L"pacman_down_1";
 				if (m_State->movingFrame == 2)
-					return L"MushroomMoving";
+					return L"pacman_down_2";
+				if (m_State->movingFrame == 3)
+					return L"pacman_down_1";
 			}
-			if (m_State->direction == MushroomMovingDirection::UP)
+			if (m_State->direction == PacmanMovingDirection::UP)
 			{
 				if (m_State->movingFrame == 0)
-					return L"MushroomMoving";
+					return L"pacman_up_0";
 				if (m_State->movingFrame == 1)
-					return L"MushroomMoving";
+					return L"pacman_up_1";
 				if (m_State->movingFrame == 2)
-					return L"MushroomMoving";
+					return L"pacman_up_2";
+				if (m_State->movingFrame == 3)
+					return L"pacman_up_1";
 			}
-			if (m_State->direction == MushroomMovingDirection::LEFT)
+			if (m_State->direction == PacmanMovingDirection::LEFT)
 			{
 				if (m_State->movingFrame == 0)
-					return L"MushroomMoving";
+					return L"pacman_left_0";
 				if (m_State->movingFrame == 1)
-					return L"MushroomMoving";
+					return L"pacman_left_1";
 				if (m_State->movingFrame == 2)
-					return L"MushroomMoving";
+					return L"pacman_left_2";
+				if (m_State->movingFrame == 3)
+					return L"pacman_left_1";
 			}
-			if (m_State->direction == MushroomMovingDirection::RIGHT)
+			if (m_State->direction == PacmanMovingDirection::RIGHT)
 			{
 				if (m_State->movingFrame == 0)
-					return L"MushroomMoving";
+					return L"pacman_right_0";
 				if (m_State->movingFrame == 1)
-					return L"MushroomMoving";
+					return L"pacman_right_1";
 				if (m_State->movingFrame == 2)
-					return L"MushroomMoving";
+					return L"pacman_right_2";
+				if (m_State->movingFrame == 3)
+					return L"pacman_right_1";
 			}
 		}
-		return L"MushroomSprite";
+		return L"pacman_right_0";
 	}
 
 	//================================================Input==========================================================================================================
-	MushroomInputComponent::MushroomInputComponent(int entityId) : 
+	PacmanInputComponent::PacmanInputComponent(int entityId) : 
 		m_EntityId(entityId) 
 	{
 	};
 
-	void MushroomInputComponent::Init()
+	void PacmanInputComponent::Init()
 	{
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_DOWN_PRESS)));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_UP_PRESS)));
@@ -78,7 +86,7 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_RIGHT_PRESS)));
 	}
 
-	void MushroomInputComponent::Update(float dt)
+	void PacmanInputComponent::Update(float dt)
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();
@@ -92,37 +100,37 @@ namespace Game
 			switch (key.first)
 			{
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_DOWN_PRESS) :
-					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::DOWN));
+					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::DOWN));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_UP_PRESS) :
-					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::UP));
+					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::UP));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_LEFT_PRESS) :
-					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::LEFT));
+					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::LEFT));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_RIGHT_PRESS) :
-					Messager::Fire(CreateMoveEvent(MushroomMovingDirection::RIGHT));
+					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::RIGHT));
 					break;
 			}
 		}
 	}
 
-	shared_ptr<LogicEvent> MushroomInputComponent::CreateMoveEvent(MushroomMovingDirection direction)
+	shared_ptr<LogicEvent> PacmanInputComponent::CreateMoveEvent(PacmanMovingDirection direction)
 	{
 		int deltaX = 0;
 		int deltaY = 0;
 		switch (direction)
 		{
-		case MushroomMovingDirection::DOWN:
+		case PacmanMovingDirection::DOWN:
 			deltaY = 10;
 			break;
-		case MushroomMovingDirection::UP:
+		case PacmanMovingDirection::UP:
 			deltaY = -10;
 			break;
-		case MushroomMovingDirection::LEFT:
+		case PacmanMovingDirection::LEFT:
 			deltaX = -10;
 			break;
-		case MushroomMovingDirection::RIGHT:
+		case PacmanMovingDirection::RIGHT:
 			deltaX = 10;
 			break;
 		}
@@ -130,32 +138,32 @@ namespace Game
 			Event::Key
 			(
 				static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
-				static_cast<int>(GameEventId::MushroomMove),
+				static_cast<int>(GameEventId::PacmanMove),
 				m_EntityId
 			),
-			make_shared<MoveMushroomLogicEvent>(deltaX, deltaY, direction)
+			make_shared<MovePacmanLogicEvent>(deltaX, deltaY, direction)
 			);
 	}
 	//================================================Logic==========================================================================================================
-	MushroomLogicComponent::MushroomLogicComponent(int entityId, shared_ptr<MushroomState> state) : 
+	PacmanLogicComponent::PacmanLogicComponent(int entityId, shared_ptr<PacmanState> state) : 
 		m_EntityId(entityId), 
 		m_State(state) 
 	{
 	};
 
-	MoveMushroomLogicEvent::MoveMushroomLogicEvent(int deltaX, int deltaY, MushroomMovingDirection direction) : 
+	MovePacmanLogicEvent::MovePacmanLogicEvent(int deltaX, int deltaY, PacmanMovingDirection direction) : 
 		m_DeltaX(deltaX),
 		m_DeltaY(deltaY),
 		m_Direction(direction)
 	{
 	};
 
-	void MushroomLogicComponent::Init()
+	void PacmanLogicComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::MushroomMove), m_EntityId));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMove), m_EntityId));
 	}
 
-	void MushroomLogicComponent::Update(float dt)
+	void PacmanLogicComponent::Update(float dt)
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();
@@ -163,41 +171,46 @@ namespace Game
 			auto ev = dynamic_pointer_cast<LogicEvent>(event);
 			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
 			{
-			case GameEventId::MushroomMove:
-				Move(dynamic_pointer_cast<MoveMushroomLogicEvent>(ev->GetGameLogicEvent()));
+			case GameEventId::PacmanMove:
+				Move(dynamic_pointer_cast<MovePacmanLogicEvent>(ev->GetGameLogicEvent()));
 				break;
 			}
 		}
 	}
 
-	void MushroomLogicComponent::Move(shared_ptr<MoveMushroomLogicEvent> ev)
+	void PacmanLogicComponent::Move(shared_ptr<MovePacmanLogicEvent> ev)
 	{
-		if (m_State->actionState != MushroomActionState::MOVING)
+		if (m_State->actionState != PacmanActionState::MOVING)
 		{
-			m_State->actionState = MushroomActionState::MOVING;
-			m_State->movingFrame = 0;
+			m_State->actionState = PacmanActionState::MOVING;
+			m_State->movingFrame = 1;
+		}
+		else {
+			m_State->movingFrame++;
+			if (m_State->movingFrame > 3)
+				m_State->movingFrame = 0;
 		}
 
 		if (ev->GetDirection() != m_State->direction)
 		{
 			m_State->direction = ev->GetDirection();
-			m_State->movingFrame = 0;
 		}
+
 
 		m_State->posX += ev->GetDeltaX();
 		m_State->posY += ev->GetDeltaY();
 	}
 	//================================================Audio==========================================================================================================
-	MushroomAudioComponent::MushroomAudioComponent(int entityId) : 
+	PacmanAudioComponent::PacmanAudioComponent(int entityId) : 
 		m_EntityId(entityId) 
 	{
 	};
-	void MushroomAudioComponent::Init()
+	void PacmanAudioComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::MushroomMove), m_EntityId));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMove), m_EntityId));
 	}
 
-	void MushroomAudioComponent::Update(float dt)
+	void PacmanAudioComponent::Update(float dt)
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();
@@ -205,16 +218,16 @@ namespace Game
 			auto ev = dynamic_pointer_cast<LogicEvent>(event);
 			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
 			{
-			case GameEventId::MushroomMove:
+			case GameEventId::PacmanMove:
 				Messager::Fire(CreateAudioEvent());
 				break;
 			}
 		}
 	}
 
-	shared_ptr<AudioEvent> MushroomAudioComponent::CreateAudioEvent() const
+	shared_ptr<AudioEvent> PacmanAudioComponent::CreateAudioEvent() const
 	{
 		Event::Key key(static_cast<int>(Engine::EventDefinition::Id::AUDIO));
-		return make_shared<AudioEvent>(key, L"MushroomMoveSound");
+		return make_shared<AudioEvent>(key, L"pacman_chomp");
 	}
 }

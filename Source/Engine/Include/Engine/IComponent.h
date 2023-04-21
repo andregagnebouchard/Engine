@@ -23,8 +23,6 @@ namespace Engine
 		virtual Type GetType() const = 0;
 
 		// The engine will handle the unique id attribution while creating the components in EntityFactory
-		int GetId() const { return m_Id; }
-	private:
-		int m_Id;
+		virtual int GetId() const = 0;
   };
 }

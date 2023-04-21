@@ -2,7 +2,17 @@
 <!DOCTYPE PLAY SYSTEM "play.dtd">
 <WINDOW Width="1920" Height="1080" Name="Application" IsVisible="0"/>
 <RESOURCES>
-  <RESOURCE Name="MushroomSprite" Path="Assets\Graphic\Mushroom.png" />
-  <RESOURCE Name="MushroomMoving" Path="Assets\Graphic\Mushroom-grey.png" />
-  <RESOURCE Name="MushroomMoveSound" Path="Assets\Sound\pacman_beginning.wav" />
+  <RESOURCE Name="pacman_right_0" Path="Assets\Graphic\pacman_right_0.png" />
+  <RESOURCE Name="pacman_right_1" Path="Assets\Graphic\pacman_right_1.png" />
+  <RESOURCE Name="pacman_right_2" Path="Assets\Graphic\pacman_right_2.png" />
+  <RESOURCE Name="pacman_left_0" Path="Assets\Graphic\pacman_left_0.png" />
+  <RESOURCE Name="pacman_left_1" Path="Assets\Graphic\pacman_left_1.png" />
+  <RESOURCE Name="pacman_left_2" Path="Assets\Graphic\pacman_left_2.png" />
+  <RESOURCE Name="pacman_up_0" Path="Assets\Graphic\pacman_up_0.png" />
+  <RESOURCE Name="pacman_up_1" Path="Assets\Graphic\pacman_up_1.png" />
+  <RESOURCE Name="pacman_up_2" Path="Assets\Graphic\pacman_up_2.png" />
+  <RESOURCE Name="pacman_down_0" Path="Assets\Graphic\pacman_down_0.png" />
+  <RESOURCE Name="pacman_down_1" Path="Assets\Graphic\pacman_down_1.png" />
+  <RESOURCE Name="pacman_down_2" Path="Assets\Graphic\pacman_down_2.png" />
+  <RESOURCE Name="pacman_chomp" Path="Assets\Sound\pacman_chomp.wav" />
 </RESOURCES>

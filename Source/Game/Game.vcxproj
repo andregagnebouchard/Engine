@@ -167,14 +167,17 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="GameEventIds.h" />
-    <ClInclude Include="Mushroom.h" />
+    <ClInclude Include="Pacman.h" />
+    <ClInclude Include="notes.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Mushroom.cpp" />
+    <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

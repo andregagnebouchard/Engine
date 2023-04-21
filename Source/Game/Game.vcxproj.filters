@@ -13,12 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{3c325d9e-fbe8-44d5-9790-32b66d8c04fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Pause">
+      <UniqueIdentifier>{a2d6c20c-5903-4912-bee8-89b89957572c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Pacman">
+      <UniqueIdentifier>{7b88b100-79ff-42f4-b507-017a827134c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mushroom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEventIds.h">
@@ -30,6 +36,15 @@
     <ClInclude Include="EntityFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Pause.h">
+      <Filter>Entities\Pause</Filter>
+    </ClInclude>
+    <ClInclude Include="notes.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pacman.h">
+      <Filter>Entities\Pacman</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -38,14 +53,17 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EntityFactory.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>Entities\Pause</Filter>
+    </ClCompile>
+    <ClCompile Include="Pacman.cpp">
+      <Filter>Entities\Pacman</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
