@@ -5,6 +5,22 @@
 using namespace Engine;
 namespace Game
 {
+	PauseGraphicComponent::PauseGraphicComponent(int entityId, const shared_ptr<PauseState> state) :
+		m_EntityId(entityId),
+		m_State(state)
+	{
+	}
+
+	void PauseGraphicComponent::Update(float dt)
+	{
+		if(m_State->isPaused)
+			Messager::Fire(make_shared<RenderEvent>(
+				Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
+				L"pause_ui_element",
+				250.0f,
+				250.0f));
+	}
+
 	PauseInputComponent::PauseInputComponent(int entityId) :
 		m_EntityId(entityId)
 	{
@@ -33,8 +49,9 @@ namespace Game
 		}
 	}
 
-	PauseLogicComponent::PauseLogicComponent(int entityId) :
-		m_EntityId(entityId)
+	PauseLogicComponent::PauseLogicComponent(int entityId, shared_ptr<PauseState> state) :
+		m_EntityId(entityId),
+		m_PauseState(state)
 	{
 	}
 
@@ -53,14 +70,14 @@ namespace Game
 			if (event->GetType() != Event::Type::Logic)
 				throw invalid_argument("A non-logic event was caught by a logic component");
 
-			if (m_PauseState.isPaused == false)
+			if (m_PauseState->isPaused == false)
 			{
-				m_PauseState.isPaused = true;
+				m_PauseState->isPaused = true;
 				Messager::Fire(make_shared<LogicEvent>(Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)), nullptr));
 			}
 			else
 			{
-				m_PauseState.isPaused = false;
+				m_PauseState->isPaused = false;
 				Messager::Fire(make_shared<LogicEvent>(Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)), nullptr));
 			}
 		}

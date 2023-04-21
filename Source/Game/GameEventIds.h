@@ -4,6 +4,7 @@ namespace Game
 {
 	enum class GameEventId
 	{
+		PacmanMoveInput,
 		PacmanMove,
 		PressedPauseButton,
 		PauseGame,

@@ -138,7 +138,7 @@ namespace Game
 			Event::Key
 			(
 				static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
-				static_cast<int>(GameEventId::PacmanMove),
+				static_cast<int>(GameEventId::PacmanMoveInput),
 				m_EntityId
 			),
 			make_shared<MovePacmanLogicEvent>(deltaX, deltaY, direction)
@@ -160,7 +160,9 @@ namespace Game
 
 	void PacmanLogicComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMove), m_EntityId));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
 	}
 
 	void PacmanLogicComponent::Update(float dt)
@@ -171,8 +173,14 @@ namespace Game
 			auto ev = dynamic_pointer_cast<LogicEvent>(event);
 			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
 			{
-			case GameEventId::PacmanMove:
+			case GameEventId::PacmanMoveInput:
 				Move(dynamic_pointer_cast<MovePacmanLogicEvent>(ev->GetGameLogicEvent()));
+				break;
+			case GameEventId::PauseGame:
+				Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+				break;
+			case GameEventId::UnpauseGame:
+				Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 				break;
 			}
 		}
@@ -199,6 +207,17 @@ namespace Game
 
 		m_State->posX += ev->GetDeltaX();
 		m_State->posY += ev->GetDeltaY();
+
+
+		Messager::Fire(make_shared<LogicEvent>(
+			Event::Key
+			(
+				static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
+				static_cast<int>(GameEventId::PacmanMove),
+				m_EntityId
+			),
+			nullptr
+			));
 	}
 	//================================================Audio==========================================================================================================
 	PacmanAudioComponent::PacmanAudioComponent(int entityId) : 

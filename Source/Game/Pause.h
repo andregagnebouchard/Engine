@@ -10,6 +10,24 @@ namespace Game
 		bool isPaused;
 	};
 
+	class PauseGraphicComponent : public IComponent
+	{
+	public:
+		PauseGraphicComponent(int entityId, const shared_ptr<PauseState> state);
+		~PauseGraphicComponent() = default;
+		void Init() override {};
+		void Shutdown() override {};
+		void Update(float dt) override;
+
+		wstring GetName() const override { return L"PauseGraphicComponent"; }
+		Type GetType() const override { return IComponent::Type::Graphic; }
+		int GetId() const override { return m_EntityId; };
+	private:
+		MessageQueue m_MsgQueue;
+		int m_EntityId;
+		const shared_ptr<PauseState> m_State;
+	};
+
 	class PauseInputComponent : public IComponent
 	{
 	public:
@@ -30,7 +48,7 @@ namespace Game
 	class PauseLogicComponent : public IComponent
 	{
 	public:
-		PauseLogicComponent(int entityId);
+		PauseLogicComponent(int entityId, shared_ptr<PauseState> state);
 		~PauseLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
@@ -40,7 +58,7 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		PauseState m_PauseState;
+		shared_ptr<PauseState> m_PauseState;
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
 	};

@@ -6,7 +6,6 @@
 #include "Event.h"
 #include <unordered_map>
 using namespace std;
-//TODO: Use boost::hash_combine for custom hashing
 namespace Engine
 {
   class Messager

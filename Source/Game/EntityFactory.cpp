@@ -19,9 +19,11 @@ namespace Game
 		}
 		else if(name == L"Pause")
 		{
+			shared_ptr<PauseState> state = make_shared<PauseState>();
 			vector<shared_ptr<IComponent>> components;
+			components.emplace_back(make_shared<PauseGraphicComponent>(entityId, state));
 			components.emplace_back(make_shared<PauseInputComponent>(entityId));
-			components.emplace_back(make_shared<PauseLogicComponent>(entityId));
+			components.emplace_back(make_shared<PauseLogicComponent>(entityId, state));
 			return make_shared<Entity>(name, components);
 		}
 		return nullptr;
