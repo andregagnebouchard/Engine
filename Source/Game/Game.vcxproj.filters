@@ -45,6 +45,9 @@
     <ClInclude Include="Pacman.h">
       <Filter>Entities\Pacman</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

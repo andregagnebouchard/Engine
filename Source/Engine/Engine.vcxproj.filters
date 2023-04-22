@@ -34,11 +34,11 @@
     <Filter Include="Engine\Logic">
       <UniqueIdentifier>{79b383ae-0722-4442-ab22-fbdbd4433847}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\System">
-      <UniqueIdentifier>{ced6ce79-8920-46c5-b7d6-5369d079ae94}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{8f46f020-531b-4c5f-9bf2-3ae8fc879f3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Physic">
+      <UniqueIdentifier>{8a44af4b-2252-4c25-86b8-61980cbcdefc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +138,6 @@
     <ClInclude Include="Include\Engine\Typedef.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>Engine\System</Filter>
-    </ClInclude>
     <ClInclude Include="EventDefinition.h">
       <Filter>Engine\Event</Filter>
     </ClInclude>
@@ -155,6 +152,15 @@
     </ClInclude>
     <ClInclude Include="ISystemAudio.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystemPhysic.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ICollisionLogic.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemPhysic.h">
+      <Filter>Engine\Physic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,11 +212,11 @@
     <ClCompile Include="SystemLogic.cpp">
       <Filter>Engine\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>Engine\System</Filter>
-    </ClCompile>
     <ClCompile Include="SystemAudio.cpp">
       <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemPhysic.cpp">
+      <Filter>Engine\Physic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
