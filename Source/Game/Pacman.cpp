@@ -6,9 +6,9 @@ using namespace Engine;
 namespace Game
 {
 	//================================================Graphic==========================================================================================================
-	PacmanGraphicComponent::PacmanGraphicComponent(int entityId, shared_ptr<PacmanState> state) : 
+	PacmanGraphicComponent::PacmanGraphicComponent(int entityId, const PacmanState* state) :
 		m_EntityId(entityId), 
-		m_State(state) 
+		m_State(state)
 	{
 	};
 	void PacmanGraphicComponent::Update(float dt)
@@ -16,15 +16,15 @@ namespace Game
 		Messager::Fire(make_shared<RenderEvent>(
 			Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
 			PickSpriteName(),
-			m_State->posX,
-			m_State->posY));
+			m_State->positionX,
+			m_State->positionY));
 	}
 
 	wstring PacmanGraphicComponent::PickSpriteName() const
 	{
-		if (m_State->actionState == PacmanActionState::MOVING)
+		if (m_State->action == PacmanState::Action::Moving)
 		{
-			if (m_State->direction == PacmanMovingDirection::DOWN)
+			if (m_State->direction == PacmanState::MovingDirection::Down)
 			{
 				if(m_State->movingFrame == 0)
 					return L"pacman_down_0";
@@ -35,7 +35,7 @@ namespace Game
 				if (m_State->movingFrame == 3)
 					return L"pacman_down_1";
 			}
-			if (m_State->direction == PacmanMovingDirection::UP)
+			if (m_State->direction == PacmanState::MovingDirection::Up)
 			{
 				if (m_State->movingFrame == 0)
 					return L"pacman_up_0";
@@ -46,7 +46,7 @@ namespace Game
 				if (m_State->movingFrame == 3)
 					return L"pacman_up_1";
 			}
-			if (m_State->direction == PacmanMovingDirection::LEFT)
+			if (m_State->direction == PacmanState::MovingDirection::Left)
 			{
 				if (m_State->movingFrame == 0)
 					return L"pacman_left_0";
@@ -57,7 +57,7 @@ namespace Game
 				if (m_State->movingFrame == 3)
 					return L"pacman_left_1";
 			}
-			if (m_State->direction == PacmanMovingDirection::RIGHT)
+			if (m_State->direction == PacmanState::MovingDirection::Right)
 			{
 				if (m_State->movingFrame == 0)
 					return L"pacman_right_0";
@@ -100,37 +100,37 @@ namespace Game
 			switch (key.first)
 			{
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_DOWN_PRESS) :
-					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::DOWN));
+					Messager::Fire(CreateMoveEvent(PacmanState::MovingDirection::Down));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_UP_PRESS) :
-					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::UP));
+					Messager::Fire(CreateMoveEvent(PacmanState::MovingDirection::Up));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_LEFT_PRESS) :
-					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::LEFT));
+					Messager::Fire(CreateMoveEvent(PacmanState::MovingDirection::Left));
 					break;
 				case static_cast<int>(Engine::EventDefinition::Id::KEY_RIGHT_PRESS) :
-					Messager::Fire(CreateMoveEvent(PacmanMovingDirection::RIGHT));
+					Messager::Fire(CreateMoveEvent(PacmanState::MovingDirection::Right));
 					break;
 			}
 		}
 	}
 
-	shared_ptr<LogicEvent> PacmanInputComponent::CreateMoveEvent(PacmanMovingDirection direction)
+	shared_ptr<LogicEvent> PacmanInputComponent::CreateMoveEvent(PacmanState::MovingDirection direction)
 	{
 		int deltaX = 0;
 		int deltaY = 0;
 		switch (direction)
 		{
-		case PacmanMovingDirection::DOWN:
+		case PacmanState::MovingDirection::Down:
 			deltaY = 10;
 			break;
-		case PacmanMovingDirection::UP:
+		case PacmanState::MovingDirection::Up:
 			deltaY = -10;
 			break;
-		case PacmanMovingDirection::LEFT:
+		case PacmanState::MovingDirection::Left:
 			deltaX = -10;
 			break;
-		case PacmanMovingDirection::RIGHT:
+		case PacmanState::MovingDirection::Right:
 			deltaX = 10;
 			break;
 		}
@@ -145,13 +145,13 @@ namespace Game
 			);
 	}
 	//================================================Logic==========================================================================================================
-	PacmanLogicComponent::PacmanLogicComponent(int entityId, shared_ptr<PacmanState> state) : 
+	PacmanLogicComponent::PacmanLogicComponent(int entityId, PacmanState *state) :
 		m_EntityId(entityId), 
-		m_State(state) 
+		m_State(state)
 	{
 	};
 
-	MovePacmanLogicEvent::MovePacmanLogicEvent(int deltaX, int deltaY, PacmanMovingDirection direction) : 
+	MovePacmanLogicEvent::MovePacmanLogicEvent(int deltaX, int deltaY, PacmanState::MovingDirection direction) : 
 		m_DeltaX(deltaX),
 		m_DeltaY(deltaY),
 		m_Direction(direction)
@@ -188,9 +188,9 @@ namespace Game
 
 	void PacmanLogicComponent::Move(shared_ptr<MovePacmanLogicEvent> ev)
 	{
-		if (m_State->actionState != PacmanActionState::MOVING)
+		if (m_State->action != PacmanState::Action::Moving)
 		{
-			m_State->actionState = PacmanActionState::MOVING;
+			m_State->action = PacmanState::Action::Moving;
 			m_State->movingFrame = 1;
 		}
 		else {
@@ -205,8 +205,8 @@ namespace Game
 		}
 
 
-		m_State->posX += ev->GetDeltaX();
-		m_State->posY += ev->GetDeltaY();
+		m_State->positionX += ev->GetDeltaX();
+		m_State->positionY += ev->GetDeltaY();
 
 
 		Messager::Fire(make_shared<LogicEvent>(

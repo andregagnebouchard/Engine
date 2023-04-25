@@ -5,7 +5,7 @@
 using namespace Engine;
 namespace Game
 {
-	PauseGraphicComponent::PauseGraphicComponent(int entityId, const shared_ptr<PauseState> state) :
+	PauseGraphicComponent::PauseGraphicComponent(int entityId, const PauseState *state) :
 		m_EntityId(entityId),
 		m_State(state)
 	{
@@ -49,7 +49,7 @@ namespace Game
 		}
 	}
 
-	PauseLogicComponent::PauseLogicComponent(int entityId, shared_ptr<PauseState> state) :
+	PauseLogicComponent::PauseLogicComponent(int entityId, PauseState *state) :
 		m_EntityId(entityId),
 		m_PauseState(state)
 	{

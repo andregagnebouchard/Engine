@@ -170,7 +170,9 @@
     <ClInclude Include="GameEventIds.h" />
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="notes.h" />
+    <ClInclude Include="PacmanState.h" />
     <ClInclude Include="Pause.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

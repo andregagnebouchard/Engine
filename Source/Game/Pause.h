@@ -2,18 +2,14 @@
 #include <Engine\IComponent.h>
 #include <Engine\Messager.h>
 #include <Engine\IGameLogicEvent.h>
+#include "PauseState.h"
 using namespace Engine;
 namespace Game
 {
-	struct PauseState
-	{
-		bool isPaused;
-	};
-
 	class PauseGraphicComponent : public IComponent
 	{
 	public:
-		PauseGraphicComponent(int entityId, const shared_ptr<PauseState> state);
+		PauseGraphicComponent(int entityId, const PauseState *state);
 		~PauseGraphicComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};
@@ -25,7 +21,7 @@ namespace Game
 	private:
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
-		const shared_ptr<PauseState> m_State;
+		const PauseState* m_State;
 	};
 
 	class PauseInputComponent : public IComponent
@@ -48,7 +44,7 @@ namespace Game
 	class PauseLogicComponent : public IComponent
 	{
 	public:
-		PauseLogicComponent(int entityId, shared_ptr<PauseState> state);
+		PauseLogicComponent(int entityId, PauseState* state);
 		~PauseLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
@@ -58,7 +54,7 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		shared_ptr<PauseState> m_PauseState;
+		PauseState* m_PauseState;
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
 	};

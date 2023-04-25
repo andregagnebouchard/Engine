@@ -8,6 +8,12 @@ namespace Game
 	class Entity : public Engine::IEntity
 	{
 	public:
+		enum Type
+		{
+			Pacman,
+			Pause
+		};
+
 		Entity(const wstring& name, const vector<shared_ptr<Engine::IComponent>>& components);
 		~Entity() = default;
 		wstring GetName() const override;

@@ -12,5 +12,6 @@ namespace Engine
 	public:
 		virtual ~IEntityFactory() = default;
 		virtual shared_ptr<IEntity> Create(const wstring & name, int entityId) = 0;
+		virtual void Delete(int entityId) = 0;
 	};
 }

@@ -188,6 +188,7 @@
     <ClInclude Include="Include\Engine\Typedef.h" />
     <ClInclude Include="ISystemAudio.h" />
     <ClInclude Include="ISystemPhysic.h" />
+    <ClInclude Include="PackedArray.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceCache.h" />
     <ClInclude Include="StringUtil.h" />

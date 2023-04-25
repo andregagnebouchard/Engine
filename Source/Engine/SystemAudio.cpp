@@ -37,7 +37,7 @@ namespace Engine
 			if (event->GetType() == Event::Type::Audio)
 				HandleAudioEvent(dynamic_pointer_cast<AudioEvent>(event));
 			else
-				throw invalid_argument("Unknown sound event received by SystemGraphic");
+				throw invalid_argument("Unknown sound event received by SystemAudio");
 		}
 	}
 

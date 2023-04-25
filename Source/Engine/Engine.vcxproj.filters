@@ -162,6 +162,9 @@
     <ClInclude Include="SystemPhysic.h">
       <Filter>Engine\Physic</Filter>
     </ClInclude>
+    <ClInclude Include="PackedArray.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">

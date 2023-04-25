@@ -48,6 +48,12 @@
     <ClInclude Include="CollisionLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PacmanState.h">
+      <Filter>Entities\Pacman</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Entities\Pause</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
