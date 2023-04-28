@@ -156,6 +156,9 @@
     <ClInclude Include="PackedArray.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="WorldGrid.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">

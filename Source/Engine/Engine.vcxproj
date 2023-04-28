@@ -202,6 +202,7 @@
     <ClInclude Include="SystemAudio.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsInclude.h" />
+    <ClInclude Include="WorldGrid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
