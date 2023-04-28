@@ -14,8 +14,13 @@ namespace Game
 	{
 	public:
 		~EntityFactory() = default;
+
+		// IEntityFactory
 		shared_ptr<Engine::IEntity> Create(const wstring& name, int entityId) override;
 		void Delete(int entityId) override;
+
+		// EntityFactory
+		Entity::Type GetEntityType(int entityId) const;
 	private:
 		PacmanState m_PacmanState;
 		PauseState m_PauseState;

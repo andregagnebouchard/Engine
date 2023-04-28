@@ -15,10 +15,10 @@ namespace Engine
       Key(int first, int second, int third);
       Key(int first, int second, int third, int fourth);
 
-      int first;
-      int second;
-      int third;
-      int fourth;
+      int first = 0;
+      int second = 0;
+      int third = 0;
+      int fourth = 0;
 
       bool operator==(const Key& other) const
       {
@@ -39,15 +39,14 @@ namespace Engine
       Unknown
     };
 
-    Event(Event::Key key);
+    Event(const Event::Key &key);
     Event();
 
     virtual Type GetType() const = 0;
 
     Event::Key GetKey() const;
-    void SetKey(Event::Key key);
   private:
-    Event::Key m_Key;
+    const Event::Key m_Key;
   };
 
   class AudioEvent : public Event
@@ -99,7 +98,7 @@ namespace Engine
 		EntityEvent(Event::Key key, Type type, const wstring &name);
 
 		Type GetActionType() const;
-		wstring GetName() const;
+		wstring GetName() const; // This should be an id, not a name
 		Event::Type GetType() const override;
 	private:
 		wstring m_Name;

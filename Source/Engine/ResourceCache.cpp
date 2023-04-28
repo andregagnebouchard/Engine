@@ -13,6 +13,16 @@ namespace Engine
 	{
 	}
 
+	void ResourceCache::Clear()
+	{
+		m_NameToType.clear();
+		m_NameToGraphicResource.clear();
+		m_NameToAudioResource.clear();
+		m_NameToFilepath.clear();
+		m_NameToSfmlGraphicResource.clear();
+		m_NameToSfmlAudioResource.clear();
+	}
+
 	Resource* ResourceCache::GetResource(const wstring& name)
 	{
 		if (m_NameToType.find(name) == m_NameToType.end()) // Unloaded

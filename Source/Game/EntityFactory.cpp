@@ -20,7 +20,6 @@ namespace Game
 		}
 		else if(name == L"Pause")
 		{
-			vector<shared_ptr<IComponent>> components;
 			components.emplace_back(make_shared<PauseGraphicComponent>(entityId, &m_PauseState));
 			components.emplace_back(make_shared<PauseInputComponent>(entityId));
 			components.emplace_back(make_shared<PauseLogicComponent>(entityId, &m_PauseState));
@@ -35,5 +34,10 @@ namespace Game
 		if (m_EntityIdToEntityType.find(entityId) == m_EntityIdToEntityType.end())
 			throw std::runtime_error("The entity id does not exist");
 		m_EntityIdToEntityType.erase(entityId);
+	}
+
+	Entity::Type EntityFactory::GetEntityType(int entityId) const
+	{
+		return m_EntityIdToEntityType.at(entityId);
 	}
 }

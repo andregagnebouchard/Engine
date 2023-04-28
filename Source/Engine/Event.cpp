@@ -8,7 +8,7 @@ namespace Engine
   Event::Key::Key(int first, int second, int third) : first(first), second(second), third(third), fourth(-1) {}
   Event::Key::Key(int first, int second, int third, int fourth) : first(first), second(second), third(third), fourth(fourth) {}
 
-  Event::Event(Event::Key key) : 
+  Event::Event(const Event::Key &key) : 
     m_Key(key) 
   {
   }
@@ -68,11 +68,6 @@ namespace Engine
   Event::Key Event::GetKey() const
   { 
     return m_Key;
-  }
-
-  void Event::SetKey(Event::Key key)
-  { 
-    m_Key= key; 
   }
 
   Event::Type Event::GetType() const

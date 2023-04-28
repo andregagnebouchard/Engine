@@ -1,7 +1,6 @@
 #include <gtest\gtest.h>
 #include <Engine\Resource.h>
 #include <Engine\ResourceCache.h>
-#include <Engine\ResourceLoader.h>
 #include <Engine\StringUtil.h>
 #include <Engine\FileUtil.h>
 #include <Engine\constant.h>
@@ -32,7 +31,7 @@ protected:
 // Resource
 TEST_F(ResourceTest, CreateWavResource)
 {
-	Resource resource(PNG_RESOURCE_PATH, PNG_RESOURCE_NAME);
+	Resource resource(PNG_RESOURCE_PATH, PNG_RESOURCE_NAME, Resource::Type::Graphic);
 	ASSERT_EQ(resource.GetType(), Resource::Type::Graphic);
 	ASSERT_EQ(resource.GetSize(), FileUtil::GetFileSize(PNG_RESOURCE_PATH));
 	ASSERT_EQ(resource.GetName(), PNG_RESOURCE_NAME);
@@ -40,7 +39,7 @@ TEST_F(ResourceTest, CreateWavResource)
 
 TEST_F(ResourceTest, CreatePngResource)
 {
-	Resource resource(WAV_RESOURCE_PATH, WAV_RESOURCE_NAME);
+	Resource resource(WAV_RESOURCE_PATH, WAV_RESOURCE_NAME, Resource::Type::Audio);
 	ASSERT_EQ(resource.GetType(), Resource::Type::Audio);
 	ASSERT_EQ(resource.GetSize(), FileUtil::GetFileSize(WAV_RESOURCE_PATH));
 	ASSERT_EQ(resource.GetName(), WAV_RESOURCE_NAME);

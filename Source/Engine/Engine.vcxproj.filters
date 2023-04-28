@@ -165,6 +165,9 @@
     <ClInclude Include="PackedArray.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Box2DPhysic.h">
+      <Filter>Engine\Physic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">
@@ -219,6 +222,9 @@
       <Filter>Engine\Audio</Filter>
     </ClCompile>
     <ClCompile Include="SystemPhysic.cpp">
+      <Filter>Engine\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2DPhysic.cpp">
       <Filter>Engine\Physic</Filter>
     </ClCompile>
   </ItemGroup>

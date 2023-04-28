@@ -13,6 +13,8 @@ namespace Engine
   public:
     ResourceCache(const unordered_map<wstring, wstring> &nameToFilepath);
     Resource* GetResource(const wstring &name);
+
+    void Clear();
   private:
     struct SfmlGraphicResource
     {
