@@ -13,7 +13,7 @@ namespace Engine
   {
   public:
 		~Application();
-    void Init(shared_ptr<IApplicationOption> options, shared_ptr<IEntityFactory> entityFactory, shared_ptr<ICollisionLogic> collisionLogic) override;
+    void Init(shared_ptr<IApplicationOption> options, shared_ptr<IEntityFactory> entityFactory) override;
     void Shutdown() override;
 
     shared_ptr<ISystemInput> GetSystemInput() const override;

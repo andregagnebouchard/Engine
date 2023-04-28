@@ -20,7 +20,7 @@ namespace Engine
 		return make_shared<Application>();
 	}
 
-	void Application::Init(shared_ptr<IApplicationOption> options, shared_ptr<IEntityFactory> entityFactory, shared_ptr<ICollisionLogic> collisionLogic)
+	void Application::Init(shared_ptr<IApplicationOption> options, shared_ptr<IEntityFactory> entityFactory)
 	{
 		if (options == nullptr) throw invalid_argument("Parameter \"options\" is nullptr");
 		if (entityFactory == nullptr) throw invalid_argument("Parameter \"entityFactory\" is nullptr");

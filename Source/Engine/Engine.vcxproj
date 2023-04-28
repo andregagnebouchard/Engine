@@ -171,7 +171,6 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="constant.h" />
-    <ClInclude Include="ICollisionLogic.h" />
     <ClInclude Include="IEntityFactory.h" />
     <ClInclude Include="IGameLogicEvent.h" />
     <ClInclude Include="Include\Engine\All.h" />

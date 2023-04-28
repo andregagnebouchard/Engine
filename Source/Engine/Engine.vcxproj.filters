@@ -150,9 +150,6 @@
     <ClInclude Include="ISystemAudio.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="ICollisionLogic.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="PackedArray.h">
       <Filter>Include</Filter>
     </ClInclude>
