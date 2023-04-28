@@ -20,7 +20,6 @@ namespace Engine
     shared_ptr<ISystemGraphic> GetSystemGraphic() const override;
 		shared_ptr<ISystemLogic> GetSystemLogic() const override;
     shared_ptr<ISystemAudio> GetSystemAudio() const override;
-    shared_ptr<ISystemPhysic> GetSystemPhysic() const;
 
     void RunLoop() override;
   private:
@@ -28,7 +27,6 @@ namespace Engine
     shared_ptr<ISystemInput> m_SystemInput;
     shared_ptr<ISystemGraphic> m_SystemGraphic;
     shared_ptr<ISystemAudio> m_SystemAudio;
-    shared_ptr<ISystemPhysic> m_SystemPhysic;
     shared_ptr<ResourceCache> m_ResourceCache;
 		shared_ptr<EntityFactory> m_EntityFactory;
   };

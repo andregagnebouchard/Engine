@@ -37,9 +37,6 @@
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{8f46f020-531b-4c5f-9bf2-3ae8fc879f3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Physic">
-      <UniqueIdentifier>{8a44af4b-2252-4c25-86b8-61980cbcdefc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -153,20 +150,11 @@
     <ClInclude Include="ISystemAudio.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="ISystemPhysic.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="ICollisionLogic.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="SystemPhysic.h">
-      <Filter>Engine\Physic</Filter>
-    </ClInclude>
     <ClInclude Include="PackedArray.h">
       <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Box2DPhysic.h">
-      <Filter>Engine\Physic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -220,12 +208,6 @@
     </ClCompile>
     <ClCompile Include="SystemAudio.cpp">
       <Filter>Engine\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemPhysic.cpp">
-      <Filter>Engine\Physic</Filter>
-    </ClCompile>
-    <ClCompile Include="Box2DPhysic.cpp">
-      <Filter>Engine\Physic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,12 +3,10 @@
 #include "SystemGraphic.h"
 #include "SystemLogic.h"
 #include "SystemAudio.h"
-#include "SystemPhysic.h"
 #include "Window.h"
 #include "SystemInput.h"
 #include "ResourceCache.h"
 #include "EntityFactory.h"
-#include "Box2DPhysic.h"
 using namespace sf;
 
 namespace Engine
@@ -38,14 +36,11 @@ namespace Engine
     m_SystemInput = make_shared<SystemInput>(renderWindow);
 		m_SystemLogic = make_shared<SystemLogic>();
 		m_SystemAudio= make_shared<SystemAudio>(m_ResourceCache);
-		m_SystemPhysic = make_shared<SystemPhysic>(collisionLogic, make_shared<Box2DPhysic>());
 		m_EntityFactory = make_shared<EntityFactory>(entityFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput, m_SystemAudio);
-
 		m_SystemGraphic->Init();
 		m_SystemInput->Init();
 		m_SystemLogic->Init();
 		m_SystemAudio->Init();
-		m_SystemPhysic->Init();
 	}
 
 	void Application::Shutdown()
@@ -67,7 +62,6 @@ namespace Engine
 			m_EntityFactory->Update(dt);
 			m_SystemInput->Update(dt);
 			m_SystemLogic->Update(dt);
-			m_SystemPhysic->Update(dt);
 			m_SystemGraphic->Update(dt);
 			m_SystemAudio->Update(dt);
 		}
@@ -94,11 +88,5 @@ namespace Engine
 	{
 		if (!m_SystemAudio) throw std::exception("Uninitialized SystemAudio");
 		return m_SystemAudio;
-	}
-
-	shared_ptr<ISystemPhysic> Application::GetSystemPhysic() const
-	{
-		if (!m_SystemAudio) throw std::exception("Uninitialized SystemAudio");
-		return m_SystemPhysic;
 	}
 }

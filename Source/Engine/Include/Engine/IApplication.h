@@ -3,7 +3,6 @@
 #include <Engine/ISystemInput.h>
 #include <Engine/ISystemLogic.h>
 #include <Engine/ISystemAudio.h>
-#include <Engine/ISystemPhysic.h>
 #include <Engine/IApplicationOption.h>
 #include <Engine/ICollisionLogic.h>
 #include <Engine/IEntityFactory.h>
@@ -27,7 +26,6 @@ namespace Engine
     virtual shared_ptr<ISystemGraphic> GetSystemGraphic() const = 0;
 		virtual shared_ptr<ISystemLogic> GetSystemLogic() const = 0;
 		virtual shared_ptr<ISystemAudio> GetSystemAudio() const = 0;
-		virtual shared_ptr<ISystemPhysic> GetSystemPhysic() const = 0;
     virtual void RunLoop() = 0;
 	};
 }
