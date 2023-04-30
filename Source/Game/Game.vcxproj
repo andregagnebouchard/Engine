@@ -164,7 +164,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionLogic.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="CollisionEvent.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="LevelGenerator.h" />
+    <ClInclude Include="MoveEvent.h" />
+    <ClInclude Include="SmallDot.h" />
+    <ClInclude Include="DotState.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="GameEventIds.h" />
@@ -173,9 +179,15 @@
     <ClInclude Include="PacmanState.h" />
     <ClInclude Include="Pause.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="StateContainer.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="LevelGenerator.cpp" />
+    <ClCompile Include="MoveEvent.cpp" />
+    <ClCompile Include="SmallDot.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />

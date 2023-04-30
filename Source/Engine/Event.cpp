@@ -2,11 +2,10 @@
 #include "Event.h"
 namespace Engine
 {
-  Event::Key::Key() : first(-1), second(-1), third(-1), fourth(-1){}
-  Event::Key::Key(int first) : first(first), second(-1), third(-1), fourth(-1) {}
-  Event::Key::Key(int first, int second) : first(first), second(second), third(-1), fourth(-1) {}
-  Event::Key::Key(int first, int second, int third) : first(first), second(second), third(third), fourth(-1) {}
-  Event::Key::Key(int first, int second, int third, int fourth) : first(first), second(second), third(third), fourth(fourth) {}
+  Event::Key::Key() : first(AnyValue), second(AnyValue), third(AnyValue){}
+  Event::Key::Key(int first) : first(first), second(AnyValue), third(AnyValue) {}
+  Event::Key::Key(int first, int second) : first(first), second(second), third(AnyValue) {}
+  Event::Key::Key(int first, int second, int third) : first(first), second(second), third(third) {}
 
   Event::Event(const Event::Key &key) : 
     m_Key(key) 
@@ -84,10 +83,12 @@ namespace Engine
     return Event::Type::Input;
   }
 
-	EntityEvent::EntityEvent(Event::Key key, EntityEvent::Type type, const wstring &name) :
+	EntityEvent::EntityEvent(Event::Key key, EntityEvent::Type type, const wstring &name, int entityId, const Point &&position) :
 		Event(key),
 		m_Type(type),
-		m_Name(name)
+		m_Name(name),
+    m_EntityId(entityId),
+    m_Position(position)
 	{
 	}
 

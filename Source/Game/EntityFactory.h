@@ -1,9 +1,9 @@
 #pragma once
 #include <Engine\IEntityFactory.h>
 #include <Engine\IEntity.h>
+#include <Engine\WorldGrid.h>
 #include "Entity.h"
-#include "PacmanState.h"
-#include "PauseState.h"
+#include "StateContainer.h"
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -13,17 +13,16 @@ namespace Game
 	class EntityFactory : public Engine::IEntityFactory
 	{
 	public:
+		EntityFactory();
 		~EntityFactory() = default;
 
 		// IEntityFactory
-		shared_ptr<Engine::IEntity> Create(const wstring& name, int entityId) override;
+		shared_ptr<Engine::IEntity> Create(shared_ptr<EntityEvent> event) override;
 		void Delete(int entityId) override;
 
-		// EntityFactory
-		Entity::Type GetEntityType(int entityId) const;
 	private:
-		PacmanState m_PacmanState;
-		PauseState m_PauseState;
+		StateContainer m_StateContainer;
+		Engine::WorldGrid m_WorldGrid;
 		unordered_map<int, Entity::Type> m_EntityIdToEntityType;
 	};
 }

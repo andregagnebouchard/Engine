@@ -17,24 +17,26 @@ namespace Engine
 		m_SystemLogic(systemLogic),
 		m_SystemGraphic(systemGraphic),
 		m_SystemInput(systemInput),
-		m_SystemAudio(systemAudio),
-		m_EntityIdCounter(0)
+		m_SystemAudio(systemAudio)
 	{
 		if (gameEntityFactory == nullptr) throw invalid_argument("The parameter \"gameEntityFactory\" is nullptr");
 		if (systemGraphic == nullptr) throw invalid_argument("The parameter \"systemGraphic\" is nullptr");
 		if (systemLogic == nullptr) throw invalid_argument("The parameter \"systemLogic\" is nullptr");
 		if (systemInput == nullptr) throw invalid_argument("The parameter \"systemInput\" is nullptr");
+	}
 
+	void EntityFactory::Init()
+	{
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
 	}
 
-	shared_ptr<IEntity> EntityFactory::CreateEntity(const wstring& name)
+	shared_ptr<IEntity> EntityFactory::CreateEntity(shared_ptr<EntityEvent> event)
 	{
 		// Create the entity using the entity factory provided by the user
-		auto entity = m_GameEntityFactory->Create(name, m_EntityIdCounter++);
+		auto entity = m_GameEntityFactory->Create(event);
 		if (entity == nullptr)
-			throw runtime_error("The entity named \"" + StringUtil::ToStr(name) + "\" returned a nullptr from the EntityFactory provided by the game");
+			throw runtime_error("The entity named \"" + StringUtil::ToStr(event->GetName()) + "\" returned a nullptr from the EntityFactory provided by the game");
 
 		// Register the component to its proper system
 		for (auto& component : entity->GetComponents())
@@ -58,8 +60,8 @@ namespace Engine
 				throw runtime_error("Unknown component type");
 			}
 		}
-		m_Entities.emplace_back(entity);
-		return m_Entities.back();
+		m_Entities.emplace(event->GetEntityId(), entity);
+		return m_Entities.at(event->GetEntityId());
 	}
 
 	void EntityFactory::Update(float dt)
@@ -76,17 +78,31 @@ namespace Engine
 			switch (ev->GetActionType())
 			{
 			case EntityEvent::Type::Create:
-				CreateEntity(ev->GetName());
+				CreateEntity(ev);
 				break;
 			case EntityEvent::Type::Delete:
-				DeleteEntity(ev->GetName());
+				DeleteEntity(ev->GetName(), ev->GetEntityId());
 				break;
 			}
 		}
 	}
 
-	void EntityFactory::DeleteEntity(const wstring &name)
+	void EntityFactory::DeleteEntity(const wstring &name, int entityId)
 	{
-		throw runtime_error("Not implemented");
+		auto entity = m_Entities.at(entityId);
+		for (auto component : entity->GetComponents())
+		{
+			if (component->GetType() == IComponent::Type::Audio)
+				m_SystemAudio->Remove(component);
+			if (component->GetType() == IComponent::Type::Graphic)
+				m_SystemGraphic->Remove(component);
+			if (component->GetType() == IComponent::Type::Logic)
+				m_SystemLogic->Remove(component);
+			if (component->GetType() == IComponent::Type::Input)
+				m_SystemInput->Remove(component);
+			component->Shutdown();
+		}
+		m_Entities.erase(entityId);
+		m_GameEntityFactory->Delete(entityId);
 	}
 }

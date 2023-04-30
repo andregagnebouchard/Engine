@@ -2,23 +2,29 @@
 #include <Engine\IComponent.h>
 #include <Engine\Messager.h>
 #include <Engine\IGameLogicEvent.h>
+#include <Engine\WorldGrid.h>
 #include "PacmanState.h"
+#include "Entity.h"
 using namespace Engine;
 namespace Game
 {
-	class MovePacmanLogicEvent : public IGameLogicEvent
+	class MoveEvent;
+	class PacmanInputMoveEvent : public IGameLogicEvent
 	{
 	public:
-		MovePacmanLogicEvent(int deltaX, int deltaY, PacmanState::MovingDirection direction);
-		~MovePacmanLogicEvent() = default;
+		enum Direction
+		{
+			Up,
+			Down,
+			Left,
+			Right
+		};
+		PacmanInputMoveEvent(Direction direction);
+		~PacmanInputMoveEvent() = default;
 
-		int GetDeltaX() const { return m_DeltaX; };
-		int GetDeltaY() const { return m_DeltaY; };
-		PacmanState::MovingDirection GetDirection() const { return m_Direction; };
+		Direction GetDirection() const { return m_Direction; };
 	private:
-		int m_DeltaX;
-		int m_DeltaY;
-		PacmanState::MovingDirection m_Direction;
+		Direction m_Direction;
 	};
 
 	class PacmanInputComponent : public IComponent
@@ -37,13 +43,12 @@ namespace Game
 		shared_ptr<LogicEvent> CreateMoveEvent(PacmanState::MovingDirection direction);
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
-
 	};
 
 	class PacmanLogicComponent : public IComponent
 	{
 	public:
-		PacmanLogicComponent(int entityId, PacmanState *state);
+		PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid *worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType);
 		~PacmanLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
@@ -53,10 +58,15 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		void Move(shared_ptr<MovePacmanLogicEvent> ev);
+		void TryMove(shared_ptr<PacmanInputMoveEvent> ev);
+		void StopMoving();
+
+		const unordered_map<int, Entity::Type> *m_EntityIdToEntityType; // Owner is EntityFactory
+		WorldGrid* m_WorldGrid; // Owner is EntityFactory
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
-		PacmanState *m_State;
+		PacmanState *m_State; // Owner is EntityFactory
+		const int m_MoveDistanceByFrame = 32;
 	};
 
 	class PacmanGraphicComponent : public IComponent
@@ -74,7 +84,7 @@ namespace Game
 	private:
 		wstring PickSpriteName() const;
 		int m_EntityId;
-		const PacmanState* m_State;
+		const PacmanState* m_State; // Owner is EntityFactory
 	};
 
 	class PacmanAudioComponent : public IComponent

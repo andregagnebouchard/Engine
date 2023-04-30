@@ -16,6 +16,7 @@ namespace Engine
 
     static void Fire(const shared_ptr<Event> event);
   private:
+    static void ValidateEventKey(const Event::Key& key);
     static unordered_map<Event::Key, set<const function<void(shared_ptr<Event>)>*>> m_Callbacks;
   };
 

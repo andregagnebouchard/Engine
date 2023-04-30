@@ -22,6 +22,18 @@
     <Filter Include="Entities\Pacman">
       <UniqueIdentifier>{7b88b100-79ff-42f4-b507-017a827134c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Collision">
+      <UniqueIdentifier>{bad7795b-5315-4341-a17f-7abc10cf4d24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\SmallDot">
+      <UniqueIdentifier>{da6a437b-4362-44a9-b438-34f8dc7a7b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Grid">
+      <UniqueIdentifier>{69615073-19cd-4e33-8543-4950bd9fef48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\LevelGenerator">
+      <UniqueIdentifier>{0499a0a1-695f-4b48-80bc-547ff7bb3455}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -45,14 +57,35 @@
     <ClInclude Include="Pacman.h">
       <Filter>Entities\Pacman</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionLogic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PacmanState.h">
       <Filter>Entities\Pacman</Filter>
     </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>Entities\Pause</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Entities\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="StateContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionEvent.h">
+      <Filter>Entities\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="DotState.h">
+      <Filter>Entities\SmallDot</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallDot.h">
+      <Filter>Entities\SmallDot</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Entities\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelGenerator.h">
+      <Filter>Entities\LevelGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEvent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +106,21 @@
     </ClCompile>
     <ClCompile Include="Pacman.cpp">
       <Filter>Entities\Pacman</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Entities\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallDot.cpp">
+      <Filter>Entities\SmallDot</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Entities\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelGenerator.cpp">
+      <Filter>Entities\LevelGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEvent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

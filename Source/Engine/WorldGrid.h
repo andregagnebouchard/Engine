@@ -1,6 +1,6 @@
 #pragma once
 #include <array>
-#include <unordered_map>
+#include <cmath>  // for floor
 using namespace std;
 namespace Engine
 {
@@ -10,41 +10,22 @@ namespace Engine
 		int row = 0;
 	};
 
-	template <typename CellContent, typename size_t RowCount, typename size_t ColCount>
+	// Could use template for the cell value as this is the engine, but this would be over-engineering
 	class WorldGrid
 	{
 	public:
+		WorldGrid(float cellSizeX, float cellSizeY);
 
-		WorldGrid(float cellSizeX, float cellSizeY) : 
-			m_CellSizeX(cellSizeX), 
-			m_CellSizeY(cellSizeY) 
-		{};
+		static const int EmptyGridValue = -1;
 
-		CellLocation GetCellLocationFromPosition(float xPosition, float yPosition) const
-		{
-			CellLocation cell;
-			cell.col = static_cast<int>(xPosition / m_CellSizeX);
-			cell.row = static_cast<int>(yPosition / m_CellSizeY);
-			return cell;
-		}
-
-		bool IsCellInbound(const CellLocation &cell) const
-		{
-			if (cell.row < 0 || cell.row >= RowCount || cell.col < 0 || cell.col >= ColCount)
-				return false;
-			return true;
-		}
-		CellContent GetCellValue(const CellLocation& cell) const // -1 means no one is there
-		{
-			return m_Grid.at(cell.row).at(cell.col);
-		}
-		void SetCellValue(const CellLocation& cell, int value)
-		{
-			m_Grid.at(cell.row).at(cell.col) = value;
-		}
+		CellLocation GetCellLocationFromPosition(float xPosition, float yPosition) const;
+		bool IsCellInbound(const CellLocation& cell) const;
+		int GetCellValue(const CellLocation& cell) const;
+		void SetCellValue(const CellLocation& cell, int value);
 	private:
-
-		array<array<CellContent, ColCount>, RowCount> m_Grid;
+		static constexpr int rowQty = 10;
+		static constexpr int colQty = 10;
+		array<array<int, colQty>, rowQty> m_Grid;
 		float m_CellSizeX;
 		float m_CellSizeY;
 	};

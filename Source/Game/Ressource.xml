@@ -16,4 +16,5 @@
   <RESOURCE Name="pacman_down_1" Path="Assets\Graphic\pacman_down_1.png" />
   <RESOURCE Name="pacman_down_2" Path="Assets\Graphic\pacman_down_2.png" />
   <RESOURCE Name="pacman_chomp" Path="Assets\Sound\pacman_chomp.wav" />
+  <RESOURCE Name="small_dot" Path="Assets\Graphic\small_dot.png" />
 </RESOURCES>

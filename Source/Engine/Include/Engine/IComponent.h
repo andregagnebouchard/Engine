@@ -19,8 +19,8 @@ namespace Engine
     virtual void Shutdown() = 0;
     virtual void Update(float dt) = 0;
 
-		virtual wstring GetName() const = 0;
-		virtual Type GetType() const = 0;
+		virtual wstring GetName() const = 0; // Can we remove this?
+		virtual Type GetType() const = 0; // Can we remove this?
 
 		// The engine will handle the unique id attribution while creating the components in EntityFactory
 		virtual int GetId() const = 0;

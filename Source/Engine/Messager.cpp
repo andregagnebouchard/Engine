@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Messager.h"
+#include <array>
 namespace Engine
 {
   unordered_map<Event::Key, set<const std::function<void(shared_ptr<Event>)>*>> Messager::m_Callbacks;
@@ -8,6 +9,7 @@ namespace Engine
   {
 		if (callback == nullptr)
 			throw invalid_argument("Argument \"callback\" is nullptr");
+    ValidateEventKey(eventKey);
 
     m_Callbacks[eventKey].insert(callback);
   }
@@ -22,14 +24,33 @@ namespace Engine
 
   void Messager::Fire(const shared_ptr<Event> event)
   {
-		//Logger::Log("Firing EventId " + itoa(event->GetKey().first) + "\t" + event->GetKey().second + "\t" + event->GetKey().third + "\t" + event->GetKey().fourth, Logger::Level::Info);
-    for (auto callback : m_Callbacks[event->GetKey()])
+    // Check all key combinations with a wild card, and call their callbacks
+    Event::Key& k = event->GetKey();
+    ValidateEventKey(k);
+    for (auto callback : m_Callbacks[k])
       (*callback)(event);
+
+    if (k.third != Event::Key::AnyValue)
+    {
+      k.third = Event::Key::AnyValue;
+      for (auto callback : m_Callbacks[k])
+        (*callback)(event);
+    }
+    if (k.second != Event::Key::AnyValue)
+    {
+      k.second = Event::Key::AnyValue;
+      for (auto callback : m_Callbacks[k])
+        (*callback)(event);
+    }
   }
 
-  //=============
-  // MessageQueue
-  //=============
+  // Validate that not all attributes are wild cards, and that you don't have a non-wildcard attribute post a wildcard one
+  void Messager::ValidateEventKey(const Event::Key& key)
+  {
+    if (key.first == Event::Key::AnyValue || (key.third != Event::Key::AnyValue && key.second == Event::Key::AnyValue))
+      throw invalid_argument("Event key is not properly formated");
+  }
+
   MessageQueue::MessageQueue() :
 		m_CurrentQueue(m_Queue1),
 		m_CurrentQueueId(1)

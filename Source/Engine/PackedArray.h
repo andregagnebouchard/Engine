@@ -14,31 +14,35 @@ namespace Engine
     {
       if (m_TailIndex == SIZE - 1)
         throw runtime_error("PackedArray is full");
-      if (m_IdToDataIndex.find(id) != m_IdToDataIndex.end())
+      if (m_IdToIndex.find(id) != m_IdToIndex.end())
         throw runtime_error("Cannot add the data in the packed array. The id already exist in the array");
 
       m_TailIndex++;
       m_Data.at(m_TailIndex) = data;
-      m_IdToDataIndex.emplace(id, m_TailIndex);
+      m_IdToIndex.emplace(id, m_TailIndex);
+      m_IndexToId.emplace(m_TailIndex, id);
     };
 
     void Delete(int id)
     {
-      if (m_IdToDataIndex.find(id) == m_IdToDataIndex.end())
+      if (m_IdToIndex.find(id) == m_IdToIndex.end())
         throw runtime_error("Could not delete the data associated to the id in the packed array");
-      const int deletedIndex = m_IdToDataIndex.at(id);
-      const int tailId = m_IdToDataIndex.at(m_TailIndex);
-      m_Data.at(deletedIndex) = m_Data.at(m_TailIndex); // The data from the tail is copied to the deleted index
-      m_IdToDataIndex.at(tailId) = deletedIndex; // Update the mapping of the tail entity to point to the deleted index
+      const int deletedIndex = m_IdToIndex.at(id);
+      const int tailId = m_IndexToId.at(m_TailIndex);
+      m_Data.at(deletedIndex) = m_Data.at(m_TailIndex); // Copy tail data to new spot
+      m_IdToIndex.at(tailId) = deletedIndex;
+      m_IndexToId.at(deletedIndex) = tailId;
       m_TailIndex--; // Reset to tail
     };
 
     T* GetData(int id)
     {
-      return &m_Data[m_IdToDataIndex.at(id)];
+      return &m_Data[m_IdToIndex.at(id)];
     };
   private:
-    unordered_map<int, int> m_IdToDataIndex;
+    // I need hash maps on the stack
+    unordered_map<int, int> m_IdToIndex;
+    unordered_map<int, int> m_IndexToId;
     array<T, SIZE> m_Data;
     int m_TailIndex = -1;
   };

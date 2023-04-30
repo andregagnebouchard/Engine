@@ -11,7 +11,12 @@ namespace Game
 		enum Type
 		{
 			Pacman,
-			Pause
+			Pause,
+			Collision,
+			SmallDot,
+			Grid,
+			LevelGenerator,
+			Wall
 		};
 
 		Entity(const wstring& name, const vector<shared_ptr<Engine::IComponent>>& components);

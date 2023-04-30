@@ -1,32 +1,34 @@
 #pragma once
 #include "constant.h"
 #include <Engine/IGameLogicEvent.h>
+#include <Engine/math.h>
 using namespace std;
 namespace Engine
 {
   class Event
   {
   public:
+
     struct Key
     {
       Key();
       Key(int first);
       Key(int first, int second);
       Key(int first, int second, int third);
-      Key(int first, int second, int third, int fourth);
 
-      int first = 0;
-      int second = 0;
-      int third = 0;
-      int fourth = 0;
+      static const int AnyValue = -1; // Meaning we subscribe to all possible values for that key attribute
+
+      int first = AnyValue;
+      int second = AnyValue;
+      int third = AnyValue;
 
       bool operator==(const Key& other) const
       {
         return (first == other.first
           && second == other.second
-          && third == other.third
-          && fourth== other.fourth);
+          && third == other.third);
       }
+
     };
 
     enum class Type
@@ -95,14 +97,19 @@ namespace Engine
 	{
 	public:
 		enum class Type { Create, Delete };
-		EntityEvent(Event::Key key, Type type, const wstring &name);
+		EntityEvent(Event::Key key, Type type, const wstring &name, int entityId, const Point &&position);
+
+    int GetEntityId() const { return m_EntityId; }
 
 		Type GetActionType() const;
 		wstring GetName() const; // This should be an id, not a name
 		Event::Type GetType() const override;
+    Point GetPosition() const { return m_Position; } // Position here is weird. It's not needed for delete events, and only for some create events. Can't think of a better way right now
 	private:
-		wstring m_Name;
-		Type m_Type;
+		const wstring m_Name;
+		const Type m_Type;
+    const int m_EntityId;
+    const Point m_Position;
 	};
 
   class LogicEvent : public Event
@@ -132,8 +139,7 @@ namespace std
 
       return ((hash<int>()(k.first)
         ^ (hash<int>()(k.second) << 1)) >> 1)
-        ^ (hash<int>()(k.third) << 1)
-        ^ (hash<int>()(k.fourth) << 1);
+        ^ (hash<int>()(k.third) << 1);
     }
   };
 }

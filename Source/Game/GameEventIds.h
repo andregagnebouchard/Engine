@@ -5,9 +5,10 @@ namespace Game
 	enum class GameEventId
 	{
 		PacmanMoveInput,
-		PacmanMove,
+		Move,
 		PressedPauseButton,
 		PauseGame,
-		UnpauseGame
+		UnpauseGame,
+		Collision,
 	};
 }

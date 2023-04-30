@@ -2,9 +2,12 @@
 #include "Pacman.h"
 #include "GameEventIds.h"
 #include <Engine\EventDefinition.h>
+#include "Entity.h"
+#include "MoveEvent.h"
 using namespace Engine;
 namespace Game
 {
+	PacmanInputMoveEvent::PacmanInputMoveEvent(Direction direction) : m_Direction(direction) {}
 	//================================================Graphic==========================================================================================================
 	PacmanGraphicComponent::PacmanGraphicComponent(int entityId, const PacmanState* state) :
 		m_EntityId(entityId), 
@@ -117,23 +120,19 @@ namespace Game
 
 	shared_ptr<LogicEvent> PacmanInputComponent::CreateMoveEvent(PacmanState::MovingDirection direction)
 	{
+
 		int deltaX = 0;
 		int deltaY = 0;
-		switch (direction)
-		{
-		case PacmanState::MovingDirection::Down:
-			deltaY = 10;
-			break;
-		case PacmanState::MovingDirection::Up:
-			deltaY = -10;
-			break;
-		case PacmanState::MovingDirection::Left:
-			deltaX = -10;
-			break;
-		case PacmanState::MovingDirection::Right:
-			deltaX = 10;
-			break;
-		}
+		PacmanInputMoveEvent::Direction inputDirection;
+		if (direction == PacmanState::MovingDirection::Down)
+			inputDirection = PacmanInputMoveEvent::Direction::Down;
+		else if (direction == PacmanState::MovingDirection::Up)
+			inputDirection = PacmanInputMoveEvent::Direction::Up;
+		else if (direction == PacmanState::MovingDirection::Right)
+			inputDirection = PacmanInputMoveEvent::Direction::Right;
+		else if (direction == PacmanState::MovingDirection::Left)
+			inputDirection = PacmanInputMoveEvent::Direction::Left;
+
 		return make_shared<LogicEvent>(
 			Event::Key
 			(
@@ -141,20 +140,15 @@ namespace Game
 				static_cast<int>(GameEventId::PacmanMoveInput),
 				m_EntityId
 			),
-			make_shared<MovePacmanLogicEvent>(deltaX, deltaY, direction)
+			make_shared<PacmanInputMoveEvent>(inputDirection)
 			);
 	}
 	//================================================Logic==========================================================================================================
-	PacmanLogicComponent::PacmanLogicComponent(int entityId, PacmanState *state) :
+	PacmanLogicComponent::PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid* worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType) :
 		m_EntityId(entityId), 
-		m_State(state)
-	{
-	};
-
-	MovePacmanLogicEvent::MovePacmanLogicEvent(int deltaX, int deltaY, PacmanState::MovingDirection direction) : 
-		m_DeltaX(deltaX),
-		m_DeltaY(deltaY),
-		m_Direction(direction)
+		m_State(state),
+		m_WorldGrid(worldGrid),
+		m_EntityIdToEntityType(entityIdToEntityType)
 	{
 	};
 
@@ -174,7 +168,7 @@ namespace Game
 			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
 			{
 			case GameEventId::PacmanMoveInput:
-				Move(dynamic_pointer_cast<MovePacmanLogicEvent>(ev->GetGameLogicEvent()));
+				TryMove(dynamic_pointer_cast<PacmanInputMoveEvent>(ev->GetGameLogicEvent()));
 				break;
 			case GameEventId::PauseGame:
 				Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
@@ -186,38 +180,99 @@ namespace Game
 		}
 	}
 
-	void PacmanLogicComponent::Move(shared_ptr<MovePacmanLogicEvent> ev)
+	void PacmanLogicComponent::TryMove(shared_ptr<PacmanInputMoveEvent> ev) // Should split that function
 	{
+		const PacmanInputMoveEvent::Direction moveDirection = ev->GetDirection();
+		float deltaX = 0.0f;
+		float deltaY = 0.0f;
+		if (moveDirection == PacmanInputMoveEvent::Direction::Down)
+			deltaY = m_MoveDistanceByFrame;
+		else if (moveDirection == PacmanInputMoveEvent::Direction::Up)
+			deltaY = -m_MoveDistanceByFrame;
+		else if (moveDirection == PacmanInputMoveEvent::Direction::Right)
+			deltaX = m_MoveDistanceByFrame;
+		else if (moveDirection == PacmanInputMoveEvent::Direction::Left)
+			deltaX = -m_MoveDistanceByFrame;
+
+		const CellLocation newLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX + deltaX, m_State->positionY + deltaY);
+		if (!m_WorldGrid->IsCellInbound(newLocation)) { // Don't move if new location is not inbound
+			StopMoving();
+			return;
+		}
+
+		int valueAtNewLocation = m_WorldGrid->GetCellValue(newLocation);
+		if (valueAtNewLocation != WorldGrid::EmptyGridValue)
+		{
+			Entity::Type typeInNewLocation = m_EntityIdToEntityType->at(valueAtNewLocation);
+			if (typeInNewLocation == Entity::Type::Wall) {
+				StopMoving();
+				return;
+			}
+		}
+
+		// Move
 		if (m_State->action != PacmanState::Action::Moving)
 		{
 			m_State->action = PacmanState::Action::Moving;
 			m_State->movingFrame = 1;
 		}
-		else {
+		else 
+		{
 			m_State->movingFrame++;
 			if (m_State->movingFrame > 3)
 				m_State->movingFrame = 0;
 		}
-
-		if (ev->GetDirection() != m_State->direction)
-		{
-			m_State->direction = ev->GetDirection();
+		MoveEvent::Direction moveEventDirection;
+		if (moveDirection == PacmanInputMoveEvent::Direction::Up) {
+			m_State->direction = PacmanState::MovingDirection::Up;
+			moveEventDirection = MoveEvent::Direction::Up;
+		} else  if (moveDirection == PacmanInputMoveEvent::Direction::Down) {
+			m_State->direction = PacmanState::MovingDirection::Down;
+			moveEventDirection = MoveEvent::Direction::Down;
+		} else  if (moveDirection == PacmanInputMoveEvent::Direction::Right) {
+			m_State->direction = PacmanState::MovingDirection::Right;
+			moveEventDirection = MoveEvent::Direction::Right;
+		} else if (moveDirection == PacmanInputMoveEvent::Direction::Left) {
+			m_State->direction = PacmanState::MovingDirection::Left;
+			moveEventDirection = MoveEvent::Direction::Left;
 		}
 
+		float initialX = m_State->positionX;
+		float initialY = m_State->positionY;
 
-		m_State->positionX += ev->GetDeltaX();
-		m_State->positionY += ev->GetDeltaY();
+		m_State->positionX += deltaX;
+		m_State->positionY += deltaY;
 
-
+		// TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest
+		/*
+		auto eve = make_shared<CollisionEvent>(m_EntityId, m_EntityId);
 		Messager::Fire(make_shared<LogicEvent>(
 			Event::Key
 			(
 				static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
-				static_cast<int>(GameEventId::PacmanMove),
-				m_EntityId
+				static_cast<int>(GameEventId::Collision)
 			),
-			nullptr
+			eve
 			));
+			*/
+		// TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest
+
+		Messager::Fire(make_shared<LogicEvent>
+			(
+				Event::Key
+				(
+					static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
+					static_cast<int>(GameEventId::Move),
+					m_EntityId
+				),
+				make_shared<MoveEvent>(deltaX, deltaY, initialX, initialY, moveEventDirection)
+			));
+	}
+
+	void PacmanLogicComponent::StopMoving()
+	{
+		m_State->action = PacmanState::Action::Idle;
+		m_State->movingFrame = 0;
 	}
 	//================================================Audio==========================================================================================================
 	PacmanAudioComponent::PacmanAudioComponent(int entityId) : 
@@ -226,7 +281,7 @@ namespace Game
 	};
 	void PacmanAudioComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMove), m_EntityId));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));
 	}
 
 	void PacmanAudioComponent::Update(float dt)
@@ -237,7 +292,7 @@ namespace Game
 			auto ev = dynamic_pointer_cast<LogicEvent>(event);
 			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
 			{
-			case GameEventId::PacmanMove:
+			case GameEventId::Move:
 				Messager::Fire(CreateAudioEvent());
 				break;
 			}

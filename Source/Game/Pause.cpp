@@ -64,12 +64,14 @@ namespace Game
 
 	void PauseLogicComponent::Update(float dt)
 	{
-		while (!m_MsgQueue.Empty()) {
+		while (!m_MsgQueue.Empty()) 
+		{
 			shared_ptr<Event> event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 			if (event->GetType() != Event::Type::Logic)
 				throw invalid_argument("A non-logic event was caught by a logic component");
 
+			// Not checking the event content, we know it's a pause press
 			if (m_PauseState->isPaused == false)
 			{
 				m_PauseState->isPaused = true;

@@ -41,6 +41,7 @@ namespace Engine
 		m_SystemInput->Init();
 		m_SystemLogic->Init();
 		m_SystemAudio->Init();
+		m_EntityFactory->Init();
 	}
 
 	void Application::Shutdown()
