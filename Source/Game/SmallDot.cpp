@@ -14,7 +14,7 @@ namespace Game
 	void SmallDotGraphicComponent::Update(float dt)
 	{
 		const SmallDotState* state = m_States->GetData(m_EntityId);
-		Messager::Fire(make_shared<RenderEvent>(
+		Messager::Fire(make_shared<RenderSpriteEvent>(
 			Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
 			L"small_dot",
 			state->positionX,

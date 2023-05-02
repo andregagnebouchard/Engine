@@ -10,5 +10,6 @@ namespace Game
 		PauseGame,
 		UnpauseGame,
 		Collision,
+		ToggleDebugModeInput
 	};
 }

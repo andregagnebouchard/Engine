@@ -14,7 +14,7 @@ namespace Game
 	void PauseGraphicComponent::Update(float dt)
 	{
 		if(m_State->isPaused)
-			Messager::Fire(make_shared<RenderEvent>(
+			Messager::Fire(make_shared<RenderSpriteEvent>(
 				Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
 				L"pause_ui_element",
 				250.0f,

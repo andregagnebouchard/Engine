@@ -68,6 +68,7 @@ namespace Game
 		}
 		else
 		{
+			// There is a bug here. When two entities collide, what do we write?
 			m_EntityToLocation.at(movingEntityId) = newLocation;
 			Messager::Fire(make_shared<LogicEvent>(
 				Event::Key
@@ -100,5 +101,30 @@ namespace Game
 		if(m_EntityToLocation.find(ev->GetEntityId()) == m_EntityToLocation.end())
 			return; // Deleting an entity without a location
 		m_Grid->SetCellValue(m_EntityToLocation.at(ev->GetEntityId()), WorldGrid::EmptyGridValue);
+	}
+	//================================================Input==========================================================================================================
+	GridInputComponent::GridInputComponent(int entityId) :
+		m_EntityId(entityId)
+	{
+	};
+
+	void GridInputComponent::Init()
+	{
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_O_PRESS)));
+	}
+
+	void GridInputComponent::Update(float dt)
+	{
+		while (!m_MsgQueue.Empty()) {
+			shared_ptr<Event> event = m_MsgQueue.Front();
+			m_MsgQueue.Pop();
+			if (event->GetType() != Event::Type::Input)
+				throw invalid_argument("A non-input event was caught by an input component");
+
+			auto ev = dynamic_pointer_cast<InputEvent>(event);
+
+			// There is only one key subscribed, no need to check which one was pressed
+
+		}
 	}
 }

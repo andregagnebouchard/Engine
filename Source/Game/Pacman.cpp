@@ -16,7 +16,7 @@ namespace Game
 	};
 	void PacmanGraphicComponent::Update(float dt)
 	{
-		Messager::Fire(make_shared<RenderEvent>(
+		Messager::Fire(make_shared<RenderSpriteEvent>(
 			Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
 			PickSpriteName(),
 			m_State->positionX,

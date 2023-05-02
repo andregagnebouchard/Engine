@@ -25,12 +25,19 @@ namespace Engine
   {
   }
 
-  RenderEvent::RenderEvent(Event::Key key, const wstring& resourceName, const float x, const float y) :
+  RenderSpriteEvent::RenderSpriteEvent(Event::Key key, const wstring& resourceName, const float x, const float y) :
     Event(key), 
     m_ResourceName(resourceName),
     m_XPosition(x),
     m_YPosition(y)
   {
+  }
+
+  RenderLineEvent::RenderLineEvent(const Event::Key& key, const Point& from, const Point& to) :
+    m_From(from),
+    m_To(to)
+  {
+
   }
 
   InputEvent::KeyState InputEvent::GetAltKeyState() const
@@ -50,16 +57,16 @@ namespace Engine
     return m_SystemKeyState;
   }
 
-  wstring RenderEvent::GetResourceName() const 
+  wstring RenderSpriteEvent::GetResourceName() const 
   { 
     return m_ResourceName; 
   }
 
-  float RenderEvent::GetXPosition() const
+  float RenderSpriteEvent::GetXPosition() const
   {
     return m_XPosition;
   }
-  float RenderEvent::GetYPosition() const
+  float RenderSpriteEvent::GetYPosition() const
   {
     return m_YPosition;
   }
@@ -73,7 +80,7 @@ namespace Engine
   {
     return Event::Type::Unknown;
   }
-  Event::Type RenderEvent::GetType() const
+  Event::Type RenderSpriteEvent::GetType() const
   { 
     return Event::Type::Render; 
   }

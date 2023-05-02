@@ -28,4 +28,21 @@ namespace Game
 		WorldGrid* m_Grid; // Owner is entity factory
 		int m_EntityId;
 	};
+
+	class GridInputComponent : public IComponent
+	{
+	public:
+		GridInputComponent(int entityId);
+		~GridInputComponent() = default;
+		void Init() override;
+		void Shutdown() override {};
+		void Update(float dt) override;
+
+		wstring GetName() const override { return L"GridInputComponent"; }
+		Type GetType() const override { return IComponent::Type::Input; }
+		int GetId() const override { return m_EntityId; };
+	private:
+		MessageQueue m_MsgQueue;
+		int m_EntityId;
+	};
 }

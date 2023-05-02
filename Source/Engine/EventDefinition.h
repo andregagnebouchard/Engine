@@ -218,6 +218,7 @@ namespace Engine
       UNKNOWN, // Unknown Id for initialization purposes
 
       RENDER_SPRITE,
+      RENDER_LINE,
       CREATE_ENTITY,
       DELETE_ENTITY,
       GAME_LOGIC,

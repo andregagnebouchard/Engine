@@ -16,7 +16,7 @@ namespace Engine
       Key(int first, int second);
       Key(int first, int second, int third);
 
-      static const int AnyValue = -1; // Meaning we subscribe to all possible values for that key attribute
+      static const int AnyValue = -12345; // Meaning we subscribe to all possible values for that key attribute
 
       int first = AnyValue;
       int second = AnyValue;
@@ -61,10 +61,10 @@ namespace Engine
     wstring m_ResourceName;
   };
 
-  class RenderEvent : public Event
+  class RenderSpriteEvent : public Event
   {
   public :
-    RenderEvent(Event::Key key, const wstring &resourceName, const float x, const float y);
+    RenderSpriteEvent(Event::Key key, const wstring &resourceName, const float x, const float y);
     wstring GetResourceName() const;
     float GetXPosition() const;
     float GetYPosition() const;
@@ -73,6 +73,17 @@ namespace Engine
     wstring m_ResourceName;
     float m_XPosition;
     float m_YPosition;
+  };
+
+  class RenderLineEvent : public Event
+  {
+  public:
+    RenderLineEvent(const Event::Key &key, const Point &from, const Point &to);
+    Point GetFrom() const { return m_From; };
+    Point GetTo() const { return m_To; };
+  private:
+    Point m_From;
+    Point m_To;
   };
 
   class InputEvent : public Event

@@ -66,7 +66,7 @@ namespace Game
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
 		PacmanState *m_State; // Owner is EntityFactory
-		const int m_MoveDistanceByFrame = 32;
+		const float m_MoveDistanceByFrame = 4;
 	};
 
 	class PacmanGraphicComponent : public IComponent

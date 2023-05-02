@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SystemGraphic.h"
 #include <SFML\Window.hpp>
+#include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\Text.hpp>
 #include <SFML\Graphics\Sprite.hpp>
 #include <GL\glew.h>
@@ -43,7 +44,7 @@ namespace Engine
 			m_MsgQueue.Pop();
 
 			if (event->GetType() == Event::Type::Render)
-				HandleRenderingEvent(dynamic_pointer_cast<RenderEvent>(event));
+				HandleRenderingEvent(dynamic_pointer_cast<RenderSpriteEvent>(event));
 			else
 				throw invalid_argument("Unknown rendering event received by SystemGraphic");
     }
@@ -74,26 +75,38 @@ namespace Engine
 		m_Components.erase(component->GetId());
 	}
 
-  void SystemGraphic::HandleRenderingEvent(shared_ptr<RenderEvent> event)
+  void SystemGraphic::HandleRenderingEvent(shared_ptr<Event> event)
   {
-    switch(static_cast<EventDefinition::Id>(event->GetKey().first))
-    {
-      case EventDefinition::Id::RENDER_SPRITE:
-      {
-        Resource* resource = m_ResourceCache->GetResource((event->GetResourceName()));
-        if (resource->GetType() != Resource::Type::Graphic)
-          throw invalid_argument("A non-Graphic resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
-
-				GraphicResource* graphicResource= dynamic_cast<GraphicResource*>(resource);
-
-				sf::Sprite* sprite = graphicResource->GetSprite();
-				sprite->setPosition(sf::Vector2f(event->GetXPosition(), event->GetYPosition()));
-
-        m_RenderWindow->draw(*sprite);
-        break;
-      }
-    }
+		EventDefinition::Id eventId = static_cast<EventDefinition::Id>(event->GetKey().first);
+		if (eventId == EventDefinition::Id::RENDER_SPRITE)
+			RenderSprite(event);
+		else if (eventId == EventDefinition::Id::RENDER_LINE)
+			RenderLine(event);
   }
+
+	void SystemGraphic::RenderSprite(shared_ptr<Event> event)
+	{
+		auto ev = dynamic_pointer_cast<RenderSpriteEvent>(event);
+		Resource* resource = m_ResourceCache->GetResource((ev->GetResourceName()));
+		if (resource->GetType() != Resource::Type::Graphic)
+			throw invalid_argument("A non-Graphic resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
+
+		GraphicResource* graphicResource = dynamic_cast<GraphicResource*>(resource);
+
+		sf::Sprite* sprite = graphicResource->GetSprite();
+		sprite->setPosition(sf::Vector2f(ev->GetXPosition(), ev->GetYPosition()));
+		if (ev->GetResourceName() != L"small_dot")
+			sprite->setOrigin(16, 16);
+
+		m_RenderWindow->draw(*sprite);
+	}
+
+	void SystemGraphic::RenderLine(shared_ptr<Event> event)
+	{
+		auto ev = dynamic_pointer_cast<RenderLineEvent>(event);
+		sf::RectangleShape rectangle(sf::Vector2f(1, 200));
+		m_RenderWindow->draw(rectangle);
+	}
 
 	shared_ptr<IWindow> SystemGraphic::GetWindow() const
 	{
