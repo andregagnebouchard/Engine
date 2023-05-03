@@ -164,13 +164,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BigDot.h" />
+    <ClInclude Include="BigDotState.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionEvent.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="MoveEvent.h" />
     <ClInclude Include="SmallDot.h" />
-    <ClInclude Include="DotState.h" />
+    <ClInclude Include="SmallDotState.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="GameEventIds.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BigDot.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />

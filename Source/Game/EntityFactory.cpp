@@ -4,6 +4,7 @@
 #include "Pacman.h"
 #include "Pause.h"
 #include "SmallDot.h"
+#include "BigDot.h"
 #include "Collision.h"
 #include "LevelGenerator.h"
 #include "Grid.h"
@@ -51,9 +52,22 @@ namespace Game
 			state.positionX = event->GetPosition().x;
 			state.positionY = event->GetPosition().y;
 			m_StateContainer.dotStates.Add(state, entityId);
+			m_StateContainer.smallDotStates.Add(state, entityId);
 
-			components.emplace_back(make_shared<SmallDotGraphicComponent>(entityId, &m_StateContainer.dotStates));
+			components.emplace_back(make_shared<SmallDotGraphicComponent>(entityId, &m_StateContainer.smallDotStates));
 			m_EntityIdToEntityType.emplace(entityId, Entity::Type::SmallDot);
+			return make_shared<Entity>(name, components);
+		}
+		else if (name == L"BigDot")
+		{
+			// Not sure whether entity factory should init the state, but it's certainly better than the graphic component
+			BigDotState state;
+			state.positionX = event->GetPosition().x;
+			state.positionY = event->GetPosition().y;
+			m_StateContainer.bigDotStates.Add(state, entityId);
+
+			components.emplace_back(make_shared<BigDotGraphicComponent>(entityId, &m_StateContainer.bigDotStates));
+			m_EntityIdToEntityType.emplace(entityId, Entity::Type::BigDot);
 			return make_shared<Entity>(name, components);
 		}
 		else if (name == L"Grid")
@@ -74,7 +88,7 @@ namespace Game
 	void EntityFactory::Delete(int entityId)
 	{
 		if (m_EntityIdToEntityType.at(entityId) == Entity::Type::SmallDot)
-			m_StateContainer.dotStates.Delete(entityId);
+			m_StateContainer.smallDotStates.Delete(entityId);
 		m_EntityIdToEntityType.erase(entityId);
 	}
 }

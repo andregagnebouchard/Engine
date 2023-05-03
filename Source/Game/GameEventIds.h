@@ -10,6 +10,7 @@ namespace Game
 		PauseGame,
 		UnpauseGame,
 		Collision,
-		ToggleDebugModeInput
+		ToggleDebugModeInput,
+		BigDotEaten
 	};
 }

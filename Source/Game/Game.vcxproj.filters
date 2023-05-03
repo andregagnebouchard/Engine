@@ -34,6 +34,9 @@
     <Filter Include="Entities\LevelGenerator">
       <UniqueIdentifier>{0499a0a1-695f-4b48-80bc-547ff7bb3455}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\BigDot">
+      <UniqueIdentifier>{0f6652e8-484e-4d29-82f0-b180bac9e560}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -72,9 +75,6 @@
     <ClInclude Include="CollisionEvent.h">
       <Filter>Entities\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="DotState.h">
-      <Filter>Entities\SmallDot</Filter>
-    </ClInclude>
     <ClInclude Include="SmallDot.h">
       <Filter>Entities\SmallDot</Filter>
     </ClInclude>
@@ -86,6 +86,15 @@
     </ClInclude>
     <ClInclude Include="MoveEvent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BigDot.h">
+      <Filter>Entities\BigDot</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallDotState.h">
+      <Filter>Entities\SmallDot</Filter>
+    </ClInclude>
+    <ClInclude Include="BigDotState.h">
+      <Filter>Entities\BigDot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="MoveEvent.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BigDot.cpp">
+      <Filter>Entities\BigDot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

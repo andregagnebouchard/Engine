@@ -19,7 +19,8 @@ namespace Game
 		int GetId() const override { return m_EntityId; };
 	private:
 		void OnCollision(shared_ptr<Event> event);
-		void OnCollisionPacmanDot(int pacmanEntityId, int dotEntityId);
+		void OnCollisionPacmanSmallDot(int pacmanEntityId, int dotEntityId);
+		void OnCollisionPacmanBigDot(int pacmanEntityId, int bigDotEntityId);
 
 		int m_EntityId;
 		function<void(shared_ptr<Event>)> m_Callback;

@@ -14,9 +14,9 @@ namespace Game
 			Pause,
 			Collision,
 			SmallDot,
+			BigDot,
 			Grid,
 			LevelGenerator,
-			Wall
 		};
 
 		Entity(const wstring& name, const vector<shared_ptr<Engine::IComponent>>& components);
