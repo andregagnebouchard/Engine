@@ -18,4 +18,40 @@
   <RESOURCE Name="pacman_chomp" Path="Assets\Sound\pacman_chomp.wav" />
   <RESOURCE Name="small_dot" Path="Assets\Graphic\small_dot.png" />
   <RESOURCE Name="big_dot" Path="Assets\Graphic\big_dot.png" />
+  
+  <RESOURCE Name="ghost_red_up_0" Path="Assets\Graphic\ghost_red_up_0.png" />
+  <RESOURCE Name="ghost_red_up_1" Path="Assets\Graphic\ghost_red_up_0.png" />
+  <RESOURCE Name="ghost_red_right_0" Path="Assets\Graphic\ghost_red_right_0.png" />
+  <RESOURCE Name="ghost_red_right_1" Path="Assets\Graphic\ghost_red_right_1.png" />
+  <RESOURCE Name="ghost_red_down_0" Path="Assets\Graphic\ghost_red_down_0.png" />
+  <RESOURCE Name="ghost_red_down_1" Path="Assets\Graphic\ghost_red_down_0.png" />
+  <RESOURCE Name="ghost_red_left_0" Path="Assets\Graphic\ghost_red_left_0.png" />
+  <RESOURCE Name="ghost_red_left_1" Path="Assets\Graphic\ghost_red_left_1.png" />
+
+  <RESOURCE Name="ghost_blue_up_0" Path="Assets\Graphic\ghost_blue_up_0.png" />
+  <RESOURCE Name="ghost_blue_up_1" Path="Assets\Graphic\ghost_blue_up_1.png" />
+  <RESOURCE Name="ghost_blue_right_0" Path="Assets\Graphic\ghost_blue_right_0.png" />
+  <RESOURCE Name="ghost_blue_right_1" Path="Assets\Graphic\ghost_blue_right_1.png" />
+  <RESOURCE Name="ghost_blue_down_0" Path="Assets\Graphic\ghost_blue_down_0.png" />
+  <RESOURCE Name="ghost_blue_down_1" Path="Assets\Graphic\ghost_blue_down_1.png" />
+  <RESOURCE Name="ghost_blue_left_0" Path="Assets\Graphic\ghost_blue_left_0.png" />
+  <RESOURCE Name="ghost_blue_left_1" Path="Assets\Graphic\ghost_blue_left_1.png" />
+
+  <RESOURCE Name="ghost_orange_up_0" Path="Assets\Graphic\ghost_orange_up_0.png" />
+  <RESOURCE Name="ghost_orange_up_1" Path="Assets\Graphic\ghost_orange_up_1.png" />
+  <RESOURCE Name="ghost_orange_right_0" Path="Assets\Graphic\ghost_orange_right_0.png" />
+  <RESOURCE Name="ghost_orange_right_1" Path="Assets\Graphic\ghost_orange_right_1.png" />
+  <RESOURCE Name="ghost_orange_down_0" Path="Assets\Graphic\ghost_orange_down_0.png" />
+  <RESOURCE Name="ghost_orange_down_1" Path="Assets\Graphic\ghost_orange_down_1.png" />
+  <RESOURCE Name="ghost_orange_left_0" Path="Assets\Graphic\ghost_orange_left_0.png" />
+  <RESOURCE Name="ghost_orange_left_1" Path="Assets\Graphic\ghost_orange_left_1.png" />
+
+  <RESOURCE Name="ghost_pink_up_0" Path="Assets\Graphic\ghost_pink_up_0.png" />
+  <RESOURCE Name="ghost_pink_up_1" Path="Assets\Graphic\ghost_pink_up_1.png" />
+  <RESOURCE Name="ghost_pink_right_0" Path="Assets\Graphic\ghost_pink_right_0.png" />
+  <RESOURCE Name="ghost_pink_right_1" Path="Assets\Graphic\ghost_pink_right_1.png" />
+  <RESOURCE Name="ghost_pink_down_0" Path="Assets\Graphic\ghost_pink_down_0.png" />
+  <RESOURCE Name="ghost_pink_down_1" Path="Assets\Graphic\ghost_pink_down_1.png" />
+  <RESOURCE Name="ghost_pink_left_0" Path="Assets\Graphic\ghost_pink_left_0.png" />
+  <RESOURCE Name="ghost_pink_left_1" Path="Assets\Graphic\ghost_pink_left_1.png" />
 </RESOURCES>
