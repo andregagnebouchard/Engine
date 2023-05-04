@@ -17,6 +17,8 @@ namespace Game
 			BigDot,
 			Grid,
 			LevelGenerator,
+			Wall,
+			Debug
 		};
 
 		Entity(const wstring& name, const vector<shared_ptr<Engine::IComponent>>& components);

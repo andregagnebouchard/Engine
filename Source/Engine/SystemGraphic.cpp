@@ -19,6 +19,7 @@ namespace Engine
 		m_RenderWindow(renderWindow)
 	{
     Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
 	}
 
 	void SystemGraphic::Init()
@@ -43,10 +44,11 @@ namespace Engine
       shared_ptr<Event> &event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 
-			if (event->GetType() == Event::Type::Render)
-				HandleRenderingEvent(dynamic_pointer_cast<RenderSpriteEvent>(event));
-			else
-				throw invalid_argument("Unknown rendering event received by SystemGraphic");
+			EventDefinition::Id eventId = static_cast<EventDefinition::Id>(event->GetKey().first);
+			if (eventId == EventDefinition::Id::RENDER_SPRITE)
+				RenderSprite(event);
+			else if (eventId == EventDefinition::Id::RENDER_LINE)
+				RenderLine(event);
     }
     m_RenderWindow->display();
 	}
@@ -75,15 +77,6 @@ namespace Engine
 		m_Components.erase(component->GetId());
 	}
 
-  void SystemGraphic::HandleRenderingEvent(shared_ptr<Event> event)
-  {
-		EventDefinition::Id eventId = static_cast<EventDefinition::Id>(event->GetKey().first);
-		if (eventId == EventDefinition::Id::RENDER_SPRITE)
-			RenderSprite(event);
-		else if (eventId == EventDefinition::Id::RENDER_LINE)
-			RenderLine(event);
-  }
-
 	void SystemGraphic::RenderSprite(shared_ptr<Event> event)
 	{
 		auto ev = dynamic_pointer_cast<RenderSpriteEvent>(event);
@@ -97,15 +90,28 @@ namespace Engine
 		sprite->setPosition(sf::Vector2f(ev->GetXPosition(), ev->GetYPosition()));
 		if (ev->GetResourceName() != L"small_dot")
 			sprite->setOrigin(16, 16);
+		if (ev->GetResourceName() == L"big_dot")
+			int breakHere = 5;
 
 		m_RenderWindow->draw(*sprite);
 	}
-
+	int render_line_count = 0;
 	void SystemGraphic::RenderLine(shared_ptr<Event> event)
 	{
 		auto ev = dynamic_pointer_cast<RenderLineEvent>(event);
-		sf::RectangleShape rectangle(sf::Vector2f(1, 200));
-		m_RenderWindow->draw(rectangle);
+		if (render_line_count == 1)
+			return;
+		sf::Vertex line[] =
+		{
+				sf::Vertex(sf::Vector2f(10, 10)),
+				sf::Vertex(sf::Vector2f(150, 150))
+		};
+
+		//m_RenderWindow->draw(line, 2, sf::Lines);
+		render_line_count++;
+
+		//sf::RectangleShape rectangle(sf::Vector2f(1, 200));
+		//m_RenderWindow->draw(rectangle);
 	}
 
 	shared_ptr<IWindow> SystemGraphic::GetWindow() const

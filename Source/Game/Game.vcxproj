@@ -168,6 +168,8 @@
     <ClInclude Include="BigDotState.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionEvent.h" />
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="DebugState.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="MoveEvent.h" />
@@ -187,6 +189,7 @@
   <ItemGroup>
     <ClCompile Include="BigDot.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="MoveEvent.cpp" />

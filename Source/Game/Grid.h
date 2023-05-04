@@ -6,6 +6,7 @@
 using namespace Engine;
 namespace Game
 {
+	struct DebugState;
 	class GridLogicComponent : public IComponent
 	{
 	public:
@@ -29,20 +30,22 @@ namespace Game
 		int m_EntityId;
 	};
 
-	class GridInputComponent : public IComponent
+	class GridGraphicComponent : public IComponent
 	{
 	public:
-		GridInputComponent(int entityId);
-		~GridInputComponent() = default;
-		void Init() override;
+		GridGraphicComponent(int entityId, const WorldGrid* grid, const DebugState* state);
+		~GridGraphicComponent() = default;
+		void Init() override {};
 		void Shutdown() override {};
 		void Update(float dt) override;
 
-		wstring GetName() const override { return L"GridInputComponent"; }
-		Type GetType() const override { return IComponent::Type::Input; }
+		wstring GetName() const override { return L"GridGraphicComponent"; }
+		Type GetType() const override { return IComponent::Type::Graphic; }
 		int GetId() const override { return m_EntityId; };
 	private:
 		MessageQueue m_MsgQueue;
+		const WorldGrid* m_Grid; // Owner is entity factory
 		int m_EntityId;
+		const DebugState* m_DebugState;
 	};
 }

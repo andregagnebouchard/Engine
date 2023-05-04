@@ -18,6 +18,7 @@ namespace Game
 	{
 		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::CREATE_ENTITY)), Engine::EntityEvent::Type::Create, L"Pacman", EntityIdCounter::GenerateEntityId(), Engine::Point{ 0, 0 }));
 		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::CREATE_ENTITY)), Engine::EntityEvent::Type::Create, L"Pause", EntityIdCounter::GenerateEntityId(), Engine::Point{ -1, -1 }));
+		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::CREATE_ENTITY)), Engine::EntityEvent::Type::Create, L"Debug", EntityIdCounter::GenerateEntityId(), Engine::Point{ -1, -1 }));
 		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::CREATE_ENTITY)), Engine::EntityEvent::Type::Create, L"Collision", EntityIdCounter::GenerateEntityId(), Engine::Point{ -1, -1 }));
 
 		// Delete itself, to not generate level twice

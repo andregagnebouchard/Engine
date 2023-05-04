@@ -4,7 +4,7 @@
 using namespace Engine;
 namespace Game
 {
-	class DebugState;
+	struct DebugState;
 	class DebugInputComponent : public IComponent
 	{
 	public:
@@ -32,7 +32,7 @@ namespace Game
 		void Update(float dt) override;
 
 		wstring GetName() const override { return L"DebugLogicComponent"; }
-		Type GetType() const override { return IComponent::Type::Input; }
+		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
 		MessageQueue m_MsgQueue;

@@ -24,7 +24,6 @@ namespace Engine
 		// ISystemGraphic
 		shared_ptr<IWindow> GetWindow() const override;
   private:
-    void HandleRenderingEvent(shared_ptr<Event> event);
     void RenderSprite(shared_ptr<Event> event);
     void RenderLine(shared_ptr<Event> event);
     MessageQueue m_MsgQueue;

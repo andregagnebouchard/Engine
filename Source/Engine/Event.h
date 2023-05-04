@@ -81,6 +81,7 @@ namespace Engine
     RenderLineEvent(const Event::Key &key, const Point &from, const Point &to);
     Point GetFrom() const { return m_From; };
     Point GetTo() const { return m_To; };
+    Type GetType() const override { return Event::Type::Render; };
   private:
     Point m_From;
     Point m_To;

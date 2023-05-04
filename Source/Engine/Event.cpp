@@ -34,6 +34,7 @@ namespace Engine
   }
 
   RenderLineEvent::RenderLineEvent(const Event::Key& key, const Point& from, const Point& to) :
+    Event(key),
     m_From(from),
     m_To(to)
   {

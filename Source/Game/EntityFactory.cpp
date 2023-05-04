@@ -6,6 +6,7 @@
 #include "SmallDot.h"
 #include "BigDot.h"
 #include "Collision.h"
+#include "Debug.h"
 #include "LevelGenerator.h"
 #include "Grid.h"
 namespace Game
@@ -51,7 +52,6 @@ namespace Game
 			SmallDotState state;
 			state.positionX = event->GetPosition().x;
 			state.positionY = event->GetPosition().y;
-			m_StateContainer.dotStates.Add(state, entityId);
 			m_StateContainer.smallDotStates.Add(state, entityId);
 
 			components.emplace_back(make_shared<SmallDotGraphicComponent>(entityId, &m_StateContainer.smallDotStates));
@@ -73,6 +73,7 @@ namespace Game
 		else if (name == L"Grid")
 		{
 			components.emplace_back(make_shared<GridLogicComponent>(entityId, &m_WorldGrid));
+			components.emplace_back(make_shared<GridGraphicComponent>(entityId, &m_WorldGrid, &m_StateContainer.debugState));
 			m_EntityIdToEntityType.emplace(entityId, Entity::Type::Grid);
 			return make_shared<Entity>(name, components);
 		}
@@ -80,6 +81,13 @@ namespace Game
 		{
 			components.emplace_back(make_shared<LevelGeneratorLogicComponent>(entityId));
 			m_EntityIdToEntityType.emplace(entityId, Entity::Type::LevelGenerator);
+			return make_shared<Entity>(name, components);
+		}
+		else if (name == L"Debug")
+		{
+			components.emplace_back(make_shared<DebugLogicComponent>(entityId, &m_StateContainer.debugState));
+			components.emplace_back(make_shared<DebugInputComponent>(entityId));
+			m_EntityIdToEntityType.emplace(entityId, Entity::Type::Debug);
 			return make_shared<Entity>(name, components);
 		}
 		return nullptr;

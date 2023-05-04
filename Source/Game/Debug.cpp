@@ -24,9 +24,13 @@ namespace Game
 			if (event->GetType() != Event::Type::Input)
 				throw invalid_argument("A non-input event was caught by an input component");
 
-			auto ev = dynamic_pointer_cast<InputEvent>(event);
-
-			// There is only one key subscribed, no need to check which one was pressed
+			Messager::Fire(make_shared<LogicEvent>(
+				Event::Key(
+					static_cast<int>(EventDefinition::Id::GAME_LOGIC),
+					static_cast<int>(GameEventId::ToggleDebugModeInput),
+					m_EntityId
+				),
+				nullptr)); // No payload for toggling debug menu
 
 		}
 	}

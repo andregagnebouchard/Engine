@@ -3,6 +3,7 @@
 #include "GameEventIds.h"
 #include <Engine\EventDefinition.h>
 #include "MoveEvent.h"
+#include "DebugState.h"
 #include "CollisionEvent.h"
 using namespace Engine;
 namespace Game
@@ -102,29 +103,21 @@ namespace Game
 			return; // Deleting an entity without a location
 		m_Grid->SetCellValue(m_EntityToLocation.at(ev->GetEntityId()), WorldGrid::EmptyGridValue);
 	}
-	//================================================Input==========================================================================================================
-	GridInputComponent::GridInputComponent(int entityId) :
-		m_EntityId(entityId)
+	//================================================Graphic==========================================================================================================
+	GridGraphicComponent::GridGraphicComponent(int entityId, const WorldGrid* grid, const DebugState* state) :
+		m_EntityId(entityId),
+		m_DebugState(state),
+		m_Grid(grid)
 	{
-	};
-
-	void GridInputComponent::Init()
-	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_O_PRESS)));
 	}
 
-	void GridInputComponent::Update(float dt)
+	void GridGraphicComponent::Update(float dt)
 	{
-		while (!m_MsgQueue.Empty()) {
-			shared_ptr<Event> event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
-			if (event->GetType() != Event::Type::Input)
-				throw invalid_argument("A non-input event was caught by an input component");
-
-			auto ev = dynamic_pointer_cast<InputEvent>(event);
-
-			// There is only one key subscribed, no need to check which one was pressed
-
-		}
+		Event::Key k(static_cast<int>(EventDefinition::Id::RENDER_LINE));
+		if (m_DebugState->isDebugModeActive)
+			Messager::Fire(make_shared<RenderLineEvent>(
+				k,
+				Point{ 50, 50 },
+				Point{ 250, 250 }));
 	}
 }

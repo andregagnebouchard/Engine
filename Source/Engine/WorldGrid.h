@@ -22,9 +22,13 @@ namespace Engine
 		bool IsCellInbound(const CellLocation& cell) const;
 		int GetCellValue(const CellLocation& cell) const;
 		void SetCellValue(const CellLocation& cell, int value);
-	private:
+
 		static constexpr int rowQty = 10;
 		static constexpr int colQty = 10;
+
+		float GetCellSizeX() const { return m_CellSizeX; };
+		float GetCellSizey() const { return m_CellSizeY; };
+	private:
 		array<array<int, colQty>, rowQty> m_Grid;
 		float m_CellSizeX;
 		float m_CellSizeY;

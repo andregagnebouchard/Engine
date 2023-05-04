@@ -34,6 +34,9 @@
     <Filter Include="Entities\LevelGenerator">
       <UniqueIdentifier>{0499a0a1-695f-4b48-80bc-547ff7bb3455}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Debug">
+      <UniqueIdentifier>{173997d1-7d43-451b-a2c4-8b3911ef218a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Entities\BigDot">
       <UniqueIdentifier>{0f6652e8-484e-4d29-82f0-b180bac9e560}</UniqueIdentifier>
     </Filter>
@@ -87,6 +90,12 @@
     <ClInclude Include="MoveEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Entities\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugState.h">
+      <Filter>Entities\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="BigDot.h">
       <Filter>Entities\BigDot</Filter>
     </ClInclude>
@@ -130,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="MoveEvent.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Entities\Debug</Filter>
     </ClCompile>
     <ClCompile Include="BigDot.cpp">
       <Filter>Entities\BigDot</Filter>
