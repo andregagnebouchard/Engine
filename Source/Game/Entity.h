@@ -18,7 +18,11 @@ namespace Game
 			Grid,
 			LevelGenerator,
 			Wall,
-			Debug
+			Debug,
+			BlueGhost,
+			RedGhost,
+			PinkGhost,
+			OrangeGhost
 		};
 
 		Entity(const wstring& name, const vector<shared_ptr<Engine::IComponent>>& components);

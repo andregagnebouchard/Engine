@@ -33,7 +33,7 @@ namespace Game
 		PacmanInputComponent(int entityId);
 		~PacmanInputComponent() = default;
 		void Init() override;
-		void Shutdown() override {};
+		void Shutdown() override;
 		void Update(float dt) override;
 
 		wstring GetName() const override { return L"PacmanInputComponent"; }
@@ -51,7 +51,7 @@ namespace Game
 		PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid *worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType);
 		~PacmanLogicComponent() = default;
 		void Init() override;
-		void Shutdown() override {};
+		void Shutdown() override;
 		void Update(float dt) override;
 
 		wstring GetName() const override { return L"PacmanLogicComponent"; }
@@ -66,7 +66,7 @@ namespace Game
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
 		PacmanState *m_State; // Owner is EntityFactory
-		const float m_MoveDistanceByFrame = 4;
+		const float m_MoveDistanceByFrame = 32;
 	};
 
 	class PacmanGraphicComponent : public IComponent
@@ -93,7 +93,7 @@ namespace Game
 		PacmanAudioComponent(int entityId);
 		~PacmanAudioComponent() = default;
 		void Init() override;
-		void Shutdown() override {};
+		void Shutdown() override;
 		void Update(float dt) override;
 
 		wstring GetName() const override { return L"PacmanAudioComponent"; }

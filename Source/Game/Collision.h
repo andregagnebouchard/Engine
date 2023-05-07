@@ -21,6 +21,9 @@ namespace Game
 		void OnCollision(shared_ptr<Event> event);
 		void OnCollisionPacmanSmallDot(int pacmanEntityId, int dotEntityId);
 		void OnCollisionPacmanBigDot(int pacmanEntityId, int bigDotEntityId);
+		void OnColisionPacmanBlueGhost(int pacmanEntityId, int blueGhostEntityId);
+		void OnCollisionPacmanFleeingGhost(int pacmanEntityId, int blueGhostEntityId);
+		void OnCollisionPacmanChasingGhost(int pacmanEntityId, int blueGhostEntityId);
 
 		int m_EntityId;
 		function<void(shared_ptr<Event>)> m_Callback;

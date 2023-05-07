@@ -4,6 +4,7 @@
 #include <Engine\WorldGrid.h>
 #include "Entity.h"
 #include "StateContainer.h"
+#include "GhostMovementBehaviour.h"
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -24,5 +25,6 @@ namespace Game
 		StateContainer m_StateContainer;
 		Engine::WorldGrid m_WorldGrid;
 		unordered_map<int, Entity::Type> m_EntityIdToEntityType;
+		BlueGhostMovementBehaviour m_BlueGhostBehaviour; // TEmporary to test
 	};
 }

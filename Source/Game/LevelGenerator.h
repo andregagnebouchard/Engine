@@ -13,6 +13,10 @@ namespace Game
 		void Shutdown() override {};
 		void Update(float dt) override;
 
+		void GenerateSmallDots();
+		void GenerateBigDots();
+		void GenerateGhost();
+		void DeleteItself();
 		wstring GetName() const override { return L"LevelGeneratorLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };

@@ -7,12 +7,14 @@
 #include "BigDot.h"
 #include "Collision.h"
 #include "Debug.h"
+#include "Ghost.h"
 #include "LevelGenerator.h"
 #include "Grid.h"
 namespace Game
 {
 	EntityFactory::EntityFactory() :
-		m_WorldGrid(32, 32)
+		m_WorldGrid(32, 32),
+		m_BlueGhostBehaviour(&m_WorldGrid, &m_EntityIdToEntityType)
 	{
 
 	}
@@ -88,6 +90,16 @@ namespace Game
 			components.emplace_back(make_shared<DebugLogicComponent>(entityId, &m_StateContainer.debugState));
 			components.emplace_back(make_shared<DebugInputComponent>(entityId));
 			m_EntityIdToEntityType.emplace(entityId, Entity::Type::Debug);
+			return make_shared<Entity>(name, components);
+		}
+		else if (name == L"BlueGhost")
+		{
+			// Not sure whether entity factory should init the state, but it's certainly better than the graphic component
+			m_StateContainer.blueGhostState.positionX = event->GetPosition().x;
+			m_StateContainer.blueGhostState.positionY = event->GetPosition().y;
+			components.emplace_back(make_shared<GhostGraphicComponent>(entityId, &m_StateContainer.blueGhostState, GhostType::Blue));
+			components.emplace_back(make_shared<GhostLogicComponent>(entityId, &m_StateContainer.blueGhostState, &m_WorldGrid, &m_EntityIdToEntityType, &m_BlueGhostBehaviour));
+			m_EntityIdToEntityType.emplace(entityId, Entity::Type::BlueGhost);
 			return make_shared<Entity>(name, components);
 		}
 		return nullptr;

@@ -11,6 +11,8 @@ namespace Game
 		UnpauseGame,
 		Collision,
 		ToggleDebugModeInput,
-		BigDotEaten
+		BigDotEaten,
+		PacmanEatGhost,
+		GhostKillPacman
 	};
 }

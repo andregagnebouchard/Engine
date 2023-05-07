@@ -81,6 +81,16 @@ namespace Game
 	{
 	};
 
+	void PacmanInputComponent::Shutdown()
+	{
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_DOWN_PRESS)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_UP_PRESS)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_LEFT_PRESS)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_RIGHT_PRESS)));
+	}
+
+
+
 	void PacmanInputComponent::Init()
 	{
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_DOWN_PRESS)));
@@ -151,6 +161,13 @@ namespace Game
 		m_EntityIdToEntityType(entityIdToEntityType)
 	{
 	};
+
+	void PacmanLogicComponent::Shutdown()
+	{
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
+	}
 
 	void PacmanLogicComponent::Init()
 	{
@@ -243,20 +260,6 @@ namespace Game
 		m_State->positionX += deltaX;
 		m_State->positionY += deltaY;
 
-		// TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest
-		/*
-		auto eve = make_shared<CollisionEvent>(m_EntityId, m_EntityId);
-		Messager::Fire(make_shared<LogicEvent>(
-			Event::Key
-			(
-				static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
-				static_cast<int>(GameEventId::Collision)
-			),
-			eve
-			));
-			*/
-		// TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest
-
 		Messager::Fire(make_shared<LogicEvent>
 			(
 				Event::Key
@@ -279,6 +282,12 @@ namespace Game
 		m_EntityId(entityId) 
 	{
 	};
+
+	void PacmanAudioComponent::Shutdown()
+	{
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));
+	}
+
 	void PacmanAudioComponent::Init()
 	{
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));

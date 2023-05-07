@@ -170,6 +170,9 @@
     <ClInclude Include="CollisionEvent.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugState.h" />
+    <ClInclude Include="Ghost.h" />
+    <ClInclude Include="GhostMovementBehaviour.h" />
+    <ClInclude Include="GhostState.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="MoveEvent.h" />
@@ -190,6 +193,8 @@
     <ClCompile Include="BigDot.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="GhostMovementBehaviour.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="MoveEvent.cpp" />

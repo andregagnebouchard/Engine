@@ -54,4 +54,14 @@
   <RESOURCE Name="ghost_pink_down_1" Path="Assets\Graphic\ghost_pink_down_1.png" />
   <RESOURCE Name="ghost_pink_left_0" Path="Assets\Graphic\ghost_pink_left_0.png" />
   <RESOURCE Name="ghost_pink_left_1" Path="Assets\Graphic\ghost_pink_left_1.png" />
+
+  <RESOURCE Name="ghost_fleeing_blue_0" Path="Assets\Graphic\ghost_fleeing_blue_0.png" />
+  <RESOURCE Name="ghost_fleeing_blue_1" Path="Assets\Graphic\ghost_fleeing_blue_1.png" />
+  <RESOURCE Name="ghost_fleeing_white_0" Path="Assets\Graphic\ghost_fleeing_white_0.png" />
+  <RESOURCE Name="ghost_fleeing_white_1" Path="Assets\Graphic\ghost_fleeing_white_1.png" />
+
+  <RESOURCE Name="ghost_respawning_up" Path="Assets\Graphic\ghost_respawning_up.png" />
+  <RESOURCE Name="ghost_respawning_down" Path="Assets\Graphic\ghost_respawning_down.png" />
+  <RESOURCE Name="ghost_respawning_left" Path="Assets\Graphic\ghost_respawning_left.png" />
+  <RESOURCE Name="ghost_respawning_right" Path="Assets\Graphic\ghost_respawning_right.png" />
 </RESOURCES>

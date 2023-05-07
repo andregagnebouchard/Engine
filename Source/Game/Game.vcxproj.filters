@@ -40,6 +40,9 @@
     <Filter Include="Entities\BigDot">
       <UniqueIdentifier>{0f6652e8-484e-4d29-82f0-b180bac9e560}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Ghost">
+      <UniqueIdentifier>{e51d9d48-669b-4d5d-99bf-cf14e8b5d646}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -105,6 +108,15 @@
     <ClInclude Include="BigDotState.h">
       <Filter>Entities\BigDot</Filter>
     </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Entities\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostState.h">
+      <Filter>Entities\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostMovementBehaviour.h">
+      <Filter>Entities\Ghost</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -145,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="BigDot.cpp">
       <Filter>Entities\BigDot</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Entities\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostMovementBehaviour.cpp">
+      <Filter>Entities\Ghost</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
