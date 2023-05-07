@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <thread>
 #include "Engine\Application.h"
 #include "SystemGraphic.h"
 #include "SystemLogic.h"
@@ -57,14 +58,19 @@ namespace Engine
 		auto earlier = clock::now();
 		while (true)
 		{
-			float dt = static_cast<float>((clock::now() - earlier).count());
+			float elapsedNs = static_cast<float>((clock::now() - earlier).count());
+			if (elapsedNs < nanoSecondPerFrame) // 
+			{
+				this_thread::sleep_for(chrono::nanoseconds(nanoSecondPerFrame - static_cast<int>(elapsedNs)));
+				elapsedNs = static_cast<float>((clock::now() - earlier).count());
+			}
 			earlier = clock::now();
 
-			m_EntityFactory->Update(dt);
-			m_SystemInput->Update(dt);
-			m_SystemLogic->Update(dt);
-			m_SystemGraphic->Update(dt);
-			m_SystemAudio->Update(dt);
+			m_EntityFactory->Update(elapsedNs);
+			m_SystemInput->Update(elapsedNs);
+			m_SystemLogic->Update(elapsedNs);
+			m_SystemGraphic->Update(elapsedNs);
+			m_SystemAudio->Update(elapsedNs);
 		}
 	}
 

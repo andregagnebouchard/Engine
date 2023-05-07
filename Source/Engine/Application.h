@@ -29,5 +29,7 @@ namespace Engine
     shared_ptr<ISystemAudio> m_SystemAudio;
     shared_ptr<ResourceCache> m_ResourceCache;
 		shared_ptr<EntityFactory> m_EntityFactory;
+
+    const int nanoSecondPerFrame = 1000000000 / 60; // 60 fps
   };
 }
