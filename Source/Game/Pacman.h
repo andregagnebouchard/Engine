@@ -8,6 +8,13 @@
 using namespace Engine;
 namespace Game
 {
+	namespace PacmanConstants
+	{
+		const int dyingAnimationSpriteCount = 10;
+		const float moveDistanceByFrame = 32;
+		const int framePerDyingAnimationSprite = 5;
+		const int dyingAnimationLength = dyingAnimationSpriteCount * framePerDyingAnimationSprite;
+	}
 	class MoveEvent;
 	class PacmanInputMoveEvent : public IGameLogicEvent
 	{
@@ -58,7 +65,9 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
+		void ProcessEvents();
 		void TryMove(shared_ptr<PacmanInputMoveEvent> ev);
+		void UpdateDyingLogic();
 		void StopMoving();
 
 		const unordered_map<int, Entity::Type> *m_EntityIdToEntityType; // Owner is EntityFactory
@@ -66,7 +75,6 @@ namespace Game
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
 		PacmanState *m_State; // Owner is EntityFactory
-		const float m_MoveDistanceByFrame = 32;
 	};
 
 	class PacmanGraphicComponent : public IComponent
@@ -83,6 +91,8 @@ namespace Game
 		int GetId() const override { return m_EntityId; };
 	private:
 		wstring PickSpriteName() const;
+		wstring PickMovingSprite() const;
+		wstring PickDyingSprite() const;
 		int m_EntityId;
 		const PacmanState* m_State; // Owner is EntityFactory
 	};

@@ -18,6 +18,18 @@
   <RESOURCE Name="pacman_chomp" Path="Assets\Sound\pacman_chomp.wav" />
   <RESOURCE Name="small_dot" Path="Assets\Graphic\small_dot.png" />
   <RESOURCE Name="big_dot" Path="Assets\Graphic\big_dot.png" />
+
+  <RESOURCE Name="pacman_dying_0" Path="Assets\Graphic\pacman_dying_0.png" />
+  <RESOURCE Name="pacman_dying_1" Path="Assets\Graphic\pacman_dying_1.png" />
+  <RESOURCE Name="pacman_dying_2" Path="Assets\Graphic\pacman_dying_2.png" />
+  <RESOURCE Name="pacman_dying_3" Path="Assets\Graphic\pacman_dying_3.png" />
+  <RESOURCE Name="pacman_dying_4" Path="Assets\Graphic\pacman_dying_4.png" />
+  <RESOURCE Name="pacman_dying_5" Path="Assets\Graphic\pacman_dying_5.png" />
+  <RESOURCE Name="pacman_dying_6" Path="Assets\Graphic\pacman_dying_6.png" />
+  <RESOURCE Name="pacman_dying_7" Path="Assets\Graphic\pacman_dying_7.png" />
+  <RESOURCE Name="pacman_dying_8" Path="Assets\Graphic\pacman_dying_8.png" />
+  <RESOURCE Name="pacman_dying_9" Path="Assets\Graphic\pacman_dying_9.png" />
+  <RESOURCE Name="pacman_dying_10" Path="Assets\Graphic\pacman_dying_10.png" />
   
   <RESOURCE Name="ghost_red_up_0" Path="Assets\Graphic\ghost_red_up_0.png" />
   <RESOURCE Name="ghost_red_up_1" Path="Assets\Graphic\ghost_red_up_0.png" />

@@ -13,6 +13,7 @@ namespace Game
 		ToggleDebugModeInput,
 		BigDotEaten,
 		PacmanEatGhost,
-		GhostKillPacman
+		GhostKillPacman,
+		PacmanFinishesDyingAnimation
 	};
 }

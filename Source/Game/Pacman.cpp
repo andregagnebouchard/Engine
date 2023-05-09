@@ -4,6 +4,9 @@
 #include <Engine\EventDefinition.h>
 #include "Entity.h"
 #include "MoveEvent.h"
+#include <iostream>
+#include <sstream>
+#include <string>
 using namespace Engine;
 namespace Game
 {
@@ -23,55 +26,66 @@ namespace Game
 			m_State->positionY));
 	}
 
+	wstring PacmanGraphicComponent::PickMovingSprite() const
+	{
+		if (m_State->direction == PacmanState::MovingDirection::Down)
+		{
+			if (m_State->movingFrame == 0)
+				return L"pacman_down_0";
+			if (m_State->movingFrame == 1)
+				return L"pacman_down_1";
+			if (m_State->movingFrame == 2)
+				return L"pacman_down_2";
+			if (m_State->movingFrame == 3)
+				return L"pacman_down_1";
+		}
+		if (m_State->direction == PacmanState::MovingDirection::Up)
+		{
+			if (m_State->movingFrame == 0)
+				return L"pacman_up_0";
+			if (m_State->movingFrame == 1)
+				return L"pacman_up_1";
+			if (m_State->movingFrame == 2)
+				return L"pacman_up_2";
+			if (m_State->movingFrame == 3)
+				return L"pacman_up_1";
+		}
+		if (m_State->direction == PacmanState::MovingDirection::Left)
+		{
+			if (m_State->movingFrame == 0)
+				return L"pacman_left_0";
+			if (m_State->movingFrame == 1)
+				return L"pacman_left_1";
+			if (m_State->movingFrame == 2)
+				return L"pacman_left_2";
+			if (m_State->movingFrame == 3)
+				return L"pacman_left_1";
+		}
+		if (m_State->direction == PacmanState::MovingDirection::Right)
+		{
+			if (m_State->movingFrame == 0)
+				return L"pacman_right_0";
+			if (m_State->movingFrame == 1)
+				return L"pacman_right_1";
+			if (m_State->movingFrame == 2)
+				return L"pacman_right_2";
+			if (m_State->movingFrame == 3)
+				return L"pacman_right_1";
+		}
+	}
+	wstring PacmanGraphicComponent::PickDyingSprite() const
+	{
+		int animationSpriteId = m_State->movingFrame / PacmanConstants::framePerDyingAnimationSprite;
+		wstringstream ss;
+		ss << L"pacman_dying_" << animationSpriteId;
+		return ss.str();
+	}
 	wstring PacmanGraphicComponent::PickSpriteName() const
 	{
 		if (m_State->action == PacmanState::Action::Moving)
-		{
-			if (m_State->direction == PacmanState::MovingDirection::Down)
-			{
-				if(m_State->movingFrame == 0)
-					return L"pacman_down_0";
-				if (m_State->movingFrame == 1)
-					return L"pacman_down_1";
-				if (m_State->movingFrame == 2)
-					return L"pacman_down_2";
-				if (m_State->movingFrame == 3)
-					return L"pacman_down_1";
-			}
-			if (m_State->direction == PacmanState::MovingDirection::Up)
-			{
-				if (m_State->movingFrame == 0)
-					return L"pacman_up_0";
-				if (m_State->movingFrame == 1)
-					return L"pacman_up_1";
-				if (m_State->movingFrame == 2)
-					return L"pacman_up_2";
-				if (m_State->movingFrame == 3)
-					return L"pacman_up_1";
-			}
-			if (m_State->direction == PacmanState::MovingDirection::Left)
-			{
-				if (m_State->movingFrame == 0)
-					return L"pacman_left_0";
-				if (m_State->movingFrame == 1)
-					return L"pacman_left_1";
-				if (m_State->movingFrame == 2)
-					return L"pacman_left_2";
-				if (m_State->movingFrame == 3)
-					return L"pacman_left_1";
-			}
-			if (m_State->direction == PacmanState::MovingDirection::Right)
-			{
-				if (m_State->movingFrame == 0)
-					return L"pacman_right_0";
-				if (m_State->movingFrame == 1)
-					return L"pacman_right_1";
-				if (m_State->movingFrame == 2)
-					return L"pacman_right_2";
-				if (m_State->movingFrame == 3)
-					return L"pacman_right_1";
-			}
-		}
+			return PickMovingSprite();
+		else if (m_State->action == PacmanState::Action::Dying)
+			return PickDyingSprite();
 		return L"pacman_right_0";
 	}
 
@@ -167,6 +181,7 @@ namespace Game
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostKillPacman)));
 	}
 
 	void PacmanLogicComponent::Init()
@@ -174,9 +189,18 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostKillPacman)));
 	}
 
 	void PacmanLogicComponent::Update(float dt)
+	{
+		if (m_State->action == PacmanState::Action::Dying)
+			UpdateDyingLogic();
+		else // Ignore all events if we're dying, they're irrelevant now
+			ProcessEvents();
+	}
+
+	void PacmanLogicComponent::ProcessEvents()
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();
@@ -193,8 +217,31 @@ namespace Game
 			case GameEventId::UnpauseGame:
 				Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 				break;
+			case GameEventId::GhostKillPacman:
+				m_State->action = PacmanState::Action::Dying;
+				m_State->movingFrame = 0;
+				// Stop processing inputs when we die
+				// Potential bug - What if we process in the same frame as we die? Then we'll move first, then die. Might want to introduce the concept of priority events, or undo previous ones
+				Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 			}
 		}
+	}
+
+	void PacmanLogicComponent::UpdateDyingLogic()
+	{
+		if(m_State->movingFrame < PacmanConstants::dyingAnimationLength)
+			m_State->movingFrame++;
+		if(m_State->movingFrame >= PacmanConstants::dyingAnimationLength)
+			Messager::Fire(make_shared<LogicEvent>
+				(
+					Event::Key
+					(
+						static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
+						static_cast<int>(GameEventId::PacmanFinishesDyingAnimation),
+						m_EntityId
+					),
+					nullptr
+					));
 	}
 
 	void PacmanLogicComponent::TryMove(shared_ptr<PacmanInputMoveEvent> ev) // Should split that function
@@ -203,13 +250,13 @@ namespace Game
 		float deltaX = 0.0f;
 		float deltaY = 0.0f;
 		if (moveDirection == PacmanInputMoveEvent::Direction::Down)
-			deltaY = m_MoveDistanceByFrame;
+			deltaY = PacmanConstants::moveDistanceByFrame;
 		else if (moveDirection == PacmanInputMoveEvent::Direction::Up)
-			deltaY = -m_MoveDistanceByFrame;
+			deltaY = -PacmanConstants::moveDistanceByFrame;
 		else if (moveDirection == PacmanInputMoveEvent::Direction::Right)
-			deltaX = m_MoveDistanceByFrame;
+			deltaX = PacmanConstants::moveDistanceByFrame;
 		else if (moveDirection == PacmanInputMoveEvent::Direction::Left)
-			deltaX = -m_MoveDistanceByFrame;
+			deltaX = -PacmanConstants::moveDistanceByFrame;
 
 		const CellLocation newLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX + deltaX, m_State->positionY + deltaY);
 		if (!m_WorldGrid->IsCellInbound(newLocation)) { // Don't move if new location is not inbound

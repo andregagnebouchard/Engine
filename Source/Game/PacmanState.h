@@ -5,7 +5,8 @@ namespace Game
     enum class Action {
       Idle,
       Moving,
-      Eating
+      Eating,
+      Dying
     };
 
     enum class MovingDirection {
