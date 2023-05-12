@@ -75,6 +75,7 @@ namespace Game
 			m_StateContainer.bigDotStates.Add(state, entityId);
 
 			components.emplace_back(make_shared<BigDotGraphicComponent>(entityId, &m_StateContainer.bigDotStates));
+			components.emplace_back(make_shared<BigDotLogicComponent>(entityId, &m_StateContainer.bigDotStates));
 			m_EntityIdToEntityType.emplace(entityId, Entity::Type::BigDot);
 			return make_shared<Entity>(name, components);
 		}
