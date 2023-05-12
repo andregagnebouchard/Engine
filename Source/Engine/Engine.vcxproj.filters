@@ -162,6 +162,12 @@
     <ClInclude Include="math.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="DelayedEventLogicComponent.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntityCreatedPayload.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">
@@ -219,6 +225,9 @@
       <Filter>Include</Filter>
     </ClCompile>
     <ClCompile Include="WorldGrid.cpp">
+      <Filter>Include</Filter>
+    </ClCompile>
+    <ClCompile Include="DelayedEventLogicComponent.cpp">
       <Filter>Include</Filter>
     </ClCompile>
   </ItemGroup>

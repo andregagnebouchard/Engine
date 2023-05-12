@@ -1,7 +1,9 @@
 #pragma once
 #include "constant.h"
 #include <Engine/IGameLogicEvent.h>
+#include <Engine/IEntityCreatedPayload.h>
 #include <Engine/math.h>
+#include <string>
 using namespace std;
 namespace Engine
 {
@@ -109,19 +111,20 @@ namespace Engine
 	{
 	public:
 		enum class Type { Create, Delete };
-		EntityEvent(Event::Key key, Type type, const wstring &name, int entityId, const Point &&position);
+		EntityEvent(Event::Key key, Type type, const wstring &name, int entityId, shared_ptr<IEntityCreatedPayload> payload);
 
     int GetEntityId() const { return m_EntityId; }
 
 		Type GetActionType() const;
 		wstring GetName() const; // This should be an id, not a name
 		Event::Type GetType() const override;
-    Point GetPosition() const { return m_Position; } // Position here is weird. It's not needed for delete events, and only for some create events. Can't think of a better way right now
+    shared_ptr<IEntityCreatedPayload> GetPayload() const { return m_Payload; }
 	private:
 		const wstring m_Name;
 		const Type m_Type;
     const int m_EntityId;
     const Point m_Position;
+    shared_ptr<IEntityCreatedPayload> m_Payload;
 	};
 
   class LogicEvent : public Event

@@ -10,9 +10,9 @@ namespace Game
 {
 	namespace PacmanConstants
 	{
-		const int dyingAnimationSpriteCount = 10;
+		const int dyingAnimationSpriteCount = 11;
 		const float moveDistanceByFrame = 32;
-		const int framePerDyingAnimationSprite = 5;
+		const int framePerDyingAnimationSprite = 6;
 		const int dyingAnimationLength = dyingAnimationSpriteCount * framePerDyingAnimationSprite;
 	}
 	class MoveEvent;

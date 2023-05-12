@@ -18,7 +18,7 @@ namespace Game
 
 	void GhostGraphicComponent::Update(float dt)
 	{
-		if (m_State->action == GhostState::Action::Chasing)
+		if (m_State->action == GhostState::Action::Chasing || m_State->action == GhostState::Action::WatingForPacmanDying)
 			ChasingUpdate();
 		else if (m_State->action == GhostState::Action::Fleeing)
 			FleeingUpdate();
@@ -199,8 +199,17 @@ namespace Game
 	{
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::BigDotEaten)));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanEatGhost), m_EntityId));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
+	void GhostLogicComponent::Shutdown()
+	{
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::BigDotEaten)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanEatGhost), m_EntityId));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
+	}
 	void GhostLogicComponent::Update(float dt)
 	{
 		// Tick logic happens after event processing, in case ghost changed state from an event
@@ -225,8 +234,19 @@ namespace Game
 				m_State->action = GhostState::Action::Respawning;
 				m_State->animationFrame = 0;
 				break;
+			case GameEventId::GhostTouchesPacman:
+				m_State->action = GhostState::Action::WatingForPacmanDying;
+				m_State->animationFrame = 0;
+				break;
+			case GameEventId::PacmanStartDyingAnimation:
+				KillYourself();
 			}
 		}
+	}
+
+	void GhostLogicComponent::KillYourself()
+	{
+		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::DELETE_ENTITY)), Engine::EntityEvent::Type::Delete, L"Ghost", m_EntityId, nullptr));
 	}
 	void GhostLogicComponent::TickLogic()
 	{
@@ -236,6 +256,17 @@ namespace Game
 			FleeingLogicUpdate();
 		else if (m_State->action == GhostState::Action::Respawning)
 			RespawningLogicUpdate();
+		else if (m_State->action == GhostState::Action::WatingForPacmanDying)
+			WaitingForPacmanDyingLogicUpdate();
+	}
+
+	void GhostLogicComponent::WaitingForPacmanDyingLogicUpdate()
+	{
+		// Toggle the blobbing
+		if (m_State->animationFrame < 2 * GhostConstants::chasingFramePerSprite) // There are 2 frames in the animation
+			m_State->animationFrame++;
+		else
+			m_State->animationFrame = 0;
 	}
 
 	void GhostLogicComponent::ChasingLogicUpdate()

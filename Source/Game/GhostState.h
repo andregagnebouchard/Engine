@@ -6,7 +6,8 @@ namespace Game
     enum class Action {
       Respawning,
       Chasing,
-      Fleeing
+      Fleeing,
+      WatingForPacmanDying // This happens when pacman dies, there is a second or so where all ghost stop moving
     };
 
     float positionX = 0.0f;

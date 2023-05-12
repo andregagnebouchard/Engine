@@ -1,4 +1,7 @@
 #include "stdafx.h"
+#include <Engine/DelayedEventLogicComponent.h>
+#include <Engine/EventDefinition.h>
+#include "EntityCreatedPayload.h"
 #include "EntityFactory.h"
 #include "Entity.h"
 #include "Pacman.h"
@@ -10,6 +13,7 @@
 #include "Ghost.h"
 #include "LevelGenerator.h"
 #include "Grid.h"
+#include "GameEventIds.h"
 namespace Game
 {
 	EntityFactory::EntityFactory() :
@@ -52,8 +56,9 @@ namespace Game
 		{
 			// Not sure whether entity factory should init the state, but it's certainly better than the graphic component
 			SmallDotState state;
-			state.positionX = event->GetPosition().x;
-			state.positionY = event->GetPosition().y;
+			const Point &position= dynamic_pointer_cast<PositionPayload>(event->GetPayload())->GetPosition();
+			state.positionX = position.x;
+			state.positionY = position.y;
 			m_StateContainer.smallDotStates.Add(state, entityId);
 
 			components.emplace_back(make_shared<SmallDotGraphicComponent>(entityId, &m_StateContainer.smallDotStates));
@@ -64,8 +69,9 @@ namespace Game
 		{
 			// Not sure whether entity factory should init the state, but it's certainly better than the graphic component
 			BigDotState state;
-			state.positionX = event->GetPosition().x;
-			state.positionY = event->GetPosition().y;
+			const Point& position = dynamic_pointer_cast<PositionPayload>(event->GetPayload())->GetPosition();
+			state.positionX = position.x;
+			state.positionY = position.y;
 			m_StateContainer.bigDotStates.Add(state, entityId);
 
 			components.emplace_back(make_shared<BigDotGraphicComponent>(entityId, &m_StateContainer.bigDotStates));
@@ -95,11 +101,19 @@ namespace Game
 		else if (name == L"BlueGhost")
 		{
 			// Not sure whether entity factory should init the state, but it's certainly better than the graphic component
-			m_StateContainer.blueGhostState.positionX = event->GetPosition().x;
-			m_StateContainer.blueGhostState.positionY = event->GetPosition().y;
+			const Point& position = dynamic_pointer_cast<PositionPayload>(event->GetPayload())->GetPosition();
+			m_StateContainer.blueGhostState.positionX = position.x;
+			m_StateContainer.blueGhostState.positionY = position.y;
 			components.emplace_back(make_shared<GhostGraphicComponent>(entityId, &m_StateContainer.blueGhostState, GhostType::Blue));
 			components.emplace_back(make_shared<GhostLogicComponent>(entityId, &m_StateContainer.blueGhostState, &m_WorldGrid, &m_EntityIdToEntityType, &m_BlueGhostBehaviour));
 			m_EntityIdToEntityType.emplace(entityId, Entity::Type::BlueGhost);
+			return make_shared<Entity>(name, components);
+		}
+		else if (name == L"DelayPacmanDeathEvent")
+		{
+			auto payload = dynamic_pointer_cast<DelayedEventCreatedPayload>(event->GetPayload());
+			components.emplace_back(make_shared<DelayedEventLogicComponent>(entityId, payload->GetDelayTickCount(), payload->GetKeyToEmit()));
+			m_EntityIdToEntityType.emplace(entityId, Entity::Type::DelayPacmanDeathEvent);
 			return make_shared<Entity>(name, components);
 		}
 		return nullptr;

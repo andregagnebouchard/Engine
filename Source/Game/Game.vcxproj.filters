@@ -117,6 +117,9 @@
     <ClInclude Include="GhostMovementBehaviour.h">
       <Filter>Entities\Ghost</Filter>
     </ClInclude>
+    <ClInclude Include="EntityCreatedPayload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

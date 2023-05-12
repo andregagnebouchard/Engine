@@ -4,6 +4,10 @@
 using namespace Engine;
 namespace Game
 {
+	namespace CollisionConstants
+	{
+		const int frameBetweenGhostTouchesPacmanAndPacmanStartDying = 40;
+	}
 	struct StateContainer;
 	class CollisionLogicComponent : public IComponent
 	{

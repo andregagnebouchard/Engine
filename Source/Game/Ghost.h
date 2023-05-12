@@ -36,7 +36,7 @@ namespace Game
 		GhostLogicComponent(int entityId, GhostState *state, const WorldGrid *worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType, const IGhostMovementBehaviour *movementBehaviour);
 		~GhostLogicComponent() = default;
 		void Init() override;
-		void Shutdown() override {};
+		void Shutdown() override;
 		void Update(float dt) override;
 
 		wstring GetName() const override { return L"GhostLogicComponent"; }
@@ -49,6 +49,8 @@ namespace Game
 		void ChasingLogicUpdate();
 		void FleeingLogicUpdate();
 		void RespawningLogicUpdate();
+		void WaitingForPacmanDyingLogicUpdate();
+		void KillYourself();
 		const unordered_map<int, Entity::Type> *m_EntityIdToEntityType; // Owner is EntityFactory
 		const WorldGrid* m_WorldGrid; // Owner is EntityFactory
 		MessageQueue m_MsgQueue;

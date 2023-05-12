@@ -91,12 +91,12 @@ namespace Engine
     return Event::Type::Input;
   }
 
-	EntityEvent::EntityEvent(Event::Key key, EntityEvent::Type type, const wstring &name, int entityId, const Point &&position) :
+	EntityEvent::EntityEvent(Event::Key key, EntityEvent::Type type, const wstring &name, int entityId, shared_ptr<IEntityCreatedPayload> payload) :
 		Event(key),
 		m_Type(type),
 		m_Name(name),
     m_EntityId(entityId),
-    m_Position(position)
+    m_Payload(payload)
 	{
 	}
 

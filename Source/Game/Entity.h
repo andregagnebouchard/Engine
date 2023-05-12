@@ -22,7 +22,8 @@ namespace Game
 			BlueGhost,
 			RedGhost,
 			PinkGhost,
-			OrangeGhost
+			OrangeGhost,
+			DelayPacmanDeathEvent
 		};
 
 		Entity(const wstring& name, const vector<shared_ptr<Engine::IComponent>>& components);

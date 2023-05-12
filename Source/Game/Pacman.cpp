@@ -72,10 +72,15 @@ namespace Game
 			if (m_State->movingFrame == 3)
 				return L"pacman_right_1";
 		}
+		return L"";
 	}
 	wstring PacmanGraphicComponent::PickDyingSprite() const
 	{
 		int animationSpriteId = m_State->movingFrame / PacmanConstants::framePerDyingAnimationSprite;
+
+		// Graphic component is updated in the frame pacman dies, before it dies. So keep the last sprite when that happens
+		if (animationSpriteId >= PacmanConstants::dyingAnimationSpriteCount)
+			animationSpriteId = PacmanConstants::dyingAnimationSpriteCount - 1;
 		wstringstream ss;
 		ss << L"pacman_dying_" << animationSpriteId;
 		return ss.str();
@@ -181,7 +186,8 @@ namespace Game
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostKillPacman)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
 	void PacmanLogicComponent::Init()
@@ -189,7 +195,8 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostKillPacman)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
 	void PacmanLogicComponent::Update(float dt)
@@ -217,12 +224,14 @@ namespace Game
 			case GameEventId::UnpauseGame:
 				Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
 				break;
-			case GameEventId::GhostKillPacman:
-				m_State->action = PacmanState::Action::Dying;
-				m_State->movingFrame = 0;
-				// Stop processing inputs when we die
+			case GameEventId::GhostTouchesPacman:
+				// Stop processing inputs when we touch a ghost
 				// Potential bug - What if we process in the same frame as we die? Then we'll move first, then die. Might want to introduce the concept of priority events, or undo previous ones
 				Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+				break;
+			case GameEventId::PacmanStartDyingAnimation:
+				m_State->action = PacmanState::Action::Dying;
+				m_State->movingFrame = 0;
 			}
 		}
 	}
@@ -231,17 +240,8 @@ namespace Game
 	{
 		if(m_State->movingFrame < PacmanConstants::dyingAnimationLength)
 			m_State->movingFrame++;
-		if(m_State->movingFrame >= PacmanConstants::dyingAnimationLength)
-			Messager::Fire(make_shared<LogicEvent>
-				(
-					Event::Key
-					(
-						static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
-						static_cast<int>(GameEventId::PacmanFinishesDyingAnimation),
-						m_EntityId
-					),
-					nullptr
-					));
+		if(m_State->movingFrame >= PacmanConstants::dyingAnimationLength) // Kill yourself
+			Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::DELETE_ENTITY)), Engine::EntityEvent::Type::Delete, L"Pacman", m_EntityId, nullptr));
 	}
 
 	void PacmanLogicComponent::TryMove(shared_ptr<PacmanInputMoveEvent> ev) // Should split that function

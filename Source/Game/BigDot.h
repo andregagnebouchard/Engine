@@ -7,6 +7,10 @@
 using namespace Engine;
 namespace Game
 {
+	namespace BigDotConstants
+	{
+		const int frameBetweenEachBlink = 5;
+	}
 	class BigDotGraphicComponent : public IComponent
 	{
 	public:

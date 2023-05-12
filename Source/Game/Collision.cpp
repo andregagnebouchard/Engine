@@ -2,10 +2,12 @@
 #include <Engine\EventDefinition.h>
 #include <Engine\Messager.h>
 #include <Engine\IGameLogicEvent.h>
+#include <Engine\EntityIdCounter.h>
 #include "Collision.h"
 #include "CollisionEvent.h"
 #include "GameEventIds.h"
 #include "StateContainer.h"
+#include "EntityCreatedPayload.h"
 #include <functional>
 using namespace Engine;
 namespace Game
@@ -69,14 +71,27 @@ namespace Game
 	}
 	void CollisionLogicComponent::OnCollisionPacmanChasingGhost(int pacmanEntityId, int blueGhostEntityId)
 	{
+		// That's gonna make the ghost stop moving, and make pacman uncontrollable, until PACMAN starts its animation
 		Engine::Messager::Fire(
 			make_shared<Engine::LogicEvent>(
 				Engine::Event::Key(
 					static_cast<int>(Engine::EventDefinition::Id::GAME_LOGIC),
-					static_cast<int>(GameEventId::GhostKillPacman),
+					static_cast<int>(GameEventId::GhostTouchesPacman),
 					pacmanEntityId
 				),
 				nullptr));
+
+		// Delay pacman death animation by a constant
+		Engine::Messager::Fire(
+			make_shared<Engine::EntityEvent>(
+				Engine::Event::Key(
+					static_cast<int>(Engine::EventDefinition::Id::CREATE_ENTITY)), 
+				Engine::EntityEvent::Type::Create, 
+				L"DelayPacmanDeathEvent", 
+				EntityIdCounter::GenerateEntityId(), 
+				make_shared<DelayedEventCreatedPayload>(
+					Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)),
+					CollisionConstants::frameBetweenGhostTouchesPacmanAndPacmanStartDying)));
 	}
 	void CollisionLogicComponent::OnCollisionPacmanSmallDot(int pacmanEntityId, int dotEntityId)
 	{
@@ -86,7 +101,7 @@ namespace Game
 				Engine::EntityEvent::Type::Delete, 
 				L"SmallDot", 
 				dotEntityId, 
-				Engine::Point{ -1, -1 }));
+				nullptr));
 	}
 
 	void CollisionLogicComponent::OnCollisionPacmanBigDot(int pacmanEntityId, int bigDotEntityId)
@@ -97,7 +112,7 @@ namespace Game
 				Engine::EntityEvent::Type::Delete,
 				L"BigDot",
 				bigDotEntityId,
-				Engine::Point{ -1, -1 }));
+				nullptr));
 
 		Engine::Messager::Fire(
 			make_shared<Engine::LogicEvent>(
