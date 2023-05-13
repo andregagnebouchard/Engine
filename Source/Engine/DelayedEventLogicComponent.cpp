@@ -13,7 +13,7 @@ namespace Engine
 	{
 	}
 
-	void DelayedEventLogicComponent::Update(float dt)
+	void DelayedEventLogicComponent::Update()
 	{
 		m_TickCounter++;
 		if (m_TickCounter >= m_DelayTick)

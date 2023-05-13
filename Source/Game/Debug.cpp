@@ -16,7 +16,7 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_O_PRESS)));
 	}
 
-	void DebugInputComponent::Update(float dt)
+	void DebugInputComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();
@@ -46,7 +46,7 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::ToggleDebugModeInput)));
 	}
 
-	void DebugLogicComponent::Update(float dt)
+	void DebugLogicComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();

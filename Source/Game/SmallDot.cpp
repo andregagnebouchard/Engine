@@ -11,7 +11,7 @@ namespace Game
 	{
 	}
 
-	void SmallDotGraphicComponent::Update(float dt)
+	void SmallDotGraphicComponent::Update()
 	{
 		const SmallDotState* state = m_States->GetData(m_EntityId);
 		Messager::Fire(make_shared<RenderSpriteEvent>(

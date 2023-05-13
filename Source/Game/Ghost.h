@@ -37,7 +37,7 @@ namespace Game
 		~GhostLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override;
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"GhostLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
@@ -66,7 +66,7 @@ namespace Game
 		~GhostGraphicComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"GhostGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }

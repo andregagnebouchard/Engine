@@ -15,7 +15,7 @@ namespace Engine
 
 		void Init() override {};
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"DelayedEventLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }

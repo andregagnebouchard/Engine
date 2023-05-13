@@ -16,7 +16,7 @@ namespace Game
 		~CollisionLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
-		void Update(float dt) override {}; // Events are handled synchronously for this one, no need for update
+		void Update() override {}; // Events are handled synchronously for this one, no need for update
 
 		wstring GetName() const override { return L"CollisionLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }

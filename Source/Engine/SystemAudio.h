@@ -16,7 +16,7 @@ namespace Engine
     // ISystem
     void Init() override;
     void Shutdown() override;
-    void Update(float dt) override;
+    void Update() override;
     void Add(shared_ptr<IComponent> component) override;
     void Remove(shared_ptr<IComponent> component) override;
 

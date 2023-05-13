@@ -12,7 +12,7 @@ namespace Game
 		~DebugInputComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"DebugInputComponent"; }
 		Type GetType() const override { return IComponent::Type::Input; }
@@ -29,7 +29,7 @@ namespace Game
 		~DebugLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"DebugLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }

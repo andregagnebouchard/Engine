@@ -11,7 +11,7 @@ namespace Game
 	{
 	}
 
-	void PauseGraphicComponent::Update(float dt)
+	void PauseGraphicComponent::Update()
 	{
 		if(m_State->isPaused)
 			Messager::Fire(make_shared<RenderSpriteEvent>(
@@ -31,7 +31,7 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_P_PRESS)));
 	}
 
-	void PauseInputComponent::Update(float dt)
+	void PauseInputComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();
@@ -62,7 +62,7 @@ namespace Game
 
 
 
-	void PauseLogicComponent::Update(float dt)
+	void PauseLogicComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) 
 		{

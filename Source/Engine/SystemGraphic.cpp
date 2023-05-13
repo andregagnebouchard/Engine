@@ -31,13 +31,13 @@ namespace Engine
     Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
 	}
 
-	void SystemGraphic::Update(float dt)
+	void SystemGraphic::Update()
 	{
     m_RenderWindow->clear();
 
 		// Update all components first so they can fire their render event
 		for (auto &component : m_Components)
-			component.second->Update(dt);
+			component.second->Update();
 
     while(!m_MsgQueue.Empty())
     {

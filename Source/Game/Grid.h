@@ -14,7 +14,7 @@ namespace Game
 		~GridLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"GridLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
@@ -37,7 +37,7 @@ namespace Game
 		~GridGraphicComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"GridGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }

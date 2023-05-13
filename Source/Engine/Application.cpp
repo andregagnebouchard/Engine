@@ -60,17 +60,14 @@ namespace Engine
 		{
 			float elapsedNs = static_cast<float>((clock::now() - earlier).count());
 			if (elapsedNs < nanoSecondPerFrame) // 
-			{
 				this_thread::sleep_for(chrono::nanoseconds(nanoSecondPerFrame - static_cast<int>(elapsedNs)));
-				elapsedNs = static_cast<float>((clock::now() - earlier).count());
-			}
 			earlier = clock::now();
 
-			m_EntityFactory->Update(elapsedNs);
-			m_SystemInput->Update(elapsedNs);
-			m_SystemLogic->Update(elapsedNs);
-			m_SystemGraphic->Update(elapsedNs);
-			m_SystemAudio->Update(elapsedNs);
+			m_EntityFactory->Update();
+			m_SystemInput->Update();
+			m_SystemLogic->Update();
+			m_SystemGraphic->Update();
+			m_SystemAudio->Update();
 		}
 	}
 

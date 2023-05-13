@@ -17,7 +17,7 @@ namespace Game
 		m_State(state)
 	{
 	};
-	void PacmanGraphicComponent::Update(float dt)
+	void PacmanGraphicComponent::Update()
 	{
 		Messager::Fire(make_shared<RenderSpriteEvent>(
 			Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
@@ -118,7 +118,7 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_RIGHT_PRESS)));
 	}
 
-	void PacmanInputComponent::Update(float dt)
+	void PacmanInputComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();
@@ -199,7 +199,7 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
-	void PacmanLogicComponent::Update(float dt)
+	void PacmanLogicComponent::Update()
 	{
 		if (m_State->action == PacmanState::Action::Dying)
 			UpdateDyingLogic();
@@ -340,7 +340,7 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));
 	}
 
-	void PacmanAudioComponent::Update(float dt)
+	void PacmanAudioComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
 			shared_ptr<Event> event = m_MsgQueue.Front();

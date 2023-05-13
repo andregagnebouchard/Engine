@@ -14,7 +14,7 @@ namespace Game
 		~SmallDotGraphicComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"DotGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }

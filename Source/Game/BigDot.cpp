@@ -11,7 +11,7 @@ namespace Game
 	{
 	}
 
-	void BigDotLogicComponent::Update(float dt)
+	void BigDotLogicComponent::Update()
 	{
 		// Blink
 		BigDotState* state = m_States->GetData(m_EntityId);
@@ -27,7 +27,7 @@ namespace Game
 	{
 	}
 
-	void BigDotGraphicComponent::Update(float dt)
+	void BigDotGraphicComponent::Update()
 	{
 		const BigDotState* state = m_States->GetData(m_EntityId);
 		bool isVisible = state->animationFrame < BigDotConstants::frameBetweenEachBlink;

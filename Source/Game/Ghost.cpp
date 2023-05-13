@@ -16,7 +16,7 @@ namespace Game
 
 	}
 
-	void GhostGraphicComponent::Update(float dt)
+	void GhostGraphicComponent::Update()
 	{
 		if (m_State->action == GhostState::Action::Chasing || m_State->action == GhostState::Action::WatingForPacmanDying)
 			ChasingUpdate();
@@ -210,7 +210,7 @@ namespace Game
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
-	void GhostLogicComponent::Update(float dt)
+	void GhostLogicComponent::Update()
 	{
 		// Tick logic happens after event processing, in case ghost changed state from an event
 		ProcessEvents();

@@ -22,7 +22,7 @@ namespace Engine
 		EntityFactory(shared_ptr<IEntityFactory> gameEntityFactory, shared_ptr<ISystemGraphic> systemGraphic, shared_ptr<ISystemLogic> systemLogic, shared_ptr<ISystemInput> systemInput, shared_ptr<ISystemAudio> systemAudio);
 
 		void Init();
-		void Update(float dt);
+		void Update();
 	private:
 		shared_ptr<IEntity> CreateEntity(shared_ptr<EntityEvent> event);
 		void DeleteEntity(const wstring& name, int entityId);

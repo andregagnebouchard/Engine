@@ -41,7 +41,7 @@ namespace Game
 		~PacmanInputComponent() = default;
 		void Init() override;
 		void Shutdown() override;
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"PacmanInputComponent"; }
 		Type GetType() const override { return IComponent::Type::Input; }
@@ -59,7 +59,7 @@ namespace Game
 		~PacmanLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override;
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"PacmanLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
@@ -84,7 +84,7 @@ namespace Game
 		~PacmanGraphicComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"PacmanGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }
@@ -104,7 +104,7 @@ namespace Game
 		~PacmanAudioComponent() = default;
 		void Init() override;
 		void Shutdown() override;
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"PacmanAudioComponent"; }
 		Type GetType() const override { return IComponent::Type::Audio; }

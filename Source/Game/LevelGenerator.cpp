@@ -15,7 +15,7 @@ namespace Game
 	{
 	};
 
-	void LevelGeneratorLogicComponent::Update(float dt)
+	void LevelGeneratorLogicComponent::Update()
 	{
 		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::CREATE_ENTITY)), Engine::EntityEvent::Type::Create, L"Pacman", EntityIdCounter::GenerateEntityId(), make_shared<PositionPayload>(Point{ 0.0f, 0.0f })));
 		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::CREATE_ENTITY)), Engine::EntityEvent::Type::Create, L"Pause", EntityIdCounter::GenerateEntityId(), nullptr));

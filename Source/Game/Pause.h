@@ -13,7 +13,7 @@ namespace Game
 		~PauseGraphicComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"PauseGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }
@@ -31,7 +31,7 @@ namespace Game
 		~PauseInputComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"PauseInputComponent"; }
 		Type GetType() const override { return IComponent::Type::Input; }
@@ -48,7 +48,7 @@ namespace Game
 		~PauseLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		wstring GetName() const override { return L"PauseLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }

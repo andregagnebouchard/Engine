@@ -11,7 +11,7 @@ namespace Game
 		~LevelGeneratorLogicComponent() = default;
 		void Init() override {};
 		void Shutdown() override {};
-		void Update(float dt) override;
+		void Update() override;
 
 		void GenerateSmallDots();
 		void GenerateBigDots();

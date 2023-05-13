@@ -20,7 +20,7 @@ namespace Engine
 	{
 	}
 
-	void SystemInput::Update(float dt)
+	void SystemInput::Update()
 	{
 		sf::Event event;
 		while (m_Window->pollEvent(event))
@@ -36,7 +36,7 @@ namespace Engine
 
 		// Update all components
 		for (auto &component : m_Components)
-			component.second->Update(dt);
+			component.second->Update();
 	}
 
 	void SystemInput::Add(shared_ptr<IComponent> component)

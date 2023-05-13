@@ -17,11 +17,11 @@ namespace Engine
 	{
 	}
 
-	void SystemLogic::Update(float dt)
+	void SystemLogic::Update()
 	{
 		// Update all components
 		for (auto &component : m_Components)
-			component.second->Update(dt);
+			component.second->Update();
 	}
 
 	void SystemLogic::Add(shared_ptr<IComponent> component)

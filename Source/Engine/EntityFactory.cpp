@@ -64,7 +64,7 @@ namespace Engine
 		return m_Entities.at(event->GetEntityId());
 	}
 
-	void EntityFactory::Update(float dt)
+	void EntityFactory::Update()
 	{
 		while (!m_MsgQueue.Empty())
 		{

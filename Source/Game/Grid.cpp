@@ -24,7 +24,7 @@ namespace Game
 		// Subscribe to the move event of ANY entity in the game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), Event::Key::AnyValue));
 	}
-	void GridLogicComponent::Update(float dt)
+	void GridLogicComponent::Update()
 	{
 		while (!m_MsgQueue.Empty())
 		{
@@ -115,7 +115,7 @@ namespace Game
 	{
 	}
 
-	void GridGraphicComponent::Update(float dt)
+	void GridGraphicComponent::Update()
 	{
 		Event::Key k(static_cast<int>(EventDefinition::Id::RENDER_LINE));
 		if (m_DebugState->isDebugModeActive)

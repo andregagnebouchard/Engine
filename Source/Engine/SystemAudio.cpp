@@ -23,11 +23,11 @@ namespace Engine
 		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::AUDIO)));
 	}
 
-	void SystemAudio::Update(float dt)
+	void SystemAudio::Update()
 	{
 		// Update all components first so they can fire their sound event
 		for (auto& component : m_Components)
-			component.second->Update(dt);
+			component.second->Update();
 
 		while (!m_MsgQueue.Empty())
 		{

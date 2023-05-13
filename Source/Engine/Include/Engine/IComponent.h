@@ -17,7 +17,7 @@ namespace Engine
 
 		virtual void Init() = 0; // Called when the entity is created
     virtual void Shutdown() = 0;
-    virtual void Update(float dt) = 0;
+    virtual void Update() = 0;
 
 		virtual wstring GetName() const = 0; // Can we remove this?
 		virtual Type GetType() const = 0; // Can we remove this?
