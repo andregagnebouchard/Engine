@@ -6,17 +6,8 @@
 #include "StringUtil.h"
 namespace Engine
 {
-	SystemInput::SystemInput(shared_ptr<sf::Window> window) :
+	SystemInput::SystemInput(const shared_ptr<sf::Window> window) :
 		m_Window(window)
-	{
-	}
-
-	void SystemInput::Init()
-	{
-
-	}
-
-	void SystemInput::Shutdown()
 	{
 	}
 
@@ -24,62 +15,42 @@ namespace Engine
 	{
 		sf::Event event;
 		while (m_Window->pollEvent(event))
-		{
-			switch (event.type)
-			{
-			case sf::Event::KeyPressed:
-      case sf::Event::KeyReleased:
+			if(event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
 				SignalKeyEvent(event);
-				break;
-			}
-		}
 
 		// Update all components
-		for (auto &component : m_Components)
+		for (const auto &component : m_Components)
 			component.second->Update();
 	}
 
-	void SystemInput::Add(shared_ptr<IComponent> component)
+	void SystemInput::Add(const shared_ptr<IComponent> component)
 	{
 		if (component == nullptr)
 			throw invalid_argument("The parameter \"Component\" is nullptr");
 
-		auto it = m_Components.find(component->GetId());
-		if (it != m_Components.end())
-			throw invalid_argument("The component is already added in SystemInput");
-
-		m_Components[component->GetId()] = component;
+		m_Components.emplace(component->GetId(), component);
 	}
 
-	void SystemInput::Remove(shared_ptr<IComponent> component)
+	void SystemInput::Remove(const shared_ptr<IComponent> component)
 	{
 		if (component == nullptr)
 			throw invalid_argument("The parameter \"Component\" is nullptr");
-
-		auto it = m_Components.find(component->GetId());
-		if (it == m_Components.end())
-			throw invalid_argument("The component is not in SystemInput");
 
 		m_Components.erase(component->GetId());
 	}
 
 	void SystemInput::SignalKeyEvent(const sf::Event &event)
 	{
-    auto toKeyState = [&](const bool isPressed) 
-    {
-      return isPressed ? InputEvent::KeyState::Pressed : InputEvent::KeyState::Released; 
-    };
-
-    InputEvent::KeyState altKeyState = toKeyState(event.key.alt);
-    InputEvent::KeyState controlKeyState = toKeyState(event.key.control);
-    InputEvent::KeyState shiftKeyState = toKeyState(event.key.shift);
-    InputEvent::KeyState systemKeyState = toKeyState(event.key.system);
+		const InputEvent::KeyState altKeyState = event.key.alt ? InputEvent::KeyState::Pressed : InputEvent::KeyState::Released;
+    const InputEvent::KeyState controlKeyState = event.key.control ? InputEvent::KeyState::Pressed : InputEvent::KeyState::Released;
+    const InputEvent::KeyState shiftKeyState = event.key.shift ? InputEvent::KeyState::Pressed : InputEvent::KeyState::Released;
+    const InputEvent::KeyState systemKeyState = event.key.system ? InputEvent::KeyState::Pressed : InputEvent::KeyState::Released;
 
     //sf::Keyboard::key and our events matches 1:1
     // SFML does not differentiate pressed and released key, but we do
 	  // We apply an offset to the numerical enum value if it is released to locate its corresponding id
-    int offset = event.type == sf::Event::KeyPressed ? 0 : EventDefinition::KEY_RELEASED_OFFSET;
-    int id = offset + static_cast<int>(event.key.code);
+    const int offset = event.type == sf::Event::KeyPressed ? 0 : EventDefinition::KEY_RELEASED_OFFSET;
+    const int id = offset + static_cast<int>(event.key.code);
     Messager::Fire(make_shared<InputEvent>(static_cast<Event::Key>(id), altKeyState, controlKeyState, shiftKeyState, systemKeyState));
 	}
 }

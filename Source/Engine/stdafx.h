@@ -13,8 +13,6 @@
 #include <chrono>
 
 #include <Engine\Typedef.h>
-#include "macro.h"
-#include "constant.h"
 
 using namespace std; // Yup!
 

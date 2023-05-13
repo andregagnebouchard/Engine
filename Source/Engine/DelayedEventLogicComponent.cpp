@@ -18,10 +18,12 @@ namespace Engine
 		m_TickCounter++;
 		if (m_TickCounter >= m_DelayTick)
 		{
+			// Fire the event
 			Engine::Messager::Fire(
 				make_shared<Engine::LogicEvent>(
 					m_KeyToEmit, nullptr));
 
+			// Destroy yourself
 			Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::DELETE_ENTITY)), Engine::EntityEvent::Type::Delete, L"DelayedEvent", m_EntityId, nullptr));
 		}
 	}

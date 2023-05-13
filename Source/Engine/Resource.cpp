@@ -19,24 +19,11 @@ namespace Engine
     m_Size(0),
     m_Type(type)
   {
-    if (m_Name.length() > RESOURCE_NAME_CHAR_MAX)
-      throw invalid_argument("Resource name exceeds character limit of \"" + to_string(RESOURCE_NAME_CHAR_MAX) + "\" :\"" + StringUtil::ToStr(name));
+    if (m_Name.length() > ResourceConstants::maxResourceNameLen)
+      throw invalid_argument("Resource name exceeds character limit of \"" + to_string(ResourceConstants::maxResourceNameLen) + "\" :\"" + StringUtil::ToStr(name));
 
 		m_Size = FileUtil::GetFileSize(filepath);
 		m_Type = FileExtensionToResourceType(FileUtil::GetExtension(filepath));
-  }
-
-  wstring Resource::GetFilePath() const
-  {
-    return m_FilePath;
-  }
-	Byte Resource::GetSize() const
-  {
-    return m_Size;
-  }
-  Resource::Type Resource::GetType() const
-  {
-    return m_Type;
   }
 
   AudioResource::AudioResource(const wstring& filepath, const wstring& name, sf::Sound* sound) :
@@ -45,23 +32,9 @@ namespace Engine
   {
   }
 
-  sf::Sound* AudioResource::GetSound() const
-  {
-    return m_Sound;
-  }
-
-	wstring Resource::GetName() const
-	{
-		return m_Name;
-	}
   GraphicResource::GraphicResource(const wstring& filepath, const wstring& name, sf::Sprite* sprite) :
     Resource(filepath, name, Resource::Type::Graphic),
     m_Sprite(sprite)
   {
-  }
-
-  sf::Sprite* GraphicResource::GetSprite() const
-  {
-    return m_Sprite;
   }
 }

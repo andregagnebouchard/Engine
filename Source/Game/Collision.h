@@ -1,6 +1,6 @@
 #pragma once
 #include <Engine\IComponent.h>
-#include "Entity.h"
+#include "EntityTypes.h"
 using namespace Engine;
 namespace Game
 {
@@ -12,7 +12,7 @@ namespace Game
 	class CollisionLogicComponent : public IComponent
 	{
 	public:
-		CollisionLogicComponent(int entityId, StateContainer *stateContainer, const unordered_map<int, Entity::Type> *entityIdToType);
+		CollisionLogicComponent(int entityId, StateContainer *stateContainer, const unordered_map<int, EntityType> *entityIdToType);
 		~CollisionLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override {};
@@ -31,6 +31,6 @@ namespace Game
 		int m_EntityId;
 		function<void(shared_ptr<Event>)> m_Callback;
 		StateContainer* m_StateContainer; // Owner is EntityFactory
-		const unordered_map<int, Entity::Type>* m_EntityIdToType; // Owner is EntityFactory
+		const unordered_map<int, EntityType>* m_EntityIdToType; // Owner is EntityFactory
 	};
 }

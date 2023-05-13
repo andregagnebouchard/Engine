@@ -8,14 +8,14 @@
 #include <memory>
 namespace Engine
 {
-	SystemAudio::SystemAudio(shared_ptr<ResourceCache> resourceCache) :
+	SystemAudio::SystemAudio(const shared_ptr<ResourceCache> resourceCache) :
 		m_ResourceCache(resourceCache)
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::AUDIO)));
 	}
 
 	void SystemAudio::Init()
 	{
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::AUDIO)));
 	}
 
 	void SystemAudio::Shutdown()
@@ -31,7 +31,7 @@ namespace Engine
 
 		while (!m_MsgQueue.Empty())
 		{
-			shared_ptr<Event>& event = m_MsgQueue.Front();
+			const shared_ptr<Event>& event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 
 			if (event->GetType() == Event::Type::Audio)
@@ -41,16 +41,12 @@ namespace Engine
 		}
 	}
 
-	void SystemAudio::Add(shared_ptr<IComponent> component)
+	void SystemAudio::Add(const shared_ptr<IComponent> component)
 	{
 		if (component == nullptr)
 			throw invalid_argument("The parameter \"Component\" is nullptr");
 
-		auto it = m_Components.find(component->GetId());
-		if (it != m_Components.end())
-			throw invalid_argument("The component is already added in SystemSound");
-
-		m_Components[component->GetId()] = component;
+		m_Components.emplace(component->GetId(), component);
 	}
 
 	void SystemAudio::Remove(shared_ptr<IComponent> component)
@@ -58,20 +54,16 @@ namespace Engine
 		if (component == nullptr)
 			throw invalid_argument("The parameter \"Component\" is nullptr");
 
-		auto it = m_Components.find(component->GetId());
-		if (it == m_Components.end())
-			throw invalid_argument("The component is not in SystemSound");
-
 		m_Components.erase(component->GetId());
 	}
 
-	void SystemAudio::HandleAudioEvent(shared_ptr<AudioEvent> event)
+	void SystemAudio::HandleAudioEvent(const shared_ptr<AudioEvent> event) const
 	{
 		Resource* resource = m_ResourceCache->GetResource((event->GetResourceName()));
 		if (resource->GetType() != Resource::Type::Audio)
 			throw invalid_argument("A non-audio resource was asked to be played: \"" + StringUtil::ToStr(resource->GetName()));
 
-		AudioResource* audioResource = dynamic_cast<AudioResource*>(resource);
+		const AudioResource* const audioResource = dynamic_cast<AudioResource*>(resource);
 
 		audioResource->GetSound()->play();
 	}

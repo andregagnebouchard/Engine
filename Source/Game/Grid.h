@@ -24,7 +24,7 @@ namespace Game
 		void HandleDeleteEntityEvent(shared_ptr<EntityEvent> ev);
 		void HandleMoveEvent(shared_ptr<LogicEvent> event);
 		MessageQueue m_MsgQueue;
-		unordered_map<int, CellLocation> m_EntityToLocation; // I don't like using the heap here
+		unordered_map<int, WorldGrid::CellLocation> m_EntityToLocation; // I don't like using the heap here
 		WorldGrid* m_Grid; // Owner is entity factory
 		int m_EntityId;
 	};

@@ -2,7 +2,7 @@
 #include "Ghost.h"
 #include "GameEventIds.h"
 #include <Engine\EventDefinition.h>
-#include "Entity.h"
+#include "EntityTypes.h"
 #include "MoveEvent.h"
 using namespace Engine;
 namespace Game
@@ -186,7 +186,7 @@ namespace Game
 	}
 
 	//================================================Logic==========================================================================================================
-	GhostLogicComponent::GhostLogicComponent(int entityId, GhostState* state, const WorldGrid* worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType, const IGhostMovementBehaviour* movementBehaviour) :
+	GhostLogicComponent::GhostLogicComponent(int entityId, GhostState* state, const WorldGrid* worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType, const IGhostMovementBehaviour* movementBehaviour) :
 		m_EntityId(entityId),
 		m_State(state),
 		m_WorldGrid(worldGrid),
@@ -271,8 +271,8 @@ namespace Game
 
 	void GhostLogicComponent::ChasingLogicUpdate()
 	{
-		CellLocation currentLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX, m_State->positionY);
-		CellLocation targetLocation = m_MovementBehaviour->ChooseNextCellToMove();
+		WorldGrid::CellLocation currentLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX, m_State->positionY);
+		WorldGrid::CellLocation targetLocation = m_MovementBehaviour->ChooseNextCellToMove();
 		float deltaX = 0;
 		float deltaY = 0;
 		float initialX = m_State->positionX;

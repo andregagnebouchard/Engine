@@ -16,7 +16,8 @@ namespace Engine
     m_Key()
   {
   }
-  InputEvent::InputEvent(Event::Key key, KeyState altKeyState, KeyState controlKeyState, KeyState shiftKeyState, KeyState systemKeyState) :
+
+  InputEvent::InputEvent(const Event::Key &key, KeyState altKeyState, KeyState controlKeyState, KeyState shiftKeyState, KeyState systemKeyState) :
     Event(key),
     m_AltKeyState(altKeyState),
     m_ControlKeyState(controlKeyState),
@@ -25,7 +26,7 @@ namespace Engine
   {
   }
 
-  RenderSpriteEvent::RenderSpriteEvent(Event::Key key, const wstring& resourceName, const float x, const float y) :
+  RenderSpriteEvent::RenderSpriteEvent(const Event::Key &key, const wstring& resourceName, const float x, const float y) :
     Event(key), 
     m_ResourceName(resourceName),
     m_XPosition(x),
@@ -41,57 +42,7 @@ namespace Engine
 
   }
 
-  InputEvent::KeyState InputEvent::GetAltKeyState() const
-  {
-    return m_AltKeyState;
-  }
-  InputEvent::KeyState InputEvent::GetControlKeyState() const
-  {
-    return m_ControlKeyState;
-  }
-  InputEvent::KeyState InputEvent::GetShiftKeyState() const
-  {
-    return m_ShiftKeyState;
-  }
-  InputEvent::KeyState InputEvent::GetSystemKeyState() const
-  {
-    return m_SystemKeyState;
-  }
-
-  wstring RenderSpriteEvent::GetResourceName() const 
-  { 
-    return m_ResourceName; 
-  }
-
-  float RenderSpriteEvent::GetXPosition() const
-  {
-    return m_XPosition;
-  }
-  float RenderSpriteEvent::GetYPosition() const
-  {
-    return m_YPosition;
-  }
-
-  Event::Key Event::GetKey() const
-  { 
-    return m_Key;
-  }
-
-  Event::Type Event::GetType() const
-  {
-    return Event::Type::Unknown;
-  }
-  Event::Type RenderSpriteEvent::GetType() const
-  { 
-    return Event::Type::Render; 
-  }
-
-  Event::Type InputEvent::GetType() const
-  {
-    return Event::Type::Input;
-  }
-
-	EntityEvent::EntityEvent(Event::Key key, EntityEvent::Type type, const wstring &name, int entityId, shared_ptr<IEntityCreatedPayload> payload) :
+	EntityEvent::EntityEvent(const Event::Key &key, EntityEvent::Type type, const wstring &name, int entityId, const shared_ptr<IEntityCreatedPayload> payload) :
 		Event(key),
 		m_Type(type),
 		m_Name(name),
@@ -100,21 +51,7 @@ namespace Engine
 	{
 	}
 
-	EntityEvent::Type EntityEvent::GetActionType() const
-	{
-		return m_Type;
-	}
-	wstring EntityEvent::GetName() const
-	{
-		return m_Name;
-	}
-
-	Event::Type EntityEvent::GetType() const
-	{
-		return Event::Type::Entity;
-	}
-
-  LogicEvent::LogicEvent(Event::Key key, shared_ptr<IGameLogicEvent> gameLogicEvent) : 
+  LogicEvent::LogicEvent(const Event::Key &key, const shared_ptr<IGameLogicEvent> gameLogicEvent) : 
     Event(key),
     m_GameLogicEventId(key.second), 
     m_EntityId(key.third),
@@ -122,38 +59,9 @@ namespace Engine
   {
   }
 
-  Event::Type LogicEvent::GetType() const
-  {
-    return Event::Type::Logic;
-  }
-
-  int LogicEvent::GetEntityId() const
-  {
-    return m_EntityId;
-  }
-
-  int LogicEvent::GetGameLogicEventId() const
-  {
-    return m_GameLogicEventId;
-  }
-
-  shared_ptr<IGameLogicEvent> LogicEvent::GetGameLogicEvent() const
-  {
-    return m_GameLogicEvent;
-  }
-
-  AudioEvent::AudioEvent(Event::Key key, const wstring& resourceName) :
+  AudioEvent::AudioEvent(const Event::Key &key, const wstring& resourceName) :
     Event(key),
     m_ResourceName(resourceName)
   {
-
-  }
-  wstring AudioEvent::GetResourceName() const
-  {
-    return m_ResourceName;
-  }
-  Event::Type AudioEvent::GetType() const
-  {
-    return Event::Type::Audio;
   }
 }

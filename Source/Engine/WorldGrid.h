@@ -4,16 +4,16 @@
 using namespace std;
 namespace Engine
 {
-	struct CellLocation // Outside the class, as we do not need this templated
-	{
-		int col = 0;
-		int row = 0;
-	};
-
 	// Could use template for the cell value as this is the engine, but this would be over-engineering
 	class WorldGrid
 	{
 	public:
+		struct CellLocation
+		{
+			int col = 0;
+			int row = 0;
+		};
+
 		WorldGrid(float cellSizeX, float cellSizeY);
 
 		static const int EmptyGridValue = -1;
@@ -29,8 +29,9 @@ namespace Engine
 		float GetCellSizeX() const { return m_CellSizeX; };
 		float GetCellSizey() const { return m_CellSizeY; };
 	private:
+		// Stack memory
 		array<array<int, colQty>, rowQty> m_Grid;
-		float m_CellSizeX;
-		float m_CellSizeY;
+		const float m_CellSizeX;
+		const float m_CellSizeY;
 	};
 }

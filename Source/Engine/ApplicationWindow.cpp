@@ -1,13 +1,13 @@
 #include "stdafx.h"
-#include "Window.h"
+#include "ApplicationWindow.h"
 namespace Engine
 {
-	Window::Window(shared_ptr<sf::Window> window) :
+	ApplicationWindow::ApplicationWindow(const shared_ptr<sf::Window> window) :
 		m_Window(window)
 	{
 	}
 
-	void Window::Resize(uint width, uint height)
+	void ApplicationWindow::Resize(uint width, uint height)
 	{
 		//TODO: Resize OpenGL viewport glViewport(0, 0, width, height); see https://learnopengl.com/Getting-started/Hello-Window
 		if (width * height == 0)
@@ -18,7 +18,7 @@ namespace Engine
 
 		m_Window->setSize(sf::Vector2u(width, height));
 	}
-	void Window::SetVisible(bool isVisible)
+	void ApplicationWindow::SetVisible(bool isVisible)
 	{
 		m_Window->setVisible(isVisible);
 	}

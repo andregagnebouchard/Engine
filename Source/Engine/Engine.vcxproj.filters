@@ -37,15 +37,12 @@
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{8f46f020-531b-4c5f-9bf2-3ae8fc879f3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameUtil">
+      <UniqueIdentifier>{eb4d930b-9cf8-49ff-91b6-0db4cdf5f71b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="macro.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="constant.h">
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="WindowsInclude.h">
@@ -84,23 +81,8 @@
     <ClInclude Include="ApplicationOption.h">
       <Filter>Engine\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Startup.h">
-      <Filter>Engine\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Engine\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityFactory.h">
-      <Filter>Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Engine\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="SystemLogic.h">
       <Filter>Engine\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\All.h">
-      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\Engine\Export.h">
       <Filter>Include</Filter>
@@ -112,9 +94,6 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\Engine\IComponent.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\IEntity.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\Engine\ISystem.h">
@@ -150,23 +129,32 @@
     <ClInclude Include="ISystemAudio.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="PackedArray.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldGrid.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityIdCounter.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="math.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DelayedEventLogicComponent.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="IEntityCreatedPayload.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="DelayedEventLogicComponent.h">
+      <Filter>Engine\GameUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="PackedArray.h">
+      <Filter>Engine\GameUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldGrid.h">
+      <Filter>Engine\GameUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityIdCounter.h">
+      <Filter>Engine\GameUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineEntityFactory.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationWindow.h">
+      <Filter>Engine\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,20 +185,11 @@
     <ClCompile Include="Application.cpp">
       <Filter>Engine\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Startup.cpp">
-      <Filter>Engine\Application</Filter>
-    </ClCompile>
     <ClCompile Include="ApplicationOption.cpp">
       <Filter>Engine\Application</Filter>
     </ClCompile>
     <ClCompile Include="Event.cpp">
       <Filter>Engine\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Engine\Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityFactory.cpp">
-      <Filter>Engine\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Engine\Entity</Filter>
@@ -221,14 +200,20 @@
     <ClCompile Include="SystemAudio.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="EntityIdCounter.cpp">
-      <Filter>Include</Filter>
+    <ClCompile Include="DelayedEventLogicComponent.cpp">
+      <Filter>Engine\GameUtil</Filter>
     </ClCompile>
     <ClCompile Include="WorldGrid.cpp">
-      <Filter>Include</Filter>
+      <Filter>Engine\GameUtil</Filter>
     </ClCompile>
-    <ClCompile Include="DelayedEventLogicComponent.cpp">
-      <Filter>Include</Filter>
+    <ClCompile Include="EntityIdCounter.cpp">
+      <Filter>Engine\GameUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineEntityFactory.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationWindow.cpp">
+      <Filter>Engine\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

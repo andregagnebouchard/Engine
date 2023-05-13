@@ -4,7 +4,7 @@
 using namespace std;
 namespace Engine
 {
-	// This class with throw a logic event with the input key after X ticks
+	// This class will throw a logic event with the input key after X ticks
 	// I have a feeling that this component would be easier if the same logic component could be used to schedule multiple events, instead
 	// of having to create one instance for each schedule
 	class DelayedEventLogicComponent : public IComponent

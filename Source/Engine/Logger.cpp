@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Logger.h"
 using namespace Engine;
-//=================================================================================================
 void Logger::Init()
 {
 	log4cplus::Initializer initializer;
@@ -10,11 +9,11 @@ void Logger::Init()
 	config.configure();
 
 	log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("Engine"));
-	log4cplus::SharedFileAppenderPtr loggerFileAppender(NEW log4cplus::RollingFileAppender(LOG4CPLUS_TEXT("log//Engine.log"), 5 * 1024, 5, false, true));
+	log4cplus::SharedFileAppenderPtr loggerFileAppender(new log4cplus::RollingFileAppender(LOG4CPLUS_TEXT("log//Engine.log"), 5 * 1024, 5, false, true));
 	logger.addAppender(log4cplus::SharedAppenderPtr(loggerFileAppender.get()));
 	LOG4CPLUS_INFO(logger, LOG4CPLUS_TEXT("Logger initialized"));
 }
-//=================================================================================================
+
 void Logger::Log(const sf::String &msg, Level level)
 {
 	log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("Engine"));
@@ -47,7 +46,7 @@ void Logger::Log(const sf::String &msg, Level level)
 		}
 	}
 }
-//=================================================================================================
+
 void Logger::SetLogLevel(Level level)
 {
 	log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("Engine"));
@@ -75,4 +74,3 @@ void Logger::SetLogLevel(Level level)
 		}
 	}
 }
-//=================================================================================================

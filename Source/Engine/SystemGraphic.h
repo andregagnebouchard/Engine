@@ -11,18 +11,18 @@ namespace Engine
   class SystemGraphic : public ISystemGraphic
   {
   public:
-    SystemGraphic(shared_ptr<sf::RenderWindow> renderWindow, shared_ptr<IWindow> window, shared_ptr<ResourceCache> resourceCache);
+    SystemGraphic(const shared_ptr<sf::RenderWindow> renderWindow, const shared_ptr<IWindow> window, const shared_ptr<ResourceCache> resourceCache);
     ~SystemGraphic() = default;
 		
 		// ISystem
     void Init() override;
     void Shutdown() override;
     void Update() override;
-		void Add(shared_ptr<IComponent> component) override;
-		void Remove(shared_ptr<IComponent> component) override;
+		void Add(const shared_ptr<IComponent> component) override;
+		void Remove(const shared_ptr<IComponent> component) override;
 
 		// ISystemGraphic
-		shared_ptr<IWindow> GetWindow() const override;
+    shared_ptr<IWindow> GetWindow() const override { return m_Window; };
   private:
     void RenderSprite(shared_ptr<Event> event);
     void RenderLine(shared_ptr<Event> event);

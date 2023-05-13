@@ -18,105 +18,53 @@ namespace Engine
 		if (xml_doc.LoadFile(StringUtil::ToStr(filename).c_str()) != XML_SUCCESS)
 			throw invalid_argument("Error while loading XML file:" + StringUtil::ToStr(filename));
 
-		auto Throw = [&filename](const string &parameter) {throw invalid_argument("Did not find a value for the parameter \"" + parameter + "\" in the file \"" + StringUtil::ToStr(filename)); };
 
 		// Window
-		if (XMLElement* window = xml_doc.FirstChildElement("WINDOW"))
+		if (const XMLElement* window = xml_doc.FirstChildElement("WINDOW"))
 		{
-			if (const char* width = window->Attribute("Width")) m_WindowWidth = atoi(width); else Throw("WINDOW::Width");
-			if (const char* height = window->Attribute("Height")) m_WindowHeight = atoi(height); else Throw("WINDOW::Height");
-			if (const char* name = window->Attribute("Name")) m_WindowName = name; else Throw("WINDOW::Name");
+			if (const char* width = window->Attribute("Width")) 
+				m_WindowWidth = atoi(width); 
+			else 
+				throw invalid_argument("Did not find a value for WINDOW::Width in the file \"" + StringUtil::ToStr(filename));
+
+			if (const char* height = window->Attribute("Height")) 
+				m_WindowHeight = atoi(height); 
+			else 
+				throw invalid_argument("Did not find a value for WINDOW::Height in the file \"" + StringUtil::ToStr(filename));
+
+			if (const char* name = window->Attribute("Name")) 
+				m_WindowName = name; 
+			else 
+				throw invalid_argument("Did not find a value for WINDOW::Name in the file \"" + StringUtil::ToStr(filename));
 		}
 		else
-			Throw("WINDOW");
+			throw invalid_argument("Did not find a value for WINDOW in the file \"" + StringUtil::ToStr(filename));
 
 		// Resource
-		if (XMLElement* resources = xml_doc.FirstChildElement("RESOURCES"))
+		if (const XMLElement* resources = xml_doc.FirstChildElement("RESOURCES"))
 		{
 			for (auto resourceNode = resources->FirstChildElement(); resourceNode != NULL; resourceNode = resourceNode->NextSiblingElement())
 			{
 				const char *name = resourceNode->Attribute("Name");
 				const char *path = resourceNode->Attribute("Path");
-				if (name == nullptr) Throw("RESSOURCES::Name");
-				if (path == nullptr) Throw("RESSOURCES::Path");
+				if (name == nullptr) 
+					throw invalid_argument("Did not find a value for RESSOURCES::Name in the file \"" + StringUtil::ToStr(filename));
+				if (path == nullptr) 
+					throw invalid_argument("Did not find a value for RESSOURCES::Path in the file \"" + StringUtil::ToStr(filename));
+
 				m_ResourceNameToFilepath.insert(make_pair(StringUtil::ToWStr(name), StringUtil::ToWStr(path)));
 			}
 		}
 		else
 			// Not having any ressource is "technically" not a mistake
 			Logger::Log("Did not find any resource in the file \"" + StringUtil::ToStr(filename), Logger::Level::Warning);
-
-		// Entity
-		if (XMLElement* entities = xml_doc.FirstChildElement("ENTITIES"))
-		{
-			for (auto entityNode = entities->FirstChildElement(); entityNode != NULL; entityNode = entityNode->NextSiblingElement())
-			{
-				const char *name = entityNode->Attribute("Name");
-				const char *logicComponent = entityNode->Attribute("LogicComponent");
-				const char *graphicComponent = entityNode->Attribute("GraphicComponent");
-				const char *inputComponent = entityNode->Attribute("InputComponent");
-
-				if (name == nullptr) Throw("ENTITIES::Name");
-
-				vector<wstring> components = { StringUtil::ToWStr(logicComponent), StringUtil::ToWStr(graphicComponent), StringUtil::ToWStr(inputComponent) };
-				if(components.empty())
-					Logger::Log("The entity \"" + StringUtil::ToStr(name) + "\" declared in the file \"" + StringUtil::ToStr(filename) + "\" do not have any component", Logger::Level::Warning);
-
-				m_Entities.push_back(make_shared<EntityDeclaration>());
-				m_Entities.back()->componentNames = components;
-				m_Entities.back()->name = StringUtil::ToWStr(name);
-			}
-		}
-		else
-			// Not having any entity is "technically" not a mistake
-			Logger::Log("Did not find any entity in the file \"" + StringUtil::ToStr(filename), Logger::Level::Warning);
 	}
 
 	ApplicationOption::ApplicationOption() :
-		m_WindowWidth(640),
+		m_WindowWidth(640), // Default value if not provided by the file option
 		m_WindowHeight(480),
 		m_WindowName("Application"),
 		m_IsWindowVisible(true)
 	{
-	}
-		
-	void ApplicationOption::SetWindowWidth(int width)
-	{
-		m_WindowWidth = width;
-	}
-	int ApplicationOption::GetWindowWidth() const
-	{
-		return m_WindowWidth;
-	}
-	void ApplicationOption::SetWindowHeight(int height)
-	{
-		m_WindowHeight = height;
-	}
-	int ApplicationOption::GetWindowHeight() const
-	{
-		return m_WindowHeight;
-	}
-	void ApplicationOption::SetWindowName(const string &name)
-	{
-		m_WindowName = name;
-	}
-	string ApplicationOption::GetWindowName() const
-	{
-		return m_WindowName;
-	}
-
-	vector<shared_ptr<IApplicationOption::EntityDeclaration>> ApplicationOption::GetEntities() const
-	{
-		return m_Entities;
-	}
-
-	void ApplicationOption::AddEntity(shared_ptr<EntityDeclaration> entity)
-	{
-		m_Entities.push_back(entity);
-	}
-
-	unordered_map<wstring, wstring> ApplicationOption::GetResourceNameToFilepath() const
-	{
-		return m_ResourceNameToFilepath;
 	}
 }

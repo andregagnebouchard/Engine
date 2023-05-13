@@ -13,38 +13,40 @@
 #include "EventDefinition.h"
 namespace Engine
 {
-  SystemGraphic::SystemGraphic(shared_ptr<sf::RenderWindow> renderWindow, shared_ptr<IWindow> window, shared_ptr<ResourceCache> resourceCache) :
+  SystemGraphic::SystemGraphic(const shared_ptr<sf::RenderWindow> renderWindow, const shared_ptr<IWindow> window, const shared_ptr<ResourceCache> resourceCache) :
     m_Window(window),
     m_ResourceCache(resourceCache),
 		m_RenderWindow(renderWindow)
 	{
-    Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
 	}
 
 	void SystemGraphic::Init()
 	{
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
+		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
 	}
 
 	void SystemGraphic::Shutdown()
 	{
     Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
+		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
 	}
 
 	void SystemGraphic::Update()
 	{
+		// Clear the screen to black
     m_RenderWindow->clear();
 
 		// Update all components first so they can fire their render event
-		for (auto &component : m_Components)
+		for (const auto &component : m_Components)
 			component.second->Update();
 
     while(!m_MsgQueue.Empty())
     {
-      shared_ptr<Event> &event = m_MsgQueue.Front();
+      const shared_ptr<Event> &event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 
-			EventDefinition::Id eventId = static_cast<EventDefinition::Id>(event->GetKey().first);
+			const EventDefinition::Id eventId = static_cast<EventDefinition::Id>(event->GetKey().first);
 			if (eventId == EventDefinition::Id::RENDER_SPRITE)
 				RenderSprite(event);
 			else if (eventId == EventDefinition::Id::RENDER_LINE)
@@ -53,50 +55,41 @@ namespace Engine
     m_RenderWindow->display();
 	}
 
-	void SystemGraphic::Add(shared_ptr<IComponent> component)
+	void SystemGraphic::Add(const shared_ptr<IComponent> component)
 	{
 		if (component == nullptr)
 			throw invalid_argument("The parameter \"Component\" is nullptr");
 
-		auto it = m_Components.find(component->GetId());
-		if (it != m_Components.end())
-			throw invalid_argument("The component is already added in SystemGraphic");
-
-		m_Components[component->GetId()] = component;
+		m_Components.emplace(component->GetId(), component);
 	}
 
-	void SystemGraphic::Remove(shared_ptr<IComponent> component)
+	void SystemGraphic::Remove(const shared_ptr<IComponent> component)
 	{
 		if (component == nullptr)
 			throw invalid_argument("The parameter \"Component\" is nullptr");
-
-		auto it = m_Components.find(component->GetId());
-		if (it == m_Components.end())
-			throw invalid_argument("The component is not in SystemGraphic");
 
 		m_Components.erase(component->GetId());
 	}
 
-	void SystemGraphic::RenderSprite(shared_ptr<Event> event)
+	void SystemGraphic::RenderSprite(const shared_ptr<Event> event)
 	{
-		auto ev = dynamic_pointer_cast<RenderSpriteEvent>(event);
+		const auto ev = dynamic_pointer_cast<RenderSpriteEvent>(event);
 		Resource* resource = m_ResourceCache->GetResource((ev->GetResourceName()));
 		if (resource->GetType() != Resource::Type::Graphic)
 			throw invalid_argument("A non-Graphic resource was asked to be rendered: \"" + StringUtil::ToStr(resource->GetName()));
 
-		GraphicResource* graphicResource = dynamic_cast<GraphicResource*>(resource);
+		const GraphicResource* const graphicResource = dynamic_cast<GraphicResource*>(resource);
 
 		sf::Sprite* sprite = graphicResource->GetSprite();
 		sprite->setPosition(sf::Vector2f(ev->GetXPosition(), ev->GetYPosition()));
-		if (ev->GetResourceName() != L"small_dot")
-			sprite->setOrigin(16, 16);
-		if (ev->GetResourceName() == L"big_dot")
-			int breakHere = 5;
+		sprite->setOrigin(16, 16); // All sprites are 32x32. Center them
 
 		m_RenderWindow->draw(*sprite);
 	}
+
+	// WIP for render debug lines
 	int render_line_count = 0;
-	void SystemGraphic::RenderLine(shared_ptr<Event> event)
+	void SystemGraphic::RenderLine(const shared_ptr<Event> event)
 	{
 		auto ev = dynamic_pointer_cast<RenderLineEvent>(event);
 		if (render_line_count == 1)
@@ -112,10 +105,5 @@ namespace Engine
 
 		//sf::RectangleShape rectangle(sf::Vector2f(1, 200));
 		//m_RenderWindow->draw(rectangle);
-	}
-
-	shared_ptr<IWindow> SystemGraphic::GetWindow() const
-	{
-		return m_Window;
 	}
 }

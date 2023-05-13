@@ -179,7 +179,7 @@
     <ClInclude Include="MoveEvent.h" />
     <ClInclude Include="SmallDot.h" />
     <ClInclude Include="SmallDotState.h" />
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityTypes.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="GameEventIds.h" />
     <ClInclude Include="Pacman.h" />
@@ -201,7 +201,6 @@
     <ClCompile Include="MoveEvent.cpp" />
     <ClCompile Include="SmallDot.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="Pause.cpp" />

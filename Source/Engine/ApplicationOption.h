@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine\IApplicationOption.h"
 #include <unordered_map>
+#include <memory>
 using namespace std;
 
 namespace Engine
@@ -13,16 +14,11 @@ namespace Engine
 
 		// IApplicationOption
 		void Load(const wstring &filename) override;
-		void SetWindowWidth(int width) override;
-		int GetWindowWidth() const override;
-		void SetWindowHeight(int height) override;
-		int GetWindowHeight() const override;
-		void SetWindowName(const string &name) override;
-		string GetWindowName() const override;
+		int GetWindowWidth() const override {return m_WindowWidth;}
+		int GetWindowHeight() const override { return m_WindowHeight; }
+		string GetWindowName() const override { return m_WindowName; }
 
-		vector<shared_ptr<EntityDeclaration>> GetEntities() const override;
-		unordered_map<wstring, wstring> GetResourceNameToFilepath() const override;
-		void AddEntity(shared_ptr<IApplicationOption::EntityDeclaration> entity) override;
+		unordered_map<wstring, wstring> GetResourceNameToFilepath() const override { return m_ResourceNameToFilepath; }
 
 	private:
 		int m_WindowWidth;

@@ -2,7 +2,7 @@
 #include "Pacman.h"
 #include "GameEventIds.h"
 #include <Engine\EventDefinition.h>
-#include "Entity.h"
+#include "EntityTypes.h"
 #include "MoveEvent.h"
 #include <iostream>
 #include <sstream>
@@ -173,7 +173,7 @@ namespace Game
 			);
 	}
 	//================================================Logic==========================================================================================================
-	PacmanLogicComponent::PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid* worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType) :
+	PacmanLogicComponent::PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid* worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType) :
 		m_EntityId(entityId), 
 		m_State(state),
 		m_WorldGrid(worldGrid),
@@ -258,7 +258,7 @@ namespace Game
 		else if (moveDirection == PacmanInputMoveEvent::Direction::Left)
 			deltaX = -PacmanConstants::moveDistanceByFrame;
 
-		const CellLocation newLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX + deltaX, m_State->positionY + deltaY);
+		const WorldGrid::CellLocation newLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX + deltaX, m_State->positionY + deltaY);
 		if (!m_WorldGrid->IsCellInbound(newLocation)) { // Don't move if new location is not inbound
 			StopMoving();
 			return;
@@ -267,8 +267,8 @@ namespace Game
 		int valueAtNewLocation = m_WorldGrid->GetCellValue(newLocation);
 		if (valueAtNewLocation != WorldGrid::EmptyGridValue)
 		{
-			Entity::Type typeInNewLocation = m_EntityIdToEntityType->at(valueAtNewLocation);
-			if (typeInNewLocation == Entity::Type::Wall) {
+			EntityType typeInNewLocation = m_EntityIdToEntityType->at(valueAtNewLocation);
+			if (typeInNewLocation == EntityType::Wall) {
 				StopMoving();
 				return;
 			}

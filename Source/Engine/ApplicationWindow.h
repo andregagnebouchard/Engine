@@ -5,15 +5,15 @@
 using namespace std;
 namespace Engine
 {
-	class Window : public IWindow
+	class ApplicationWindow : public IWindow
 	{
 	public:
-		Window(shared_ptr<sf::Window> window);
-		~Window() = default;
+		ApplicationWindow(const shared_ptr<sf::Window> window);
+		~ApplicationWindow() = default;
 
 		void Resize(uint width, uint height) override;
 		void SetVisible(bool isVisible) override;
 	private:
-		shared_ptr<sf::Window> m_Window;
+		const shared_ptr<sf::Window> m_Window;
 	};
 }

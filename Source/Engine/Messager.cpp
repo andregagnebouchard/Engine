@@ -4,8 +4,8 @@
 #include <array>
 namespace Engine
 {
-  unordered_map<Event::Key, set<const std::function<void(shared_ptr<Event>)>*>> Messager::m_Callbacks;
-  void Messager::Attach(const std::function<void(shared_ptr<Event>)> *callback, Event::Key eventKey)
+  unordered_map<Event::Key, unordered_set<const std::function<void(shared_ptr<Event>)>*>> Messager::m_Callbacks;
+  void Messager::Attach(const std::function<void(shared_ptr<Event>)> *callback, const Event::Key &eventKey)
   {
 		if (callback == nullptr)
 			throw invalid_argument("Argument \"callback\" is nullptr");
@@ -14,7 +14,7 @@ namespace Engine
     m_Callbacks[eventKey].insert(callback);
   }
 
-  void Messager::Detach(const std::function<void(shared_ptr<Event>)> *callback, Event::Key eventId)
+  void Messager::Detach(const std::function<void(shared_ptr<Event>)> *callback, const Event::Key &eventId)
   {
 		if (callback == nullptr)
 			throw invalid_argument("Argument \"callback\" is nullptr");
@@ -58,10 +58,6 @@ namespace Engine
     m_Callback = bind(&MessageQueue::OnEvent, this, placeholders::_1);
   }
 
-  function<void(shared_ptr<Event>)>* MessageQueue::GetCallback()
-  {
-    return &m_Callback;
-  }
   void MessageQueue::OnEvent(shared_ptr<Event> event)
   {
 		m_CurrentQueue.push(event);
@@ -85,11 +81,11 @@ namespace Engine
   {
     m_CurrentQueue.pop();
   }
-  shared_ptr<Event> MessageQueue::Front()
+  shared_ptr<Event> MessageQueue::Front() const
   {
     return m_CurrentQueue.front();
   }
-  bool MessageQueue::Empty()
+  bool MessageQueue::Empty() const
   {
     return m_CurrentQueue.empty();
   }

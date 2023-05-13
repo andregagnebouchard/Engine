@@ -1,22 +1,24 @@
 #pragma once
 #include <Engine\ISystemLogic.h>
+#include <memory>
+#include <unordered_map>
 using namespace std;
 namespace Engine
 {
 	class SystemLogic : public ISystemLogic
 	{
 	public:
-		SystemLogic();
+		SystemLogic() = default;
 		~SystemLogic() = default;
 
 		// ISystem
-		void Init() override;
-		void Shutdown() override;
+		void Init() override {};
+		void Shutdown() override {};
 		void Update() override;
-		void Add(shared_ptr<IComponent> component) override;
-		void Remove(shared_ptr<IComponent> component) override;
+		void Add(const shared_ptr<IComponent> component) override;
+		void Remove(const shared_ptr<IComponent> component) override;
 
 	private:
-		map<int, shared_ptr<IComponent>> m_Components;
+		unordered_map<int, shared_ptr<IComponent>> m_Components;
 	};
 }

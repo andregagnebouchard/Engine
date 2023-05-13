@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "Entity.h"
 namespace Engine
 {
@@ -6,15 +7,5 @@ namespace Engine
 		m_Name(name),
 		m_Components(components)
 	{
-
-	}
-	wstring Entity::GetName() const
-	{
-		return m_Name;
-	}
-
-	vector<shared_ptr<IComponent>> Entity::GetComponents() const
-	{
-		return m_Components;
 	}
 }

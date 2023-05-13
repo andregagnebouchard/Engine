@@ -12,7 +12,7 @@ namespace Engine
 				m_Grid[row][col] = EmptyGridValue;
 	};
 
-	CellLocation WorldGrid::GetCellLocationFromPosition(float xPosition, float yPosition) const
+	WorldGrid::CellLocation WorldGrid::GetCellLocationFromPosition(float xPosition, float yPosition) const
 	{
 		CellLocation cell;
 		cell.col = static_cast<int>(floor(xPosition / m_CellSizeX));

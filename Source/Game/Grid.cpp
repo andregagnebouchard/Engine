@@ -54,8 +54,8 @@ namespace Game
 		float newX = ev->GetDeltaX() + ev->GetInitialX();
 		float newY = ev->GetDeltaY() + ev->GetInitialY();
 
-		CellLocation initialLocation = m_Grid->GetCellLocationFromPosition(ev->GetInitialX(), ev->GetInitialY());
-		CellLocation newLocation = m_Grid->GetCellLocationFromPosition(newX, newY);
+		WorldGrid::CellLocation initialLocation = m_Grid->GetCellLocationFromPosition(ev->GetInitialX(), ev->GetInitialY());
+		WorldGrid::CellLocation newLocation = m_Grid->GetCellLocationFromPosition(newX, newY);
 		if (!m_Grid->IsCellInbound(newLocation))
 			return;
 
@@ -89,7 +89,7 @@ namespace Game
 		if (ev->GetPayload() == nullptr || ev->GetPayload()->GetType() != static_cast<int>(EntityCreatedPayloadTypes::Position))
 			return; // Not all entities are created at a position on the grid
 		Point point = dynamic_pointer_cast<PositionPayload>(ev->GetPayload())->GetPosition();
-		CellLocation location = m_Grid->GetCellLocationFromPosition(point.x, point.y);
+		WorldGrid::CellLocation location = m_Grid->GetCellLocationFromPosition(point.x, point.y);
 		if (!m_Grid->IsCellInbound(location))
 			assert(true); // Some entities, like pause, do not have a location on the grid. This used to be expected, but not anymore
 

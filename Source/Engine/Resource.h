@@ -1,12 +1,16 @@
 #pragma once
-#include <string>
-#include <memory>
 #include <Engine/Typedef.h>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <string>
+#include <memory>
 using namespace std;
 namespace Engine
 {
+  namespace ResourceConstants
+  {
+    const int maxResourceNameLen = 128;
+  }
   class Resource
   {
   public:
@@ -20,10 +24,10 @@ namespace Engine
     Resource(const wstring &filepath, const wstring &name, Type type);
     virtual ~Resource() = default;
 
-    wstring GetFilePath() const;
-		wstring GetName() const;
-    Byte GetSize() const;
-    Type GetType() const;
+    wstring GetFilePath() const { return m_FilePath; };
+		wstring GetName() const { return m_Name; };
+    Byte GetSize() const { return m_Size; };
+    Type GetType() const { return m_Type; };
 
   private:
     wstring m_FilePath;
@@ -38,7 +42,7 @@ namespace Engine
   public:
     AudioResource(const wstring& filepath, const wstring& name, sf::Sound* sound);
     ~AudioResource() = default;
-    sf::Sound* GetSound() const;
+    sf::Sound* GetSound() const { return m_Sound; };
   private:
     sf::Sound *m_Sound;
   };
@@ -49,7 +53,7 @@ namespace Engine
     GraphicResource(const wstring& filepath, const wstring& name, sf::Sprite* sprite);
     ~GraphicResource() = default;
 
-    sf::Sprite* GetSprite() const;;
+    sf::Sprite* GetSprite() const { return m_Sprite; };
   private:
     sf::Sprite *m_Sprite;
   };

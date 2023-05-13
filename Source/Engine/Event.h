@@ -1,9 +1,9 @@
 #pragma once
-#include "constant.h"
 #include <Engine/IGameLogicEvent.h>
 #include <Engine/IEntityCreatedPayload.h>
 #include <Engine/math.h>
 #include <string>
+#include <memory>
 using namespace std;
 namespace Engine
 {
@@ -11,6 +11,12 @@ namespace Engine
   {
   public:
 
+    // Event key are unique identifiers for the event
+    // We are using int as generic identifiers, to allow the Games to cast their own specific enums into int
+    // The structure is very loose, but it generally follows this approach:
+    // First is the engine event type (Audio, Graphic, Logic, etc)
+    // Second is the game specific event type, such as "Entity died"for example
+    // Third is the entity id, when the event is targeted towards a specific entity
     struct Key
     {
       Key();
@@ -30,7 +36,6 @@ namespace Engine
           && second == other.second
           && third == other.third);
       }
-
     };
 
     enum class Type
@@ -48,7 +53,7 @@ namespace Engine
 
     virtual Type GetType() const = 0;
 
-    Event::Key GetKey() const;
+    Event::Key GetKey() const { return m_Key; };
   private:
     const Event::Key m_Key;
   };
@@ -56,25 +61,25 @@ namespace Engine
   class AudioEvent : public Event
   {
   public:
-    AudioEvent(Event::Key key, const wstring& resourceName);
-    wstring GetResourceName() const;
-    Type GetType() const override;
+    AudioEvent(const Event::Key &key, const wstring& resourceName);
+    wstring GetResourceName() const { return m_ResourceName; };
+    Type GetType() const override { return Event::Type::Audio; };
   private:
-    wstring m_ResourceName;
+    const wstring m_ResourceName;
   };
 
   class RenderSpriteEvent : public Event
   {
   public :
-    RenderSpriteEvent(Event::Key key, const wstring &resourceName, const float x, const float y);
-    wstring GetResourceName() const;
-    float GetXPosition() const;
-    float GetYPosition() const;
-    Type GetType() const override;
+    RenderSpriteEvent(const Event::Key &key, const wstring &resourceName, float x, float y);
+    wstring GetResourceName() const { return m_ResourceName; };
+    float GetXPosition() const { return m_XPosition; };
+    float GetYPosition() const { return m_YPosition; };
+    Type GetType() const override { return Event::Type::Render; };
   private:
-    wstring m_ResourceName;
-    float m_XPosition;
-    float m_YPosition;
+    const wstring m_ResourceName;
+    const float m_XPosition;
+    const float m_YPosition;
   };
 
   class RenderLineEvent : public Event
@@ -85,62 +90,64 @@ namespace Engine
     Point GetTo() const { return m_To; };
     Type GetType() const override { return Event::Type::Render; };
   private:
-    Point m_From;
-    Point m_To;
+    const Point m_From;
+    const Point m_To;
   };
 
   class InputEvent : public Event
   {
   public:
     enum class KeyState { Pressed, Released };
-    InputEvent(Event::Key key, KeyState altKeyState, KeyState controlKeyState, KeyState shiftKeyState, KeyState systemKeyState);
+    InputEvent(const Event::Key &key, KeyState altKeyState, KeyState controlKeyState, KeyState shiftKeyState, KeyState systemKeyState);
 
-    KeyState GetAltKeyState() const;
-    KeyState GetControlKeyState() const;
-    KeyState GetShiftKeyState() const;
-    KeyState GetSystemKeyState() const;
-    Type GetType() const override;
+    KeyState GetAltKeyState() const { return m_AltKeyState; };
+    KeyState GetControlKeyState() const { return m_ControlKeyState; };
+    KeyState GetShiftKeyState() const { return m_ShiftKeyState; };
+    KeyState GetSystemKeyState() const { return m_SystemKeyState; };
+    Type GetType() const override { return Event::Type::Input; };
   private:
-    KeyState m_AltKeyState;
-    KeyState m_ControlKeyState;
-    KeyState m_ShiftKeyState;
-    KeyState m_SystemKeyState;
+    const KeyState m_AltKeyState;
+    const KeyState m_ControlKeyState;
+    const KeyState m_ShiftKeyState;
+    const KeyState m_SystemKeyState;
   };
 
 	class EntityEvent : public Event
 	{
 	public:
 		enum class Type { Create, Delete };
-		EntityEvent(Event::Key key, Type type, const wstring &name, int entityId, shared_ptr<IEntityCreatedPayload> payload);
+		EntityEvent(const Event::Key &key, Type type, const wstring &name, int entityId, const shared_ptr<IEntityCreatedPayload> payload);
 
     int GetEntityId() const { return m_EntityId; }
 
-		Type GetActionType() const;
-		wstring GetName() const; // This should be an id, not a name
-		Event::Type GetType() const override;
+		Type GetActionType() const { return m_Type; };
+		wstring GetName() const { return m_Name; }; // This would be more efficient as an id, instead of a name
+		Event::Type GetType() const override { return Event::Type::Entity; };
     shared_ptr<IEntityCreatedPayload> GetPayload() const { return m_Payload; }
 	private:
 		const wstring m_Name;
 		const Type m_Type;
     const int m_EntityId;
     const Point m_Position;
-    shared_ptr<IEntityCreatedPayload> m_Payload;
+    const shared_ptr<IEntityCreatedPayload> m_Payload;
 	};
 
   class LogicEvent : public Event
   {
   public:
-    LogicEvent(Event::Key key, shared_ptr<IGameLogicEvent> gameLogicEvent);
-    int GetEntityId() const;
-    int GetGameLogicEventId() const;
-    shared_ptr<IGameLogicEvent> GetGameLogicEvent() const;
-    Type GetType() const override;
+    LogicEvent(const Event::Key &key, const shared_ptr<IGameLogicEvent> gameLogicEvent);
+    int GetEntityId() const { return m_EntityId; };
+    int GetGameLogicEventId() const { return m_GameLogicEventId; };
+    shared_ptr<IGameLogicEvent> GetGameLogicEvent() const { return m_GameLogicEvent; };
+    Type GetType() const override { return Event::Type::Logic; };
   private:
-    int m_EntityId; // Could fill these in the constructor from the event key
-    int m_GameLogicEventId;
-    shared_ptr<IGameLogicEvent> m_GameLogicEvent;
+    const int m_EntityId; // Could fill these in the constructor from the event key
+    const int m_GameLogicEventId;
+    const shared_ptr<IGameLogicEvent> m_GameLogicEvent;
   };
 }
+
+// Custom hashing function for Event::Key, in order to use them as keys in maps
 namespace std
 {
   template <>

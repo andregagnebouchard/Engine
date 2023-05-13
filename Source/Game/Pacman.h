@@ -4,7 +4,7 @@
 #include <Engine\IGameLogicEvent.h>
 #include <Engine\WorldGrid.h>
 #include "PacmanState.h"
-#include "Entity.h"
+#include "EntityTypes.h"
 using namespace Engine;
 namespace Game
 {
@@ -54,7 +54,7 @@ namespace Game
 	class PacmanLogicComponent : public IComponent
 	{
 	public:
-		PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid *worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType);
+		PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid *worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType);
 		~PacmanLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override;
@@ -68,7 +68,7 @@ namespace Game
 		void UpdateDyingLogic();
 		void StopMoving();
 
-		const unordered_map<int, Entity::Type> *m_EntityIdToEntityType; // Owner is EntityFactory
+		const unordered_map<int, EntityType> *m_EntityIdToEntityType; // Owner is EntityFactory
 		WorldGrid* m_WorldGrid; // Owner is EntityFactory
 		MessageQueue m_MsgQueue;
 		int m_EntityId;

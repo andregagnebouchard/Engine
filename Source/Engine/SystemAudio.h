@@ -1,7 +1,8 @@
 #pragma once
 #include <Engine\ISystemAudio.h>
 #include "Messager.h"
-#include <map>
+#include <unordered_map>
+#include <memory>
 using namespace std;
 namespace Engine
 {
@@ -10,20 +11,20 @@ namespace Engine
   class SystemAudio : public ISystemAudio
   {
   public:
-    SystemAudio(shared_ptr<ResourceCache> resourceCache);
+    SystemAudio(const shared_ptr<ResourceCache> resourceCache);
     ~SystemAudio() = default;
 
     // ISystem
     void Init() override;
     void Shutdown() override;
     void Update() override;
-    void Add(shared_ptr<IComponent> component) override;
-    void Remove(shared_ptr<IComponent> component) override;
+    void Add(const shared_ptr<IComponent> component) override;
+    void Remove(const shared_ptr<IComponent> component) override;
 
   private:
-    void HandleAudioEvent(shared_ptr<AudioEvent> event);
+    void HandleAudioEvent(const shared_ptr<AudioEvent> event) const;
     MessageQueue m_MsgQueue;
-    shared_ptr<ResourceCache> m_ResourceCache;
-    map<int, shared_ptr<IComponent>> m_Components;
+    const shared_ptr<ResourceCache> m_ResourceCache;
+    unordered_map<int, shared_ptr<IComponent>> m_Components;
   };
 }

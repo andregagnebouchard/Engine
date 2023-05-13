@@ -12,7 +12,7 @@
 using namespace Engine;
 namespace Game
 {
-	CollisionLogicComponent::CollisionLogicComponent(int entityId, StateContainer* stateContainer, const unordered_map<int, Entity::Type>* entityIdToType) :
+	CollisionLogicComponent::CollisionLogicComponent(int entityId, StateContainer* stateContainer, const unordered_map<int, EntityType>* entityIdToType) :
 		m_EntityId(entityId),
 		m_Callback(bind(&CollisionLogicComponent::OnCollision, this, placeholders::_1)),
 		m_StateContainer(stateContainer),
@@ -32,21 +32,21 @@ namespace Game
 
 		auto ev = dynamic_pointer_cast<LogicEvent>(event);
 		auto collisionEvent = dynamic_pointer_cast<CollisionEvent>(ev->GetGameLogicEvent());
-		Entity::Type type1 = m_EntityIdToType->at(collisionEvent->GetEntityId1());
-		Entity::Type type2 = m_EntityIdToType->at(collisionEvent->GetEntityId2());
+		EntityType type1 = m_EntityIdToType->at(collisionEvent->GetEntityId1());
+		EntityType type2 = m_EntityIdToType->at(collisionEvent->GetEntityId2());
 		int id1 = collisionEvent->GetEntityId2();
 		int id2 = collisionEvent->GetEntityId2();
-		if (type1 == Entity::Type::SmallDot && type2 == Entity::Type::Pacman)
+		if (type1 == EntityType::SmallDot && type2 == EntityType::Pacman)
 			OnCollisionPacmanSmallDot(id2, id1);
-		else if (type1 == Entity::Type::Pacman && type2 == Entity::Type::SmallDot)
+		else if (type1 == EntityType::Pacman && type2 == EntityType::SmallDot)
 			OnCollisionPacmanSmallDot(id1, id2);
-		else if (type1 == Entity::Type::Pacman && type2 == Entity::Type::BigDot)
+		else if (type1 == EntityType::Pacman && type2 == EntityType::BigDot)
 			OnCollisionPacmanBigDot(id1, id2);
-		else if (type1 == Entity::Type::BigDot && type2 == Entity::Type::Pacman)
+		else if (type1 == EntityType::BigDot && type2 == EntityType::Pacman)
 			OnCollisionPacmanSmallDot(id2, id1);
-		else if (type1 == Entity::Type::BlueGhost && type2 == Entity::Type::Pacman)
+		else if (type1 == EntityType::BlueGhost && type2 == EntityType::Pacman)
 			OnColisionPacmanBlueGhost(id2, id1);
-		else if (type1 == Entity::Type::Pacman && type2 == Entity::Type::BlueGhost)
+		else if (type1 == EntityType::Pacman && type2 == EntityType::BlueGhost)
 			OnColisionPacmanBlueGhost(id1, id2);
 	}
 

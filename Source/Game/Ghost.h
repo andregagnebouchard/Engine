@@ -5,7 +5,7 @@
 #include <Engine\WorldGrid.h>
 #include "GhostState.h"
 #include "GhostMovementBehaviour.h"
-#include "Entity.h"
+#include "EntityTypes.h"
 using namespace Engine;
 namespace Game
 {
@@ -33,7 +33,7 @@ namespace Game
 	class GhostLogicComponent : public IComponent
 	{
 	public:
-		GhostLogicComponent(int entityId, GhostState *state, const WorldGrid *worldGrid, const unordered_map<int, Entity::Type>* entityIdToEntityType, const IGhostMovementBehaviour *movementBehaviour);
+		GhostLogicComponent(int entityId, GhostState *state, const WorldGrid *worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType, const IGhostMovementBehaviour *movementBehaviour);
 		~GhostLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override;
@@ -50,7 +50,7 @@ namespace Game
 		void RespawningLogicUpdate();
 		void WaitingForPacmanDyingLogicUpdate();
 		void KillYourself();
-		const unordered_map<int, Entity::Type> *m_EntityIdToEntityType; // Owner is EntityFactory
+		const unordered_map<int, EntityType> *m_EntityIdToEntityType; // Owner is EntityFactory
 		const WorldGrid* m_WorldGrid; // Owner is EntityFactory
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
