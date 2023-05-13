@@ -48,7 +48,7 @@ namespace Engine
 
 		auto it = m_Components.find(component->GetId());
 		if (it != m_Components.end())
-			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is already added in SystemSound");
+			throw invalid_argument("The component is already added in SystemSound");
 
 		m_Components[component->GetId()] = component;
 	}
@@ -60,7 +60,7 @@ namespace Engine
 
 		auto it = m_Components.find(component->GetId());
 		if (it == m_Components.end())
-			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is not in SystemSound");
+			throw invalid_argument("The component is not in SystemSound");
 
 		m_Components.erase(component->GetId());
 	}

@@ -17,7 +17,6 @@ namespace Game
 		void GenerateBigDots();
 		void GenerateGhost();
 		void DeleteItself();
-		wstring GetName() const override { return L"LevelGeneratorLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:

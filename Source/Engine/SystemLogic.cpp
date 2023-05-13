@@ -31,7 +31,7 @@ namespace Engine
 
 		auto it = m_Components.find(component->GetId());
 		if (it != m_Components.end())
-			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is already added in SystemInput");
+			throw invalid_argument("The component is already added in SystemInput");
 
 		m_Components[component->GetId()] = component;
 	}
@@ -43,7 +43,7 @@ namespace Engine
 
 		auto it = m_Components.find(component->GetId());
 		if (it == m_Components.end())
-			throw invalid_argument("The component \"" + StringUtil::ToStr(component->GetName()) + "\" with id \"" + to_string(component->GetId()) + "\" is not in SystemLogic");
+			throw invalid_argument("The component is not in SystemLogic");
 
 		m_Components.erase(component->GetId());
 	}

@@ -16,7 +16,6 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		wstring GetName() const override { return L"DotGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }
 		int GetId() const override { return m_EntityId; };
 	private:

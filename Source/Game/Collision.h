@@ -18,7 +18,6 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override {}; // Events are handled synchronously for this one, no need for update
 
-		wstring GetName() const override { return L"CollisionLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:

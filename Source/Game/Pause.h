@@ -15,7 +15,6 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		wstring GetName() const override { return L"PauseGraphicComponent"; }
 		Type GetType() const override { return IComponent::Type::Graphic; }
 		int GetId() const override { return m_EntityId; };
 	private:
@@ -33,7 +32,6 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		wstring GetName() const override { return L"PauseInputComponent"; }
 		Type GetType() const override { return IComponent::Type::Input; }
 		int GetId() const override { return m_EntityId; };
 	private:
@@ -50,7 +48,6 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		wstring GetName() const override { return L"PauseLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:

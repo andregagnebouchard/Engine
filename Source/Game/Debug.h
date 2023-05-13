@@ -14,7 +14,6 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		wstring GetName() const override { return L"DebugInputComponent"; }
 		Type GetType() const override { return IComponent::Type::Input; }
 		int GetId() const override { return m_EntityId; };
 	private:
@@ -31,7 +30,6 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		wstring GetName() const override { return L"DebugLogicComponent"; }
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
