@@ -1,5 +1,4 @@
 #pragma once
-#include <Engine\ISystem.h>
 #include <Engine\Typedef.h>
 #include <memory>
 using namespace std;

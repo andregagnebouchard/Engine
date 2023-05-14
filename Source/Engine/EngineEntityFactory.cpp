@@ -1,10 +1,10 @@
 #pragma once
 #include <Engine\IEntityFactory.h>
 #include <Engine\IComponent.h>
-#include <Engine\ISystemGraphic.h>
-#include <Engine\ISystemInput.h>
-#include <Engine\ISystemLogic.h>
-#include <Engine\ISystemAudio.h>
+#include <Engine\SystemGraphic.h>
+#include <Engine\SystemInput.h>
+#include <Engine\SystemLogic.h>
+#include <Engine\SystemAudio.h>
 #include "Entity.h"
 #include "EngineEntityFactory.h"
 #include "StringUtil.h"
@@ -12,7 +12,7 @@
 using namespace std;
 namespace Engine
 {
-	EngineEntityFactory::EngineEntityFactory(const shared_ptr<IGameEntityFactory> gameEntityFactory, const shared_ptr<ISystemGraphic> systemGraphic, const shared_ptr<ISystemLogic> systemLogic, const shared_ptr<ISystemInput> systemInput, const shared_ptr<ISystemAudio> systemAudio) :
+	EngineEntityFactory::EngineEntityFactory(const shared_ptr<IGameEntityFactory> gameEntityFactory, const shared_ptr<SystemGraphic> systemGraphic, const shared_ptr<SystemLogic> systemLogic, const shared_ptr<SystemInput> systemInput, const shared_ptr<SystemAudio> systemAudio) :
 		m_GameEntityFactory(gameEntityFactory),
 		m_SystemLogic(systemLogic),
 		m_SystemGraphic(systemGraphic),

@@ -6,6 +6,7 @@ using namespace std;
 namespace Engine
 {
   class ResourceCache;
+  class SystemAudio;
 	class EngineEntityFactory;
 	class Application : public IApplication
   {
@@ -16,10 +17,10 @@ namespace Engine
     void Shutdown() override;
     void RunLoop() override;
   private:
-		shared_ptr<ISystemLogic> m_SystemLogic;
-    shared_ptr<ISystemInput> m_SystemInput;
-    shared_ptr<ISystemGraphic> m_SystemGraphic;
-    shared_ptr<ISystemAudio> m_SystemAudio;
+		shared_ptr<SystemLogic> m_SystemLogic;
+    shared_ptr<SystemInput> m_SystemInput;
+    shared_ptr<SystemGraphic> m_SystemGraphic;
+    shared_ptr<SystemAudio> m_SystemAudio;
     shared_ptr<ResourceCache> m_ResourceCache;
 		shared_ptr<EngineEntityFactory> m_EngineEntityFactory;
 

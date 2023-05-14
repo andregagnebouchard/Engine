@@ -1,8 +1,7 @@
 #pragma once
-#include <Engine/ISystemGraphic.h>
-#include <Engine/ISystemInput.h>
-#include <Engine/ISystemLogic.h>
-#include <Engine/ISystemAudio.h>
+#include <Engine/SystemGraphic.h>
+#include <Engine/SystemInput.h>
+#include <Engine/SystemLogic.h>
 #include <Engine/IApplicationOption.h>
 #include <Engine/IEntityFactory.h>
 #include <memory>

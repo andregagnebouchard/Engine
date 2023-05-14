@@ -1,5 +1,5 @@
 #pragma once
-#include <Engine\ISystemAudio.h>
+#include <Engine/IComponent.h>
 #include "Messager.h"
 #include <unordered_map>
 #include <memory>
@@ -8,18 +8,17 @@ namespace Engine
 {
   class ResourceCache;
   class SoundEvent;
-  class SystemAudio : public ISystemAudio
+  class SystemAudio
   {
   public:
     SystemAudio(const shared_ptr<ResourceCache> resourceCache);
     ~SystemAudio() = default;
 
-    // ISystem
-    void Init() override;
-    void Shutdown() override;
-    void Update() override;
-    void Add(const shared_ptr<IComponent> component) override;
-    void Remove(const shared_ptr<IComponent> component) override;
+    void Init();
+    void Shutdown();
+    void Update();
+    void Add(const shared_ptr<IComponent> component);
+    void Remove(const shared_ptr<IComponent> component);
 
   private:
     void HandleAudioEvent(const shared_ptr<AudioEvent> event) const;

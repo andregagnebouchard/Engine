@@ -1,28 +1,27 @@
 #pragma once
-#include <Engine\ISystemGraphic.h>
 #include <Engine\IWindow.h>
+#include <Engine\IComponent.h>
 #include <SFML\Graphics\RenderWindow.hpp>
 #include "Messager.h"
+#include <unordered_map>
 using namespace std;
 namespace Engine
 {
   class ResourceCache;
 	class IWindow;
-  class SystemGraphic : public ISystemGraphic
+  class SystemGraphic
   {
   public:
     SystemGraphic(const shared_ptr<sf::RenderWindow> renderWindow, const shared_ptr<IWindow> window, const shared_ptr<ResourceCache> resourceCache);
     ~SystemGraphic() = default;
 		
-		// ISystem
-    void Init() override;
-    void Shutdown() override;
-    void Update() override;
-		void Add(const shared_ptr<IComponent> component) override;
-		void Remove(const shared_ptr<IComponent> component) override;
+    void Init();
+    void Shutdown();
+    void Update();
+		void Add(const shared_ptr<IComponent> component);
+		void Remove(const shared_ptr<IComponent> component);
 
-		// ISystemGraphic
-    shared_ptr<IWindow> GetWindow() const override { return m_Window; };
+    shared_ptr<IWindow> GetWindow() const { return m_Window; };
   private:
     void RenderSprite(shared_ptr<Event> event);
     void RenderLine(shared_ptr<Event> event);
@@ -30,6 +29,6 @@ namespace Engine
     shared_ptr<IWindow> m_Window;
 		shared_ptr<sf::RenderWindow> m_RenderWindow;
     shared_ptr<ResourceCache> m_ResourceCache;
-		map<int, shared_ptr<IComponent>> m_Components;
+		unordered_map<int, shared_ptr<IComponent>> m_Components;
   };
 }

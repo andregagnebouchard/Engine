@@ -179,13 +179,8 @@
     <ClInclude Include="Include\Engine\IApplication.h" />
     <ClInclude Include="Include\Engine\IApplicationOption.h" />
     <ClInclude Include="Include\Engine\IComponent.h" />
-    <ClInclude Include="Include\Engine\ISystem.h" />
-    <ClInclude Include="Include\Engine\ISystemGraphic.h" />
-    <ClInclude Include="Include\Engine\ISystemInput.h" />
-    <ClInclude Include="Include\Engine\ISystemLogic.h" />
     <ClInclude Include="Include\Engine\IWindow.h" />
     <ClInclude Include="Include\Engine\Typedef.h" />
-    <ClInclude Include="ISystemAudio.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="PackedArray.h" />
     <ClInclude Include="Resource.h" />

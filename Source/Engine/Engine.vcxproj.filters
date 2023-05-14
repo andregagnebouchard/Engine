@@ -96,18 +96,6 @@
     <ClInclude Include="Include\Engine\IComponent.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\ISystem.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\ISystemGraphic.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\ISystemInput.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\ISystemLogic.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Engine\IWindow.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -125,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="SystemAudio.h">
       <Filter>Engine\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="ISystemAudio.h">
-      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="math.h">
       <Filter>Include</Filter>

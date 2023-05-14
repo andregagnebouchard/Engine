@@ -41,8 +41,6 @@ namespace Engine
 		m_SystemAudio= make_shared<SystemAudio>(m_ResourceCache);
 		m_EngineEntityFactory = make_shared<EngineEntityFactory>(gameEntityFactory, m_SystemGraphic, m_SystemLogic, m_SystemInput, m_SystemAudio);
 		m_SystemGraphic->Init();
-		m_SystemInput->Init();
-		m_SystemLogic->Init();
 		m_SystemAudio->Init();
 		m_EngineEntityFactory->Init();
 	}
@@ -50,8 +48,6 @@ namespace Engine
 	void Application::Shutdown()
 	{
 		if(m_SystemGraphic != nullptr) m_SystemGraphic->Shutdown();
-		if(m_SystemInput != nullptr) m_SystemInput->Shutdown();
-		if(m_SystemLogic != nullptr) m_SystemLogic->Shutdown();
 		if(m_SystemAudio != nullptr) m_SystemAudio->Shutdown();
 		if(m_ResourceCache != nullptr) m_ResourceCache->Clear();
 		if(m_EngineEntityFactory != nullptr) m_EngineEntityFactory->Shutdown();
