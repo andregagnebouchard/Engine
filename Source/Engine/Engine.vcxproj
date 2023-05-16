@@ -178,7 +178,6 @@
     <ClInclude Include="Include\Engine\Export.h" />
     <ClInclude Include="Include\Engine\IComponent.h" />
     <ClInclude Include="Include\Engine\IWindow.h" />
-    <ClInclude Include="Include\Engine\Typedef.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="PackedArray.h" />
     <ClInclude Include="Resource.h" />

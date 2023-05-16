@@ -22,7 +22,7 @@ namespace Engine
     if (m_Name.length() > ResourceConstants::maxResourceNameLen)
       throw invalid_argument("Resource name exceeds character limit of \"" + to_string(ResourceConstants::maxResourceNameLen) + "\" :\"" + StringUtil::ToStr(name));
 
-		m_Size = FileUtil::GetFileSize(filepath);
+		m_Size = FileUtil::GetFileSizeByte(filepath);
 		m_Type = FileExtensionToResourceType(FileUtil::GetExtension(filepath));
   }
 

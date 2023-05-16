@@ -7,7 +7,7 @@ namespace Engine
 	{
 	}
 
-	void ApplicationWindow::Resize(uint width, uint height)
+	void ApplicationWindow::Resize(unsigned int width, unsigned int height)
 	{
 		//TODO: Resize OpenGL viewport glViewport(0, 0, width, height); see https://learnopengl.com/Getting-started/Hello-Window
 		if (width * height == 0)

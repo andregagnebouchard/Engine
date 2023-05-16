@@ -12,8 +12,6 @@
 #include <cctype>
 #include <chrono>
 
-#include <Engine\Typedef.h>
-
 using namespace std; // Yup!
 
 // log4cplus

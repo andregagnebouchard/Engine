@@ -1,5 +1,4 @@
 #pragma once
-#include <Engine/Typedef.h>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <string>
@@ -26,12 +25,12 @@ namespace Engine
 
     wstring GetFilePath() const { return m_FilePath; };
 		wstring GetName() const { return m_Name; };
-    Byte GetSize() const { return m_Size; };
+    unsigned int GetByteSize() const { return m_Size; };
     Type GetType() const { return m_Type; };
 
   private:
     wstring m_FilePath;
-		Byte m_Size;
+    unsigned int m_Size;
     Type m_Type;
 		wstring m_Name;
   };

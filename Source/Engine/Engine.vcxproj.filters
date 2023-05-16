@@ -93,9 +93,6 @@
     <ClInclude Include="Include\Engine\IWindow.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\Typedef.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="EventDefinition.h">
       <Filter>Engine\Event</Filter>
     </ClInclude>

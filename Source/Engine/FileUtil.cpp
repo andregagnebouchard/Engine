@@ -6,7 +6,7 @@ namespace Engine
 {
 	namespace FileUtil
 	{
-		Byte GetFileSize(const string &fullPath)
+		unsigned int GetFileSizeByte(const string &fullPath)
 		{
 			struct stat stat_buf;
 			const int rc = stat(fullPath.c_str(), &stat_buf);
@@ -17,10 +17,10 @@ namespace Engine
 			return stat_buf.st_size;
 		}
 
-		Byte GetFileSize(const wstring &fullPath)
+		unsigned int GetFileSizeByte(const wstring &fullPath)
 		{
 			const string strFileName(fullPath.begin(), fullPath.end());
-			return GetFileSize(strFileName);
+			return GetFileSizeByte(strFileName);
 		}
 
 		wstring GetExtension(const wstring &fullpath)
