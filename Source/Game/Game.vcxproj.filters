@@ -43,15 +43,12 @@
     <Filter Include="Entities\Ghost">
       <UniqueIdentifier>{e51d9d48-669b-4d5d-99bf-cf14e8b5d646}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{3e71ef3d-7154-4b4e-a76a-0aef44bddd3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEventIds.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pause.h">
@@ -87,9 +84,6 @@
     <ClInclude Include="LevelGenerator.h">
       <Filter>Entities\LevelGenerator</Filter>
     </ClInclude>
-    <ClInclude Include="MoveEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Debug.h">
       <Filter>Entities\Debug</Filter>
     </ClInclude>
@@ -114,21 +108,24 @@
     <ClInclude Include="GhostMovementBehaviour.h">
       <Filter>Entities\Ghost</Filter>
     </ClInclude>
-    <ClInclude Include="EntityCreatedPayload.h">
+    <ClInclude Include="EntityTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntityTypes.h">
+    <ClInclude Include="GameEventIds.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCreatedPayload.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntityFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pause.cpp">
@@ -149,9 +146,6 @@
     <ClCompile Include="LevelGenerator.cpp">
       <Filter>Entities\LevelGenerator</Filter>
     </ClCompile>
-    <ClCompile Include="MoveEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Debug.cpp">
       <Filter>Entities\Debug</Filter>
     </ClCompile>
@@ -163,6 +157,15 @@
     </ClCompile>
     <ClCompile Include="GhostMovementBehaviour.cpp">
       <Filter>Entities\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntityFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

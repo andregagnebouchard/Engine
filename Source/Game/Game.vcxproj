@@ -180,7 +180,7 @@
     <ClInclude Include="SmallDot.h" />
     <ClInclude Include="SmallDotState.h" />
     <ClInclude Include="EntityTypes.h" />
-    <ClInclude Include="EntityFactory.h" />
+    <ClInclude Include="GameEntityFactory.h" />
     <ClInclude Include="GameEventIds.h" />
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="notes.h" />
@@ -200,8 +200,8 @@
     <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="MoveEvent.cpp" />
     <ClCompile Include="SmallDot.cpp" />
-    <ClCompile Include="EntityFactory.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameEntityFactory.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="Pause.cpp" />
     <ClCompile Include="stdafx.cpp">

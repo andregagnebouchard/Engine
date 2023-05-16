@@ -10,7 +10,7 @@
 using namespace Engine;
 namespace Game
 {
-	GridLogicComponent::GridLogicComponent(int entityId, WorldGrid* grid) :
+	GridLogicComponent::GridLogicComponent(int entityId, Engine::Grid* grid) :
 		m_EntityId(entityId),
 		m_Grid(grid)
 	{
@@ -54,8 +54,8 @@ namespace Game
 		float newX = ev->GetDeltaX() + ev->GetInitialX();
 		float newY = ev->GetDeltaY() + ev->GetInitialY();
 
-		WorldGrid::CellLocation initialLocation = m_Grid->GetCellLocationFromPosition(ev->GetInitialX(), ev->GetInitialY());
-		WorldGrid::CellLocation newLocation = m_Grid->GetCellLocationFromPosition(newX, newY);
+		Engine::Grid::CellLocation initialLocation = m_Grid->GetCellLocationFromPosition(ev->GetInitialX(), ev->GetInitialY());
+		Engine::Grid::CellLocation newLocation = m_Grid->GetCellLocationFromPosition(newX, newY);
 		if (!m_Grid->IsCellInbound(newLocation))
 			return;
 
@@ -64,9 +64,9 @@ namespace Game
 
 		// No collision
 		// Second condition is when the moving entity collide with itself, which can happen if the movement is within a single cell
-		if (entityIdAtNewLocation == WorldGrid::EmptyGridValue || entityIdAtNewLocation == movingEntityId)
+		if (entityIdAtNewLocation == Engine::Grid::EmptyGridValue || entityIdAtNewLocation == movingEntityId)
 		{
-			m_Grid->SetCellValue(initialLocation, WorldGrid::EmptyGridValue);
+			m_Grid->SetCellValue(initialLocation, Engine::Grid::EmptyGridValue);
 			m_Grid->SetCellValue(newLocation, event->GetEntityId());
 		}
 		else
@@ -89,13 +89,13 @@ namespace Game
 		if (ev->GetPayload() == nullptr || ev->GetPayload()->GetType() != static_cast<int>(EntityCreatedPayloadTypes::Position))
 			return; // Not all entities are created at a position on the grid
 		Point point = dynamic_pointer_cast<PositionPayload>(ev->GetPayload())->GetPosition();
-		WorldGrid::CellLocation location = m_Grid->GetCellLocationFromPosition(point.x, point.y);
+		Engine::Grid::CellLocation location = m_Grid->GetCellLocationFromPosition(point.x, point.y);
 		if (!m_Grid->IsCellInbound(location))
 			assert(true); // Some entities, like pause, do not have a location on the grid. This used to be expected, but not anymore
 
 		// There is already something in the grid at the position of the new entity
 		// This might be normal in some scenarios, but any that I know right now, so throw
-		if (m_Grid->GetCellValue(location) != WorldGrid::EmptyGridValue)
+		if (m_Grid->GetCellValue(location) != Engine::Grid::EmptyGridValue)
 			throw runtime_error("Creating an entity at the same location as another entity");
 
 		m_Grid->SetCellValue(location, ev->GetEntityId());
@@ -105,10 +105,10 @@ namespace Game
 	{
 		if(m_EntityToLocation.find(ev->GetEntityId()) == m_EntityToLocation.end())
 			return; // Deleting an entity without a location
-		m_Grid->SetCellValue(m_EntityToLocation.at(ev->GetEntityId()), WorldGrid::EmptyGridValue);
+		m_Grid->SetCellValue(m_EntityToLocation.at(ev->GetEntityId()), Engine::Grid::EmptyGridValue);
 	}
 	//================================================Graphic==========================================================================================================
-	GridGraphicComponent::GridGraphicComponent(int entityId, const WorldGrid* grid, const DebugState* state) :
+	GridGraphicComponent::GridGraphicComponent(int entityId, const Engine::Grid* grid, const DebugState* state) :
 		m_EntityId(entityId),
 		m_DebugState(state),
 		m_Grid(grid)

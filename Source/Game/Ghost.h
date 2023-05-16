@@ -2,11 +2,10 @@
 #include <Engine\IComponent.h>
 #include <Engine\Messager.h>
 #include <Engine\IGameLogicEvent.h>
-#include <Engine\WorldGrid.h>
+#include <Engine\Grid.h>
 #include "GhostState.h"
 #include "GhostMovementBehaviour.h"
 #include "EntityTypes.h"
-using namespace Engine;
 namespace Game
 {
 	class MoveEvent;
@@ -33,7 +32,7 @@ namespace Game
 	class GhostLogicComponent : public IComponent
 	{
 	public:
-		GhostLogicComponent(int entityId, GhostState *state, const WorldGrid *worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType, const IGhostMovementBehaviour *movementBehaviour);
+		GhostLogicComponent(int entityId, GhostState *state, const Engine::Grid *worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType, const IGhostMovementBehaviour *movementBehaviour);
 		~GhostLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override;
@@ -51,7 +50,7 @@ namespace Game
 		void WaitingForPacmanDyingLogicUpdate();
 		void KillYourself();
 		const unordered_map<int, EntityType> *m_EntityIdToEntityType; // Owner is EntityFactory
-		const WorldGrid* m_WorldGrid; // Owner is EntityFactory
+		const Engine::Grid* m_WorldGrid; // Owner is EntityFactory
 		MessageQueue m_MsgQueue;
 		int m_EntityId;
 		GhostState *m_State; // Owner is EntityFactory

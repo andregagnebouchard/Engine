@@ -2,7 +2,7 @@
 #include <Engine/DelayedEventLogicComponent.h>
 #include <Engine/EventDefinition.h>
 #include "EntityCreatedPayload.h"
-#include "EntityFactory.h"
+#include "GameEntityFactory.h"
 #include "EntityTypes.h"
 #include "Pacman.h"
 #include "Pause.h"
@@ -16,13 +16,13 @@
 #include "GameEventIds.h"
 namespace Game
 {
-	EntityFactory::EntityFactory() :
-		m_WorldGrid(32, 32),
-		m_BlueGhostBehaviour(&m_WorldGrid, &m_EntityIdToEntityType)
+	GameEntityFactory::GameEntityFactory() :
+		m_Grid(32, 32),
+		m_BlueGhostBehaviour(&m_Grid, &m_EntityIdToEntityType)
 	{
 
 	}
-	shared_ptr<Engine::Entity> EntityFactory::Create(shared_ptr<EntityEvent> event)
+	shared_ptr<Engine::Entity> GameEntityFactory::Create(shared_ptr<EntityEvent> event)
 	{
 		const wstring& name = event->GetName();
 		const int entityId = event->GetEntityId();
@@ -30,7 +30,7 @@ namespace Game
 		vector<shared_ptr<IComponent>> components;
 		if (name == L"Pacman")
 		{
-			components.emplace_back(make_shared<PacmanLogicComponent>(entityId, &m_StateContainer.pacmanState, &m_WorldGrid, &m_EntityIdToEntityType));
+			components.emplace_back(make_shared<PacmanLogicComponent>(entityId, &m_StateContainer.pacmanState, &m_Grid, &m_EntityIdToEntityType));
 			components.emplace_back(make_shared<PacmanGraphicComponent>(entityId, &m_StateContainer.pacmanState));
 			components.emplace_back(make_shared<PacmanInputComponent>(entityId));
 			components.emplace_back(make_shared<PacmanAudioComponent>(entityId));
@@ -81,8 +81,8 @@ namespace Game
 		}
 		else if (name == L"Grid")
 		{
-			components.emplace_back(make_shared<GridLogicComponent>(entityId, &m_WorldGrid));
-			components.emplace_back(make_shared<GridGraphicComponent>(entityId, &m_WorldGrid, &m_StateContainer.debugState));
+			components.emplace_back(make_shared<GridLogicComponent>(entityId, &m_Grid));
+			components.emplace_back(make_shared<GridGraphicComponent>(entityId, &m_Grid, &m_StateContainer.debugState));
 			m_EntityIdToEntityType.emplace(entityId, EntityType::Grid);
 			return make_shared<Entity>(name, components);
 		}
@@ -106,7 +106,7 @@ namespace Game
 			m_StateContainer.blueGhostState.positionX = position.x;
 			m_StateContainer.blueGhostState.positionY = position.y;
 			components.emplace_back(make_shared<GhostGraphicComponent>(entityId, &m_StateContainer.blueGhostState, GhostType::Blue));
-			components.emplace_back(make_shared<GhostLogicComponent>(entityId, &m_StateContainer.blueGhostState, &m_WorldGrid, &m_EntityIdToEntityType, &m_BlueGhostBehaviour));
+			components.emplace_back(make_shared<GhostLogicComponent>(entityId, &m_StateContainer.blueGhostState, &m_Grid, &m_EntityIdToEntityType, &m_BlueGhostBehaviour));
 			m_EntityIdToEntityType.emplace(entityId, EntityType::BlueGhost);
 			return make_shared<Entity>(name, components);
 		}
@@ -120,7 +120,7 @@ namespace Game
 		return nullptr;
 	}
 
-	void EntityFactory::Delete(int entityId)
+	void GameEntityFactory::Delete(int entityId)
 	{
 		if (m_EntityIdToEntityType.at(entityId) == EntityType::SmallDot)
 			m_StateContainer.smallDotStates.Delete(entityId);

@@ -11,13 +11,13 @@
 using namespace std;
 namespace Game
 {
-	class EntityFactory : public Engine::IGameEntityFactory
+	class GameEntityFactory : public Engine::IGameEntityFactory
 	{
 	public:
-		EntityFactory();
-		~EntityFactory() = default;
+		GameEntityFactory();
+		~GameEntityFactory() = default;
 
-		// IEntityFactory
+		// IGameEntityFactory
 		shared_ptr<Engine::Entity> Create(shared_ptr<EntityEvent> event) override;
 		void Delete(int entityId) override;
 

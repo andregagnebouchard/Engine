@@ -173,7 +173,7 @@ namespace Game
 			);
 	}
 	//================================================Logic==========================================================================================================
-	PacmanLogicComponent::PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid* worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType) :
+	PacmanLogicComponent::PacmanLogicComponent(int entityId, PacmanState *state, Engine::Grid* worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType) :
 		m_EntityId(entityId), 
 		m_State(state),
 		m_WorldGrid(worldGrid),
@@ -258,14 +258,14 @@ namespace Game
 		else if (moveDirection == PacmanInputMoveEvent::Direction::Left)
 			deltaX = -PacmanConstants::moveDistanceByFrame;
 
-		const WorldGrid::CellLocation newLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX + deltaX, m_State->positionY + deltaY);
+		const Engine::Grid::CellLocation newLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX + deltaX, m_State->positionY + deltaY);
 		if (!m_WorldGrid->IsCellInbound(newLocation)) { // Don't move if new location is not inbound
 			StopMoving();
 			return;
 		}
 
 		int valueAtNewLocation = m_WorldGrid->GetCellValue(newLocation);
-		if (valueAtNewLocation != WorldGrid::EmptyGridValue)
+		if (valueAtNewLocation != Engine::Grid::EmptyGridValue)
 		{
 			EntityType typeInNewLocation = m_EntityIdToEntityType->at(valueAtNewLocation);
 			if (typeInNewLocation == EntityType::Wall) {

@@ -3,6 +3,7 @@
 using namespace std;
 namespace Engine
 {
+	// This class implementation exposes Engine's dependencies, therefore the implementation is hidden
 	class IWindow
 	{
 	public:

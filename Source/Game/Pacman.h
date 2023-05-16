@@ -2,10 +2,9 @@
 #include <Engine\IComponent.h>
 #include <Engine\Messager.h>
 #include <Engine\IGameLogicEvent.h>
-#include <Engine\WorldGrid.h>
+#include <Engine\Grid.h>
 #include "PacmanState.h"
 #include "EntityTypes.h"
-using namespace Engine;
 namespace Game
 {
 	namespace PacmanConstants
@@ -16,7 +15,7 @@ namespace Game
 		const int dyingAnimationLength = dyingAnimationSpriteCount * framePerDyingAnimationSprite;
 	}
 	class MoveEvent;
-	class PacmanInputMoveEvent : public IGameLogicEvent
+	class PacmanInputMoveEvent : public Engine::IGameLogicEvent
 	{
 	public:
 		enum Direction
@@ -34,7 +33,7 @@ namespace Game
 		Direction m_Direction;
 	};
 
-	class PacmanInputComponent : public IComponent
+	class PacmanInputComponent : public Engine::IComponent
 	{
 	public:
 		PacmanInputComponent(int entityId);
@@ -46,21 +45,21 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Input; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		shared_ptr<LogicEvent> CreateMoveEvent(PacmanState::MovingDirection direction);
-		MessageQueue m_MsgQueue;
+		shared_ptr<Engine::LogicEvent> CreateMoveEvent(PacmanState::MovingDirection direction);
+		Engine::MessageQueue m_MsgQueue;
 		int m_EntityId;
 	};
 
-	class PacmanLogicComponent : public IComponent
+	class PacmanLogicComponent : public Engine::IComponent
 	{
 	public:
-		PacmanLogicComponent(int entityId, PacmanState *state, WorldGrid *worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType);
+		PacmanLogicComponent(int entityId, PacmanState *state, Engine::Grid *worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType);
 		~PacmanLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override;
 		void Update() override;
 
-		Type GetType() const override { return IComponent::Type::Logic; }
+		Type GetType() const override { return Engine::IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
 		void ProcessEvents();
@@ -69,13 +68,13 @@ namespace Game
 		void StopMoving();
 
 		const unordered_map<int, EntityType> *m_EntityIdToEntityType; // Owner is EntityFactory
-		WorldGrid* m_WorldGrid; // Owner is EntityFactory
-		MessageQueue m_MsgQueue;
+		Engine::Grid* m_WorldGrid; // Owner is EntityFactory
+		Engine::MessageQueue m_MsgQueue;
 		int m_EntityId;
 		PacmanState *m_State; // Owner is EntityFactory
 	};
 
-	class PacmanGraphicComponent : public IComponent
+	class PacmanGraphicComponent : public Engine::IComponent
 	{
 	public:
 		PacmanGraphicComponent(int entityId, const PacmanState *state);
@@ -84,7 +83,7 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		Type GetType() const override { return IComponent::Type::Graphic; }
+		Type GetType() const override { return Engine::IComponent::Type::Graphic; }
 		int GetId() const override { return m_EntityId; };
 	private:
 		wstring PickSpriteName() const;
@@ -94,7 +93,7 @@ namespace Game
 		const PacmanState* m_State; // Owner is EntityFactory
 	};
 
-	class PacmanAudioComponent : public IComponent
+	class PacmanAudioComponent : public Engine::IComponent
 	{
 	public:
 		PacmanAudioComponent(int entityId);
@@ -103,11 +102,11 @@ namespace Game
 		void Shutdown() override;
 		void Update() override;
 
-		Type GetType() const override { return IComponent::Type::Audio; }
+		Type GetType() const override { return Engine::IComponent::Type::Audio; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		shared_ptr<AudioEvent> CreateAudioEvent() const;
-		MessageQueue m_MsgQueue;
+		shared_ptr<Engine::AudioEvent> CreateAudioEvent() const;
+		Engine::MessageQueue m_MsgQueue;
 		int m_EntityId;
 	};
 }
