@@ -1,7 +1,7 @@
 #pragma once
 #include <Engine/IGameLogicEvent.h>
 #include <Engine/IEntityCreatedPayload.h>
-#include <Engine/math.h>
+#include <Engine/MathStructs.h>
 #include <string>
 #include <memory>
 using namespace std;

@@ -1,7 +1,7 @@
 #pragma once
 #include <Engine/IEntityCreatedPayload.h>
 #include <Engine/Event.h>
-#include <Engine/math.h>
+#include <Engine/MathStructs.h>
 using namespace Engine;
 namespace Game
 {

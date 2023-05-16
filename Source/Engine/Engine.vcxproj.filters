@@ -99,14 +99,8 @@
     <ClInclude Include="IGameLogicEvent.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="IEntityFactory.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="SystemAudio.h">
       <Filter>Engine\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="math.h">
-      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="IEntityCreatedPayload.h">
       <Filter>Include</Filter>
@@ -115,9 +109,6 @@
       <Filter>Engine\GameUtil</Filter>
     </ClInclude>
     <ClInclude Include="PackedArray.h">
-      <Filter>Engine\GameUtil</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldGrid.h">
       <Filter>Engine\GameUtil</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
@@ -131,6 +122,15 @@
     </ClInclude>
     <ClInclude Include="ApplicationWindow.h">
       <Filter>Engine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameEntityFactory.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MathStructs.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Engine\GameUtil</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,9 +179,6 @@
     <ClCompile Include="DelayedEventLogicComponent.cpp">
       <Filter>Engine\GameUtil</Filter>
     </ClCompile>
-    <ClCompile Include="WorldGrid.cpp">
-      <Filter>Engine\GameUtil</Filter>
-    </ClCompile>
     <ClCompile Include="EntityIdCounter.cpp">
       <Filter>Engine\GameUtil</Filter>
     </ClCompile>
@@ -190,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="ApplicationWindow.cpp">
       <Filter>Engine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Engine\GameUtil</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

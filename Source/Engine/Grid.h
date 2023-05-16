@@ -5,7 +5,7 @@ using namespace std;
 namespace Engine
 {
 	// Could use template for the cell value as this is the engine, but this would be over-engineering
-	class WorldGrid
+	class Grid
 	{
 	public:
 		struct CellLocation
@@ -14,7 +14,7 @@ namespace Engine
 			int row = 0;
 		};
 
-		WorldGrid(float cellSizeX, float cellSizeY);
+		Grid(float cellSizeX, float cellSizeY);
 
 		static const int EmptyGridValue = -1;
 

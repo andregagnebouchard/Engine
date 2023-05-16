@@ -173,12 +173,12 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="IEntityCreatedPayload.h" />
-    <ClInclude Include="IEntityFactory.h" />
+    <ClInclude Include="IGameEntityFactory.h" />
     <ClInclude Include="IGameLogicEvent.h" />
     <ClInclude Include="Include\Engine\Export.h" />
     <ClInclude Include="Include\Engine\IComponent.h" />
     <ClInclude Include="Include\Engine\IWindow.h" />
-    <ClInclude Include="math.h" />
+    <ClInclude Include="MathStructs.h" />
     <ClInclude Include="PackedArray.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceCache.h" />
@@ -192,7 +192,7 @@
     <ClInclude Include="SystemAudio.h" />
     <ClInclude Include="ApplicationWindow.h" />
     <ClInclude Include="WindowsInclude.h" />
-    <ClInclude Include="WorldGrid.h" />
+    <ClInclude Include="Grid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -213,7 +213,7 @@
     <ClCompile Include="SystemLogic.cpp" />
     <ClCompile Include="SystemAudio.cpp" />
     <ClCompile Include="ApplicationWindow.cpp" />
-    <ClCompile Include="WorldGrid.cpp" />
+    <ClCompile Include="Grid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\glew\build\vc12\glew_shared.vcxproj">

@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "WorldGrid.h"
+#include "Grid.h"
 
 namespace Engine
 {
-	WorldGrid::WorldGrid(float cellSizeX, float cellSizeY) :
+	Grid::Grid(float cellSizeX, float cellSizeY) :
 		m_CellSizeX(cellSizeX),
 		m_CellSizeY(cellSizeY)
 	{
@@ -12,7 +12,7 @@ namespace Engine
 				m_Grid[row][col] = EmptyGridValue;
 	};
 
-	WorldGrid::CellLocation WorldGrid::GetCellLocationFromPosition(float xPosition, float yPosition) const
+	Grid::CellLocation Grid::GetCellLocationFromPosition(float xPosition, float yPosition) const
 	{
 		CellLocation cell;
 		cell.col = static_cast<int>(floor(xPosition / m_CellSizeX));
@@ -20,17 +20,17 @@ namespace Engine
 		return cell;
 	}
 
-	bool WorldGrid::IsCellInbound(const CellLocation& cell) const
+	bool Grid::IsCellInbound(const CellLocation& cell) const
 	{
 		if (cell.row < 0 || cell.row >= rowQty || cell.col < 0 || cell.col >= colQty)
 			return false;
 		return true;
 	}
-	int WorldGrid::GetCellValue(const CellLocation& cell) const
+	int Grid::GetCellValue(const CellLocation& cell) const
 	{
 		return m_Grid.at(cell.row).at(cell.col);
 	}
-	void WorldGrid::SetCellValue(const CellLocation& cell, int value)
+	void Grid::SetCellValue(const CellLocation& cell, int value)
 	{
 		m_Grid.at(cell.row).at(cell.col) = value;
 	}

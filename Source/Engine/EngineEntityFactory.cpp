@@ -1,5 +1,5 @@
 #pragma once
-#include <Engine\IEntityFactory.h>
+#include <Engine\IGameEntityFactory.h>
 #include <Engine\IComponent.h>
 #include <Engine\SystemGraphic.h>
 #include <Engine\SystemInput.h>

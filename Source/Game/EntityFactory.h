@@ -1,7 +1,7 @@
 #pragma once
-#include <Engine\IEntityFactory.h>
+#include <Engine\IGameEntityFactory.h>
 #include <Engine\Entity.h>
-#include <Engine\WorldGrid.h>
+#include <Engine\Grid.h>
 #include "EntityTypes.h"
 #include "StateContainer.h"
 #include "GhostMovementBehaviour.h"
@@ -23,7 +23,7 @@ namespace Game
 
 	private:
 		StateContainer m_StateContainer;
-		Engine::WorldGrid m_WorldGrid;
+		Engine::Grid m_Grid;
 		unordered_map<int, EntityType> m_EntityIdToEntityType;
 		BlueGhostMovementBehaviour m_BlueGhostBehaviour; // TEmporary to test
 	};
