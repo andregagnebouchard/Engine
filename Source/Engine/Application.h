@@ -5,31 +5,26 @@ using namespace std;
 
 namespace Engine
 {
-  class ResourceCache;
-  class SystemAudio;
-	class EngineEntityFactory;
+  class ApplicationImpl;
   class IGameEntityFactory;
-  class SystemLogic;
-  class SystemInput;
-  class SystemGraphic;
-  class SystemAudio;
-  class ResourceCache;
+  class ApplicationOption;
+  class Window;
 	class Application
   {
   public:
-    Application() = default;
-		~Application();
-    void Init(const shared_ptr<ApplicationOption> options, const shared_ptr<IGameEntityFactory> entityFactory);
+    Application();
+    ~Application();
+    void Init(const ApplicationOption &options, const shared_ptr<IGameEntityFactory> entityFactory);
     void Shutdown();
     void RunLoop();
-  private:
-		shared_ptr<SystemLogic> m_SystemLogic;
-    shared_ptr<SystemInput> m_SystemInput;
-    shared_ptr<SystemGraphic> m_SystemGraphic;
-    shared_ptr<SystemAudio> m_SystemAudio;
-    shared_ptr<ResourceCache> m_ResourceCache;
-		shared_ptr<EngineEntityFactory> m_EngineEntityFactory;
 
-    const int nanoSecondPerFrame = 1000000000 / 60; // 60 fps
+    void Resize(unsigned int width, unsigned int height);
+    void SetVisible(bool isVisible);
+  private:
+    // Somehow couldn't compile the game when using a unique_ptr
+    // We use the implementation pointer pattern as the implementation details of the 
+    // application includes multiple dependencies, which we don't want to include in the games
+    // using the engine
+    ApplicationImpl *m_Impl;
   };
 }

@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Global">
-      <UniqueIdentifier>{5d328b7e-f3e1-4aab-9357-5f33f8f5aa60}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{41a1dac1-d323-4275-aabf-611967884329}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Include">
-      <UniqueIdentifier>{1f5cb3ad-da46-47fb-a8b5-8b6f355385f5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{e2a5a1c8-f86c-4c48-a8e0-b7a937bd4af2}</UniqueIdentifier>
@@ -40,16 +34,22 @@
     <Filter Include="Engine\GameUtil">
       <UniqueIdentifier>{eb4d930b-9cf8-49ff-91b6-0db4cdf5f71b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Global">
+      <UniqueIdentifier>{5d328b7e-f3e1-4aab-9357-5f33f8f5aa60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameCore">
+      <UniqueIdentifier>{1f5cb3ad-da46-47fb-a8b5-8b6f355385f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>Global</Filter>
+      <Filter>Engine\Global</Filter>
     </ClInclude>
     <ClInclude Include="WindowsInclude.h">
-      <Filter>Global</Filter>
+      <Filter>Engine\Global</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>Global</Filter>
+      <Filter>Engine\Global</Filter>
     </ClInclude>
     <ClInclude Include="SystemInput.h">
       <Filter>Engine\Input</Filter>
@@ -85,25 +85,22 @@
       <Filter>Engine\Logic</Filter>
     </ClInclude>
     <ClInclude Include="Include\Engine\Export.h">
-      <Filter>Include</Filter>
+      <Filter>Engine\GameCore</Filter>
     </ClInclude>
     <ClInclude Include="Include\Engine\IComponent.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\IWindow.h">
-      <Filter>Include</Filter>
+      <Filter>Engine\GameCore</Filter>
     </ClInclude>
     <ClInclude Include="EventDefinition.h">
       <Filter>Engine\Event</Filter>
     </ClInclude>
     <ClInclude Include="IGameLogicEvent.h">
-      <Filter>Include</Filter>
+      <Filter>Engine\GameCore</Filter>
     </ClInclude>
     <ClInclude Include="SystemAudio.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
     <ClInclude Include="IEntityCreatedPayload.h">
-      <Filter>Include</Filter>
+      <Filter>Engine\GameCore</Filter>
     </ClInclude>
     <ClInclude Include="DelayedEventLogicComponent.h">
       <Filter>Engine\GameUtil</Filter>
@@ -120,22 +117,22 @@
     <ClInclude Include="EngineEntityFactory.h">
       <Filter>Engine\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="ApplicationWindow.h">
-      <Filter>Engine\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="IGameEntityFactory.h">
-      <Filter>Include</Filter>
+      <Filter>Engine\GameCore</Filter>
     </ClInclude>
     <ClInclude Include="MathStructs.h">
-      <Filter>Include</Filter>
+      <Filter>Engine\GameCore</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Engine\GameUtil</Filter>
     </ClInclude>
+    <ClInclude Include="ApplicationImpl.h">
+      <Filter>Engine\Application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp">
-      <Filter>Global</Filter>
+      <Filter>Engine\Global</Filter>
     </ClCompile>
     <ClCompile Include="SystemInput.cpp">
       <Filter>Engine\Input</Filter>
@@ -185,11 +182,11 @@
     <ClCompile Include="EngineEntityFactory.cpp">
       <Filter>Engine\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="ApplicationWindow.cpp">
-      <Filter>Engine\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>Engine\GameUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationImpl.cpp">
+      <Filter>Engine\Application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

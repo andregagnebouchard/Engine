@@ -17,7 +17,6 @@ namespace Engine
 		ApplicationOption();
 		~ApplicationOption() = default;
 
-		// IApplicationOption
 		void Load(const wstring &filename);
 		int GetWindowWidth() const {return m_WindowWidth;}
 		int GetWindowHeight() const { return m_WindowHeight; }

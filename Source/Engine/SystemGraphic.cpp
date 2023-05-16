@@ -4,6 +4,7 @@
 #include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\Text.hpp>
 #include <SFML\Graphics\Sprite.hpp>
+#include <SFML\Graphics\RenderWindow.hpp>
 #include <GL\glew.h>
 #include <GL\GL.h>
 #include "Messager.h"
@@ -13,8 +14,7 @@
 #include "EventDefinition.h"
 namespace Engine
 {
-  SystemGraphic::SystemGraphic(const shared_ptr<sf::RenderWindow> renderWindow, const shared_ptr<IWindow> window, const shared_ptr<ResourceCache> resourceCache) :
-    m_Window(window),
+  SystemGraphic::SystemGraphic(const shared_ptr<sf::RenderWindow> renderWindow, const shared_ptr<ResourceCache> resourceCache) :
     m_ResourceCache(resourceCache),
 		m_RenderWindow(renderWindow)
 	{

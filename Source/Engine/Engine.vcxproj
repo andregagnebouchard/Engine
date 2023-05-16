@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ApplicationImpl.h" />
     <ClInclude Include="ApplicationOption.h" />
     <ClInclude Include="DelayedEventLogicComponent.h" />
     <ClInclude Include="EntityIdCounter.h" />
@@ -177,7 +178,6 @@
     <ClInclude Include="IGameLogicEvent.h" />
     <ClInclude Include="Include\Engine\Export.h" />
     <ClInclude Include="Include\Engine\IComponent.h" />
-    <ClInclude Include="Include\Engine\IWindow.h" />
     <ClInclude Include="MathStructs.h" />
     <ClInclude Include="PackedArray.h" />
     <ClInclude Include="Resource.h" />
@@ -190,12 +190,12 @@
     <ClInclude Include="SystemInput.h" />
     <ClInclude Include="SystemLogic.h" />
     <ClInclude Include="SystemAudio.h" />
-    <ClInclude Include="ApplicationWindow.h" />
     <ClInclude Include="WindowsInclude.h" />
     <ClInclude Include="Grid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ApplicationImpl.cpp" />
     <ClCompile Include="ApplicationOption.cpp" />
     <ClCompile Include="DelayedEventLogicComponent.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -212,7 +212,6 @@
     <ClCompile Include="SystemInput.cpp" />
     <ClCompile Include="SystemLogic.cpp" />
     <ClCompile Include="SystemAudio.cpp" />
-    <ClCompile Include="ApplicationWindow.cpp" />
     <ClCompile Include="Grid.cpp" />
   </ItemGroup>
   <ItemGroup>
