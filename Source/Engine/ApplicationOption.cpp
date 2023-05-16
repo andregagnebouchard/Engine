@@ -7,11 +7,6 @@
 using namespace tinyxml2;
 namespace Engine
 {
-	shared_ptr<IApplicationOption> IApplicationOption::Create()
-	{
-		return make_shared<ApplicationOption>();
-	}
-
 	void ApplicationOption::Load(const wstring &filename)
 	{
 		XMLDocument xml_doc;

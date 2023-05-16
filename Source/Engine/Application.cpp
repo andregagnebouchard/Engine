@@ -18,13 +18,7 @@ namespace Engine
 		Shutdown();
 	}
 
-	// Entry point for all games
-	shared_ptr<IApplication> IApplication::Create()
-	{
-		return make_shared<Application>();
-	}
-
-	void Application::Init(const shared_ptr<IApplicationOption> options, const shared_ptr<IGameEntityFactory> gameEntityFactory)
+	void Application::Init(const shared_ptr<ApplicationOption> options, const shared_ptr<IGameEntityFactory> gameEntityFactory)
 	{
 		if (options == nullptr) throw invalid_argument("Parameter \"options\" is nullptr");
 		if (gameEntityFactory == nullptr) throw invalid_argument("Parameter \"entityFactory\" is nullptr");

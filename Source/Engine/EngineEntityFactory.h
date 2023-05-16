@@ -13,6 +13,7 @@ namespace Engine
 	class SystemAudio;
 	class IGameEntityFactory;
 	class EntityEvent;
+	class Entity;
 	class EngineEntityFactory
 	{
 	public:

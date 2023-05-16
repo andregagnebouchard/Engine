@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine\IApplication.h"
+#include "Engine\ApplicationOption.h"
 #include <memory>
 using namespace std;
 
@@ -8,14 +8,20 @@ namespace Engine
   class ResourceCache;
   class SystemAudio;
 	class EngineEntityFactory;
-	class Application : public IApplication
+  class IGameEntityFactory;
+  class SystemLogic;
+  class SystemInput;
+  class SystemGraphic;
+  class SystemAudio;
+  class ResourceCache;
+	class Application
   {
   public:
     Application() = default;
 		~Application();
-    void Init(const shared_ptr<IApplicationOption> options, const shared_ptr<IGameEntityFactory> entityFactory) override;
-    void Shutdown() override;
-    void RunLoop() override;
+    void Init(const shared_ptr<ApplicationOption> options, const shared_ptr<IGameEntityFactory> entityFactory);
+    void Shutdown();
+    void RunLoop();
   private:
 		shared_ptr<SystemLogic> m_SystemLogic;
     shared_ptr<SystemInput> m_SystemInput;

@@ -87,12 +87,6 @@
     <ClInclude Include="Include\Engine\Export.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Engine\IApplication.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Engine\IApplicationOption.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Engine\IComponent.h">
       <Filter>Include</Filter>
     </ClInclude>
