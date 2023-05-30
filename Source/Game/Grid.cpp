@@ -3,7 +3,6 @@
 #include "GameEventIds.h"
 #include <Engine\EventDefinition.h>
 #include "MoveEvent.h"
-#include "DebugState.h"
 #include "CollisionEvent.h"
 #include "EntityCreatedPayload.h"
 #include <assert.h>
@@ -115,21 +114,5 @@ namespace Game
 		if(m_EntityToLocation.find(ev->GetEntityId()) == m_EntityToLocation.end())
 			return; // Deleting an entity which doesn't have a location, which is normal
 		m_Grid->SetCellValue(m_EntityToLocation.at(ev->GetEntityId()), Engine::Grid::EmptyGridValue);
-	}
-	//================================================Graphic==========================================================================================================
-	GridGraphicComponent::GridGraphicComponent(int entityId, const Engine::Grid* grid, const DebugState* state) :
-		m_EntityId(entityId),
-		m_DebugState(state)
-	{
-	}
-
-	void GridGraphicComponent::Update()
-	{
-		Event::Key k(static_cast<int>(EventDefinition::Id::RENDER_LINE));
-		if (m_DebugState->isDebugModeActive)
-			Messager::Fire(make_shared<RenderLineEvent>(
-				k,
-				Point{ 50, 50 },
-				Point{ 250, 250 }));
 	}
 }

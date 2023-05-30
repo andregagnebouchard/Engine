@@ -168,8 +168,6 @@
     <ClInclude Include="BigDotState.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionEvent.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="DebugState.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityCreatedPayload.h" />
     <ClInclude Include="Ghost.h" />
@@ -186,15 +184,12 @@
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="notes.h" />
     <ClInclude Include="PacmanState.h" />
-    <ClInclude Include="Pause.h" />
-    <ClInclude Include="PauseState.h" />
     <ClInclude Include="StateContainer.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BigDot.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="GhostMovementBehaviour.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -204,7 +199,6 @@
     <ClCompile Include="GameEntityFactory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pacman.cpp" />
-    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -29,21 +29,4 @@ namespace Game
 		Engine::Grid* m_Grid; // Owner is entity factory
 		int m_EntityId;
 	};
-
-	class GridGraphicComponent : public Engine::IComponent
-	{
-	public:
-		GridGraphicComponent(int entityId, const Engine::Grid* grid, const DebugState* state);
-		~GridGraphicComponent() = default;
-		void Init() override {};
-		void Shutdown() override {};
-		void Update() override;
-
-		Type GetType() const override { return IComponent::Type::Graphic; }
-		int GetId() const override { return m_EntityId; };
-	private:
-		const Engine::Grid* m_Grid; // Owner is entity factory
-		int m_EntityId;
-		const DebugState* m_DebugState;
-	};
 }

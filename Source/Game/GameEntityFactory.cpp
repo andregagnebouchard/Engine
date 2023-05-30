@@ -5,11 +5,9 @@
 #include "GameEntityFactory.h"
 #include "EntityTypes.h"
 #include "Pacman.h"
-#include "Pause.h"
 #include "SmallDot.h"
 #include "BigDot.h"
 #include "Collision.h"
-#include "Debug.h"
 #include "Ghost.h"
 #include "LevelGenerator.h"
 #include "Grid.h"
@@ -28,8 +26,6 @@ namespace Game
 
 		if (name == L"Pacman")
 			return CreatePacman(entityId, name);
-		else if (name == L"Pause")
-			return CreatePause(entityId, name);
 		else if (name == L"Collision")
 			return CreateCollision(entityId, name);
 		else if (name == L"SmallDot")
@@ -40,8 +36,6 @@ namespace Game
 			return CreateGrid(entityId, name);
 		else if (name == L"LevelGenerator")
 			return CreateLevelGenerator(entityId, name);
-		else if (name == L"Debug")
-			return CreateDebug(entityId, name);
 		else if (name == L"BlueGhost")
 			return CreateBlueGhost(entityId, name, event);
 		else if (name == L"DelayPacmanDeathEvent")
@@ -67,15 +61,7 @@ namespace Game
 		m_EntityIdToEntityType.emplace(entityId, EntityType::Pacman);
 		return make_shared<Entity>(name, components);
 	}
-	shared_ptr<Engine::Entity> GameEntityFactory::CreatePause(int entityId, const wstring& name)
-	{
-		vector<shared_ptr<IComponent>> components;
-		components.emplace_back(make_shared<PauseGraphicComponent>(entityId, &m_StateContainer.pauseState));
-		components.emplace_back(make_shared<PauseInputComponent>(entityId));
-		components.emplace_back(make_shared<PauseLogicComponent>(entityId, &m_StateContainer.pauseState));
-		m_EntityIdToEntityType.emplace(entityId, EntityType::Pause);
-		return make_shared<Entity>(name, components);
-	}
+
 	shared_ptr<Engine::Entity> GameEntityFactory::CreateCollision(int entityId, const wstring& name)
 	{
 		vector<shared_ptr<IComponent>> components;
@@ -117,7 +103,6 @@ namespace Game
 	{
 		vector<shared_ptr<IComponent>> components;
 		components.emplace_back(make_shared<GridLogicComponent>(entityId, &m_Grid));
-		components.emplace_back(make_shared<GridGraphicComponent>(entityId, &m_Grid, &m_StateContainer.debugState));
 		m_EntityIdToEntityType.emplace(entityId, EntityType::Grid);
 		return make_shared<Entity>(name, components);
 	}
@@ -126,14 +111,6 @@ namespace Game
 		vector<shared_ptr<IComponent>> components;
 		components.emplace_back(make_shared<LevelGeneratorLogicComponent>(entityId));
 		m_EntityIdToEntityType.emplace(entityId, EntityType::LevelGenerator);
-		return make_shared<Entity>(name, components);
-	}
-	shared_ptr<Engine::Entity> GameEntityFactory::CreateDebug(int entityId, const wstring& name)
-	{
-		vector<shared_ptr<IComponent>> components;
-		components.emplace_back(make_shared<DebugLogicComponent>(entityId, &m_StateContainer.debugState));
-		components.emplace_back(make_shared<DebugInputComponent>(entityId));
-		m_EntityIdToEntityType.emplace(entityId, EntityType::Debug);
 		return make_shared<Entity>(name, components);
 	}
 	shared_ptr<Engine::Entity> GameEntityFactory::CreateBlueGhost(int entityId, const wstring& name, const shared_ptr<EntityEvent> event)

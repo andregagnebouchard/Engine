@@ -25,13 +25,11 @@ namespace Game
 	private:
 
 		shared_ptr<Engine::Entity> CreatePacman(int entityId, const wstring& name);
-		shared_ptr<Engine::Entity> CreatePause(int entityId, const wstring& name);
 		shared_ptr<Engine::Entity> CreateCollision(int entityId, const wstring& name);
 		shared_ptr<Engine::Entity> CreateSmallDot(int entityId, const wstring& name, const shared_ptr<EntityEvent> event);
 		shared_ptr<Engine::Entity> CreateBigDot(int entityId, const wstring& name, const shared_ptr<EntityEvent> event);
 		shared_ptr<Engine::Entity> CreateGrid(int entityId, const wstring& name);
 		shared_ptr<Engine::Entity> CreateLevelGenerator(int entityId, const wstring& name);
-		shared_ptr<Engine::Entity> CreateDebug(int entityId, const wstring& name);
 		shared_ptr<Engine::Entity> CreateBlueGhost(int entityId, const wstring& name, const shared_ptr<EntityEvent> event);
 		shared_ptr<Engine::Entity> CreateDelayPacmanDeathEvent(int entityId, const wstring& name, const shared_ptr<EntityEvent> event);
 		StateContainer m_StateContainer;
