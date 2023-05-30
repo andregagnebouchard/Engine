@@ -13,11 +13,7 @@ namespace Game
 
 	void BigDotLogicComponent::Update()
 	{
-		Blink();
-	}
-
-	void BigDotLogicComponent::Blink()
-	{
+		// Blink
 		BigDotState* state = m_States->GetData(m_EntityId);
 		if (state->animationFrame < 2 * BigDotConstants::frameCountBetweenEachBlink) // There are 2 frames in the animation
 			state->animationFrame++;

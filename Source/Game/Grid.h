@@ -13,7 +13,8 @@ namespace Game
 		GridLogicComponent(int entityId, Engine::Grid *grid);
 		~GridLogicComponent() = default;
 		void Init() override;
-		void Shutdown() override {};
+		void Shutdown() override;
+		void OnEvent(const shared_ptr<Engine::Event> event);
 		void Update() override;
 
 		Type GetType() const override { return IComponent::Type::Logic; }
@@ -23,7 +24,7 @@ namespace Game
 		void HandleCreateEntityEvent(const shared_ptr<Engine::EntityEvent> ev);
 		void HandleDeleteEntityEvent(const shared_ptr<Engine::EntityEvent> ev);
 		void HandleMoveEvent(const shared_ptr<Engine::LogicEvent> event);
-		Engine::MessageQueue m_MsgQueue;
+		const function<void(shared_ptr<Engine::Event>)> m_EventCallback;
 		unordered_map<int, Engine::Grid::CellLocation> m_EntityToLocation; // I don't like using the heap here
 		Engine::Grid* m_Grid; // Owner is entity factory
 		int m_EntityId;
@@ -41,7 +42,6 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Graphic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		Engine::MessageQueue m_MsgQueue;
 		const Engine::Grid* m_Grid; // Owner is entity factory
 		int m_EntityId;
 		const DebugState* m_DebugState;

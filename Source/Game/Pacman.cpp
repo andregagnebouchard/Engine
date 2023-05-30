@@ -97,31 +97,38 @@ namespace Game
 
 	//================================================Input==========================================================================================================
 	PacmanInputComponent::PacmanInputComponent(int entityId) : 
-		m_EntityId(entityId) 
+		m_EntityId(entityId),
+		m_EventCallback(bind(&PacmanInputComponent::OnEvent, this, placeholders::_1))
 	{
 	};
 
 	void PacmanInputComponent::Shutdown()
 	{
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_DOWN_PRESS)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_UP_PRESS)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_LEFT_PRESS)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_RIGHT_PRESS)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_DOWN_PRESS)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_UP_PRESS)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_LEFT_PRESS)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_RIGHT_PRESS)));
 	}
 
 	void PacmanInputComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_DOWN_PRESS)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_UP_PRESS)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_LEFT_PRESS)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_RIGHT_PRESS)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_DOWN_PRESS)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_UP_PRESS)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_LEFT_PRESS)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::KEY_RIGHT_PRESS)));
 	}
 
+	void PacmanInputComponent::OnEvent(const shared_ptr<Event> event)
+	{
+		// We buffer the input event, as we only want to process input
+		// once per tick
+		m_MsgQueue.push(event);
+	}
 	void PacmanInputComponent::Update()
 	{
-		while (!m_MsgQueue.Empty()) {
-			const shared_ptr<Event> event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
+		while (!m_MsgQueue.empty()) {
+			const shared_ptr<Event> event = m_MsgQueue.front();
+			m_MsgQueue.pop();
 			if (event->GetType() != Event::Type::Input)
 				throw invalid_argument("A non-input event was caught by an input component");
 
@@ -161,63 +168,60 @@ namespace Game
 		m_EntityId(entityId), 
 		m_State(state),
 		m_WorldGrid(worldGrid),
-		m_EntityIdToEntityType(entityIdToEntityType)
+		m_EntityIdToEntityType(entityIdToEntityType),
+		m_EventCallback(bind(&PacmanLogicComponent::OnEvent, this, placeholders::_1))
 	{
 	};
 
 	void PacmanLogicComponent::Shutdown()
 	{
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
 	void PacmanLogicComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PauseGame)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::UnpauseGame)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
+	void PacmanLogicComponent::OnEvent(const shared_ptr<Event> event)
+	{
+		// Process event right away. This is to be in the correct state before
+		// pacman's tick update, in case an event already modified its state
+		const auto ev = dynamic_pointer_cast<LogicEvent>(event);
+		switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
+		{
+		case GameEventId::PacmanMoveInput:
+			if(m_State->action != PacmanState::Action::Dying && m_State->action != PacmanState::Action::WaitingToDie) // Don't move if we're dead
+				TryMove(dynamic_pointer_cast<PacmanInputMoveEvent>(ev->GetGameLogicEvent())); // Might fail moving if it's out of bound
+			break;
+		case GameEventId::PauseGame:
+			Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+			break;
+		case GameEventId::UnpauseGame:
+			Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
+			break;
+		case GameEventId::GhostTouchesPacman:
+			m_State->action = PacmanState::Action::WaitingToDie; 
+			m_State->movingFrame = 0;
+			break;
+		case GameEventId::PacmanStartDyingAnimation:
+			m_State->action = PacmanState::Action::Dying;
+			m_State->movingFrame = 0;
+		}
+	}
 	void PacmanLogicComponent::Update()
 	{
+		// Most updates are results of event, except dying
 		if (m_State->action == PacmanState::Action::Dying)
 			UpdateDying();
-		else // Ignore all events if we're dying, they're irrelevant now
-			ProcessEvents();
-	}
-
-	void PacmanLogicComponent::ProcessEvents()
-	{
-		while (!m_MsgQueue.Empty()) {
-			const shared_ptr<Event> event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
-			const auto ev = dynamic_pointer_cast<LogicEvent>(event);
-			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
-			{
-			case GameEventId::PacmanMoveInput:
-				TryMove(dynamic_pointer_cast<PacmanInputMoveEvent>(ev->GetGameLogicEvent())); // Might fail moving if it's out of bound
-				break;
-			case GameEventId::PauseGame:
-				Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
-				break;
-			case GameEventId::UnpauseGame:
-				Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
-				break;
-			case GameEventId::GhostTouchesPacman:
-				// Stop processing inputs when we touch a ghost
-				// Potential bug - What if we process in the same frame as we die? Then we'll move first, then die. Might want to introduce the concept of priority events, or undo previous ones
-				Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanMoveInput), m_EntityId));
-				break;
-			case GameEventId::PacmanStartDyingAnimation:
-				m_State->action = PacmanState::Action::Dying;
-				m_State->movingFrame = 0;
-			}
-		}
 	}
 
 	void PacmanLogicComponent::UpdateDying()
@@ -299,32 +303,29 @@ namespace Game
 	}
 	//================================================Audio==========================================================================================================
 	PacmanAudioComponent::PacmanAudioComponent(int entityId) : 
-		m_EntityId(entityId) 
+		m_EntityId(entityId),
+		m_EventCallback(bind(&PacmanAudioComponent::OnEvent, this, placeholders::_1))
 	{
 	};
 
 	void PacmanAudioComponent::Shutdown()
 	{
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));
 	}
 
 	void PacmanAudioComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), m_EntityId));
 	}
 
-	void PacmanAudioComponent::Update()
+	void PacmanAudioComponent::OnEvent(const shared_ptr<Engine::Event> event)
 	{
-		while (!m_MsgQueue.Empty()) {
-			const shared_ptr<Event> event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
-			const auto ev = dynamic_pointer_cast<LogicEvent>(event);
-			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
-			{
-			case GameEventId::Move:
-				Messager::Fire(CreateAudioEvent());
-				break;
-			}
+		const auto ev = dynamic_pointer_cast<LogicEvent>(event);
+		switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
+		{
+		case GameEventId::Move:
+			Messager::Fire(CreateAudioEvent());
+			break;
 		}
 	}
 

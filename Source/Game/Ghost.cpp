@@ -191,64 +191,52 @@ namespace Game
 		m_State(state),
 		m_WorldGrid(worldGrid),
 		m_EntityIdToEntityType(entityIdToEntityType),
-		m_MovementBehaviour(movementBehaviour)
+		m_MovementBehaviour(movementBehaviour),
+		m_EventCallback(bind(&GhostLogicComponent::OnEvent, this, placeholders::_1))
 	{
 	}
 
 	void GhostLogicComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::BigDotEaten)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanEatGhost), m_EntityId));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::BigDotEaten)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanEatGhost), m_EntityId));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
 	void GhostLogicComponent::Shutdown()
 	{
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::BigDotEaten)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanEatGhost), m_EntityId));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
-	}
-	void GhostLogicComponent::Update()
-	{
-		// Tick logic happens after event processing, in case ghost changed state from an event
-		ProcessEvents();
-		TickLogic();
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::BigDotEaten)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanEatGhost), m_EntityId));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::GhostTouchesPacman)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PacmanStartDyingAnimation)));
 	}
 
-	void GhostLogicComponent::ProcessEvents()
+	void GhostLogicComponent::OnEvent(const shared_ptr<Event> event)
 	{
-		while (!m_MsgQueue.Empty()) {
-			const shared_ptr<Event> event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
-			const auto ev = dynamic_pointer_cast<LogicEvent>(event);
-
-			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
-			{
-			case GameEventId::BigDotEaten:
-				m_State->action = GhostState::Action::Fleeing;
-				m_State->animationFrame = 0;
-				break;
-			case GameEventId::PacmanEatGhost:
-				m_State->action = GhostState::Action::Respawning;
-				m_State->animationFrame = 0;
-				break;
-			case GameEventId::GhostTouchesPacman:
-				m_State->action = GhostState::Action::WaitingForPacmanDying;
-				m_State->animationFrame = 0;
-				break;
-			case GameEventId::PacmanStartDyingAnimation: // Ghost disapears when pacman dies
-				KillYourself();
-			}
+		// Process event right away. This is to be in the correct state before
+		// ghost's tick update, in case an event already modified its state
+		const auto ev = dynamic_pointer_cast<LogicEvent>(event);
+		switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
+		{
+		case GameEventId::BigDotEaten:
+			m_State->action = GhostState::Action::Fleeing;
+			m_State->animationFrame = 0;
+			break;
+		case GameEventId::PacmanEatGhost:
+			m_State->action = GhostState::Action::Respawning;
+			m_State->animationFrame = 0;
+			break;
+		case GameEventId::GhostTouchesPacman:
+			m_State->action = GhostState::Action::WaitingForPacmanDying;
+			m_State->animationFrame = 0;
+			break;
+		case GameEventId::PacmanStartDyingAnimation: // Ghost disapears when pacman dies
+			KillYourself();
 		}
 	}
 
-	void GhostLogicComponent::KillYourself()
-	{
-		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::DELETE_ENTITY)), Engine::EntityEvent::Type::Delete, L"Ghost", m_EntityId, nullptr));
-	}
-	void GhostLogicComponent::TickLogic()
+	void GhostLogicComponent::Update()
 	{
 		if (m_State->action == GhostState::Action::Chasing)
 			ChasingLogicUpdate();
@@ -258,6 +246,11 @@ namespace Game
 			RespawningLogicUpdate();
 		else if (m_State->action == GhostState::Action::WaitingForPacmanDying)
 			WaitingForPacmanDyingLogicUpdate();
+	}
+
+	void GhostLogicComponent::KillYourself()
+	{
+		Engine::Messager::Fire(make_shared<Engine::EntityEvent>(Engine::Event::Key(static_cast<int>(Engine::EventDefinition::Id::DELETE_ENTITY)), Engine::EntityEvent::Type::Delete, L"Ghost", m_EntityId, nullptr));
 	}
 
 	void GhostLogicComponent::WaitingForPacmanDyingLogicUpdate()

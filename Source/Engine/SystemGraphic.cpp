@@ -16,20 +16,32 @@ namespace Engine
 {
   SystemGraphic::SystemGraphic(const shared_ptr<sf::RenderWindow> renderWindow, const shared_ptr<ResourceCache> resourceCache) :
     m_ResourceCache(resourceCache),
-		m_RenderWindow(renderWindow)
+		m_RenderWindow(renderWindow),
+		m_EventCallback(bind(&SystemGraphic::OnEvent, this, placeholders::_1))
 	{
 	}
 
 	void SystemGraphic::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
 	}
 
 	void SystemGraphic::Shutdown()
 	{
-    Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
+    Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::RENDER_LINE)));
+	}
+
+	// We process the render events as they are fired, as they are only fired 
+	// when the SystemGraphic is updated, so it is deterministic
+	void SystemGraphic::OnEvent(const shared_ptr<Event> event)
+	{
+		const EventDefinition::Id eventId = static_cast<EventDefinition::Id>(event->GetKey().first);
+		if (eventId == EventDefinition::Id::RENDER_SPRITE)
+			RenderSprite(event);
+		else if (eventId == EventDefinition::Id::RENDER_LINE)
+			RenderLine(event);
 	}
 
 	void SystemGraphic::Update()
@@ -38,20 +50,10 @@ namespace Engine
     m_RenderWindow->clear();
 
 		// Update all components first so they can fire their render event
+		// We will catch these events, and fill the video buffer right away
 		for (const auto &component : m_Components)
 			component.second->Update();
 
-    while(!m_MsgQueue.Empty())
-    {
-      const shared_ptr<Event> &event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
-
-			const EventDefinition::Id eventId = static_cast<EventDefinition::Id>(event->GetKey().first);
-			if (eventId == EventDefinition::Id::RENDER_SPRITE)
-				RenderSprite(event);
-			else if (eventId == EventDefinition::Id::RENDER_LINE)
-				RenderLine(event);
-    }
     m_RenderWindow->display();
 	}
 

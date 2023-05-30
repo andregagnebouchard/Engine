@@ -7,6 +7,7 @@ namespace Game
       Idle,
       Moving,
       Eating,
+      WaitingToDie, // In-between touching a ghost, and dying animation
       Dying
     };
 

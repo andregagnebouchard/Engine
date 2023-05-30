@@ -23,8 +23,8 @@ namespace Engine
   private:
     // Somehow couldn't compile the game when using a unique_ptr
     // We use the implementation pointer pattern as the implementation details of the 
-    // application includes multiple dependencies, which we don't want to include in the games
-    // using the engine
+    // application includes multiple external dependencies, 
+    // which we don't want to include in the games using this engine
     ApplicationImpl *m_Impl;
   };
 }

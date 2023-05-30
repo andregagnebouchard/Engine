@@ -23,6 +23,7 @@ namespace Engine
 		void Init();
 		void Shutdown();
 		void Update();
+		void OnEvent(const shared_ptr<Event> event);
 	private:
 		shared_ptr<Entity> CreateEntity(const shared_ptr<EntityEvent> event);
 		void DeleteEntity(const wstring& name, int entityId);
@@ -33,6 +34,7 @@ namespace Engine
 		const shared_ptr<SystemInput> m_SystemInput;
 		const shared_ptr<SystemAudio> m_SystemAudio;
 		unordered_map<int, shared_ptr<Engine::Entity>> m_Entities;
-		MessageQueue m_MsgQueue;
+		const function<void(shared_ptr<Event>)> m_EventCallback;
+		queue<shared_ptr<Event>> m_MsgQueue;
 	};
 }

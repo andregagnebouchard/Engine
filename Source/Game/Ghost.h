@@ -36,14 +36,13 @@ namespace Game
 		~GhostLogicComponent() = default;
 		void Init() override;
 		void Shutdown() override;
+		void OnEvent(const shared_ptr<Engine::Event> event);
 		void Update() override;
 
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
 
-		void ProcessEvents();
-		void TickLogic();
 		void ChasingLogicUpdate();
 		void FleeingLogicUpdate();
 		void RespawningLogicUpdate();
@@ -51,7 +50,7 @@ namespace Game
 		void KillYourself();
 		const unordered_map<int, EntityType> *m_EntityIdToEntityType; // Owner is EntityFactory
 		const Engine::Grid* m_WorldGrid; // Owner is EntityFactory
-		Engine::MessageQueue m_MsgQueue;
+		const function<void(shared_ptr<Engine::Event>)> m_EventCallback;
 		const int m_EntityId;
 		GhostState *m_State; // Owner is EntityFactory
 		const IGhostMovementBehaviour* m_MovementBehaviour; // Owner is EntityFactory

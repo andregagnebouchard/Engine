@@ -17,7 +17,8 @@ namespace Engine
 		m_SystemLogic(systemLogic),
 		m_SystemGraphic(systemGraphic),
 		m_SystemInput(systemInput),
-		m_SystemAudio(systemAudio)
+		m_SystemAudio(systemAudio),
+		m_EventCallback(bind(&EngineEntityFactory::OnEvent, this, placeholders::_1))
 	{
 		if (gameEntityFactory == nullptr) throw invalid_argument("The parameter \"gameEntityFactory\" is nullptr");
 		if (systemGraphic == nullptr) throw invalid_argument("The parameter \"systemGraphic\" is nullptr");
@@ -27,14 +28,14 @@ namespace Engine
 
 	void EngineEntityFactory::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
 	}
 
 	void EngineEntityFactory::Shutdown()
 	{
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
 	}
 
 	shared_ptr<Entity> EngineEntityFactory::CreateEntity(const shared_ptr<EntityEvent> event)
@@ -64,12 +65,20 @@ namespace Engine
 		return m_Entities.at(event->GetEntityId());
 	}
 
+	void EngineEntityFactory::OnEvent(const shared_ptr<Event> event)
+	{
+		// We do not create and delete entities in the middle of a game loop,
+		// as this can cause weird behaviour. We buffer the creation/deletion,
+		// and execute it at the end of the game loop
+		m_MsgQueue.push(event);
+	}
+
 	void EngineEntityFactory::Update()
 	{
-		while (!m_MsgQueue.Empty())
+		while (!m_MsgQueue.empty())
 		{
-			const shared_ptr<Event> &event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
+			const shared_ptr<Event> event = m_MsgQueue.front();
+			m_MsgQueue.pop();
 
 			if (event->GetType() != Event::Type::Entity)
 				throw invalid_argument("Unknown event type handled by EntityFactory");

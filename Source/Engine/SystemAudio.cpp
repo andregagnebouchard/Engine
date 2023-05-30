@@ -9,36 +9,36 @@
 namespace Engine
 {
 	SystemAudio::SystemAudio(const shared_ptr<ResourceCache> resourceCache) :
-		m_ResourceCache(resourceCache)
+		m_ResourceCache(resourceCache),
+		m_EventCallback(bind(&SystemAudio::OnEvent, this, placeholders::_1))
 	{
 	}
 
 	void SystemAudio::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::AUDIO)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::AUDIO)));
 	}
 
 	void SystemAudio::Shutdown()
 	{
-		Messager::Detach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::AUDIO)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::AUDIO)));
+	}
+
+	void SystemAudio::OnEvent(const shared_ptr<Event> event)
+	{
+		// We process the events as they are fired, as it doesn't make any difference when the
+		// audio is played within a frame. Furthermore, audio events should only be fired
+		// when the SystemAudio is updating its components anyhow
+		if (event->GetType() == Event::Type::Audio)
+			HandleAudioEvent(dynamic_pointer_cast<AudioEvent>(event));
+		else
+			throw invalid_argument("Unknown sound event received by SystemAudio");
 	}
 
 	void SystemAudio::Update()
 	{
-		// Update all components first so they can fire their sound event
-		for (auto& component : m_Components)
+		for (auto& component : m_Components) // Update all components first so they can fire their sound event
 			component.second->Update();
-
-		while (!m_MsgQueue.Empty())
-		{
-			const shared_ptr<Event>& event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
-
-			if (event->GetType() == Event::Type::Audio)
-				HandleAudioEvent(dynamic_pointer_cast<AudioEvent>(event));
-			else
-				throw invalid_argument("Unknown sound event received by SystemAudio");
-		}
 	}
 
 	void SystemAudio::Add(const shared_ptr<IComponent> component)

@@ -19,7 +19,6 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Graphic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		MessageQueue m_MsgQueue;
 		PackedArray<SmallDotState, 1024> *m_States; // EntityFactory is the owner
 		const int m_EntityId;
 	};

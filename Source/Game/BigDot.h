@@ -24,7 +24,6 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		void Blink();
 
 		PackedArray<BigDotState, 32>* m_States; // EntityFactory is the owner
 		const int m_EntityId;
@@ -42,7 +41,6 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Graphic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		MessageQueue m_MsgQueue;
 		PackedArray<BigDotState, 32>* m_States; // EntityFactory is the owner
 		const int m_EntityId;
 	};

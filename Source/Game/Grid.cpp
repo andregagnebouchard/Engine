@@ -12,32 +12,41 @@ namespace Game
 {
 	GridLogicComponent::GridLogicComponent(int entityId, Engine::Grid* grid) :
 		m_EntityId(entityId),
-		m_Grid(grid)
+		m_Grid(grid),
+		m_EventCallback(bind(&GridLogicComponent::OnEvent, this, placeholders::_1))
 	{
 	}
 
 	void GridLogicComponent::Init()
 	{
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
 
 		// Subscribe to the move event of ANY entity in the game, to write them in the grid
-		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), Event::Key::AnyValue));
+		Messager::Attach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), Event::Key::AnyValue));
 	}
+
+	void GridLogicComponent::Shutdown()
+	{
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
+		Messager::Detach(&m_EventCallback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), Event::Key::AnyValue));
+	}
+
+	void GridLogicComponent::OnEvent(const shared_ptr<Event> event)
+	{
+		const Event::Type eventType = event->GetType();
+		if (eventType == Event::Type::Entity)
+			HandleEntityEvent(dynamic_pointer_cast<EntityEvent>(event));
+		else if (eventType == Event::Type::Logic) // Move
+			HandleMoveEvent(dynamic_pointer_cast<LogicEvent>(event));
+		else
+			throw invalid_argument("Grid logic component received an unknown event type");
+	}
+
 	void GridLogicComponent::Update()
 	{
-		while (!m_MsgQueue.Empty())
-		{
-			const shared_ptr<Event> event = m_MsgQueue.Front();
-			m_MsgQueue.Pop();
-			const Event::Type eventType = event->GetType();
-			if (eventType == Event::Type::Entity)
-				HandleEntityEvent(dynamic_pointer_cast<EntityEvent>(event));
-			else if (eventType == Event::Type::Logic) // Move
-				HandleMoveEvent(dynamic_pointer_cast<LogicEvent>(event));
-			else
-				throw invalid_argument("Grid logic component received an unknown event type");
-		}
+		// Nothing, purely event based
 	}
 
 	void GridLogicComponent::HandleEntityEvent(const shared_ptr<EntityEvent> ev)
@@ -110,8 +119,7 @@ namespace Game
 	//================================================Graphic==========================================================================================================
 	GridGraphicComponent::GridGraphicComponent(int entityId, const Engine::Grid* grid, const DebugState* state) :
 		m_EntityId(entityId),
-		m_DebugState(state),
-		m_Grid(grid)
+		m_DebugState(state)
 	{
 	}
 
