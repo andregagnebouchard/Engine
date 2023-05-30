@@ -21,6 +21,6 @@ namespace Game
 	private:
 		MessageQueue m_MsgQueue;
 		PackedArray<SmallDotState, 1024> *m_States; // EntityFactory is the owner
-		int m_EntityId;
+		const int m_EntityId;
 	};
 }

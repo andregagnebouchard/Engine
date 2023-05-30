@@ -19,7 +19,7 @@ namespace Game
 		int GetId() const override { return m_EntityId; };
 	private:
 		MessageQueue m_MsgQueue;
-		int m_EntityId;
+		const int m_EntityId;
 		const PauseState* m_State;
 	};
 
@@ -36,7 +36,7 @@ namespace Game
 		int GetId() const override { return m_EntityId; };
 	private:
 		MessageQueue m_MsgQueue;
-		int m_EntityId;
+		const int m_EntityId;
 	};
 
 	class PauseLogicComponent : public IComponent
@@ -53,6 +53,6 @@ namespace Game
 	private:
 		PauseState* m_PauseState;
 		MessageQueue m_MsgQueue;
-		int m_EntityId;
+		const int m_EntityId;
 	};
 }

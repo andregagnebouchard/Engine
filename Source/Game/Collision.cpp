@@ -25,17 +25,17 @@ namespace Game
 		Messager::Attach(&m_Callback, Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Collision)));
 	}
 
-	void CollisionLogicComponent::OnCollision(shared_ptr<Event> event)
+	void CollisionLogicComponent::OnCollision(const shared_ptr<Event> event)
 	{
 		if (event->GetType() != Event::Type::Logic)
 			throw invalid_argument("CollisionLogicComponent received a non logic event");
 
-		auto ev = dynamic_pointer_cast<LogicEvent>(event);
-		auto collisionEvent = dynamic_pointer_cast<CollisionEvent>(ev->GetGameLogicEvent());
-		EntityType type1 = m_EntityIdToType->at(collisionEvent->GetEntityId1());
-		EntityType type2 = m_EntityIdToType->at(collisionEvent->GetEntityId2());
-		int id1 = collisionEvent->GetEntityId2();
-		int id2 = collisionEvent->GetEntityId2();
+		const auto ev = dynamic_pointer_cast<LogicEvent>(event);
+		const auto collisionEvent = dynamic_pointer_cast<CollisionEvent>(ev->GetGameLogicEvent());
+		const EntityType type1 = m_EntityIdToType->at(collisionEvent->GetEntityId1());
+		const EntityType type2 = m_EntityIdToType->at(collisionEvent->GetEntityId2());
+		const int id1 = collisionEvent->GetEntityId2();
+		const int id2 = collisionEvent->GetEntityId2();
 		if (type1 == EntityType::SmallDot && type2 == EntityType::Pacman)
 			OnCollisionPacmanSmallDot(id2, id1);
 		else if (type1 == EntityType::Pacman && type2 == EntityType::SmallDot)
@@ -45,12 +45,12 @@ namespace Game
 		else if (type1 == EntityType::BigDot && type2 == EntityType::Pacman)
 			OnCollisionPacmanSmallDot(id2, id1);
 		else if (type1 == EntityType::BlueGhost && type2 == EntityType::Pacman)
-			OnColisionPacmanBlueGhost(id2, id1);
+			OnCollisionPacmanBlueGhost(id2, id1);
 		else if (type1 == EntityType::Pacman && type2 == EntityType::BlueGhost)
-			OnColisionPacmanBlueGhost(id1, id2);
+			OnCollisionPacmanBlueGhost(id1, id2);
 	}
 
-	void CollisionLogicComponent::OnColisionPacmanBlueGhost(int pacmanEntityId, int blueGhostEntityId)
+	void CollisionLogicComponent::OnCollisionPacmanBlueGhost(int pacmanEntityId, int blueGhostEntityId)
 	{
 		if (m_StateContainer->blueGhostState.action == GhostState::Action::Fleeing)
 			OnCollisionPacmanFleeingGhost(pacmanEntityId, blueGhostEntityId);

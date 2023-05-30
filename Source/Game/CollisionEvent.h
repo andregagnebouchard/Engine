@@ -11,7 +11,7 @@ namespace Game
 		int GetEntityId1() const { return m_EntityId1; };
 		int GetEntityId2() const { return m_EntityId2; };
 	private:
-		int m_EntityId1;
-		int m_EntityId2;
+		const int m_EntityId1;
+		const int m_EntityId2;
 	};
 }

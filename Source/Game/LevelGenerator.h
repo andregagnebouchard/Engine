@@ -13,13 +13,13 @@ namespace Game
 		void Shutdown() override {};
 		void Update() override;
 
-		void GenerateSmallDots();
-		void GenerateBigDots();
-		void GenerateGhost();
-		void DeleteItself();
+		void GenerateSmallDots() const;
+		void GenerateBigDots() const;
+		void GenerateGhost() const;
+		void DeleteItself() const;
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		int m_EntityId;
+		const int m_EntityId;
 	};
 }

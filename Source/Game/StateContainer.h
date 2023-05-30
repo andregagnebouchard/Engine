@@ -10,6 +10,7 @@ using namespace std;
 using namespace Engine;
 namespace Game
 {
+	// Contains the state of all the objects in the game
 	struct StateContainer
 	{
 		PacmanState pacmanState;

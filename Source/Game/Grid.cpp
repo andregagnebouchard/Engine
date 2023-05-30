@@ -21,16 +21,16 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::CREATE_ENTITY)));
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::DELETE_ENTITY)));
 
-		// Subscribe to the move event of ANY entity in the game
+		// Subscribe to the move event of ANY entity in the game, to write them in the grid
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::Move), Event::Key::AnyValue));
 	}
 	void GridLogicComponent::Update()
 	{
 		while (!m_MsgQueue.Empty())
 		{
-			shared_ptr<Event> event = m_MsgQueue.Front();
+			const shared_ptr<Event> event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
-			Event::Type eventType = event->GetType();
+			const Event::Type eventType = event->GetType();
 			if (eventType == Event::Type::Entity)
 				HandleEntityEvent(dynamic_pointer_cast<EntityEvent>(event));
 			else if (eventType == Event::Type::Logic) // Move
@@ -40,7 +40,7 @@ namespace Game
 		}
 	}
 
-	void GridLogicComponent::HandleEntityEvent(shared_ptr<EntityEvent> ev)
+	void GridLogicComponent::HandleEntityEvent(const shared_ptr<EntityEvent> ev)
 	{
 		if (ev->GetActionType() == EntityEvent::Type::Create)
 			HandleCreateEntityEvent(ev);
@@ -48,19 +48,19 @@ namespace Game
 			HandleDeleteEntityEvent(ev);
 	}
 
-	void GridLogicComponent::HandleMoveEvent(shared_ptr<LogicEvent> event)
+	void GridLogicComponent::HandleMoveEvent(const shared_ptr<LogicEvent> event)
 	{
-		auto ev = dynamic_pointer_cast<MoveEvent>(event->GetGameLogicEvent());
-		float newX = ev->GetDeltaX() + ev->GetInitialX();
-		float newY = ev->GetDeltaY() + ev->GetInitialY();
+		const auto ev = dynamic_pointer_cast<MoveEvent>(event->GetGameLogicEvent());
+		const float newX = ev->GetDeltaX() + ev->GetInitialX();
+		const float newY = ev->GetDeltaY() + ev->GetInitialY();
 
-		Engine::Grid::CellLocation initialLocation = m_Grid->GetCellLocationFromPosition(ev->GetInitialX(), ev->GetInitialY());
-		Engine::Grid::CellLocation newLocation = m_Grid->GetCellLocationFromPosition(newX, newY);
-		if (!m_Grid->IsCellInbound(newLocation))
+		const Engine::Grid::CellLocation initialLocation = m_Grid->GetCellLocationFromPosition(ev->GetInitialX(), ev->GetInitialY());
+		const Engine::Grid::CellLocation newLocation = m_Grid->GetCellLocationFromPosition(newX, newY);
+		if (!m_Grid->IsCellInbound(newLocation)) // Entity moved out of bound
 			return;
 
-		int entityIdAtNewLocation = m_Grid->GetCellValue(newLocation);
-		int movingEntityId = event->GetEntityId();
+		const int entityIdAtNewLocation = m_Grid->GetCellValue(newLocation);
+		const int movingEntityId = event->GetEntityId();
 
 		// No collision
 		// Second condition is when the moving entity collide with itself, which can happen if the movement is within a single cell
@@ -84,12 +84,12 @@ namespace Game
 		}
 	}
 
-	void GridLogicComponent::HandleCreateEntityEvent(shared_ptr<EntityEvent> ev)
+	void GridLogicComponent::HandleCreateEntityEvent(const shared_ptr<EntityEvent> ev)
 	{
 		if (ev->GetPayload() == nullptr || ev->GetPayload()->GetType() != static_cast<int>(EntityCreatedPayloadTypes::Position))
 			return; // Not all entities are created at a position on the grid
-		Point point = dynamic_pointer_cast<PositionPayload>(ev->GetPayload())->GetPosition();
-		Engine::Grid::CellLocation location = m_Grid->GetCellLocationFromPosition(point.x, point.y);
+		const Point point = dynamic_pointer_cast<PositionPayload>(ev->GetPayload())->GetPosition();
+		const Engine::Grid::CellLocation location = m_Grid->GetCellLocationFromPosition(point.x, point.y);
 		if (!m_Grid->IsCellInbound(location))
 			assert(true); // Some entities, like pause, do not have a location on the grid. This used to be expected, but not anymore
 
@@ -104,7 +104,7 @@ namespace Game
 	void GridLogicComponent::HandleDeleteEntityEvent(shared_ptr<EntityEvent> ev)
 	{
 		if(m_EntityToLocation.find(ev->GetEntityId()) == m_EntityToLocation.end())
-			return; // Deleting an entity without a location
+			return; // Deleting an entity which doesn't have a location, which is normal
 		m_Grid->SetCellValue(m_EntityToLocation.at(ev->GetEntityId()), Engine::Grid::EmptyGridValue);
 	}
 	//================================================Graphic==========================================================================================================

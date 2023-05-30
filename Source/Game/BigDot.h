@@ -9,7 +9,7 @@ namespace Game
 {
 	namespace BigDotConstants
 	{
-		const int frameBetweenEachBlink = 10;
+		const int frameCountBetweenEachBlink = 10;
 	}
 
 	class BigDotLogicComponent : public IComponent
@@ -24,8 +24,10 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
+		void Blink();
+
 		PackedArray<BigDotState, 32>* m_States; // EntityFactory is the owner
-		int m_EntityId;
+		const int m_EntityId;
 	};
 
 	class BigDotGraphicComponent : public IComponent
@@ -42,6 +44,6 @@ namespace Game
 	private:
 		MessageQueue m_MsgQueue;
 		PackedArray<BigDotState, 32>* m_States; // EntityFactory is the owner
-		int m_EntityId;
+		const int m_EntityId;
 	};
 }

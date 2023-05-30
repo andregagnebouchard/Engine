@@ -13,12 +13,11 @@ namespace Game
 		m_State(state),
 		m_Type(type)
 	{
-
 	}
 
 	void GhostGraphicComponent::Update()
 	{
-		if (m_State->action == GhostState::Action::Chasing || m_State->action == GhostState::Action::WatingForPacmanDying)
+		if (m_State->action == GhostState::Action::Chasing || m_State->action == GhostState::Action::WaitingForPacmanDying)
 			ChasingUpdate();
 		else if (m_State->action == GhostState::Action::Fleeing)
 			FleeingUpdate();
@@ -29,8 +28,8 @@ namespace Game
 	void GhostGraphicComponent::ChasingUpdate() const
 	{
 		wstring spriteName = L"";
-		bool wobbling = m_State->animationFrame < GhostConstants::chasingFramePerSprite;
-		if (m_State->direction == MoveEvent::Direction::Down)
+		const bool wobbling = m_State->animationFrame < GhostConstants::chasingFramePerWobbling;
+		if (m_State->direction == Direction::Down)
 		{
 			if (wobbling)
 			{
@@ -55,7 +54,7 @@ namespace Game
 					spriteName = L"ghost_orange_down_1";
 			}
 		}
-		else if (m_State->direction == MoveEvent::Direction::Up)
+		else if (m_State->direction == Direction::Up)
 		{
 			if (wobbling)
 			{
@@ -80,7 +79,7 @@ namespace Game
 					spriteName = L"ghost_orange_up_1";
 			}
 		}
-		else if (m_State->direction == MoveEvent::Direction::Left)
+		else if (m_State->direction == Direction::Left)
 		{
 			if (wobbling)
 			{
@@ -105,7 +104,7 @@ namespace Game
 					spriteName = L"ghost_orange_left_1";
 			}
 		}
-		else if (m_State->direction == MoveEvent::Direction::Right)
+		else if (m_State->direction == Direction::Right)
 		{
 			if (wobbling)
 			{
@@ -141,7 +140,7 @@ namespace Game
 	void GhostGraphicComponent::FleeingUpdate() const
 	{
 		wstring spriteName = L"";
-		bool wobbling = m_State->animationFrame % (2 * GhostConstants::fleeingFramePerWobling) < GhostConstants::fleeingFramePerWobling;
+		const bool wobbling = m_State->animationFrame % (2 * GhostConstants::fleeingFramePerWobling) < GhostConstants::fleeingFramePerWobling;
 		// You are white for the first X frames, then every Y frames
 		if (m_State->animationFrame >= GhostConstants::fleeingFrameBeforeFirstFlash 
 			&& m_State->animationFrame % (2 * GhostConstants::fleeingFlashFrameDuration) < GhostConstants::fleeingFlashFrameDuration)
@@ -168,14 +167,15 @@ namespace Game
 
 	void GhostGraphicComponent::RespawningUpdate() const
 	{
+		// The little eyes going back to the cage
 		wstring spriteName = L"";
-		if (m_State->direction == MoveEvent::Direction::Down)
+		if (m_State->direction == Direction::Down)
 			spriteName = L"ghost_respawning_down";
-		else if (m_State->direction == MoveEvent::Direction::Up)
+		else if (m_State->direction == Direction::Up)
 			spriteName = L"ghost_respawning_up";
-		else if (m_State->direction == MoveEvent::Direction::Left)
+		else if (m_State->direction == Direction::Left)
 			spriteName = L"ghost_respawning_left";
-		else if (m_State->direction == MoveEvent::Direction::Right)
+		else if (m_State->direction == Direction::Right)
 			spriteName = L"ghost_respawning_right";
 
 		Messager::Fire(make_shared<RenderSpriteEvent>(
@@ -220,9 +220,9 @@ namespace Game
 	void GhostLogicComponent::ProcessEvents()
 	{
 		while (!m_MsgQueue.Empty()) {
-			shared_ptr<Event> event = m_MsgQueue.Front();
+			const shared_ptr<Event> event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
-			auto ev = dynamic_pointer_cast<LogicEvent>(event);
+			const auto ev = dynamic_pointer_cast<LogicEvent>(event);
 
 			switch (static_cast<GameEventId>(ev->GetGameLogicEventId()))
 			{
@@ -235,10 +235,10 @@ namespace Game
 				m_State->animationFrame = 0;
 				break;
 			case GameEventId::GhostTouchesPacman:
-				m_State->action = GhostState::Action::WatingForPacmanDying;
+				m_State->action = GhostState::Action::WaitingForPacmanDying;
 				m_State->animationFrame = 0;
 				break;
-			case GameEventId::PacmanStartDyingAnimation:
+			case GameEventId::PacmanStartDyingAnimation: // Ghost disapears when pacman dies
 				KillYourself();
 			}
 		}
@@ -256,14 +256,14 @@ namespace Game
 			FleeingLogicUpdate();
 		else if (m_State->action == GhostState::Action::Respawning)
 			RespawningLogicUpdate();
-		else if (m_State->action == GhostState::Action::WatingForPacmanDying)
+		else if (m_State->action == GhostState::Action::WaitingForPacmanDying)
 			WaitingForPacmanDyingLogicUpdate();
 	}
 
 	void GhostLogicComponent::WaitingForPacmanDyingLogicUpdate()
 	{
 		// Toggle the blobbing
-		if (m_State->animationFrame < 2 * GhostConstants::chasingFramePerSprite) // There are 2 frames in the animation
+		if (m_State->animationFrame < 2 * GhostConstants::chasingFramePerWobbling) // There are 2 frames in the animation
 			m_State->animationFrame++;
 		else
 			m_State->animationFrame = 0;
@@ -271,33 +271,33 @@ namespace Game
 
 	void GhostLogicComponent::ChasingLogicUpdate()
 	{
-		Engine::Grid::CellLocation currentLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX, m_State->positionY);
-		Engine::Grid::CellLocation targetLocation = m_MovementBehaviour->ChooseNextCellToMove();
+		const Engine::Grid::CellLocation currentLocation = m_WorldGrid->GetCellLocationFromPosition(m_State->positionX, m_State->positionY);
+		const Engine::Grid::CellLocation targetLocation = m_MovementBehaviour->ChooseNextCellToMove();
 		float deltaX = 0;
 		float deltaY = 0;
-		float initialX = m_State->positionX;
-		float initialY = m_State->positionY;
+		const float initialX = m_State->positionX;
+		const float initialY = m_State->positionY;
 
 		// New location will never be the same as current location, so we can determine the direction by the target
 		// The movement behaviour class always choose a valid location for the frame, so no checks required. Just move
 		if (targetLocation.col < currentLocation.col)
 		{
-			m_State->direction = MoveEvent::Direction::Left;
+			m_State->direction = Direction::Left;
 			deltaX -= GhostConstants::moveDistanceByFrame;
 		}
 		else if (targetLocation.col > currentLocation.col)
 		{
-			m_State->direction = MoveEvent::Direction::Right;
+			m_State->direction = Direction::Right;
 			deltaX += GhostConstants::moveDistanceByFrame;
 		}
 		else if (targetLocation.row > currentLocation.row)
 		{
-			m_State->direction = MoveEvent::Direction::Down;
+			m_State->direction = Direction::Down;
 			deltaY = GhostConstants::moveDistanceByFrame;
 		}
 		else if (targetLocation.row < currentLocation.row)
 		{
-			m_State->direction = MoveEvent::Direction::Up;
+			m_State->direction = Direction::Up;
 			deltaY -= GhostConstants::moveDistanceByFrame;
 		}
 
@@ -305,7 +305,7 @@ namespace Game
 		m_State->positionY += deltaY;
 
 		// Toggle the blobbing
-		if (m_State->animationFrame < 2*GhostConstants::chasingFramePerSprite) // There are 2 frames in the animation
+		if (m_State->animationFrame < 2*GhostConstants::chasingFramePerWobbling) // There are 2 frames in the animation
 			m_State->animationFrame++;
 		else
 			m_State->animationFrame = 0;

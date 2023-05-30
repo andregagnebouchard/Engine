@@ -5,32 +5,26 @@
 #include <Engine\Grid.h>
 #include "PacmanState.h"
 #include "EntityTypes.h"
+#include "Direction.h"
 namespace Game
 {
 	namespace PacmanConstants
 	{
-		const int dyingAnimationSpriteCount = 11;
+		const int dyingAnimationSpriteQuantity = 11;
 		const float moveDistanceByFrame = 32;
 		const int framePerDyingAnimationSprite = 6;
-		const int dyingAnimationLength = dyingAnimationSpriteCount * framePerDyingAnimationSprite;
+		const int dyingAnimationLength = dyingAnimationSpriteQuantity * framePerDyingAnimationSprite;
 	}
 	class MoveEvent;
 	class PacmanInputMoveEvent : public Engine::IGameLogicEvent
 	{
 	public:
-		enum Direction
-		{
-			Up,
-			Down,
-			Left,
-			Right
-		};
-		PacmanInputMoveEvent(Direction direction);
+		PacmanInputMoveEvent(const Direction direction);
 		~PacmanInputMoveEvent() = default;
 
 		Direction GetDirection() const { return m_Direction; };
 	private:
-		Direction m_Direction;
+		const Direction m_Direction;
 	};
 
 	class PacmanInputComponent : public Engine::IComponent
@@ -45,9 +39,9 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Input; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		shared_ptr<Engine::LogicEvent> CreateMoveEvent(PacmanState::MovingDirection direction);
+		shared_ptr<Engine::LogicEvent> CreateMoveEvent(Direction direction);
 		Engine::MessageQueue m_MsgQueue;
-		int m_EntityId;
+		const int m_EntityId;
 	};
 
 	class PacmanLogicComponent : public Engine::IComponent
@@ -63,14 +57,18 @@ namespace Game
 		int GetId() const override { return m_EntityId; };
 	private:
 		void ProcessEvents();
-		void TryMove(shared_ptr<PacmanInputMoveEvent> ev);
-		void UpdateDyingLogic();
+		void TryMove(const shared_ptr<PacmanInputMoveEvent> ev);
+		void UpdateDying();
 		void StopMoving();
+		void IdleToMove();
+		void KeepMoving();
+		float FindDeltaX(Direction direction) const;
+		float FindDeltaY(Direction direction) const;
 
 		const unordered_map<int, EntityType> *m_EntityIdToEntityType; // Owner is EntityFactory
-		Engine::Grid* m_WorldGrid; // Owner is EntityFactory
+		const Engine::Grid* m_WorldGrid; // Owner is EntityFactory
 		Engine::MessageQueue m_MsgQueue;
-		int m_EntityId;
+		const int m_EntityId;
 		PacmanState *m_State; // Owner is EntityFactory
 	};
 
@@ -89,7 +87,7 @@ namespace Game
 		wstring PickSpriteName() const;
 		wstring PickMovingSprite() const;
 		wstring PickDyingSprite() const;
-		int m_EntityId;
+		const int m_EntityId;
 		const PacmanState* m_State; // Owner is EntityFactory
 	};
 
@@ -107,6 +105,6 @@ namespace Game
 	private:
 		shared_ptr<Engine::AudioEvent> CreateAudioEvent() const;
 		Engine::MessageQueue m_MsgQueue;
-		int m_EntityId;
+		const int m_EntityId;
 	};
 }

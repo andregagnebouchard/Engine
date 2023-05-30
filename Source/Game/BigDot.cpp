@@ -13,9 +13,13 @@ namespace Game
 
 	void BigDotLogicComponent::Update()
 	{
-		// Blink
+		Blink();
+	}
+
+	void BigDotLogicComponent::Blink()
+	{
 		BigDotState* state = m_States->GetData(m_EntityId);
-		if (state->animationFrame < 2 * BigDotConstants::frameBetweenEachBlink) // There are 2 frames in the animation
+		if (state->animationFrame < 2 * BigDotConstants::frameCountBetweenEachBlink) // There are 2 frames in the animation
 			state->animationFrame++;
 		else
 			state->animationFrame = 0;
@@ -30,7 +34,7 @@ namespace Game
 	void BigDotGraphicComponent::Update()
 	{
 		const BigDotState* state = m_States->GetData(m_EntityId);
-		bool isVisible = state->animationFrame < BigDotConstants::frameBetweenEachBlink;
+		bool isVisible = state->animationFrame < BigDotConstants::frameCountBetweenEachBlink;
 		if(isVisible)
 			Messager::Fire(make_shared<RenderSpriteEvent>(
 				Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),

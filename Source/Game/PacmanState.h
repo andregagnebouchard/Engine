@@ -1,4 +1,5 @@
 #pragma once
+#include "Direction.h"
 namespace Game
 {
   struct PacmanState {
@@ -9,18 +10,10 @@ namespace Game
       Dying
     };
 
-    enum class MovingDirection {
-      None,
-      Up,
-      Down,
-      Left,
-      Right
-    };
-
     float positionX = 0.0f;
     float positionY = 0.0f;
     Action action = Action::Idle;
-    MovingDirection direction = MovingDirection::None;
+    Direction direction = Direction::None;
     int movingFrame = 0;
   };
 }

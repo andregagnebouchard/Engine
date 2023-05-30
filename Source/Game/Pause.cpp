@@ -13,6 +13,7 @@ namespace Game
 
 	void PauseGraphicComponent::Update()
 	{
+		// Render a "pause" text in the screen
 		if(m_State->isPaused)
 			Messager::Fire(make_shared<RenderSpriteEvent>(
 				Event::Key(static_cast<int>(EventDefinition::Id::RENDER_SPRITE)),
@@ -34,7 +35,7 @@ namespace Game
 	void PauseInputComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
-			shared_ptr<Event> event = m_MsgQueue.Front();
+			const shared_ptr<Event> event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 			if (event->GetType() != Event::Type::Input)
 				throw invalid_argument("A non-input event was caught by an input component");
@@ -60,13 +61,11 @@ namespace Game
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::GAME_LOGIC), static_cast<int>(GameEventId::PressedPauseButton), m_EntityId));
 	}
 
-
-
 	void PauseLogicComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) 
 		{
-			shared_ptr<Event> event = m_MsgQueue.Front();
+			const shared_ptr<Event> event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 			if (event->GetType() != Event::Type::Logic)
 				throw invalid_argument("A non-logic event was caught by a logic component");

@@ -8,6 +8,7 @@ namespace Game
 	{
 		const int frameBetweenGhostTouchesPacmanAndPacmanStartDying = 40;
 	}
+
 	struct StateContainer;
 	class CollisionLogicComponent : public IComponent
 	{
@@ -21,16 +22,16 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		void OnCollision(shared_ptr<Event> event);
+		void OnCollision(const shared_ptr<Event> event);
 		void OnCollisionPacmanSmallDot(int pacmanEntityId, int dotEntityId);
 		void OnCollisionPacmanBigDot(int pacmanEntityId, int bigDotEntityId);
-		void OnColisionPacmanBlueGhost(int pacmanEntityId, int blueGhostEntityId);
+		void OnCollisionPacmanBlueGhost(int pacmanEntityId, int blueGhostEntityId);
 		void OnCollisionPacmanFleeingGhost(int pacmanEntityId, int blueGhostEntityId);
 		void OnCollisionPacmanChasingGhost(int pacmanEntityId, int blueGhostEntityId);
 
-		int m_EntityId;
+		const int m_EntityId;
 		function<void(shared_ptr<Event>)> m_Callback;
-		StateContainer* m_StateContainer; // Owner is EntityFactory
+		const StateContainer* m_StateContainer; // Owner is EntityFactory
 		const unordered_map<int, EntityType>* m_EntityIdToType; // Owner is EntityFactory
 	};
 }

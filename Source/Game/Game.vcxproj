@@ -170,6 +170,7 @@
     <ClInclude Include="CollisionEvent.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugState.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityCreatedPayload.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="GhostMovementBehaviour.h" />

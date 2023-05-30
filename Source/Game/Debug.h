@@ -18,7 +18,7 @@ namespace Game
 		int GetId() const override { return m_EntityId; };
 	private:
 		MessageQueue m_MsgQueue;
-		int m_EntityId;
+		const int m_EntityId;
 	};
 
 	class DebugLogicComponent : public IComponent
@@ -35,6 +35,6 @@ namespace Game
 	private:
 		MessageQueue m_MsgQueue;
 		DebugState* m_State;
-		int m_EntityId;
+		const int m_EntityId;
 	};
 }

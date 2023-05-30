@@ -13,13 +13,14 @@ namespace Game
 
 	void DebugInputComponent::Init()
 	{
+		// Arbitrary chose the key 'O' toggle the debug mode
 		Messager::Attach(m_MsgQueue.GetCallback(), Event::Key(static_cast<int>(EventDefinition::Id::KEY_O_PRESS)));
 	}
 
 	void DebugInputComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
-			shared_ptr<Event> event = m_MsgQueue.Front();
+			const shared_ptr<Event> event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 			if (event->GetType() != Event::Type::Input)
 				throw invalid_argument("A non-input event was caught by an input component");
@@ -49,19 +50,12 @@ namespace Game
 	void DebugLogicComponent::Update()
 	{
 		while (!m_MsgQueue.Empty()) {
-			shared_ptr<Event> event = m_MsgQueue.Front();
+			const shared_ptr<Event> event = m_MsgQueue.Front();
 			m_MsgQueue.Pop();
 			if (event->GetType() != Event::Type::Logic)
 				throw invalid_argument("A non-logic event was caught by a logic component");
 
-			if (m_State->isDebugModeActive)
-			{
-				m_State->isDebugModeActive = false;
-			}
-			else
-			{
-				m_State->isDebugModeActive = true;
-			}
+			m_State->isDebugModeActive = !m_State->isDebugModeActive;
 		}
 	}
 }

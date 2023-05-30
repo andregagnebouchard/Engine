@@ -20,16 +20,16 @@ namespace Game
 
 	namespace GhostConstants
 	{
-		const int chasingFramePerSprite = 5;
+		const int chasingFramePerWobbling = 5;
 		const int fleeingFramePerWobling = 5;
-		const int fleeingFrameBeforeFirstFlash = 150;
-		const int fleeingFlashFrameDuration = 15;
+		const int fleeingFrameBeforeFirstFlash = 150; // Amount of time spent flying before starting to flash
+		const int fleeingFlashFrameDuration = 15; // Time spent in each white and blue flash sprite while flashing
 		const int fleeingFlashCountBeforeChasing = 10;
 		const int fleeingEnd = fleeingFrameBeforeFirstFlash + fleeingFlashCountBeforeChasing * fleeingFlashFrameDuration;
 		const float moveDistanceByFrame = 0.0f; // Don't move, just for testing
 	};
 
-	class GhostLogicComponent : public IComponent
+	class GhostLogicComponent : public Engine::IComponent
 	{
 	public:
 		GhostLogicComponent(int entityId, GhostState *state, const Engine::Grid *worldGrid, const unordered_map<int, EntityType>* entityIdToEntityType, const IGhostMovementBehaviour *movementBehaviour);
@@ -51,13 +51,13 @@ namespace Game
 		void KillYourself();
 		const unordered_map<int, EntityType> *m_EntityIdToEntityType; // Owner is EntityFactory
 		const Engine::Grid* m_WorldGrid; // Owner is EntityFactory
-		MessageQueue m_MsgQueue;
-		int m_EntityId;
+		Engine::MessageQueue m_MsgQueue;
+		const int m_EntityId;
 		GhostState *m_State; // Owner is EntityFactory
 		const IGhostMovementBehaviour* m_MovementBehaviour; // Owner is EntityFactory
 	};
 
-	class GhostGraphicComponent : public IComponent
+	class GhostGraphicComponent : public Engine::IComponent
 	{
 	public:
 		GhostGraphicComponent(int entityId, const GhostState *state, GhostType type);
@@ -73,7 +73,7 @@ namespace Game
 		void FleeingUpdate() const;
 		void RespawningUpdate() const;
 
-		int m_EntityId;
+		const int m_EntityId;
 		const GhostState* m_State; // Owner is EntityFactory
 		const GhostType m_Type;
 	};

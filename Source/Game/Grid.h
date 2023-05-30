@@ -6,6 +6,7 @@
 namespace Game
 {
 	struct DebugState;
+
 	class GridLogicComponent : public Engine::IComponent
 	{
 	public:
@@ -18,10 +19,10 @@ namespace Game
 		Type GetType() const override { return IComponent::Type::Logic; }
 		int GetId() const override { return m_EntityId; };
 	private:
-		void HandleEntityEvent(shared_ptr<Engine::EntityEvent> ev);
-		void HandleCreateEntityEvent(shared_ptr<Engine::EntityEvent> ev);
-		void HandleDeleteEntityEvent(shared_ptr<Engine::EntityEvent> ev);
-		void HandleMoveEvent(shared_ptr<Engine::LogicEvent> event);
+		void HandleEntityEvent(const shared_ptr<Engine::EntityEvent> ev);
+		void HandleCreateEntityEvent(const shared_ptr<Engine::EntityEvent> ev);
+		void HandleDeleteEntityEvent(const shared_ptr<Engine::EntityEvent> ev);
+		void HandleMoveEvent(const shared_ptr<Engine::LogicEvent> event);
 		Engine::MessageQueue m_MsgQueue;
 		unordered_map<int, Engine::Grid::CellLocation> m_EntityToLocation; // I don't like using the heap here
 		Engine::Grid* m_Grid; // Owner is entity factory
