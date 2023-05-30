@@ -23,25 +23,4 @@ namespace Engine
     static void ValidateEventKey(const Event::Key &key);
     static unordered_map<Event::Key, unordered_set<const function<void(shared_ptr<Event>)>*>> m_Callbacks;
   };
-
-  // Double queue system to buffer events for the next frame
-  class MessageQueue
-  {
-  public:
-    MessageQueue();
-    void Pop();
-    shared_ptr<Event> Front() const;
-    void Swap();
-    bool Empty() const;
-    function<void(shared_ptr<Event>)>* GetCallback() { return &m_Callback; };
-    
-  private:
-    void OnEvent(shared_ptr<Event> event);
-
-    function<void(shared_ptr<Event>)> m_Callback;
-    queue<shared_ptr<Event>> m_Queue1;
-		queue<shared_ptr<Event>> m_Queue2;
-		queue<shared_ptr<Event>> &m_CurrentQueue;
-		int m_CurrentQueueId;
-  };
 }

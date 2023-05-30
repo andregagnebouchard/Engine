@@ -50,43 +50,4 @@ namespace Engine
     if (key.first == Event::Key::AnyValue || (key.third != Event::Key::AnyValue && key.second == Event::Key::AnyValue))
       throw invalid_argument("Event key is not properly formated");
   }
-
-  MessageQueue::MessageQueue() :
-		m_CurrentQueue(m_Queue1),
-		m_CurrentQueueId(1)
-  {
-    m_Callback = bind(&MessageQueue::OnEvent, this, placeholders::_1);
-  }
-
-  void MessageQueue::OnEvent(shared_ptr<Event> event)
-  {
-		m_CurrentQueue.push(event);
-  }
-
-	void MessageQueue::Swap()
-	{
-		if (m_CurrentQueueId == 1)
-		{
-			m_CurrentQueue = m_Queue2;
-			m_CurrentQueueId = 2;
-		}
-		else
-		{
-			m_CurrentQueue = m_Queue1;
-			m_CurrentQueueId = 1;
-		}
-	}
-
-  void MessageQueue::Pop()
-  {
-    m_CurrentQueue.pop();
-  }
-  shared_ptr<Event> MessageQueue::Front() const
-  {
-    return m_CurrentQueue.front();
-  }
-  bool MessageQueue::Empty() const
-  {
-    return m_CurrentQueue.empty();
-  }
 }
